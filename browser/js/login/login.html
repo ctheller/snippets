@@ -1,16 +1,27 @@
-<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+<div class="col-xs-12 col-sm-6 col-md-6">
 
-    <alert type="danger" ng-show="error">
-        {{ error }}
-    </alert>
+    <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
 
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-        <label for="login-password">Password</label>
-        <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+        <alert type="danger" ng-show="error">
+            {{ error }}
+        </alert>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+<div id="auth" class="col-xs-12 col-sm-6 col-md-6">
+    <a href="/auth/google" class="btn btn-block btn-social btn-google">
+      <span class="fa fa-google"></span>
+      Sign in with Google
+    </a>
+
+</div>
