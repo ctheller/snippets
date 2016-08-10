@@ -12,5 +12,8 @@ module.exports = db.define('organization', {
     },
     subscription: {
     	type: Sequelize.ENUM('paid', 'free')
+    },
+    submission_deadline: {
+    	type: Sequelize.DATE
     }
 });
