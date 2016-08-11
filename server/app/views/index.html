@@ -8,8 +8,9 @@
     <link rel="stylesheet" type="text/css" href="/angular-resizable/angular-resizable.min.css" />
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="/style.css" />
-    <script src="/lodash/index.js"></script>
+    
     <script src="/angular/angular.js"></script>
+    <script src="/lodash/index.js"></script>
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/angular-messages/angular-messages.js"></script>
     <script src="/angular-aria/angular-aria.js"></script>
@@ -17,6 +18,18 @@
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-material/angular-material.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyA3_lI3ec7vmSmznIAlPpn55gLXrr90Sko",
+        authDomain: "snippets-2f32c.firebaseapp.com",
+        databaseURL: "https://snippets-2f32c.firebaseio.com",
+        storageBucket: "snippets-2f32c.appspot.com",
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src='/angularfire/dist/angularfire.min.js'></script>
     <script src="/main.js"></script>
 </head>
 
@@ -42,6 +55,7 @@
                 <md-list-item class="sidebar-item" ng-show="user" class="welcome">
                     <div class="md-list-item-text">
                         <span>Welcome, {{ user.email }}!</span>
+                        <pre> {{user | json}}</pre>
                     </div>
                 </md-list-item>
             </md-list>
