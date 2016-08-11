@@ -19,44 +19,43 @@
 </head>
 
 <body ng-app="FullstackGeneratedApp" class="layout-row" layout="row" flex>
-    <!-- <section layout="row" flex=""> -->
-        <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-disable-backdrop="" md-whiteframe="4">
-            <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Snippets</h1>
-            </md-toolbar>
-            <md-content layout-padding="" ng-controller="SidebarCtrl">
-                <md-list ng-cloak>
-                    <md-list-item class="sidebar-item" ng-repeat="item in items">
-                        <md-icon class="lnr" md-font-icon="lnr-{{item.icon}}"></md-icon>
-                            <p ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</p>
-                    </md-list-item>
-                    <md-list-item class="sidebar-item">
-                        <div class="md-list-item-text">
-                            <p ng-show="!user" ui-sref="login" class="btn login-button">Login</p>
-                        </div>
-                    </md-list-item>
-                    <md-list-item class="sidebar-item" ng-show="user" class="welcome">
-                        <div class="md-list-item-text">
-                            <span>Welcome, {{ user.email }}!</span>
-                        </div>
-                    </md-list-item>
-                </md-list>
-                <md-button ng-click="logout()">Logout</md-button>
-                <md-button layout-padding ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
-                </md-button>
-            </md-content>
-        </md-sidenav>
-        <div role="main" layout="column" flex>
-            <md-toolbar layout="row" class="md-theme-indigo" ng-controller="ToolbarCtrl">
-                <md-icon class="lnr" md-font-icon="lnr-menu" hide-gt-md ng-click="toggle()"></md-icon>
-                <div class="md-toolbar-tools">lorem ipsum</div>
-            </md-toolbar>
-            <md-content>
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-disable-backdrop="" md-whiteframe="4">
+        <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">Snippets</h1>
+        </md-toolbar>
+        <md-content layout-padding="" ng-controller="SidebarCtrl">
+            <md-list ng-cloak>
+                <md-list-item class="sidebar-item" ng-repeat="item in items">
+                    <md-icon class="lnr" md-font-icon="lnr-{{item.icon}}"></md-icon>
+                    <p ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</p>
+                </md-list-item>
+                <md-list-item class="sidebar-item">
+                    <div class="md-list-item-text">
+                        <p ng-show="!user" ui-sref="login" class="btn login-button">Login</p>
+                    </div>
+                </md-list-item>
+                <md-list-item class="sidebar-item" ng-show="user" class="welcome">
+                    <div class="md-list-item-text">
+                        <span>Welcome, {{ user.email }}!</span>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <md-button ng-click="logout()">Logout</md-button>
+            <md-button layout-padding ng-click="close()" class="md-primary" hide-gt-md>
+                Close Sidenav Left
+            </md-button>
+        </md-content>
+    </md-sidenav>
+    <div role="main" layout="column" flex>
+        <!-- temperary controller -->
+        <md-toolbar layout="row" class="md-theme-indigo" ng-controller="ToolbarCtrl">
+            <md-icon class="lnr" md-font-icon="lnr-menu" hide-gt-md ng-click="toggle()"></md-icon>
+            <div class="md-toolbar-tools">lorem ipsum</div>
+        </md-toolbar>
+        <md-content>
             <div ui-view></div>
-            </md-content>
-        </div>
-    <!-- </section> -->
+        </md-content>
+    </div>
 </body>
 
 </html>
