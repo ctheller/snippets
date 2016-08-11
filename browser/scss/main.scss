@@ -6,6 +6,7 @@
 
 body {
   background-color: $extremely-light-grey;
+  overflow: hidden;
 }
 
 @mixin clearfix {
