@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ngAnimate', 'ngMaterial', 'ngAria', 'ngMessages', 'angularResizable']);
+window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ngAnimate', 'ngMaterial', 'ngAria', 'ngMessages', 'angularResizable', 'firebase']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -24,6 +24,8 @@ app.run(function ($rootScope, AuthService, $state) {
     // whenever the process of changing a state begins.
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 
+        console.log('1');
+
         if (!destinationStateRequiresAuth(toState)) {
             // The destination state does not require authentication
             // Short circuit with return.
@@ -39,16 +41,12 @@ app.run(function ($rootScope, AuthService, $state) {
         // Cancel navigating to new state.
         event.preventDefault();
 
-        AuthService.getLoggedInUser().then(function (user) {
-            // If a user is retrieved, then renavigate to the destination
-            // (the second time, AuthService.isAuthenticated() will work)
-            // otherwise, if no user is logged in, go to "login" state.
-            if (user) {
-                $state.go(toState.name, toParams);
-            } else {
-                $state.go('login');
-            }
-        });
+        
+        if (AuthService.getLoggedInUser()) {
+            $state.go(toState.name, toParams);
+        } else {
+            $state.go('login');
+        }
 
     });
 

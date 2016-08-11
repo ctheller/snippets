@@ -48,85 +48,39 @@
         ]);
     });
 
-    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q) {
+    app.service('AuthService', function ($rootScope, AUTH_EVENTS, Auth, $state, $firebaseObject) {
 
-        function onSuccessfulLogin(response) {
-            var data = response.data;
-            Session.create(data.id, data.user);
-            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            return data.user;
-        }
+        var user = null;
 
-        // Uses the session factory to see if an
-        // authenticated user is currently registered.
-        this.isAuthenticated = function () {
-            return !!Session.user;
+        this.getLoggedInUser = function () {
+            return user;
         };
 
-        this.getLoggedInUser = function (fromServer) {
-
-            // If an authenticated session exists, we
-            // return the user attached to that session
-            // with a promise. This ensures that we can
-            // always interface with this method asynchronously.
-
-            // Optionally, if true is given as the fromServer parameter,
-            // then this cached value will not be used.
-
-            if (this.isAuthenticated() && fromServer !== true) {
-                return $q.when(Session.user);
-            }
-
-            // Make request GET /session.
-            // If it returns a user, call onSuccessfulLogin with the response.
-            // If it returns a 401 response, we catch it and instead resolve to null.
-            return $http.get('/session').then(onSuccessfulLogin).catch(function () {
-                return null;
-            });
-
-        };
-
-        this.login = function (credentials) {
-            return $http.post('/login', credentials)
-                .then(onSuccessfulLogin)
-                .catch(function () {
-                    return $q.reject({ message: 'Invalid login credentials.' });
+        Auth.$onAuthStateChanged(function(){
+            if (Auth.$getAuth()) {
+                //check if user is in the DB already
+                var ref = firebase.database().ref().child('users');
+                ref.once('value', function(snapshot){
+                    if (!snapshot.hasChild(Auth.$getAuth().uid)) {
+                        var id = Auth.$getAuth().uid;
+                        var email = Auth.$getAuth().providerData[0].email;
+                        var photoUrl = Auth.$getAuth().providerData[0].photoURL;
+                        ref.child(id).set({email: email, photoUrl: photoUrl, isAdmin: false});
+                    }
                 });
-        };
 
-        this.logout = function () {
-            return $http.get('/logout').then(function () {
-                Session.destroy();
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            });
-        };
+                //console.log('5', $firebaseObject(ref.child('users').hasChild('5')));
 
-    });
+                //change this to get user info from db:
+                user = Auth.$getAuth()
 
-    app.service('Session', function ($rootScope, AUTH_EVENTS) {
+                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
-        var self = this;
 
-        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
-            self.destroy();
+            }
+            else $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            $state.go('home');
         });
-
-        $rootScope.$on(AUTH_EVENTS.sessionTimeout, function () {
-            self.destroy();
-        });
-
-        this.id = null;
-        this.user = null;
-
-        this.create = function (sessionId, user) {
-            this.id = sessionId;
-            this.user = user;
-        };
-
-        this.destroy = function () {
-            this.id = null;
-            this.user = null;
-        };
 
     });
 
