@@ -1,9 +1,11 @@
+@import 'color';
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: #fdfdfd;
+  background-color: $extremely-light-grey;
 }
 
 @mixin clearfix {
