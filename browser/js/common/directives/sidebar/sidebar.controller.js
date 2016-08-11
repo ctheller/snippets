@@ -3,7 +3,8 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, AUTH_EVE
     $scope.items = [
         { label: 'Home', state: 'home', icon: 'home' },
         { label: 'Profile', state: 'about', icon:'user' },
-        { label: 'Dashboard', state: 'membersOnly', icon:'briefcase' }
+        { label: 'Dashboard', state: 'dashboard', icon:'briefcase' },
+        { label: 'Members', state: 'membersOnly', icon:'poop' }
     ];
 
     $scope.user = null;
