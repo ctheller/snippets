@@ -57,7 +57,6 @@
         };
 
         Auth.$onAuthStateChanged(function(){
-            console.log("hit auth change function");
             if (Auth.$getAuth()) {
                 //check if user is in the DB already
                 var ref = firebase.database().ref().child('users');
