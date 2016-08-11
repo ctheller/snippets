@@ -5,6 +5,7 @@
     <base href="/" />
     <title>Fullstack Academy Generated Application</title>
     <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.css" />
+    <link rel="stylesheet" type="text/css" href="/angular-resizable/angular-resizable.min.css" />
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
@@ -12,17 +13,21 @@
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/angular-messages/angular-messages.js"></script>
     <script src="/angular-aria/angular-aria.js"></script>
+    <script src="/angular-resizable/angular-resizable.min.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-material/angular-material.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="/main.js"></script>
 </head>
 
-<body ng-app="FullstackGeneratedApp" class="layout-row" layout="row" flex>
-    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-disable-backdrop="" md-whiteframe="4">
-        <md-toolbar class="md-theme-indigo">
+<body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
+    <md-toolbar class="md-theme-indigo md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl">
+            <md-icon class="lnr" md-font-icon="lnr-menu" ng-click="toggle()"></md-icon>
             <h1 class="md-toolbar-tools">Snippets</h1>
-        </md-toolbar>
+    </md-toolbar>
+    <div role="main" layout="row" flex>
+        <!-- temperary controller -->
+        <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="true" md-disable-backdrop="" md-whiteframe="4">
         <md-content layout-padding="" ng-controller="SidebarCtrl">
             <md-list ng-cloak>
                 <md-list-item class="sidebar-item" ng-repeat="item in items">
@@ -45,16 +50,12 @@
                 Close Sidenav Left
             </md-button>
         </md-content>
-    </md-sidenav>
-    <div role="main" layout="column" flex>
-        <!-- temperary controller -->
-        <md-toolbar layout="row" class="md-theme-indigo" ng-controller="ToolbarCtrl">
-            <md-icon class="lnr" md-font-icon="lnr-menu" hide-gt-md ng-click="toggle()"></md-icon>
-            <div class="md-toolbar-tools">lorem ipsum</div>
-        </md-toolbar>
-        <md-content>
-            <div ui-view></div>
-        </md-content>
+        </md-sidenav>
+<!--         <md-toolbar layout="row" class="md-theme-indigo" ng-controller="ToolbarCtrl">
+
+            <div class="site-content-toolbar md-toolbar-tools md-whiteframe-3dp">lorem ipsum</div>
+        </md-toolbar> -->
+        <md-content flex="auto" ui-view layout="column"></md-content>
     </div>
 </body>
 

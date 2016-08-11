@@ -1,9 +1,11 @@
+@import 'color';
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: #fdfdfd;
+  background-color: $extremely-light-grey;
 }
 
 @mixin clearfix {
@@ -24,3 +26,4 @@ body {
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+@import 'dashboard/main';
