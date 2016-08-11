@@ -25,38 +25,38 @@
             <md-icon class="lnr" md-font-icon="lnr-menu" ng-click="toggle()"></md-icon>
             <!-- <h1 class="md-toolbar-tools">Snippets</h1> -->
             <img class="snippetLogo" src="/files/snippetLogo.png" >
+        <md-icon class="lnr" md-font-icon="lnr-menu" ng-click="toggle()"></md-icon>
+        <h1 class="md-toolbar-tools">Snippets</h1>
     </md-toolbar>
     <div role="main" layout="row" flex>
         <!-- temperary controller -->
-        <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="true" md-disable-backdrop="" md-whiteframe="4">
-        <md-content layout-padding="" ng-controller="SidebarCtrl">
-            <md-list ng-cloak>
-                <md-list-item class="sidebar-item" ng-repeat="item in items">
-                    <md-icon class="lnr" md-font-icon="lnr-{{item.icon}}"></md-icon>
-                    <p ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</p>
-                </md-list-item>
-                <md-list-item class="sidebar-item">
-                    <div class="md-list-item-text">
-                        <p ng-show="!user" ui-sref="login" class="btn login-button">Login</p>
-                    </div>
-                </md-list-item>
-                <md-list-item class="sidebar-item" ng-show="user" class="welcome">
-                    <div class="md-list-item-text">
-                        <span>Welcome, {{ user.email }}!</span>
-                    </div>
-                </md-list-item>
-            </md-list>
-            <md-button ng-click="logout()">Logout</md-button>
-            <md-button layout-padding ng-click="close()" class="md-primary" hide-gt-md>
-                Close Sidenav Left
-            </md-button>
+        <md-content class="pushing" layout="column">
+            <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('min-width:200')" md-disable-backdrop="" md-whiteframe="4">
+                <md-content layout-padding="" ng-controller="SidebarCtrl">
+                    <md-list ng-cloak>
+                        <md-list-item class="sidebar-item" ng-repeat="item in items">
+                            <md-icon class="lnr" md-font-icon="lnr-{{item.icon}}"></md-icon>
+                            <p ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</p>
+                        </md-list-item>
+                        <md-list-item class="sidebar-item">
+                            <div class="md-list-item-text">
+                                <p ng-show="!user" ui-sref="login" class="btn login-button">Login</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="sidebar-item" ng-show="user" class="welcome">
+                            <div class="md-list-item-text">
+                                <span>Welcome, {{ user.email }}!</span>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                    <md-button ng-click="logout()">Logout</md-button>
+                    <md-button layout-padding ng-click="close()" class="md-primary" hide-gt-md>
+                        Close Sidenav Left
+                    </md-button>
+                </md-content>
+            </md-sidenav>
         </md-content>
-        </md-sidenav>
-<!--         <md-toolbar layout="row" class="md-theme-indigo" ng-controller="ToolbarCtrl">
-
-            <div class="site-content-toolbar md-toolbar-tools md-whiteframe-3dp">lorem ipsum</div>
-        </md-toolbar> -->
-        <md-content flex="auto" ui-view layout="column"></md-content>
+        <md-content flex="auto" ui-view layout="column" class="md-sidenav-push-in-target pushed" layout-padding=""></md-content>
     </div>
 </body>
 
