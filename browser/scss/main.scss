@@ -23,16 +23,6 @@ body {
   margin: 0 auto;
 }
 
-.lnr:focus {
-  outline: none;
-}
-
-.lnr {
-  i {
-    cursor: pointer;
-  }
-}
-
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
