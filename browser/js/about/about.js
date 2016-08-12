@@ -9,7 +9,9 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('AboutController', function ($scope, Profile, AuthService, AUTH_EVENTS, $rootScope, Snippet) {
+app.controller('AboutController', function ($scope, Profile, AuthService, AUTH_EVENTS, $rootScope, Snippet, $log, Users) {
+
+    ///IF YOU GET INFO AS AN OBJECT, YOU CAN $BIND ON IT. IF IT'S AS AN ARRAY, YOU CAN ACCESS THE IDS BUT YOU CAN'T PERSIST CHANGES WITHOUT CALLING SAVE.
 
     var setSnippetBinding = function() {
     	// var snippetIds = Object.keys($scope.user.snippets);
@@ -17,15 +19,23 @@ app.controller('AboutController', function ($scope, Profile, AuthService, AUTH_E
     	// 	$scope.snippets[i] = {};
     	// 	Snippet(snippetId).$bindTo($scope.snippets[i], 'snippet');
     	// })
-    	Snippet(Object.keys($scope.user.snippets)[0]).$bindTo($scope, 'snippet');
-    }
+    	Snippet.getSnippetById(Object.keys($scope.user.snippets)[0]).$bindTo($scope, 'snippet');
+    };
+
+    Users().$bindTo($scope, 'users');
+
+    Snippet.getAllSnippetsAllowed().$bindTo($scope, 'allSnippets').then(function(){
+        console.log($scope.allSnippets);
+    })
+
 
     var setUserBinding = function() {    
         $scope.user = AuthService.getLoggedInUser();
         if ($scope.user) Profile($scope.user.$id).$bindTo($scope, "user").then(function(){
         	setSnippetBinding();
-        })
+        }).catch($log);
     };
+
 
     var removeUser = function() {
         $scope.user = null;
