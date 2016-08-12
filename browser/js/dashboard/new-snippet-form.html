@@ -1,0 +1,40 @@
+<md-dialog ng-cloak flex="65">
+    <form name="snippetForm" ng-submit="submitSnippet()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>New snippet</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="close dialog"><i class="material-icons">cancel</i></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="md-dialog-content">
+            <md-input-container class="md-block">
+                <label>Title</label>
+                <input name="snippetTitle" ng-model="newSnippet.title" required>
+                <div ng-messages="snippetForm.title.$error">
+                    <div ng-message="required">required</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Type</label>
+                <md-select name="snippetType" ng-model="newSnippet.type" required>
+                    <md-option>type 1</md-option>
+                    <md-option>type 2</md-option>
+                </md-select>
+                <div ng-messages="snippetForm.title.$error">
+                    <div ng-message="required">required</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Body</label>
+                <textarea name="snippetBody" ng-model="newSnippet.body" rows="7" md-select-on-focus required></textarea>
+                <div ng-messages="snippetForm.body.$error">
+                    <div ng-message="required">required</div>
+                </div>
+            </md-input-container>
+            <md-button type="submit">Submit</md-button>
+        </md-dialog-content>
+    </form>
+</md-dialog>
