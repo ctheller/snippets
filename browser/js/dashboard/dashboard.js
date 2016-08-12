@@ -4,4 +4,4 @@ app.config(function ($stateProvider) {
         controller: 'DashboardCtrl',
         templateUrl: 'js/dashboard/dashboard.html'
     });
-})
+});
