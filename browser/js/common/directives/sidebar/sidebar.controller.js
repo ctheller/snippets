@@ -1,4 +1,4 @@
-app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, AUTH_EVENTS, $state, $mdSidenav, $log) {
+app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AUTH_EVENTS, $state, $mdSidenav, $log) {
 
     $scope.items = [
         { label: 'Home', state: 'home', icon: 'home' },
@@ -14,15 +14,12 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, AUTH_EVE
     };
 
     $scope.logout = function() {
-        AuthService.logout().then(function() {
-            $state.go('home');
-        });
+        Auth.$signOut();
     };
 
-    var setUser = function() {
-        AuthService.getLoggedInUser().then(function(user) {
-            $scope.user = user;
-        });
+    var setUser = function() {    
+        $scope.user = AuthService.getLoggedInUser();
+  
     };
 
     var removeUser = function() {
