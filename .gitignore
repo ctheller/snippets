@@ -5,3 +5,4 @@ public
 .DS_Store
 coverage
 credentials
+bower_components

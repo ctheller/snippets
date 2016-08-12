@@ -34,7 +34,7 @@
         return {
             responseError: function (response) {
                 $rootScope.$broadcast(statusDict[response.status], response);
-                return $q.reject(response)
+                return $q.reject(response);
             }
         };
     });
@@ -72,7 +72,7 @@
                 //console.log('5', $firebaseObject(ref.child('users').hasChild('5')));
 
                 //change this to get user info from db:
-                user = Auth.$getAuth()
+                user = Auth.$getAuth();
 
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
