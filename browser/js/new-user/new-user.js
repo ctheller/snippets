@@ -4,4 +4,4 @@ app.config(function ($stateProvider) {
         controller: 'NewUserCtrl',
         templateUrl: 'js/new-user/new-user.html'
     });
-})
+});

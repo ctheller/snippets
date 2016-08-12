@@ -9,14 +9,14 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
       var snippetRef = ref.child("snippets").child(snippetId);
       // return it as a synchronized object
       return $firebaseObject(snippetRef);
-    }
+    };
 
     Snippet.getAllSnippetsAllowed = function() {
     	return $firebaseObject(ref.child("snippets"));
-    }
+    };
 
     Snippet.create = function(data){
-    	var currentUser = AuthService.getLoggedInUser()
+    	var currentUser = AuthService.getLoggedInUser();
     	data.team = currentUser.manager;
     	data.owner = currentUser.$id;
     	data.submitted = false;
@@ -32,11 +32,16 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
 			result.forEach(function(userId){
 				updates['/users/' + userId + '/snippets/' + newSnippetKey] = true;
-			})
+			});
 
 			return ref.update(updates);
 		});
+    };
 
+    Snippet.duplicateAsTemplate = function(snippetId) {
+    	var fromSnippet = Snippet.getSnippetById(snippetId);
+    	var dataToTransfer = {subject: fromSnippet.subject, content: fromSnippet.content};
+    	Snippet.create(dataToTransfer);
     };
 
     Snippet.delete = function(snippetId){

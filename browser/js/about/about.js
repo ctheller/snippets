@@ -21,7 +21,7 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
 
     Snippet.getAllSnippetsAllowed().$bindTo($scope, 'allSnippets').then(function(){
         console.log($scope.allSnippets);
-    })
+    });
 
     $scope.addCollaborators = function(idArray, snippetId){
         idArray.forEach(function(id){
@@ -34,19 +34,19 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
             else $scope.users[id].snippets[snippetId] = true;
 
             $scope.allSnippets[snippetId].collaborators[id] = true;
-        })
-    }
+        });
+    };
 
     $scope.removeCollaborator = function(userId, snippetId){
         //prevent from removing self as collaborator
         if (userId === $scope.user.$id) return;
         $scope.users[userId].snippets[snippetId] = null;
         $scope.allSnippets[snippetId].collaborators[userId] = null;
-    }
+    };
 
     $scope.submitSnippet = function(snippetId){
         $scope.allSnippets[snippetId].submitted = true;
-    }
+    };
 
     var setUserBinding = function() {    
         $scope.user = AuthService.getLoggedInUser();
