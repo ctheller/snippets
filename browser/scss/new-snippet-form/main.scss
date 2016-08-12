@@ -1,0 +1,9 @@
+form[name="snippetForm"] {
+    background-color: white;
+}
+
+md-select[name="snippetType"] {
+    md-option {
+        z-index: 9999;
+    }
+}

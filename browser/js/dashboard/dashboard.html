@@ -1,14 +1,26 @@
 <div layout="row" class="dashboard-wrapper" flex="grow">
-    <section class="editing-panel" resizable r-directions="['right']" r-width="300" layout="column">
-        <p>
-            What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-        </p>
+    <section class="editing-panel-wrapper one" md-whiteframe="24" layout="column" flex="40">
+       <div> <md-icon ng-model="draggables" ng-repeat="draggable in draggables"
+        data-drag="true"
+        data-jqyoui-options="{revert: 'invalid',
+                            helper: 'clone'}"
+        jqyoui-draggable="{index: {{$index}},
+                        placeholder: 'keep'}">
+            <i class="material-icons">{{draggable.icon}}</i>
+        </md-icon> </div>
     </section>
-    <section class="editing-panel" resizable layout="column" flex="auto">
-        <p>test</p>
+    <section
+    class="editing-panel-wrapper two"
+    md-whiteframe="24" layout="column" flex="auto"
+    ng-model="dragged"
+    data-drop="true"
+    jqyoui-droppable="{multiple:true}">
+        <div> <md-icon ng-repeat="item in dragged"
+        data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+        jqyoui-draggable="{index: {{$index}}}"><i class="material-icons">{{item.icon}}</i></md-icon> </div>
     </section>
-    <md-button class="md-fab add-snippet-btn" aria-label="add snippet" ng-click="showTabDialog($event)">
+    <md-button class="md-fab add-snippet-btn" aria-label="add snippet" ng-click="showSnippetForm($event)">
         <md-icon><i class="material-icons">add</i></md-icon>
     </md-button>
-
 </div>
+<!-- resizable r-directions="['right']" r-width="300" -->
