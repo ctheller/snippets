@@ -19,6 +19,10 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
     	var currentUser = AuthService.getLoggedInUser()
     	data.team = currentUser.manager;
     	data.owner = currentUser.$id;
+    	data.submitted = false;
+    	var obj = {};
+    	obj[currentUser.$id] = true;
+    	data.collaborators = obj;
     	var newSnippetKey = ref.child("snippets").push().key;
 
 
@@ -33,16 +37,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 			return ref.update(updates);
 		});
 
-    };
-
-    Snippet.addCollaborator = function(userId){
-    	//Add userId to this snippit's list of "users"
-    	//find the user and add it to their "snippet" children
-    };
-
-    Snippet.removeCollaborator = function(userId){
-    	//Remove userId from this snippit's list of "users"
-    	//find the user and remove it from their "snippet" children
     };
 
     Snippet.delete = function(snippetId){

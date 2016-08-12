@@ -23,6 +23,28 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
         console.log($scope.allSnippets);
     })
 
+    $scope.addCollaborators = function(idArray, snippetId){
+        idArray.forEach(function(id){
+
+            if (!$scope.users[id].snippets) {
+                var obj = {};
+                obj[snippetId] = true;
+                $scope.users[id].snippets = obj;
+            } 
+            else $scope.users[id].snippets[snippetId] = true;
+
+            $scope.allSnippets[snippetId].collaborators[id] = true;
+        })
+    }
+
+    $scope.removeCollaborator = function(userId, snippetId){
+        //prevent from removing self as collaborator
+        if (userId === $scope.user.$id) return;
+        $scope.users[userId].snippets[snippetId] = null;
+        $scope.allSnippets[snippetId].collaborators[userId] = null;
+    }
+
+
 
     var setUserBinding = function() {    
         $scope.user = AuthService.getLoggedInUser();
@@ -30,6 +52,8 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
         	setSnippetBinding();
         }).catch($log);
     };
+
+    $scope.saveCollaborators = Snippet.saveCollaborators;
 
     $scope.create = Snippet.create;
 

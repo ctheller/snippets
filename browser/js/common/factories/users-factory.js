@@ -24,6 +24,8 @@ app.factory("Users", function($firebaseObject, $firebaseArray) {
 	      return $firebaseObject(profileRef);
 	    }
 
+	    //Users.setSnippets()
+
       return Users;
 
 });

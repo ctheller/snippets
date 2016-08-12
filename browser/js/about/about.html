@@ -34,14 +34,27 @@
 
 <pre>{{allSnippets | json}}</pre>
 <h1>All Snippet Array Form:</h1>
-<form name="SnippetArrayForm" ng-repeat="snippet in allSnippets">
-	Id:
-	<input ng-model="snippet.$id" type="text">
-	Subject:
-	<input ng-model="snippet.subject" type="textarea">
-	Contents:
-	<input type="textarea" name="contents" ng-model="snippet.contents">
-</form>
+<div ng-repeat="(snippetkey, snippet) in allSnippets">
+	<form name="SnippetArrayForm">
+		Id:
+		<input ng-model="snippetkey" type="text">
+		
+		Subject:
+		<input ng-model="snippet.subject" type="textarea">
+		Contents:
+		<input type="textarea" name="contents" ng-model="snippet.contents">
+		Collaborators:
+		<select ng-model="newCollaborators" ng-change="addCollaborators(newCollaborators, snippetkey)" multiple>
+		  <option ng-repeat="(userkey, user) in users" value={{userkey}}>{{user.email}}</option>
+		</select>
+		<pre>{{snippet.collaborators | json}}</pre>
+	</form>
+	<div ng-repeat="(key, value) in snippet.collaborators">
+		<button ng-click="removeCollaborator(key, snippetkey)">{{key}}</button>
+	</div>
+
+
+</div>
 
 <pre>{{newSnippet}}</pre>
 </div>
