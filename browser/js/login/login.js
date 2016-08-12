@@ -8,17 +8,9 @@ app.config(function($stateProvider) {
 
 });
 
-<<<<<<< HEAD
-app.controller('LoginCtrl', function($scope, Auth) {
-
-    $scope.googleLogin = function() {
-        Auth.$signInWithRedirect('google');
-    };
-=======
-app.controller('LoginCtrl', function ($scope, AuthService) {
+app.controller('LoginCtrl', function ($scope, AuthService, Auth) {
 
     $scope.googleLogin = AuthService.login;
->>>>>>> snippetKing
 
     $scope.login = {};
     $scope.error = null;

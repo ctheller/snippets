@@ -74,17 +74,10 @@
                         ref.child(id).set({email: email, photoUrl: photoUrl, isAdmin: false});
                     }
                 });
-<<<<<<< HEAD
 
-                //console.log('5', $firebaseObject(ref.child('users').hasChild('5')));
-
-                //change this to get user info from db:
-                user = Auth.$getAuth();
-
-=======
                 //Get user info from db:
                 user = $firebaseObject(ref.child(id));
->>>>>>> snippetKing
+
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
             }
