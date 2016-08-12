@@ -19,7 +19,7 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
 
     var setUser = function() {    
         $scope.user = AuthService.getLoggedInUser();
-  
+        
     };
 
     var removeUser = function() {

@@ -34,7 +34,7 @@
         return {
             responseError: function (response) {
                 $rootScope.$broadcast(statusDict[response.status], response);
-                return $q.reject(response)
+                return $q.reject(response);
             }
         };
     });
@@ -56,30 +56,33 @@
             return user;
         };
 
+        this.login = function(){
+            Auth.$signInWithRedirect('google');
+        };
+
         Auth.$onAuthStateChanged(function(){
             if (Auth.$getAuth()) {
+                var id = Auth.$getAuth().uid;
+
                 //check if user is in the DB already
                 var ref = firebase.database().ref().child('users');
                 ref.once('value', function(snapshot){
                     if (!snapshot.hasChild(Auth.$getAuth().uid)) {
-                        var id = Auth.$getAuth().uid;
                         var email = Auth.$getAuth().providerData[0].email;
                         var photoUrl = Auth.$getAuth().providerData[0].photoURL;
                         ref.child(id).set({email: email, photoUrl: photoUrl, isAdmin: false});
                     }
                 });
-
-                //console.log('5', $firebaseObject(ref.child('users').hasChild('5')));
-
-                //change this to get user info from db:
-                user = Auth.$getAuth()
-
+                
+                //Get user info from db:
+                user = $firebaseObject(ref.child(id));
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
-
             }
-            else $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            $state.go('home');
+            else {
+                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+                $state.go('home');
+            }
         });
 
     });
