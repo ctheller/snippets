@@ -4,5 +4,5 @@ app.controller('ToolbarCtrl', function ($scope, $mdSidenav, $rootScope) {
         $mdSidenav('left').toggle();
         if ($mdSidenav('left').isOpen()) $rootScope.$emit('open');
         else $rootScope.$emit('close');
-    }
-})
+    };
+});

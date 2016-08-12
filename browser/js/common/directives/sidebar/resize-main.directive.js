@@ -12,11 +12,11 @@ app.directive('resizeMain', function($rootScope, $document, $window) {
             $rootScope.$on('open', function() {
                 element.css('max-width', body[0].clientWidth - sidebarWidth + 'px');
                 sidebarOpen = true;
-            })
+            });
             $rootScope.$on('close', function() {
                 element.css('max-width', body[0].clientWidth + 'px');
                 sidebarOpen = false;
-            })
+            });
         }
-    }
-})
+    };
+});

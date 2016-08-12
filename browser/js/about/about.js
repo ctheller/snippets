@@ -34,9 +34,9 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
             else $scope.users[id].snippets[snippetId] = true;
 
             if (!$scope.allSnippets[snippetId].collaborators) {
-                var obj = {};
-                obj[id] = true;
-                $scope.allSnippets[snippetId].collaborators = obj;
+                var obj1 = {};
+                obj1[id] = true;
+                $scope.allSnippets[snippetId].collaborators = obj1;
             }
             $scope.allSnippets[snippetId].collaborators[id] = true;
         });

@@ -21,7 +21,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
     		.once('value', function(snap){
     			callback( Object.keys(snap.val()) );
     		});
-    }
+    };
 
     //TEAM SNIPPETS COME FROM WITHIN (but actually... all snippets should be added to an entire team upon creation)
 

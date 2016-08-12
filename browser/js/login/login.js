@@ -24,7 +24,7 @@ app.controller('LoginCtrl', function ($scope, AuthService, Auth) {
                 console.log('Logged in as:', authData.uid);
             }).catch(function(err) {
                 console.log('Authentication failed:', err);
-            })
-    }
+            });
+    };
 });
 

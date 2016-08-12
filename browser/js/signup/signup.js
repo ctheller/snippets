@@ -33,7 +33,7 @@ app.controller('signUpCtrl',
                     }).catch(function(error) {
                         console.error("Error: ", error);
                     });
-            };
+            }
         };
 
         $scope.deleteUser = function() {

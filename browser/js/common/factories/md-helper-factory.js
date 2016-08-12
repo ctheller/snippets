@@ -11,8 +11,8 @@ app.factory('MdHelpers', function() {
                 $mdDialog.hide(answer);
             };
             $scope.submitSnippet = function() {
-                console.log('submitted?', $scope.newSnippet)
-            }
+                console.log('submitted?', $scope.newSnippet);
+            };
         }
-    }
-})
+    };
+});

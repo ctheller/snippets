@@ -34,9 +34,9 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
 
     $scope.sidebarOpen = false;
     $rootScope.$on('toggle', function () {
-        console.log('gotcha')
+        console.log('gotcha');
         $scope.sidebarOpen = !$scope.sidebarOpen;
-    })
+    });
 
-})
+});
 

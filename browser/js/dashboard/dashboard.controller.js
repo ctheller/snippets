@@ -7,13 +7,13 @@ app.controller('DashboardCtrl', function($scope, $mdDialog, MdHelpers) {
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true
-        })
+        });
     };
     $scope.draggables = [
         {icon: 'people'}, {icon: 'person'}
     ];
     $scope.dragged = [];
-    console.log($scope.dragged)
+    console.log($scope.dragged);
 
 
-})
+});
