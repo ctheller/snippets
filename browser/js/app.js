@@ -14,7 +14,9 @@ app.config(function ($urlRouterProvider, $locationProvider) {
 });
 
 // This app.run is for controlling access to specific states.
-app.run(function ($rootScope, AuthService, $state) {
+app.run(function ($rootScope, AuthService, $state, Users) {
+
+    Users.getAll().$bindTo($rootScope, 'users');
 
     // The given state requires an authenticated user.
     var destinationStateRequiresAuth = function (state) {
