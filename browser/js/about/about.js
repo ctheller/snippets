@@ -44,7 +44,9 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
         $scope.allSnippets[snippetId].collaborators[userId] = null;
     }
 
-
+    $scope.submitSnippet = function(snippetId){
+        $scope.allSnippets[snippetId].submitted = true;
+    }
 
     var setUserBinding = function() {    
         $scope.user = AuthService.getLoggedInUser();
