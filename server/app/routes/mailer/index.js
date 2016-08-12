@@ -29,8 +29,6 @@ router.get('/', function(req,res,next) {
       html: '<b>Hello world 🐴</b>' // html body
   };
 
-
-
   // send mail with defined transport object
   transporter.sendMail(mailOptions, function(error, info){
       if(error){
