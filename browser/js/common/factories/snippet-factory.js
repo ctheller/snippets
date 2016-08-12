@@ -15,6 +15,16 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
     	return $firebaseObject(ref.child("snippets"));
     };
 
+    Snippet.getReportSnippetIds = function(callback) {
+    	var currentUser = AuthService.getLoggedInUser();
+    	ref.child("snippets").orderByChild("manager").equalTo(currentUser.$id)
+    		.once('value', function(snap){
+    			callback( Object.keys(snap.val()) );
+    		});
+    }
+
+    //TEAM SNIPPETS COME FROM WITHIN (but actually... all snippets should be added to an entire team upon creation)
+
     Snippet.create = function(data){
     	var currentUser = AuthService.getLoggedInUser();
     	data.team = currentUser.manager;
@@ -24,7 +34,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
     	obj[currentUser.$id] = true;
     	data.collaborators = obj;
     	var newSnippetKey = ref.child("snippets").push().key;
-
 
 		Users.findUsersMatchingManager(currentUser.manager, function(result){
 			var updates = {};

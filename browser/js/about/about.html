@@ -38,7 +38,7 @@
 	<form name="SnippetArrayForm">
 		Id:
 		<input ng-model="snippetkey" type="text">
-		
+
 		Subject:
 		<input ng-model="snippet.subject" type="textarea">
 		Contents:
@@ -49,10 +49,9 @@
 		</select>
 		<pre>{{snippet.collaborators | json}}</pre>
 	</form>
-	<div ng-repeat="(key, value) in snippet.collaborators">
+	<div ng-repeat="(key, value) in snippet.collaborators track by $index">
 		<button ng-click="removeCollaborator(key, snippetkey)">{{key}}</button>
 	</div>
-
 
 </div>
 
