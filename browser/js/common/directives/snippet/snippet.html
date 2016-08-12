@@ -4,20 +4,25 @@
     <input type="textarea" name="body" ng-model="snippet.body">
   </form>
 </div> -->
+<!-- {{ collaborators }}
+<h1 ng-repeat="collaborator in collaborators">{{ collaborator }}</h1> -->
 
-<div flex-xs flex-gt-xs="20" layout="column">
+<div flex-xs flex-gt-xs="30" layout="column">
       <md-card md-theme="{{ 'default' }}" md-theme-watch>
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">Launched SuperApp to seven new markets</span>
-            <span class="md-subhead">Dragée marshmallow cupcake donut macaroon. Liquorice jelly-o liquorice jelly-o. Apple pie tootsie roll danish marzipan chocolate cake icing jelly beans lollipop. Chocolate toffee ice cream toffee candy. </span>
+            <span class="md-headline">{{ title }}</span>
+            <span class="md-subhead">{{ body }}</span>
           </md-card-title-text>
           <!-- <md-card-title-media>
             <div class="md-media-sm card-media"></div>
           </md-card-title-media> -->
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action</md-button>
+          <div class="snippetImg" ng-repeat="(index,collaborator) in collaborators">
+            <img src="{{ collaborator }}" style="z-index: {{ 100 / index }}">
+          </div>
+          <!-- <md-button>Action</md-button> -->
         </md-card-actions>
       </md-card>
 </div>
