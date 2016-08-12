@@ -68,7 +68,7 @@ md-sidenav {
     background-color: $extremely-light-grey;
     margin-left: -300px;
     padding-right: 20px;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 ui-view {
