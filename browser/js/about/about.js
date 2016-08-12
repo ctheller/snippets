@@ -36,6 +36,8 @@ app.controller('AboutController', function ($scope, Profile, AuthService, AUTH_E
         }).catch($log);
     };
 
+    $scope.create = Snippet.create;
+
 
     var removeUser = function() {
         $scope.user = null;

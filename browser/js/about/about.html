@@ -43,4 +43,14 @@
 	<input type="textarea" name="contents" ng-model="snippet.contents">
 </form>
 
+<pre>{{newSnippet}}</pre>
 </div>
+<h1>New Snippet Creation Form:</h1>
+<form name="newSnippetForm" ng-submit="create(newSnippet)">
+	Subject:
+	<input ng-model="newSnippet.subject" type="textarea">
+	Contents:
+	<input type="textarea" name="contents" ng-model="newSnippet.contents">
+	<input type="submit">
+</form>
+
