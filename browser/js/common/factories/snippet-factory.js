@@ -24,14 +24,21 @@ app.factory("Snippet", function($firebaseObject) {
     	})
     }
 
+    Snippet.addCollaborator = function(userId){
+    	//Add userId to this snippit's list of "users"
+    	//find the user and add it to their "snippet" children
+    }
+
+    Snippet.removeCollaborator = function(userId){
+    	//Remove userId from this snippit's list of "users"
+    	//find the user and remove it from their "snippet" children
+    }
+
     Snippet.delete = function(snippetId){
     	ref.child(snippetId).remove();
-    	//Also remove from users' lists of snippets
+    	//Also remove from users' lists of snippets by iterating through "collaborators" and deleting it off them first.
     }
 
     return Snippet;
 
   });
-
-
-//MAYBE snippets don't have to live on users. It'll just return the ones for which they are explicitly granted permission?
