@@ -1,0 +1,10 @@
+<form name="newUserForm">
+	First Name:
+	<input ng-model="user.first_name" type="text">
+	Last Name:
+	<input ng-model="user.last_name" type="text">
+	Manager:
+	<select ng-model="user.manager">
+	  <option ng-repeat="employee in employees" value={{employee.$id}}>{{employee.name}}</option>
+	</select>
+</form>
