@@ -25,8 +25,6 @@ app.run(function ($rootScope, AuthService, $state) {
     // whenever the process of changing a state begins.
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 
-        console.log('1');
-
         if (!destinationStateRequiresAuth(toState)) {
             // The destination state does not require authentication
             // Short circuit with return.

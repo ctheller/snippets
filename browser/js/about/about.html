@@ -1,3 +1,70 @@
 
-
 <snippet></snippet>
+
+<div>
+<pre>{{user | json}}</pre>
+<h1>User Form:</h1>
+<form name="userForm">
+	User Id:
+	<input ng-model="user.$id" type="text">
+	Is admin?:
+	<input type="checkbox" name="admin" ng-model="user.isAdmin">
+	User's Snippets:
+	<select ng-model="user.snippets[snippet.$id]" multiple>
+	  <option value=true>{{snippet.subject}}</option>
+	</select>
+</form>
+
+<pre> {{snippet | json }}</pre>
+<h1>Snippet Form:</h1>
+<form name="snippetForm">
+	Id:
+	<input ng-model="snippet.$id" type="text">
+	Subject:
+	<input ng-model="snippet.subject" type="textarea">
+	Contents:
+	<input type="textarea" name="contents" ng-model="snippet.contents">
+	Users (Collaborators):
+</form>
+<pre>{{users | json}}</pre>
+<h1>User Array Form:</h1>
+<form name="UserArrayForm" ng-repeat="person in users">
+	Email:
+	<input ng-model="person.email" type="text">
+	Is admin?:
+	<input type="checkbox" name="admin" ng-model="person.isAdmin">
+</form>
+
+<pre>{{allSnippets | json}}</pre>
+<h1>All Snippet Array Form:</h1>
+<div ng-repeat="(snippetkey, snippet) in allSnippets">
+	<form name="SnippetArrayForm">
+		Id:
+		<input ng-model="snippetkey" type="text">
+
+		Subject:
+		<input ng-model="snippet.subject" type="textarea">
+		Contents:
+		<input type="textarea" name="contents" ng-model="snippet.contents">
+		Collaborators:
+		<select ng-model="newCollaborators" ng-change="addCollaborators(newCollaborators, snippetkey)" multiple>
+		  <option ng-repeat="(userkey, user) in users" value={{userkey}}>{{user.email}}</option>
+		</select>
+		<pre>{{snippet.collaborators | json}}</pre>
+	</form>
+	<div ng-repeat="(key, value) in snippet.collaborators track by $index">
+		<button ng-click="removeCollaborator(key, snippetkey)">{{key}}</button>
+	</div>
+
+</div>
+
+<pre>{{newSnippet}}</pre>
+</div>
+<h1>New Snippet Creation Form:</h1>
+<form name="newSnippetForm" ng-submit="create(newSnippet)">
+	Subject:
+	<input ng-model="newSnippet.subject" type="textarea">
+	Contents:
+	<input type="textarea" name="contents" ng-model="newSnippet.contents">
+	<input type="submit">
+</form>
