@@ -1,5 +1,6 @@
 'use strict';
-window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ngAnimate', 'ngMaterial', 'ngAria', 'ngMessages', 'angularResizable', 'firebase']);
+
+window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ngAnimate', 'ngMaterial', 'ngAria', 'ngMessages', 'angularResizable', 'firebase', 'ngDraggable']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -41,7 +42,7 @@ app.run(function ($rootScope, AuthService, $state) {
         // Cancel navigating to new state.
         event.preventDefault();
 
-        
+
         if (AuthService.getLoggedInUser()) {
             $state.go(toState.name, toParams);
         } else {

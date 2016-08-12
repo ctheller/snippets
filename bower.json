@@ -1,0 +1,20 @@
+{
+  "name": "FullstackGeneratedApp",
+  "description": "A generated project at Fullstack Academy",
+  "main": "server/start.js",
+  "authors": [
+    "yungtiec <tctammychu@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ctheller/snippets",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngDraggable": "^0.1.10"
+  }
+}

@@ -31,14 +31,33 @@
     }
 }
 
-.pushing {
-    width: 320px;
-    @media (min-width: 1800px) {
-        height: 80vh;
-        overflow-y: hidden;
+md-toolbar {
+    z-index: 99;
+}
+
+md-sidenav {
+    background-color: $extremely-light-grey;
+    *, md-content {
+        background-color: $extremely-light-grey;
     }
 }
 
-.pushed {
-    margin-left: -300px;
+.pushing {
+    background-color: $extremely-light-grey;
+    width: 320px;
 }
+
+.pushed {
+    background-color: $extremely-light-grey;
+    margin-left: -300px;
+    padding-right: 20px;
+    overflow: hidden;
+}
+
+ui-view {
+    * {overflow: auto;}
+    width: 100%;
+    height: 100%;
+}
+
+lnr:focus {outline:0;}

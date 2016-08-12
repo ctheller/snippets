@@ -7,6 +7,7 @@
 body {
   background-color: $extremely-light-grey;
   overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @mixin clearfix {
@@ -20,6 +21,16 @@ body {
 #main {
   padding-top: 60px;
   margin: 0 auto;
+}
+
+.lnr:focus {
+  outline: none;
+}
+
+.lnr {
+  i {
+    cursor: pointer;
+  }
 }
 
 @import 'directives/main';

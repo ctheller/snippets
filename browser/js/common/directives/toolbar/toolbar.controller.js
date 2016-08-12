@@ -1,6 +1,8 @@
-app.controller('ToolbarCtrl', function ($scope, $mdSidenav) {
+app.controller('ToolbarCtrl', function ($scope, $mdSidenav, $rootScope) {
+    $scope.sidebarOpen="false";
     $scope.toggle = function () {
-        console.log('toggle')
         $mdSidenav('left').toggle();
+        if ($mdSidenav('left').isOpen()) $rootScope.$emit('open');
+        else $rootScope.$emit('close');
     }
 })
