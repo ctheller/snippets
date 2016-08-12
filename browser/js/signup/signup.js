@@ -20,14 +20,13 @@ app.controller('signUpCtrl',
             else if ($scope.signupForm.$error.maxlength) $scope.error = 'Password must have less than 32 characters';
             else if ($scope.signupForm.$error.required) $scope.error = 'All fields are required';
             else {
-                Auth.$createUserWithEmailAndPassword(signup.email, signup.password)
+                Auth.$createUserWithEmailAndPassword(signupInfo.email, signupInfo.password)
                     .then(function(userData) {
                         console.log("User " + userData.uid + " created successfully!");
 
-                        return Auth.$authWithPassword({
-                            email: signupInfo.email,
-                            password: signupInfo.password
-                        });
+                        return Auth.$signInWithEmailAndPassword(
+                            signupInfo.email, signupInfo.password
+                        );
                     }).then(function(authData) {
                         console.log("Logged in as:", authData.uid);
                     }).catch(function(error) {
