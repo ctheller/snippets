@@ -31,16 +31,16 @@
     }
 }
 
-// md-toolbar {
-//     z-index: 99;
-// }
+md-toolbar {
+    z-index: 99;
+}
 
-// md-sidenav {
-//     background-color: $extremely-light-grey;
-//     *, md-content {
-//         background-color: $extremely-light-grey;
-//     }
-// }
+md-sidenav {
+    background-color: $extremely-light-grey;
+    *, md-content {
+        background-color: $extremely-light-grey;
+    }
+}
 
 .pushing {
     background-color: $extremely-light-grey;
