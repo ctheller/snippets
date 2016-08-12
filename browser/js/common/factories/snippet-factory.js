@@ -21,11 +21,18 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
     	data.owner = currentUser.$id;
     	var newSnippetKey = ref.child("snippets").push().key;
 
-    	var updates = {};
-		updates['/snippets/' + newSnippetKey] = data;
-		updates['/users/' + currentUser.$id + '/snippets/' + newSnippetKey] = true;
 
-		return ref.update(updates);
+		Users.findUsersMatchingManager(currentUser.manager, function(result){
+			var updates = {};
+			updates['/snippets/' + newSnippetKey] = data;
+
+			result.forEach(function(userId){
+				updates['/users/' + userId + '/snippets/' + newSnippetKey] = true;
+			})
+
+			return ref.update(updates);
+		});
+
     };
 
     Snippet.addCollaborator = function(userId){

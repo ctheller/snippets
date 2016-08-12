@@ -7,8 +7,16 @@ app.factory("Users", function($firebaseObject, $firebaseArray) {
 
     	// return it as a synchronized object (array?)
     	Users.getAll = function(){
+    	
+    	Users.findUsersMatchingManager = function( managerId, callback ) {
+			    ref.orderByChild('manager').equalTo(managerId).once('value', function(snap) {
+			        callback( Object.keys(snap.val()) );
+			    });
+			};
+
     		return $firebaseObject(ref);
     	}
+
 
     	Users.getProfile = function(userId) {
 	      var profileRef = ref.child(userId);
