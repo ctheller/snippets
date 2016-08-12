@@ -55,6 +55,7 @@
         this.getLoggedInUser = function () {
             return user;
         };
+    
 
         this.login = function(){
             Auth.$signInWithRedirect('google');
@@ -73,7 +74,6 @@
                         ref.child(id).set({email: email, photoUrl: photoUrl, isAdmin: false});
                     }
                 });
-
                 //Get user info from db:
                 user = $firebaseObject(ref.child(id));
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
