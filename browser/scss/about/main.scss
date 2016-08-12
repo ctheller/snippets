@@ -1,5 +1,7 @@
 #about {
 
+  overflow: scroll !important;
+
   margin: 0 auto;
   width: 90%;
   @include clearfix;
