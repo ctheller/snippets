@@ -1,19 +1,42 @@
+@import '../color';
+
 .dashboard-wrapper {
     height: 100%;
     // overflow: hidden;
 }
 
-.editing-panel {
+.editing-panel-wrapper {
     // overflow-x: auto;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: white;
+    &.one {
+        border-top: 1px solid #e6e3e3;
+        border-left: 1px solid #e6e3e3;
+        border-bottom: 1px solid #e6e3e3;
+    }
+    &.two {
+        border-top: 1px solid #e6e3e3;
+        border-right: 1px solid #e6e3e3;
+        border-bottom: 1px solid #e6e3e3;
+    }
+
+}
+
+.editing-panel {
+    margin: 0px;
 }
 
 .rg-right {
     margin-right: 0px;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid #e6e3e3;
+    background-color: $extremely-light-grey;
 }
 
 .add-snippet-btn {
     position: fixed;
-    bottom: 3%;
+    bottom: 5%;
     right: 3%;
 }

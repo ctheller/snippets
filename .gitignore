@@ -4,5 +4,5 @@ npm-debug.log
 public
 .DS_Store
 coverage
-credentials
 bower_components
+credentials

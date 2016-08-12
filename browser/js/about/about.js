@@ -30,14 +30,14 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
                 var obj = {};
                 obj[snippetId] = true;
                 $scope.users[id].snippets = obj;
-            } 
+            }
             else $scope.users[id].snippets[snippetId] = true;
 
             if (!$scope.allSnippets[snippetId].collaborators) {
                 var obj = {};
                 obj[id] = true;
                 $scope.allSnippets[snippetId].collaborators = obj;
-            } 
+            }
             $scope.allSnippets[snippetId].collaborators[id] = true;
         });
     };
@@ -53,7 +53,7 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
         $scope.allSnippets[snippetId].submitted = true;
     };
 
-    var setUserBinding = function() {    
+    var setUserBinding = function() {
         $scope.user = AuthService.getLoggedInUser();
         if ($scope.user) Users.getProfile($scope.user.$id).$bindTo($scope, "user").then(function(){
         	setSnippetBinding();
