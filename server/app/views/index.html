@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.css" />
     <link rel="stylesheet" type="text/css" href="/angular-resizable/angular-resizable.min.css" />
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
     <script src="/angular/angular.js"></script>
@@ -16,23 +18,24 @@
     <script src="/angular-resizable/angular-resizable.min.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="/ngDraggable/ngDraggable.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="/main.js"></script>
 </head>
 
 <body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
-    <md-toolbar class="md-theme-indigo md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl">
-        <md-icon class="lnr" md-font-icon="lnr-menu" ng-click="toggle()"></md-icon>
+    <md-toolbar class="md-theme-indigo md-toolbar-tools md-whiteframe-7dp" ng-controller="ToolbarCtrl">
+        <md-icon class="lnr" ng-click="toggle()"><i class="material-icons">menu</i></md-icon>
         <h1 class="md-toolbar-tools">Snippets</h1>
     </md-toolbar>
     <div role="main" layout="row" flex>
         <!-- temperary controller -->
         <md-content class="pushing" layout="column">
-            <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('min-width:200')" md-disable-backdrop="" md-whiteframe="4">
+            <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-disable-backdrop="" md-whiteframe="4">
                 <md-content layout-padding="" ng-controller="SidebarCtrl">
                     <md-list ng-cloak>
                         <md-list-item class="sidebar-item" ng-repeat="item in items">
-                            <md-icon class="lnr" md-font-icon="lnr-{{item.icon}}"></md-icon>
+                            <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
                             <p ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</p>
                         </md-list-item>
                         <md-list-item class="sidebar-item">
@@ -50,7 +53,10 @@
                 </md-content>
             </md-sidenav>
         </md-content>
-        <md-content flex="auto" ui-view layout="column" class="md-sidenav-push-in-target pushed" layout-padding=""></md-content>
+        <md-content resize-main flex="auto" layout="column" class="md-sidenav-push-in-target pushed" layout-padding="">
+            <ui-view></ui-view>
+            <!-- <div ui-view class="ui-view-wrapper"></div> -->
+        </md-content>
     </div>
 </body>
 

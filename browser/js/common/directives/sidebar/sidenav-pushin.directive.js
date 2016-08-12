@@ -1,4 +1,4 @@
-app.directive('sidenavPushIn', function() {
+app.directive('sidenavPushIn', function($rootScope) {
     return {
         restrict: 'A',
         require: '^mdSidenav',

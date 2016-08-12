@@ -1,2 +1,13 @@
+.dashboard-wrapper {
+    height: 100%;
+    // overflow: hidden;
+}
+
 .editing-panel {
+    // overflow-x: auto;
+    overflow: auto;
+}
+
+.rg-right {
+    margin-right: 0px;
 }

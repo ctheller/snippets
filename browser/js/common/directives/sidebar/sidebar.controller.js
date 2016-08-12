@@ -2,9 +2,9 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, AUTH_EVE
 
     $scope.items = [
         { label: 'Home', state: 'home', icon: 'home' },
-        { label: 'Profile', state: 'about', icon:'user' },
-        { label: 'Dashboard', state: 'dashboard', icon:'briefcase' },
-        { label: 'Members', state: 'membersOnly', icon:'poop' }
+        { label: 'Profile', state: 'about', icon:'person' },
+        { label: 'Dashboard', state: 'dashboard', icon:'inbox' },
+        { label: 'Members', state: 'membersOnly', icon:'casino' }
     ];
 
     $scope.user = null;
@@ -35,12 +35,11 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, AUTH_EVE
     $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
     $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
 
-    $scope.close = function () {
-        console.log($mdSidenav)
-      $mdSidenav('left').close()
-        .then(function () {
-          $log.debug("close LEFT is done");
-        });
-    };
+    $scope.sidebarOpen = false;
+    $rootScope.$on('toggle', function () {
+        console.log('gotcha')
+        $scope.sidebarOpen = !$scope.sidebarOpen;
+    })
+
 })
 
