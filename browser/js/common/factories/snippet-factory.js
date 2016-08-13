@@ -67,9 +67,9 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
             });
         }
         snippet.$loaded().then(function() {
-            var collaborators = _.keys(snippet.collaborators)
+            var collaborators = _.keys(snippet.collaborators);
             Users.findUsersMatchingManager(snippet.team, function (members) {
-                collaborators = _.union(members, collaborators)
+                collaborators = _.union(members, collaborators);
                 removeSnippetFromCollaborators(collaborators);
             })
             snippet.$remove();
