@@ -1,20 +1,36 @@
 .snippetImg {
-    border-radius: 50%;
-    width: 50px;
-    margin-right: -10px;
-    &:hover {
-		margin-right: 3px;
-		margin-left: 15px;
-		transition: margin 0.2s ease;
-	}
-	transition: margin 0.2s ease;
-    /*position: absolute;*/
+    margin: 2px;
 }
 
-.snippetImg:last-of-type {
-    margin-right: 0px;
-    margin-left: 0px;
-    &:hover {
-    	margin-left: 0px;
-    }
+.btn-floating {
+    margin: 5px;
+}
+
+#snippetImages {
+    margin: 5px;
+}
+
+.img-wrap {
+    position: relative;
+    display: inline-block;
+}
+.img-wrap .close {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    z-index: 100;
+    background-color: red;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0;
+    padding: 2px 1px;
+    text-align: center;
+    font-size: 28px;
+    border-radius: 50%;
+    width: 40px;
+    height: 42px;
+}
+.img-wrap:hover .close {
+    background-color: rgba(100,0,0,.3);
+    opacity: 1;
 }
