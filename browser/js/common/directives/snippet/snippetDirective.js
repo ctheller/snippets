@@ -10,16 +10,22 @@ app.directive('snippet', function ($rootScope, $state, Snippet) {
             // do a get request for snippet info from database
             // use scope.id
 
-            Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet').then(function(){
-                var i = 0;
-                scope.collaborators = [];
-                for (var key in scope.snippet.collaborators) {
+            scope.snippet = {};
 
-                    scope.collaborators[i] = key.photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
-                    i++;
-                }
+            Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet');
 
-            });
+            scope.$watch('snippet', function(newValue, oldValue) {
+                if (newValue)
+                    var i = 0;
+                    scope.collaborators = [];
+                    if (!scope.snippet.collaborators) return;
+                    for (var key in scope.snippet.collaborators) {
+                        scope.collaborators[i] = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
+                        i++;
+                    }
+            }, true);
+
+            scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';
 
             // after it comes back set scope.title, body, collaborator
 
