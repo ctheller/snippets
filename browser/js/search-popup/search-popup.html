@@ -1,0 +1,40 @@
+<div ng-controller="PopupCtrl as ctrl">
+<md-dialog aria-label="Autocomplete Dialog Example" ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Add Collaborator:</h2>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content style="width: 600px">
+    <div style="width: 600px" id="search-popup" class="md-dialog-content">
+      <form style="width: 400px" ng-submit="$event.preventDefault()">
+        <md-autocomplete
+            md-selected-item="ctrl.selectedItem"
+            md-search-text="ctrl.searchText"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.display"
+            md-min-length="3"
+            placeholder="Who would you like to add?">
+          <md-item-template>
+            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          </md-item-template>
+          <md-not-found>
+            No employees matching "{{ctrl.searchText}}" were found.
+          </md-not-found>
+        </md-autocomplete>
+      </form>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions>
+    <md-button aria-label="Finished" ng-click="ctrl.finish($event)">Finished</md-button>
+  </md-dialog-actions>
+</md-dialog>
+
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved. 
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+-->

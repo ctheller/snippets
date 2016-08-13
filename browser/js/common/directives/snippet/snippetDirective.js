@@ -14,12 +14,12 @@ app.directive('snippet', function ($rootScope, $state, Snippet) {
                 var i = 0;
                 scope.collaborators = [];
                 for (var key in scope.snippet.collaborators) {
-
-                    scope.collaborators[i] = key.photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
+                    scope.collaborators[i] = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
                     i++;
                 }
-
             });
+
+            scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';
 
             // after it comes back set scope.title, body, collaborator
 
