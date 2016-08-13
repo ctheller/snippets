@@ -18,6 +18,7 @@
     "angular-messages": "^1.5.8",
     "angular-mocks": "^1.4.0",
     "angular-resizable": "^1.2.0",
+    "angular-sanitize": "^1.5.8",
     "angular-ui-bootstrap": "^0.14.3",
     "angular-ui-router": "^0.2.15",
     "angularfire": "^2.0.1",
