@@ -1,7 +1,9 @@
 app.controller('PopupCtrl', PopupCtrl);
 
-function PopupCtrl($mdDialog) {
+function PopupCtrl($mdDialog, $scope) {
   var self = this;
+
+  //snippet is on this scope
 
   self.openDialog = function($event) {
     $mdDialog.show({
@@ -10,14 +12,19 @@ function PopupCtrl($mdDialog) {
       templateUrl: 'js/search-popup/search-popup.html',
       parent: angular.element(document.body),
       targetEvent: $event,
-      clickOutsideToClose:true
+      clickOutsideToClose:true,
+      scope: $scope.$new()
     })
   }
 }
 
-function DialogCtrl ($timeout, $q, $scope, $mdDialog) {
+function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope) {
 
     var self = this;
+
+    //need better way to access the parent scope here
+    var snippet = $scope.$parent.$parent.snippet;
+
 
     // list of `employee` value/display objects
     self.employees        = loadAll();
@@ -30,7 +37,15 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog) {
     self.cancel = function($event) {
       $mdDialog.cancel();
     };
-    self.finish = function($event) {
+    self.finish = function($event, selectedUserId) {
+
+      if (!snippet.collaborators) {
+        var obj = {};
+        obj[selectedUserId] = true;
+        snippet.collaborators = obj;
+      } else {
+        snippet.collaborators[selectedUserId] = true;
+      }
       $mdDialog.hide();
     };
 
@@ -43,27 +58,24 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog) {
      * remote dataservice call.
      */
     function querySearch (query) {
-      return query ? self.employees.filter( createFilterFor(query) ) : self.employees;
+      return query ? $q.when(self.employees.filter( createFilterFor(query) )) : $q.when(self.employees);
     }
 
     /**
      * Build `employees` list of key/value pairs
      */
     function loadAll() {
-      var allEmployees = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-              Wisconsin, Wyoming';
+      
+      var allEmployees = [];
+      for (var key in $rootScope.users) {
+        if ($rootScope.users[key] && $rootScope.users[key].first_name) {
+          allEmployees.push({value: ($rootScope.users[key].first_name+" "+$rootScope.users[key].last_name).toLowerCase(), 
+                             display: ($rootScope.users[key].first_name+" "+$rootScope.users[key].last_name),
+                             id: key})
+        }
+      }
 
-      return allEmployees.split(/, +/g).map( function (employee) {
-        return {
-          value: employee.toLowerCase(),
-          display: employee
-        };
-      });
+      return allEmployees;
     }
 
     /**
