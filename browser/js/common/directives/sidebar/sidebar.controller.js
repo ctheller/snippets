@@ -17,9 +17,8 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
         Auth.$signOut();
     };
 
-    var setUser = function() {    
+    var setUser = function() {
         $scope.user = AuthService.getLoggedInUser();
-        
     };
 
     var removeUser = function() {
@@ -34,7 +33,6 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
 
     $scope.sidebarOpen = false;
     $rootScope.$on('toggle', function () {
-        console.log('gotcha');
         $scope.sidebarOpen = !$scope.sidebarOpen;
     });
 

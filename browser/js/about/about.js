@@ -53,6 +53,8 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
         $scope.allSnippets[snippetId].submitted = true;
     };
 
+    $scope.removeSnippet = Snippet.delete;
+
     var setUserBinding = function() {
         $scope.user = AuthService.getLoggedInUser();
         if ($scope.user) Users.getProfile($scope.user.$id).$bindTo($scope, "user").then(function(){

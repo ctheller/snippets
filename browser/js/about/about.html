@@ -72,7 +72,7 @@
 		<div ng-repeat="(key, value) in snippet.collaborators track by $index">
 			<button ng-click="removeCollaborator(key, snippetkey)">{{key}}</button>
 		</div>
-
+		<button ng-click="removeSnippet(snippetkey)">remove snippet</button>
 	</div>
 
 	<pre>{{newSnippet}}</pre>

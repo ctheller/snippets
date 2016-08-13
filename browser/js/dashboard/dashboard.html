@@ -1,5 +1,5 @@
 <div layout="row" class="dashboard-wrapper" flex="grow">
-    <section class="editing-panel-wrapper one" md-whiteframe="24" layout="column" flex="40">
+    <section class="md-whiteframe-1dp editing-panel-wrapper one" layout="column" flex="45">
        <div> <md-icon ng-model="draggables" ng-repeat="draggable in draggables"
         data-drag="true"
         data-jqyoui-options="{revert: 'invalid',
@@ -10,8 +10,7 @@
         </md-icon> </div>
     </section>
     <section
-    class="editing-panel-wrapper two"
-    md-whiteframe="24" layout="column" flex="auto"
+    class="editing-panel-wrapper two md-whiteframe-1dp" layout="column" flex="45"
     ng-model="dragged"
     data-drop="true"
     jqyoui-droppable="{multiple:true}">
