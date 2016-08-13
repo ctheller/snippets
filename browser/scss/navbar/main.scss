@@ -1,13 +1,12 @@
+@import '../color';
 .snippetLogo {
-  width: 95px;
-  display: block;
-  margin: 0 0 5px 10px;
+    width: 88px;
+    display: block;
+    margin: 0 0 5px 10px;
 }
 
-@import '../color';
-
 .sidebar-item {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .lnr-menu {
@@ -15,30 +14,28 @@
 }
 
 .lnr:focus {
-  outline: none;
+    outline: none;
 }
 
 .lnr {
-  margin: 0;
-  i {
-    cursor: pointer;
-  }
+    margin: 0;
+    i {
+        cursor: pointer;
+    }
 }
 
-.md-sidenav-left {
-
-}
+.md-sidenav-left {}
 
 .md-sidenav-push-in {
     // drawers
     .md-sidenav-push-in-target {
         transform: translate(0px);
         // same as in md-sidenav.md-closed-add.md-closed-add-active, md-sidenav.md-closed-remove.md-closed-remove-active selector
-        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        // transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     &.md-sidenav-left-open {
         .md-sidenav-push-in-target {
-            transform: translate(304px);
+            transform: translate(184px);
         }
     }
     &.md-sidenav-right-open {
@@ -48,33 +45,83 @@
     }
 }
 
-md-toolbar {
+.main-toolbar {
     z-index: 99;
+    min-height: 56px;
+    color: black;
+    height: 56px;
+    md-icon {
+        margin: 0 12px;
+    }
 }
 
 md-sidenav {
     background-color: $extremely-light-grey;
-    *, md-content {
+    *,
+    md-content {
         background-color: $extremely-light-grey;
+        max-width: 200px;
     }
+    width: 200px;
+    max-width: 200px;
 }
 
 .pushing {
     background-color: $extremely-light-grey;
-    width: 320px;
+    width: 200px;
 }
 
 .pushed {
     background-color: $extremely-light-grey;
-    margin-left: -300px;
+    margin-left: -180px;
     padding-right: 20px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 ui-view {
-    * {overflow: auto;}
+    * {
+        overflow: auto;
+    }
     width: 100%;
     height: 100%;
 }
 
-lnr:focus {outline:0;}
+lnr:focus {
+    outline: 0;
+}
+
+md-list-item {
+    padding-left: 10px;
+    padding-right: 10px;
+    &.active {
+        background-color: rgba(0, 0, 0, .05);
+        border-radius: 2px;
+        color: #212121;
+        font-weight: bold;
+        * {
+            background-color: rgb(231, 231, 231);
+            border-radius: 2px;
+        }
+    }
+    &:hover {
+        background-color: rgba(0, 0, 0, .05);
+        border-radius: 2px;
+        color: #212121;
+        * {
+            background-color: rgb(231, 231, 231);
+            border-radius: 2px;
+        }
+    }
+}
+
+md-list-item {
+    &.home i {
+        color: $blue;
+    }
+    &.profile i {
+        color: $orange;
+    }
+    &.dashboard i {
+        color: $green;
+    }
+}
