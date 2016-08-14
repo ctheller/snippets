@@ -14,7 +14,7 @@
     <script type="text/javascript" src="/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/materialize-css/dist/js/materialize.min.js"></script>
     <script src="/angular/angular.js"></script>
-    <script src="/lodash/index.js"></script>
+    <script src="/lodash/lodash.js"></script>
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/angular-messages/angular-messages.js"></script>
     <script src="/angular-sanitize/angular-sanitize.min.js"></script>
@@ -44,7 +44,10 @@
         <md-icon class="lnr" ng-click="toggle()"><i class="material-icons">menu</i></md-icon>
         <!-- <h1 class="md-toolbar-tools">Snippets</h1> -->
         <img class="snippetLogo" src="/files/snippetLogo.png">
-        <span>Welcome, {{ user.email }}!</span>
+        <!-- <md-button ng-show="!user" ui-sref="login">Login</md-button> -->
+        <img ng-show="user" class="circle-profile" md-whiteframe-1dp ng-src="{{user.photoUrl || 'files/default-profile.png'}}" ng-cloak>
+        <!-- <md-button ng-show="user" ng-click="logout()">Logout</md-button> -->
+        <!-- <span>Welcome, {{ user.email }}!</span> -->
     </md-toolbar>
     <div role="main" layout="row" flex>
         <!-- temperary controller -->
@@ -52,7 +55,7 @@
             <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-disable-backdrop="">
                 <md-content layout-padding="" ng-controller="SidebarCtrl">
                     <md-list ng-cloak>
-                        <md-list-item class="sidebar-item {{item.state}}" ng-repeat="item in items" ui-sref-active="active">
+                        <md-list-item class="sidebar-item state {{item.state}}" ng-repeat="item in items" ui-sref-active="active">
                             <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
                             <p ui-sref="{{ item.state }}">{{ item.label }}</p>
                         </md-list-item>
@@ -71,7 +74,7 @@
             </md-sidenav>
         </md-content>
         <md-content resize-main flex="auto" layout="column" class="md-sidenav-push-in-target pushed" layout-padding="">
-            <ui-view></ui-view>
+            <ui-view resize-main></ui-view>
             <!-- <div ui-view class="ui-view-wrapper"></div> -->
         </md-content>
     </div>

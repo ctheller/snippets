@@ -15,13 +15,32 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         return $firebaseObject(ref.child("snippets"));
     };
 
+    // FIREBASE WARNING: Using an unspecified index. Consider adding ".indexOn": "team" at /snippets to your security rules for better performance
+    // able to do this kind of filtering at backend???
+
     Snippet.getReportSnippetIds = function(callback) {
         var currentUser = AuthService.getLoggedInUser();
-        ref.child("snippets").orderByChild("manager").equalTo(currentUser.$id)
+        ref.child("snippets").orderByChild("team").equalTo(currentUser.$id)
             .once('value', function(snap) {
                 callback(Object.keys(snap.val()));
             });
     };
+
+    Snippet.getTeamSnippetIds = function(callback) {
+        var currentUser = AuthService.getLoggedInUser();
+        ref.child("snippets").orderByChild("team").equalTo(currentUser.manager)
+            .once('value', function(snap) {
+                callback(Object.keys(snap.val()));
+            });
+    }
+
+    Snippet.getCollabSnippetIds = function(callback) {
+        var currentUser = AuthService.getLoggedInUser();
+        ref.child("snippets").orderByChild("collaborators/" + currentUser.$id)
+            .once('value', function(snap) {
+                callback(Object.keys(snap.val()));
+            });
+    }
 
     //TEAM SNIPPETS COME FROM WITHIN (but actually... all snippets should be added to an entire team upon creation)
 
@@ -55,7 +74,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
     Snippet.delete = function(snippetId) {
         var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
-        var removeSnippetFromCollaborators = function (collaborators) {
+        var removeSnippetFromCollaborators = function(collaborators) {
             collaborators.forEach(collaborator => {
                 collaborator = Users.getProfile(collaborator);
                 return collaborator.$loaded().then(function() {
@@ -68,10 +87,10 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         }
         snippet.$loaded().then(function() {
             var collaborators = _.keys(snippet.collaborators);
-            Users.findUsersMatchingManager(snippet.team, function (members) {
+            Users.findUsersMatchingManager(snippet.team, function(members) {
                 collaborators = _.union(members, collaborators);
                 removeSnippetFromCollaborators(collaborators);
-            })
+            });
             snippet.$remove();
         });
     };

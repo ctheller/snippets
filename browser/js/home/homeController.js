@@ -10,8 +10,7 @@ app.controller('HomeController', function ($scope,Users, AuthService, AUTH_EVENT
         }).catch($log);
     };
 
-
-
     setUserBinding();
     $rootScope.$on(AUTH_EVENTS.loginSuccess, setUserBinding);
+
 });

@@ -55,7 +55,7 @@
         this.getLoggedInUser = function () {
             return user;
         };
-    
+
 
         this.login = function(){
             Auth.$signInWithRedirect('google');
@@ -79,9 +79,10 @@
                 user = $firebaseObject(ref.child(id));
 
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-
+                $rootScope.user = user;
             }
             else {
+                $rootScope.user = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 $state.go('home');
             }
