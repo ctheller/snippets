@@ -10,16 +10,6 @@
         </md-icon> </div> -->
 <!-- <md-content class="md-padding" layout-xs="column" layout="row"> -->
 <!-- <snippet ng-repeat="id in teamSnippetIds" id="id"></snippet> -->
-<div class="block-title" layout="row">Your reports</div>
-<div class='md-padding' layout="row">
-    <div layout="row" class="report-container">
-        <div class="parent" ng-repeat="id in teamSnippetIds" layout="column" flex="noshrink">
-            <snippet id="id" data-drag="true" data-jqyoui-options="{revert: 'invalid',
-                            helper: 'clone'}" jqyoui-draggable="{index: {{$index}},
-                        placeholder: 'keep'}"></snippet>
-        </div>
-    </div>
-</div>
 <!-- </section> -->
 <!-- <md-content flex="auto" class="editing-panel-wrapper two md-whiteframe-1dp" layout="row" ng-model="dragged" data-drop="true" jqyoui-droppable="{multiple:true}">
     <div>
@@ -30,3 +20,13 @@
 </md-button> -->
 <!-- </div> -->
 <!-- resizable r-directions="['right']" r-width="300" -->
+<!-- <div class="block-title" layout="column">Your reports</div> -->
+<div layout="row" class="dashboard-wrapper">
+    <div layout="column" flex="grow" data-drop="true" jqyoui-droppable="{multiple:true}">test</div>
+    <div layout="column" class="report-container" flex="50">
+        <div class="block-title" layout="row" flex="noshrink">Your reports</div>
+        <div class="parent" ng-repeat="id in teamSnippetIds" layout="row" flex="noshrink">
+            <snippet id="id" ></snippet>
+        </div>
+    </div>
+</div>

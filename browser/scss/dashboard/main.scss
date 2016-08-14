@@ -1,7 +1,7 @@
 @import '../color';
 .dashboard-wrapper {
     height: 100%;
-    // overflow: hidden;
+    overflow: hidden;
 }
 
 .editing-panel-wrapper {
@@ -56,17 +56,20 @@
             margin-left: 0;
         }
     }
-    overflow: hidden;
+    overflow-x: none;
+    overflow-y: hidden;
     margin-bottom: 5px;
 }
 
 .report-container:hover {
-    margin-bottom: 0px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .block-title {
-    margin: 0px 20px;
-    margin-bottom: -12px;
-    margin-top: 14px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+snippet {
+    width: 100%;
 }

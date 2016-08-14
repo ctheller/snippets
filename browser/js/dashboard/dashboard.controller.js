@@ -33,7 +33,11 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         $scope.$digest();
     })
 
-
+    $scope.toggle = function() {
+        $mdSidenav('right').toggle();
+        if ($mdSidenav('right').isOpen()) $rootScope.$emit('open');
+        else $rootScope.$emit('close');
+    };
 
 
 });
