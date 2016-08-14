@@ -12,14 +12,14 @@
         <md-dialog-content class="md-dialog-content">
             <md-input-container class="md-block">
                 <label>Title</label>
-                <input name="snippetTitle" ng-model="newSnippet.title" required>
+                <input name="snippetTitle" ng-model="newSnippet.subject" required>
                 <div ng-messages="snippetForm.title.$error">
                     <div ng-message="required">required</div>
                 </div>
             </md-input-container>
             <md-input-container class="md-block">
                 <label>Body</label>
-                <textarea name="snippetBody" ng-model="newSnippet.body" rows="7" md-select-on-focus required></textarea>
+                <textarea name="snippetBody" ng-model="newSnippet.contents" rows="7" md-select-on-focus required></textarea>
                 <div ng-messages="snippetForm.body.$error">
                     <div ng-message="required">required</div>
                 </div>

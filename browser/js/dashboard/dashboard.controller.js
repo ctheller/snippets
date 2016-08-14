@@ -1,4 +1,4 @@
-app.controller('DashboardCtrl', function($scope, $mdDialog, MdHelpers) {
+app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelpers, Snippet) {
     $scope.newSnippet = {};
     $scope.showSnippetForm = function(ev) {
         $mdDialog.show({
@@ -13,7 +13,27 @@ app.controller('DashboardCtrl', function($scope, $mdDialog, MdHelpers) {
         {icon: 'people'}, {icon: 'person'}
     ];
     $scope.dragged = [];
-    console.log($scope.dragged);
+    $scope.reportIds = null;
+    $scope.teamSnippetIds = null;
+    $scope.collabSnippetIds = null;
+
+    Snippet.getReportSnippetIds(function (reportIds) {
+        // snippet ids from reports
+        $scope.reportIds = reportIds;
+        $scope.$digest();
+    });
+    Snippet.getTeamSnippetIds(function (teamSnippetIds) {
+        // snippet ids from reports
+        $scope.teamSnippetIds = teamSnippetIds;
+        $scope.$digest();
+    });
+    Snippet.getCollabSnippetIds(function (collabSnippetIds) {
+        // snippet ids where Im a collaborator
+        $scope.collabSnippetIds = collabSnippetIds;
+        $scope.$digest();
+    })
+
+
 
 
 });

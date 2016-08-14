@@ -24,4 +24,5 @@ app.factory("Users", function($firebaseObject, $firebaseArray) {
 
     return Users;
 
+
 });

@@ -35,3 +35,38 @@
 #search-popup {
     width: 300px;
 }
+
+.report-container::-webkit-scrollbar-track {
+    background-color: $extremely-light-grey;
+}
+
+.report-container::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: $extremely-light-grey;
+}
+
+.report-container::-webkit-scrollbar-thumb {
+    background-color: #BDBDBD;
+}
+
+.report-container {
+    .parent {
+        md-card:first-of-type {
+            margin-left: 0;
+        }
+    }
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.report-container:hover {
+    margin-bottom: 0px;
+    overflow: scroll;
+}
+
+.block-title {
+    margin: 0px 20px;
+    margin-bottom: -12px;
+    margin-top: 14px;
+}

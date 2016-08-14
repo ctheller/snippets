@@ -7,24 +7,24 @@
 <!-- {{ collaborators }}
 <h1 ng-repeat="collaborator in collaborators">{{ collaborator }}</h1> -->
 
-<div flex-xs flex-gt-xs="30" layout="column">
+<!-- <md-content flex layout="column"> -->
       <md-card md-theme="{{ 'default' }}" md-theme-watch>
         <md-card-title>
           <md-card-title-text>
-            <span contenteditable ng-model="snippet.subject"  class="md-headline">{{ snippet.subject }}</span>
-            <span contenteditable ng-model="snippet.contents" class="md-subhead">{{ snippet.contents }}</span>
+            <p contenteditable ng-model="snippet.subject"  class="md-headline">{{ snippet.subject }}</p>
+            <p contenteditable ng-model="snippet.contents" class="md-subhead">{{ snippet.contents }}</p>
           </md-card-title-text>
 
         </md-card-title>
         <md-card-actions id="snippetImages" layout="row" layout-align="end center">
 
           <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
-          
+
             <div class="snippetImg btn-floating btn-md img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index">
               <span ng-click="removeCollaborator(collaborator.id)" class="close"><i class="material-icons"> clear</i></span>
               <img ng-src="{{ collaborator.photoUrl }}" style="z-index: {{ collaborators.length - index }}">
             </div>
         </md-card-actions>
       </md-card>
-</div>
-        
+<!-- </md-content> -->
+

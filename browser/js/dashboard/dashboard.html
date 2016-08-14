@@ -1,25 +1,32 @@
-<div layout="row" class="dashboard-wrapper" flex="grow">
-    <section class="md-whiteframe-1dp editing-panel-wrapper one" layout="column" flex="45">
-       <div> <md-icon ng-model="draggables" ng-repeat="draggable in draggables"
+<!-- <div layout="row"> -->
+<!-- <section class="md-whiteframe-1dp editing-panel-wrapper one" layout="column" flex="45"> -->
+<!-- <div> <md-icon ng-model="draggables" ng-repeat="draggable in draggables"
         data-drag="true"
         data-jqyoui-options="{revert: 'invalid',
                             helper: 'clone'}"
         jqyoui-draggable="{index: {{$index}},
                         placeholder: 'keep'}">
             <i class="material-icons">{{draggable.icon}}</i>
-        </md-icon> </div>
-    </section>
-    <section
-    class="editing-panel-wrapper two md-whiteframe-1dp" layout="column" flex="45"
-    ng-model="dragged"
-    data-drop="true"
-    jqyoui-droppable="{multiple:true}">
-        <div> <md-icon ng-repeat="item in dragged"
-        data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
-        jqyoui-draggable="{index: {{$index}}}"><i class="material-icons">{{item.icon}}</i></md-icon> </div>
-    </section>
-    <md-button class="md-fab add-snippet-btn" aria-label="add snippet" ng-click="showSnippetForm($event)">
-        <md-icon><i class="material-icons">add</i></md-icon>
-    </md-button>
+        </md-icon> </div> -->
+<!-- <md-content class="md-padding" layout-xs="column" layout="row"> -->
+<!-- <snippet ng-repeat="id in teamSnippetIds" id="id"></snippet> -->
+<div class="block-title" layout="row">Your reports</div>
+<div class='md-padding' layout="row">
+    <div layout="row" class="report-container">
+        <div class="parent" ng-repeat="id in teamSnippetIds" layout="column" flex="noshrink">
+            <snippet id="id" data-drag="true" data-jqyoui-options="{revert: 'invalid',
+                            helper: 'clone'}" jqyoui-draggable="{index: {{$index}},
+                        placeholder: 'keep'}"></snippet>
+        </div>
+    </div>
 </div>
+<!-- </section> -->
+<!-- <md-content flex="auto" class="editing-panel-wrapper two md-whiteframe-1dp" layout="row" ng-model="dragged" data-drop="true" jqyoui-droppable="{multiple:true}">
+    <div>
+        <md-icon ng-repeat="item in dragged" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}}"><i class="material-icons">{{item.icon}}</i></md-icon> test</div>
+</md-content>
+<md-button class="md-fab add-snippet-btn" aria-label="add snippet" ng-click="showSnippetForm($event)">
+    <md-icon><i class="material-icons">add</i></md-icon>
+</md-button> -->
+<!-- </div> -->
 <!-- resizable r-directions="['right']" r-width="300" -->
