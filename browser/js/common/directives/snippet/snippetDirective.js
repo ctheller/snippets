@@ -12,6 +12,10 @@ app.directive('snippet', function ($rootScope, $state, Snippet) {
 
             scope.snippet = {};
 
+            scope.removeCollaborator = function(id){
+                scope.snippet.collaborators[id] = null;
+            }
+
             Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet');
 
             scope.$watch('snippet', function(newValue, oldValue) {
@@ -20,7 +24,9 @@ app.directive('snippet', function ($rootScope, $state, Snippet) {
                     scope.collaborators = [];
                     if (!scope.snippet.collaborators) return;
                     for (var key in scope.snippet.collaborators) {
-                        scope.collaborators[i] = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
+                        scope.collaborators[i] = {};
+                        scope.collaborators[i].id = key;
+                        scope.collaborators[i].photoUrl = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
                         i++;
                     }
             }, true);

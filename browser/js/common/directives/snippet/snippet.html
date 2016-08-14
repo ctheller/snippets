@@ -14,19 +14,17 @@
             <span contenteditable ng-model="snippet.subject"  class="md-headline">{{ snippet.subject }}</span>
             <span contenteditable ng-model="snippet.contents" class="md-subhead">{{ snippet.contents }}</span>
           </md-card-title-text>
-          <!-- <md-card-title-media>
-            <div class="md-media-sm card-media"></div>
-          </md-card-title-media> -->
+
         </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <div id="plus" class="snippetImg" ng-controller="PopupCtrl as ctrl">
-          <img ng-click="ctrl.openDialog($event)" class="md-raised" ng-src="{{plusButton}}">
-          </div>
-          <div class="snippetImg" ng-repeat="(index,collaborator) in collaborators track by $index">
-            <img ng-src="{{ collaborator }}" style="z-index: {{ collaborators.length - index }}">
-          </div>
-          <!-- <md-button>Action</md-button> -->
+        <md-card-actions id="snippetImages" layout="row" layout-align="end center">
+
+          <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
+          
+            <div class="snippetImg btn-floating btn-md img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index">
+              <span ng-click="removeCollaborator(collaborator.id)" class="close"><i class="material-icons"> clear</i></span>
+              <img ng-src="{{ collaborator.photoUrl }}" style="z-index: {{ collaborators.length - index }}">
+            </div>
         </md-card-actions>
       </md-card>
 </div>
-
+        
