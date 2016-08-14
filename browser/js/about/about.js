@@ -17,7 +17,7 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
     	Snippet.getSnippetById(Object.keys($scope.user.snippets)[0]).$bindTo($scope, 'snippet');
     };
 
-    Users.getAll().$bindTo($scope, 'users');
+    //Users.getAll().$bindTo($scope, 'users');
 
     Snippet.getAllSnippetsAllowed().$bindTo($scope, 'allSnippets').then(function(){
         console.log($scope.allSnippets);
@@ -52,6 +52,8 @@ app.controller('AboutController', function ($scope, AuthService, AUTH_EVENTS, $r
     $scope.submitSnippet = function(snippetId){
         $scope.allSnippets[snippetId].submitted = true;
     };
+
+    $scope.removeSnippet = Snippet.delete;
 
     var setUserBinding = function() {
         $scope.user = AuthService.getLoggedInUser();

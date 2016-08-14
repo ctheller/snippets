@@ -7,8 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.css" />
     <link rel="stylesheet" type="text/css" href="/angular-resizable/angular-resizable.min.css" />
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/jquery-ui/jquery-ui.min.js"></script>
@@ -24,35 +23,35 @@
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
     <script>
-      // Initialize Firebase
-      var config = {
+    // Initialize Firebase
+    var config = {
         apiKey: "AIzaSyA3_lI3ec7vmSmznIAlPpn55gLXrr90Sko",
         authDomain: "snippets-2f32c.firebaseapp.com",
         databaseURL: "https://snippets-2f32c.firebaseio.com",
         storageBucket: "snippets-2f32c.appspot.com",
-      };
-      firebase.initializeApp(config);
+    };
+    firebase.initializeApp(config);
     </script>
     <script src='/angularfire/dist/angularfire.min.js'></script>
     <script src="/main.js"></script>
 </head>
 
 <body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
-    <md-toolbar class="md-theme-indigo md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl">
-    <md-icon class="lnr" ng-click="toggle()"><i class="material-icons">menu</i></md-icon>
-            <!-- <h1 class="md-toolbar-tools">Snippets</h1> -->
-            <img class="snippetLogo" src="/files/snippetLogo.png" >
+    <md-toolbar class="main-toolbar md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl" md-theme="blue">
+        <md-icon class="lnr" ng-click="toggle()"><i class="material-icons">menu</i></md-icon>
+        <!-- <h1 class="md-toolbar-tools">Snippets</h1> -->
+        <img class="snippetLogo" src="/files/snippetLogo.png">
+        <span>Welcome, {{ user.email }}!</span>
     </md-toolbar>
     <div role="main" layout="row" flex>
         <!-- temperary controller -->
-
         <md-content class="pushing" layout="column">
-            <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-disable-backdrop="" md-whiteframe="4">
+            <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-disable-backdrop="">
                 <md-content layout-padding="" ng-controller="SidebarCtrl">
                     <md-list ng-cloak>
-                        <md-list-item class="sidebar-item" ng-repeat="item in items">
+                        <md-list-item class="sidebar-item {{item.state}}" ng-repeat="item in items" ui-sref-active="active">
                             <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
-                            <p ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</p>
+                            <p ui-sref="{{ item.state }}">{{ item.label }}</p>
                         </md-list-item>
                         <!-- <md-list-item> NOT IN USE
                             <md-icon class="lnr"><i class="material-icons">'person'</i></md-icon>
@@ -63,16 +62,14 @@
                                 <p ng-show="!user" ui-sref="login" class="btn login-button">Login</p>
                             </div>
                         </md-list-item>
-                        <md-list-item class="sidebar-item" ng-show="user" class="welcome">
+                        <md-list-item class="sidebar-item">
                             <div class="md-list-item-text">
-                                <span>Welcome, {{ user.email }}!</span>
+                                <p ng-show="user" ng-click="logout()" class="btn login-button">Logout</p>
                             </div>
                         </md-list-item>
                     </md-list>
-                    <md-button ng-click="logout()">Logout</md-button>
                 </md-content>
             </md-sidenav>
-
         </md-content>
         <md-content resize-main flex="auto" layout="column" class="md-sidenav-push-in-target pushed" layout-padding="">
             <ui-view></ui-view>

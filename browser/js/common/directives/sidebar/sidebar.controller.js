@@ -32,8 +32,8 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
     $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
 
     $scope.sidebarOpen = false;
-    $rootScope.$on('toggle', function() {
-        console.log('gotcha');
+
+    $rootScope.$on('toggle', function () {
         $scope.sidebarOpen = !$scope.sidebarOpen;
     });
 

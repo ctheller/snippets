@@ -1,5 +1,4 @@
 @import '../color';
-
 .dashboard-wrapper {
     height: 100%;
     // overflow: hidden;
@@ -8,19 +7,9 @@
 .editing-panel-wrapper {
     // overflow-x: auto;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: white;
-    &.one {
-        border-top: 1px solid #e6e3e3;
-        border-left: 1px solid #e6e3e3;
-        border-bottom: 1px solid #e6e3e3;
-    }
-    &.two {
-        border-top: 1px solid #e6e3e3;
-        border-right: 1px solid #e6e3e3;
-        border-bottom: 1px solid #e6e3e3;
-    }
-
+    margin: 1px 10px;
 }
 
 .editing-panel {
@@ -36,7 +25,13 @@
 }
 
 .add-snippet-btn {
-    position: fixed;
-    bottom: 5%;
-    right: 3%;
+    align-self: flex-end;
+    :hover {
+        -webkit-transform: scale(1) rotate(360deg);
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+#search-popup {
+    width: 300px;
 }

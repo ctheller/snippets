@@ -1,24 +1,39 @@
-app.directive('snippet', function ($rootScope, $state) {
+app.directive('snippet', function ($rootScope, $state, Snippet) {
     return {
         restrict: 'E',
         templateUrl: 'js/common/directives/snippet/snippet.html',
         scope: {
             id: '=',
+            users: '='
         },
         link: function(scope, element, attributes) {
             // do a get request for snippet info from database
             // use scope.id
 
-            // after it comes back set scope.title, body, collaborators
+            scope.snippet = {};
 
-            // filler for now
-            scope.title = 'Launched SuperApp to seven new markets';
-            scope.body = 'Dragée marshmallow cupcake donut macaroon. Liquorice jelly-o liquorice jelly-o. Apple pie tootsie roll danish marzipan chocolate cake icing jelly beans lollipop. Chocolate toffee ice cream toffee candy. Dragée marshmallow cupcake donut macaroon. Liquorice jelly-o liquorice jelly-o. Apple pie tootsie roll danish marzipan chocolate cake icing jelly beans lollipop. Chocolate toffee ice cream toffee candy.';
+            Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet');
+
+            scope.$watch('snippet', function(newValue, oldValue) {
+                if (newValue)
+                    var i = 0;
+                    scope.collaborators = [];
+                    if (!scope.snippet.collaborators) return;
+                    for (var key in scope.snippet.collaborators) {
+                        scope.collaborators[i] = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
+                        i++;
+                    }
+            }, true);
+
+            scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';
+
+            // after it comes back set scope.title, body, collaborator
 
             // get profile image urls of those collaborators
             // for each to return array of urls
 
-            scope.collaborators = ['https://lh3.googleusercontent.com/-AqkAdKInFSU/AAAAAAAAAAI/AAAAAAAAAAA/AOkcYItBC05GD1jyQ8k3kYGmnmBCn20N7w/s192-c-mo/photo.jpg','http://lh3.googleusercontent.com/-50q0RpvFY0I/AAAAAAAAAAI/AAAAAAAAD6w/rX8SRDUvwds/s180-p-k-rw-no/photo.jpg','https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg', 'https://lh3.googleusercontent.com/-bOjCfXB8_qU/AAAAAAAAAAI/AAAAAAAAATw/6LnoMFC_ZUc/s180-p-k-rw-no/photo.jpg'];
+
+            // scope.collaborators = ['http://joshiscorner.com/files/images/plusButton.png','https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg', 'https://lh3.googleusercontent.com/-bOjCfXB8_qU/AAAAAAAAAAI/AAAAAAAAATw/6LnoMFC_ZUc/s180-p-k-rw-no/photo.jpg','http://lh3.googleusercontent.com/-50q0RpvFY0I/AAAAAAAAAAI/AAAAAAAAD6w/rX8SRDUvwds/s180-p-k-rw-no/photo.jpg','https://lh3.googleusercontent.com/-AqkAdKInFSU/AAAAAAAAAAI/AAAAAAAAAAA/AOkcYItBC05GD1jyQ8k3kYGmnmBCn20N7w/s192-c-mo/photo.jpg'];
         }
     };
 });

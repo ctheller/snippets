@@ -1,6 +1,6 @@
 app.factory('MdHelpers', function() {
     return {
-        dialogCtrl: function($scope, $mdDialog) {
+        dialogCtrl: function($scope, $mdDialog, Snippet) {
             $scope.hide = function() {
                 $mdDialog.hide();
             };
@@ -11,8 +11,9 @@ app.factory('MdHelpers', function() {
                 $mdDialog.hide(answer);
             };
             $scope.submitSnippet = function() {
-                console.log('submitted?', $scope.newSnippet);
-            }
+                Snippet.create($scope.newSnippet);
+                $mdDialog.cancel();
+            };
         }
     };
 });
