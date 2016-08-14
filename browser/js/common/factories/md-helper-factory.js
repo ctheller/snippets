@@ -12,7 +12,7 @@ app.factory('MdHelpers', function() {
             };
             $scope.submitSnippet = function() {
                 console.log('submitted?', $scope.newSnippet);
-            };
+            }
         }
     };
 });
