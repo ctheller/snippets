@@ -1,10 +1,10 @@
-app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AUTH_EVENTS, $state, $mdSidenav, $log) {
+app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AUTH_EVENTS, $mdMedia, MdHelpers, $state, $mdSidenav, $log) {
 
     $scope.items = [
         { label: 'Home', state: 'home', icon: 'home' },
-        { label: 'Profile', state: 'profile', icon:'person' },
-        { label: 'Dashboard', state: 'dashboard', icon:'inbox' },
-        { label: 'Members', state: 'membersOnly', icon:'casino' }
+        { label: 'Profile', state: 'profile', icon: 'person' },
+        { label: 'Dashboard', state: 'dashboard', icon: 'inbox' },
+        { label: 'Members', state: 'membersOnly', icon: 'casino' }
     ];
 
     $scope.user = null;
@@ -32,9 +32,9 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
     $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
 
     $scope.sidebarOpen = false;
+
     $rootScope.$on('toggle', function () {
         $scope.sidebarOpen = !$scope.sidebarOpen;
     });
 
 });
-

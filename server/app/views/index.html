@@ -56,6 +56,10 @@
                             <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
                             <p ui-sref="{{ item.state }}">{{ item.label }}</p>
                         </md-list-item>
+                        <!-- <md-list-item> NOT IN USE
+                            <md-icon class="lnr"><i class="material-icons">'person'</i></md-icon>
+                            <p ng-click="showProfile($event)">Profile</p>
+                        </md-list-item> -->
                         <md-list-item class="sidebar-item">
                             <div class="md-list-item-text">
                                 <p ng-show="!user" ui-sref="login" class="btn login-button">Login</p>
