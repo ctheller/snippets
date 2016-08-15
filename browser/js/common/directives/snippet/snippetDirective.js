@@ -4,7 +4,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
         templateUrl: 'js/common/directives/snippet/snippet.html',
         scope: {
             id: '=',
-            card: '@',
+            card: '=',
             users: '='
         },
         link: function(scope, element, attributes) {
