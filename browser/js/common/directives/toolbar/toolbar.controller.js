@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, $rootScope, AuthService, AUTH_EVENTS, Auth) {
+app.controller('ToolbarCtrl', function($scope, $mdSidenav, $rootScope, $state, AuthService, AUTH_EVENTS, Auth, $mdDialog) {
 
     $scope.user = null;
 
@@ -18,6 +18,25 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, $rootScope, AuthServi
 
     $scope.sidebarOpen = "false";
 
+    function DialogController($scope, $mdDialog) {
+        $scope.closeDialog = function() {
+            $mdDialog.hide();
+        };
+    };
+
+
+    $scope.viewProfile = function(ev) {
+  
+        $mdDialog.show({
+            clickOutsideToClose: true,
+            scope: $scope,
+            preserveScope: true,
+            controller: DialogController,
+            templateUrl: 'js/profile/profileCard.html',
+            parent: angular.element(document.body)
+        });
+    };
+
     $scope.toggle = function() {
         $mdSidenav('left').toggle();
         if ($mdSidenav('left').isOpen()) $rootScope.$emit('open');
@@ -30,5 +49,6 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, $rootScope, AuthServi
 
     $scope.logout = function() {
         Auth.$signOut();
+        $state.go('home');
     };
 });

@@ -55,7 +55,7 @@
         <!-- <h1 class="md-toolbar-tools">Snippets</h1> -->
         <img class="snippetLogo" src="/files/snippetLogo.png">
         <!-- <md-button ng-show="!user" ui-sref="login">Login</md-button> -->
-        <img ng-show="user" class="circle-profile" md-whiteframe-1dp ng-src="{{user.photoUrl || 'files/default-profile.png'}}" ng-cloak>
+        <img ng-show="user" ng-click="viewProfile($event)" class="circle-profile" md-whiteframe-1dp ng-src="{{user.photoUrl || 'files/default-profile.png'}}" ng-cloak>
         <!-- <md-button ng-show="user" ng-click="logout()">Logout</md-button> -->
         <!-- <span>Welcome, {{ user.email }}!</span> -->
     </md-toolbar>
