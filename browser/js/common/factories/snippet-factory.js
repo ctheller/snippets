@@ -68,8 +68,11 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
     Snippet.duplicateAsTemplate = function(snippetId) {
         var fromSnippet = Snippet.getSnippetById(snippetId);
-        var dataToTransfer = { subject: fromSnippet.subject, content: fromSnippet.content };
-        Snippet.create(dataToTransfer);
+        fromSnippet.$loaded().then(function() {
+            var dataToTransfer = { subject: fromSnippet.subject, content: fromSnippet.contents };
+            Snippet.create(dataToTransfer);
+        })
+
     };
 
     Snippet.delete = function(snippetId) {

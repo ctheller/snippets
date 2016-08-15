@@ -27,6 +27,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         // snippet ids from reports
         $scope.teamSnippetIds = teamSnippetIds;
         $scope.$digest();
+        console.log($scope.teamSnippetIds);
     });
     Snippet.getCollabSnippetIds(function (collabSnippetIds) {
         // snippet ids where Im a collaborator
@@ -40,5 +41,8 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         else $rootScope.$emit('close');
     };
 
-
+    $scope.createNewSnippet = function (e, ui) {
+        var snippetCopyId = ui.draggable.scope().id;
+        Snippet.duplicateAsTemplate(snippetCopyId);
+    }
 });
