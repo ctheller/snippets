@@ -81,8 +81,8 @@ function onCronKick(orgId, emailOrder) {
     return;
   })
   .then(function() {
-    console.log(emails,subjToSend)
-    // composeEmail(emails, subjToSend, bodyToSend);
+    // console.log(emails,subjToSend);
+    composeEmail(emails, subjToSend, bodyToSend);
   });
   // check if those users have submitted a snippet ?????
 
@@ -104,8 +104,8 @@ ref.once("value")
        // https://www.npmjs.com/package/cron
 
     new CronJob({
-      cronTime: `*/5 * * * * *`,
-      // cronTime: `* ${cronEarlyTime} * * ${cronDay}`, // 00 00 12 * * 3 = every Wednesday @ 12pm
+      // cronTime: `*/5 * * * * *`,
+      cronTime: `* ${cronEarlyTime} * * ${cronDay}`, // 00 00 12 * * 3 = every Wednesday @ 12pm
       onTick: function() {
         onCronKick(key, 1); // should pass org ID
       },
@@ -118,8 +118,8 @@ ref.once("value")
 
     // last call email reminder
     new CronJob({
-      cronTime: `*/11 * * * * *`,
-      // cronTime: `* ${cronLaterTime} * * ${cronDay}`,
+      // cronTime: `*/11 * * * * *`,
+      cronTime: `* ${cronLaterTime} * * ${cronDay}`,
       onTick: function() {
         onCronKick(key, 2);
       },
@@ -131,3 +131,7 @@ ref.once("value")
 .catch(function(err) {
   console.log("The read failed: " + err);
 });
+
+module.exports = {
+  composeEmail: composeEmail
+};
