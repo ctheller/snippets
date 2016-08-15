@@ -14,12 +14,14 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
 
             scope.snippet = {};
 
-            scope.removeCollaborator = function(id) {
-                scope.snippet.collaborators[id] = null;
+            scope.removeCollaborator = function(userId) {
+                scope.snippet.collaborators[userId] = null;
+                Users.removeAsCollaborator(userId, scope.id);
             }
 
             Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet');
 
+            //ng-repeat through object directly instead!!
             scope.$watch('snippet', function(newValue, oldValue) {
                 if (newValue)
                     var i = 0;
