@@ -56,30 +56,41 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
         Users.findUsersMatchingManager(currentUser.manager, function(result) {
             var updates = {};
-            updates['/snippets/' + newSnippetKey] = data;
+            updates['/snippets/' +  newSnippetKey] = data;
 
             result.forEach(function(userId) {
-                updates['/users/' + userId + '/snippets/' + newSnippetKey] = true;
+                updates[`/users/${userId}/snippets/asTeamMember/${newSnippetKey}`] = true;
             });
 
             return ref.update(updates);
         });
+
+        //handle error (return something) return something from create!!
     };
 
     Snippet.duplicateAsTemplate = function(snippetId) {
         var fromSnippet = Snippet.getSnippetById(snippetId);
-        var dataToTransfer = { subject: fromSnippet.subject, content: fromSnippet.content };
-        Snippet.create(dataToTransfer);
+        fromSnippet.$loaded().then(function() {
+            var dataToTransfer = { subject: fromSnippet.subject, content: fromSnippet.contents };
+            Snippet.create(dataToTransfer);
+        })
+
     };
 
+
+    //return statement on 82 not doing anything. Think about returns in general!
     Snippet.delete = function(snippetId) {
         var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
         var removeSnippetFromCollaborators = function(collaborators) {
             collaborators.forEach(collaborator => {
                 collaborator = Users.getProfile(collaborator);
                 return collaborator.$loaded().then(function() {
-                    if (collaborator.snippets.hasOwnProperty(snippetId)) {
-                        collaborator.snippets[snippetId] = null;
+                    if (collaborator.snippets.asTeamMember.hasOwnProperty(snippetId)) {
+                        collaborator.snippets.asTeamMember[snippetId] = null;
+                        collaborator.$save();
+                    }
+                    if (collaborator.snippets.asCollaborator.hasOwnProperty(snippetId)) {
+                        collaborator.snippets.asCollaborator[snippetId] = null;
                         collaborator.$save();
                     }
                 })

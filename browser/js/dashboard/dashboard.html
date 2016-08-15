@@ -1,26 +1,3 @@
-<!-- <div layout="row"> -->
-<!-- <section class="md-whiteframe-1dp editing-panel-wrapper one" layout="column" flex="45"> -->
-<!-- <div> <md-icon ng-model="draggables" ng-repeat="draggable in draggables"
-        data-drag="true"
-        data-jqyoui-options="{revert: 'invalid',
-                            helper: 'clone'}"
-        jqyoui-draggable="{index: {{$index}},
-                        placeholder: 'keep'}">
-            <i class="material-icons">{{draggable.icon}}</i>
-        </md-icon> </div> -->
-<!-- <md-content class="md-padding" layout-xs="column" layout="row"> -->
-<!-- <snippet ng-repeat="id in teamSnippetIds" id="id"></snippet> -->
-<!-- </section> -->
-<!-- <md-content flex="auto" class="editing-panel-wrapper two md-whiteframe-1dp" layout="row" ng-model="dragged" data-drop="true" jqyoui-droppable="{multiple:true}">
-    <div>
-        <md-icon ng-repeat="item in dragged" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}}"><i class="material-icons">{{item.icon}}</i></md-icon> test</div>
-</md-content>
-<md-button class="md-fab add-snippet-btn" aria-label="add snippet" ng-click="showSnippetForm($event)">
-    <md-icon><i class="material-icons">add</i></md-icon>
-</md-button> -->
-<!-- </div> -->
-<!-- resizable r-directions="['right']" r-width="300" -->
-<!-- <div class="block-title" layout="column">Your reports</div> -->
 <div layout="row" class="dashboard-wrapper">
     <div class="report-container" layout="column" flex="50">
         <div class="report-title" layout="row">
@@ -29,7 +6,6 @@
         <md-expansion-panel-group md-component-id="panelGroup" multiple>
             <div class="parent" ng-repeat="id in reportIds" layout="row"
             data-drag="true" ng-model="reportIds"
-            onStart="getSnippet(id)"
             data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
             jqyoui-draggable="{index: {{$index}}, placeholder: 'keep'}">
                 <snippet id="id" card="false"></snippet>
@@ -37,11 +13,11 @@
         </md-expansion-panel-group>
     </div>
     <div layout="column" class="snippet-container" flex="grow">
-        <div class="team-title" layout="row" flex="noshrink" >drop zone</div>
-        <div layout="row" flex="noshrink" ng-repeat="id in teamSnippetIds"
-        data-drop="true" jqyoui-droppable="{multiple:true}"
-        ng-model="teamSnippetIds">
-            <snippet id="id" card="{{true}}"></snippet>
+        <div class="team-title" layout="row" flex="noshrink" >Your Team</div>
+        <div layout="row" flex="noshrink" ng-repeat="id in collabAndTeamSnippetIds"
+        data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}"
+        ng-model="collabAndTeamSnippetIds">
+            <snippet id="id" card="true"></snippet>
         </div>
     </div>
     <md-button class="md-fab add-snippet-btn"
