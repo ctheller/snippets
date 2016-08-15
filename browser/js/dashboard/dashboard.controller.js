@@ -29,6 +29,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
             $scope.collabAndTeamSnippetIds = _.union($scope.collabSnippetIds, $scope.reportSnippetIds);
         })
 
+
         $scope.toggle = function() {
             $mdSidenav('right').toggle();
             if ($mdSidenav('right').isOpen()) $rootScope.$emit('open');
@@ -37,5 +38,8 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
     });
 
-
+    $scope.createNewSnippet = function (e, ui) {
+        var snippetCopyId = ui.draggable.scope().id;
+        Snippet.duplicateAsTemplate(snippetCopyId);
+    }
 });
