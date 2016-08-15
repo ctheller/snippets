@@ -1,0 +1,69 @@
+$green: #1ECD97;
+$gray: #bbbbbb;
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+submit-snippet {
+  margin-top: 10px;
+  outline:none;
+  height: 30px;
+  text-align: center;
+  width: 100px;
+  border-radius:40px;
+  background: #fff;
+  border: 2px solid $green;
+  color:$green;
+  letter-spacing:1px;
+  text-shadow:0;
+  content:"submit";
+  font:{
+    size:17px;
+    weight:bold;
+  }
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+  &:hover {
+    color:white;
+    background: $green;
+  }
+  &:after {
+    content: "submit";
+  }
+  &:active {
+    //letter-spacing: 2px;
+    letter-spacing: 2px ;
+  }
+}
+
+.onclic {
+  width: 30px;
+  border-width:3px;
+  font-size:0;
+
+  &:after {
+    content: "";
+  }
+}
+.validateit {
+  font-size:17px;
+  color: white;
+  content: "";
+  background: $green;
+  &:after {
+    content: "";
+  }
+}
+.finishit {
+  width: 30px;
+  background: $green;
+  font-size:17px;
+  color: white;
+  content: "";
+  &:after {
+    font-family: 'Material Icons';
+    content: "done";
+    -webkit-font-feature-settings: 'liga';
+  }
+}

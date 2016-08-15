@@ -5,7 +5,7 @@
         </div>
         <md-expansion-panel-group md-component-id="panelGroup" multiple>
             <div class="parent" ng-repeat="id in reportIds" layout="row"
-            data-drag="true" ng-model="reportIds"
+            data-drag="true" ng-model="reportSnippetIds"
             data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
             jqyoui-draggable="{index: {{$index}}, placeholder: 'keep'}">
                 <snippet id="id" card="false"></snippet>
