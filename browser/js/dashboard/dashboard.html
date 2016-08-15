@@ -17,7 +17,7 @@
         <div layout="row" flex="noshrink" ng-repeat="id in teamSnippetIds"
         data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}"
         ng-model="teamSnippetIds">
-            <snippet id="id"  card="{{true}}"></snippet>
+            <snippet id="id"  card="true"></snippet>
         </div>
     </div>
     <md-button class="md-fab add-snippet-btn"
