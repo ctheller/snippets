@@ -6,9 +6,8 @@
 </div> -->
 <!-- {{ collaborators }}
 <h1 ng-repeat="collaborator in collaborators">{{ collaborator }}</h1> -->
-
 <!-- <md-content flex layout="column"> -->
-      <md-card md-theme="{{ 'default' }}" md-theme-watch>
+<!--       <md-card md-theme="{{ 'default' }}" md-theme-watch>
         <md-card-title>
           <md-card-title-text>
             <p contenteditable ng-model="snippet.subject"  class="md-headline">{{ snippet.subject }}</p>
@@ -25,6 +24,32 @@
               <img ng-src="{{ collaborator.photoUrl }}" style="z-index: {{ collaborators.length - index }}">
             </div>
         </md-card-actions>
-      </md-card>
+      </md-card> -->
 <!-- </md-content> -->
-
+<md-expansion-panel md-component-id="{{id}}">
+    <md-expansion-panel-collapsed>
+        <div class="md-summary collapsed-title" ng-model="snippet.subject">
+            {{ snippet.subject }}
+        </div>
+    </md-expansion-panel-collapsed>
+    <md-expansion-panel-expanded>
+        <md-expansion-panel-content>
+        <div class="md-title" contenteditable ng-model="snippet.subject">
+                {{ snippet.subject }}
+            </div>
+            <div class="md-summary" contenteditable ng-model="snippet.contents">
+                {{ snippet.contents }}
+            </div>
+            <div id="snippetImages" layout="row" layout-align="end center">
+                <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
+                <div class="snippetImages img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index">
+                    <span ng-click="removeCollaborator(collaborator.id)" class="close"><i class="material-icons"> clear</i></span>
+                    <img class="collaborator-avatar" ng-src="{{ collaborator.photoUrl }}" style="z-index: {{ collaborators.length - index }}">
+                </div>
+            </div>
+        </md-expansion-panel-content>
+        <md-expansion-panel-footer md-no-sticky="true" class="collapse-btn" >
+            <md-button ng-click="collapse()">Collapse</md-button>
+        </md-expansion-panel-footer>
+    </md-expansion-panel-expanded>
+</md-expansion-panel>

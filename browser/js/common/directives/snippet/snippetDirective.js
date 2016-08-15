@@ -1,4 +1,4 @@
-app.directive('snippet', function ($rootScope, $state, Snippet) {
+app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel) {
     return {
         restrict: 'E',
         templateUrl: 'js/common/directives/snippet/snippet.html',
@@ -12,7 +12,7 @@ app.directive('snippet', function ($rootScope, $state, Snippet) {
 
             scope.snippet = {};
 
-            scope.removeCollaborator = function(id){
+            scope.removeCollaborator = function(id) {
                 scope.snippet.collaborators[id] = null;
             }
 
@@ -21,17 +21,22 @@ app.directive('snippet', function ($rootScope, $state, Snippet) {
             scope.$watch('snippet', function(newValue, oldValue) {
                 if (newValue)
                     var i = 0;
-                    scope.collaborators = [];
-                    if (!scope.snippet.collaborators) return;
-                    for (var key in scope.snippet.collaborators) {
-                        scope.collaborators[i] = {};
-                        scope.collaborators[i].id = key;
-                        scope.collaborators[i].photoUrl = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
-                        i++;
-                    }
+                scope.collaborators = [];
+                if (!scope.snippet.collaborators) return;
+                for (var key in scope.snippet.collaborators) {
+                    scope.collaborators[i] = {};
+                    scope.collaborators[i].id = key;
+                    scope.collaborators[i].photoUrl = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
+                    i++;
+                }
             }, true);
 
             scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';
+
+            scope.collapse = function () {
+                $mdExpansionPanel(scope.id).collapse();
+            }
+
 
             // after it comes back set scope.title, body, collaborator
 

@@ -10,14 +10,18 @@
     margin: 5px;
 }
 
+.snippetImages {
+    margin: 2px;
+}
+
 .img-wrap {
     position: relative;
     display: inline-block;
 }
-.img-wrap .close {
+.close {
     position: absolute;
-    top: -1px;
-    right: -1px;
+    top: 0px;
+    left: 2px;
     z-index: 100;
     background-color: red;
     font-weight: bold;
@@ -29,8 +33,20 @@
     border-radius: 50%;
     width: 40px;
     height: 42px;
+    color: white;
 }
-.img-wrap:hover .close {
+.close:hover {
     background-color: rgba(100,0,0,.3);
     opacity: 1;
+}
+
+.collaborator-avatar {
+    border-radius: 50%;
+    max-width: 40px;
+    margin: auto 2px;
+}
+
+.collapsed-title {
+    font-size: 20px;
+    font-weight: 600;
 }
