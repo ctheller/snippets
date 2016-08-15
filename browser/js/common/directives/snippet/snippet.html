@@ -31,10 +31,10 @@
     </md-expansion-panel-collapsed>
     <md-expansion-panel-expanded>
         <md-expansion-panel-content>
-            <div class="md-title" contenteditable ng-model="snippet.subject">
+            <div class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
                 {{ snippet.subject }}
             </div>
-            <div class="md-summary" contenteditable ng-model="snippet.contents">
+            <div class="md-summary" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents">
                 {{ snippet.contents }}
             </div>
             <div id="snippetImages" layout="row" layout-align="end center">

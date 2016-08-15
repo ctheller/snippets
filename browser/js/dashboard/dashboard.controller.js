@@ -14,25 +14,34 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     ];
     $scope.card = true;
     $scope.dragged = [];
-    $scope.reportIds = null;
-    $scope.teamSnippetIds = null;
-    $scope.collabSnippetIds = null;
+    $scope.reportIds = [];
+    $scope.teamSnippetIds = [];
+    $scope.collabSnippetIds = [];
 
-    Snippet.getReportSnippetIds(function (reportIds) {
-        // snippet ids from reports
-        $scope.reportIds = reportIds;
-        $scope.$digest();
-    });
-    Snippet.getTeamSnippetIds(function (teamSnippetIds) {
-        // snippet ids from reports
-        $scope.teamSnippetIds = teamSnippetIds;
-        $scope.$digest();
-    });
-    Snippet.getCollabSnippetIds(function (collabSnippetIds) {
-        // snippet ids where Im a collaborator
-        $scope.collabSnippetIds = collabSnippetIds;
-        $scope.$digest();
+    // $scope.reportIds = Object.keys($rootScope.user.snippets.asManager);
+
+    $rootScope.userRef.on('child_changed', function(){
+        $scope.teamSnippetIds = Object.keys($rootScope.user.snippets.asTeamMember);
     })
+
+    // $scope.collabSnippetIds = Object.keys($rootScope.user.snippets.asCollaborator);
+
+
+    // Snippet.getReportSnippetIds(function (reportIds) {
+    //     // snippet ids from reports
+    //     $scope.reportIds = reportIds;
+    //     $scope.$digest();
+    // });
+    // Snippet.getTeamSnippetIds(function (teamSnippetIds) {
+    //     // snippet ids from reports
+    //     $scope.teamSnippetIds = teamSnippetIds;
+    //     $scope.$digest();
+    // });
+    // Snippet.getCollabSnippetIds(function (collabSnippetIds) {
+    //     // snippet ids where Im a collaborator
+    //     $scope.collabSnippetIds = collabSnippetIds;
+    //     $scope.$digest();
+    // })
 
     $scope.toggle = function() {
         $mdSidenav('right').toggle();

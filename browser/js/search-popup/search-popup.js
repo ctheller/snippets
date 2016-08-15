@@ -18,12 +18,14 @@ function PopupCtrl($mdDialog, $scope) {
   }
 }
 
-function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope) {
+function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
 
     var self = this;
 
     //need better way to access the parent scope here
     var snippet = $scope.$parent.$parent.snippet;
+
+    console.log("SNIPPET", snippet);
 
 
     // list of `employee` value/display objects
@@ -38,6 +40,8 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope) {
       $mdDialog.cancel();
     };
     self.finish = function($event, selectedUserId) {
+
+      Users.addAsCollaborator(selectedUserId, snippet.$id);
 
       if (!snippet.collaborators) {
         var obj = {};

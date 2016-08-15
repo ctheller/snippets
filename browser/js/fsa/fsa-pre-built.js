@@ -48,7 +48,7 @@
         ]);
     });
 
-    app.service('AuthService', function ($rootScope, AUTH_EVENTS, Auth, $state, $firebaseObject) {
+    app.service('AuthService', function ($rootScope, AUTH_EVENTS, Auth, $state, $firebaseObject, Users) {
 
         var user = null;
 
@@ -61,7 +61,7 @@
             Auth.$signInWithRedirect('google');
         };
 
-        var fetchUser = function(){
+        var setUser = function(){
             if (Auth.$getAuth()) {
                 var id = Auth.$getAuth().uid;
 
@@ -79,20 +79,23 @@
                 user = $firebaseObject(ref.child(id));
 
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                $rootScope.user = user;
-                console.log("logged in as: ", user);
+                $rootScope.userRef = ref.child(id);
+                user.$bindTo($rootScope, 'user');
+                Users.getAll().$bindTo($rootScope, 'users');
+
             }
             else {
                 $rootScope.user = null;
+                $rootScope.userRef = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 $state.go('home');
             }
         }
 
-        this.fetchUser = fetchUser;
+        this.setUser = setUser;
 
         Auth.$onAuthStateChanged(function(){
-            fetchUser();
+            setUser();
         });
 
     });

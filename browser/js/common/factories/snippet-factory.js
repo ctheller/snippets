@@ -56,10 +56,10 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
         Users.findUsersMatchingManager(currentUser.manager, function(result) {
             var updates = {};
-            updates['/snippets/' + newSnippetKey] = data;
+            updates['/snippets/' +  newSnippetKey] = data;
 
             result.forEach(function(userId) {
-                updates['/users/' + userId + '/snippets/' + newSnippetKey] = true;
+                updates['/users/' + userId + '/snippets/asTeamMember/' + newSnippetKey] = true;
             });
 
             return ref.update(updates);
@@ -78,8 +78,12 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
             collaborators.forEach(collaborator => {
                 collaborator = Users.getProfile(collaborator);
                 return collaborator.$loaded().then(function() {
-                    if (collaborator.snippets.hasOwnProperty(snippetId)) {
-                        collaborator.snippets[snippetId] = null;
+                    if (collaborator.snippets.asTeamMember.hasOwnProperty(snippetId)) {
+                        collaborator.snippets.asTeamMember[snippetId] = null;
+                        collaborator.$save();
+                    }
+                    if (collaborator.snippets.asCollaborator.hasOwnProperty(snippetId)) {
+                        collaborator.snippets.asCollaborator[snippetId] = null;
                         collaborator.$save();
                     }
                 })
