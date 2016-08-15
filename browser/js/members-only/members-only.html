@@ -1,5 +1,5 @@
-<div ng-controller="MyCtrl">
-    <form name="myForm">
+<div ng-controller="ImgUploadCtrl">
+    <form name="imageUploader">
         <md-button class="md-primary md-raised blue darken-2" ng-click="clear()" ngf-select ng-model="picFile" accept="image/*">
             Select Picture</md-button>
         <div ng-show="picFile" ngf-drop ng-model="picFile" ngf-pattern="image/*"

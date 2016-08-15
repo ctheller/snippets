@@ -1,4 +1,4 @@
-app.controller('MyCtrl', function ($scope, Upload, $timeout, $rootScope) {
+app.controller('ImgUploadCtrl', function ($scope, Upload, $rootScope) {
 
     $scope.clear = function(){
         $scope.result = null;

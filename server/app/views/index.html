@@ -29,18 +29,20 @@
     <script type="text/javascript" src="/angular-dragdrop/src/angular-dragdrop.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+    
     <script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyA3_lI3ec7vmSmznIAlPpn55gLXrr90Sko",
-        authDomain: "snippets-2f32c.firebaseapp.com",
-        databaseURL: "https://snippets-2f32c.firebaseio.com",
-        storageBucket: "snippets-2f32c.appspot.com",
-    };
-    firebase.initializeApp(config);
-    var storage = firebase.storage();
-    var storageRef = storage.ref();
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyA3_lI3ec7vmSmznIAlPpn55gLXrr90Sko",
+            authDomain: "snippets-2f32c.firebaseapp.com",
+            databaseURL: "https://snippets-2f32c.firebaseio.com",
+            storageBucket: "snippets-2f32c.appspot.com",
+        };
+        firebase.initializeApp(config);
+        var storage = firebase.storage();
+        var storageRef = storage.ref();
     </script>
+
     <script src='/angularfire/dist/angularfire.min.js'></script>
     <script src="/main.js"></script>
 </head>
