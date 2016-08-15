@@ -12,7 +12,7 @@
     </div>
     <!-- team view if im a manager -->
     <div layout="column" class="snippet-container" flex="grow" ng-if="isManager">
-        <div class="team-title" layout="row" ng-cloak>Your Team</div>
+        <div class="team-title" layout="row" flex="noshrink" ng-cloak>Your Team</div>
         <div layout="row" flex="noshrink" ng-repeat="id in collabAndTeamSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}" ng-model="collabAndTeamSnippetIds">
             <snippet id="id" card="true"></snippet>
         </div>
