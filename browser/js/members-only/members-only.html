@@ -1,8 +1,7 @@
 <div ng-controller="MyCtrl">
     <form name="myForm">
-        <div>Crop Image and Upload</div>
-        <button ng-click="clear()" ngf-select ng-model="picFile" accept="image/*">
-            Select Picture</button>
+        <md-button class="md-primary md-raised blue darken-2" ng-click="clear()" ngf-select ng-model="picFile" accept="image/*">
+            Select Picture</md-button>
         <div ng-show="picFile" ngf-drop ng-model="picFile" ngf-pattern="image/*"
              class="cropArea">
             <img-crop image="picFile  | ngfDataUrl"                 
@@ -12,7 +11,7 @@
 <!--         <div ng-show="croppedDataUrl">
             <img ng-src="{{croppedDataUrl}}">
         </div> -->
-        <button ng-show="picFile && !result" ng-click="upload(croppedDataUrl)">Submit</button> 
+        <md-button class="md-primary md-raised blue darken-2" ng-show="picFile && !result" ng-click="upload(croppedDataUrl)">Submit</md-button> 
 
         <span ng-show="result">Upload Successful</span>
         <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
