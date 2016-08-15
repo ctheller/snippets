@@ -61,7 +61,7 @@
             Auth.$signInWithRedirect('google');
         };
 
-        Auth.$onAuthStateChanged(function(){
+        var fetchUser = function(){
             if (Auth.$getAuth()) {
                 var id = Auth.$getAuth().uid;
 
@@ -80,12 +80,19 @@
 
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                 $rootScope.user = user;
+                console.log("logged in as: ", user);
             }
             else {
                 $rootScope.user = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 $state.go('home');
             }
+        }
+
+        this.fetchUser = fetchUser;
+
+        Auth.$onAuthStateChanged(function(){
+            fetchUser();
         });
 
     });

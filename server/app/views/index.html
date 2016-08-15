@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/ng-img-crop/compile/minified/ng-img-crop.css">
     <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/materialize-css/dist/js/materialize.min.js"></script>
     <script src="/angular/angular.js"></script>
-    <script src="/lodash/lodash.js"></script>
+    <script src="/lodash/index.js"></script>
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/angular-messages/angular-messages.js"></script>
     <script src="/angular-sanitize/angular-sanitize.min.js"></script>
@@ -22,6 +23,9 @@
     <script src="/angular-resizable/angular-resizable.min.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-material/angular-material.js"></script>
+    <script src="/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+    <script src="/ng-file-upload/dist/ng-file-upload.min.js"></script>
+    <script src="/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
     <script type="text/javascript" src="/angular-dragdrop/src/angular-dragdrop.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
@@ -34,6 +38,8 @@
         storageBucket: "snippets-2f32c.appspot.com",
     };
     firebase.initializeApp(config);
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
     </script>
     <script src='/angularfire/dist/angularfire.min.js'></script>
     <script src="/main.js"></script>
