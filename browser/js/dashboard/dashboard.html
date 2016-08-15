@@ -21,12 +21,41 @@
 <!-- </div> -->
 <!-- resizable r-directions="['right']" r-width="300" -->
 <!-- <div class="block-title" layout="column">Your reports</div> -->
-<div layout="row" class="dashboard-wrapper">
-    <div layout="column" flex="grow" data-drop="true" jqyoui-droppable="{multiple:true}">test</div>
-    <div layout="column" class="report-container" flex="50">
-        <div class="block-title" layout="row" flex="noshrink">Your reports</div>
-        <div class="parent" ng-repeat="id in teamSnippetIds" layout="row" flex="noshrink">
-            <snippet id="id" ></snippet>
+<div layout-gt-md="row" layout-md="row"
+    layout-xs="row" layout-xs="column" class="dashboard-wrapper">
+    <div class="report-container"
+    layout-gt-md="column" flex-gt-md="50"
+    layout-md="column" flex-md="50"
+    layout-sm="column" flex-sm="noshrink"
+    layout-xs="column" flex-xs="noshrink">
+        <div class="block-title"
+        layout-gt-md="row" flex-gt-md="noshrink"
+        layout-md="row" flex-md="noshrink"
+        layout-sm="row" layout-xs="row">
+            Your reports
+        </div>
+        <div
+        layout-sm="row" flex-sm="grow"
+        layout-xs="row" flex-xs="grow">
+            <div class="parent" ng-repeat="id in teamSnippetIds"
+            layout-gt-md="row" flex-gt-md="noshrink"
+            layout-md="row" flex-md="noshrink"
+            layout-sm="column" flex-sm="noshrink"
+            layout-xs="column" flex-xs="noshrink">
+                <snippet id="id"></snippet>
+            </div>
         </div>
     </div>
+    <div
+    layout-gt-md="column" flex="grow"
+    layout-md="column" flex="grow"
+    layout-sm="row" layout-xs="row"
+    data-drop="true" jqyoui-droppable="{multiple:true}">
+        test
+    </div>
+    <md-button class="md-fab add-snippet-btn"
+    flex="noshrink"
+    aria-label="add snippet" ng-click="showSnippetForm($event)">
+        <md-icon><i class="material-icons">add</i></md-icon>
+    </md-button>
 </div>

@@ -41,8 +41,8 @@
 }
 
 .report-container::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 8px;
+    height: 3px;
     background-color: $extremely-light-grey;
 }
 
@@ -56,14 +56,15 @@
             margin-left: 0;
         }
     }
-    overflow-x: none;
-    overflow-y: hidden;
+    // overflow-x: none;
+    // overflow-y: hidden;
+    overflow: scroll;
     margin-bottom: 5px;
 }
 
-.report-container:hover {
-    overflow-y: scroll;
-}
+// .report-container:hover {
+//     overflow-y: scroll;
+// }
 
 .block-title {
     margin-top: 15px;
