@@ -38,6 +38,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';
 
             scope.collapse = function() {
+                console.log(scope.id)
                 $mdExpansionPanel(scope.id).collapse();
             };
 

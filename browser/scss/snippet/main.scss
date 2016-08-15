@@ -50,3 +50,19 @@
     font-size: 20px;
     font-weight: 600;
 }
+
+snippet {
+    &.team {
+        md-expansion-panel {
+            border-left: 3px solid $green;
+        }
+    }
+}
+
+snippet {
+    &.collab {
+        md-expansion-panel {
+            border-left: 3px solid $orange;
+        }
+    }
+}

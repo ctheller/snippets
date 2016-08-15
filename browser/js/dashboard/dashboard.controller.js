@@ -2,7 +2,21 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
     var setScope = function() {
         $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys($rootScope.user.snippets.asTeamMember) : [];
+        console.log($scope.teamSnippetIds,'???')
+        $scope.teamSnippetIds = $scope.teamSnippetIds.map(id => {
+            var obj = {};
+            obj.id = id;
+            obj.type = 'team'
+            return obj;
+        })
+        console.log($scope.teamSnippetIds,'???')
         $scope.collabSnippetIds = $rootScope.user.snippets.asCollaborator ? Object.keys($rootScope.user.snippets.asCollaborator) : [];
+        $scope.collabSnippetIds = $scope.collabSnippetIds.map(id => {
+            var obj = {};
+            obj.id = id;
+            obj.type = 'collab';
+            return obj;
+        })
         $scope.reportSnippetIds = $rootScope.user.snippets.asManager ? Object.keys($rootScope.user.snippets.asManager) : [];
         $scope.collabAndTeamSnippetIds = _.union($scope.collabSnippetIds, $scope.teamSnippetIds);
         $scope.isManager = false;

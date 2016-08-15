@@ -13,16 +13,15 @@
     <!-- team view if im a manager -->
     <div layout="column" class="snippet-container" flex="grow" ng-if="isManager">
         <div class="team-title" layout="row" flex="noshrink" ng-cloak>Your Team</div>
-        <div layout="row" flex="noshrink" ng-repeat="id in collabAndTeamSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}" ng-model="collabAndTeamSnippetIds">
-            <snippet id="id" card="true"></snippet>
+        <div layout="row" flex="noshrink" ng-repeat="obj in collabAndTeamSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}" ng-model="collabAndTeamSnippetIds">
+            <snippet id="obj.id" card="true" class="{{(obj.type === 'team') ? 'team' : 'collab'}}"></snippet>
         </div>
     </div>
-    <!-- team view if im not a manager -->
+    <!-- team + collab view if im not a manager -->
     <div layout="column" class="snippet-container" flex="grow" ng-if="!isManager">
-        <div class="team-title" layout="row" ng-cloak>Your Team</div>
         <md-expansion-panel-group md-component-id="team-panel" multiple>
-            <div class="parent" ng-repeat="id in collabAndTeamSnippetIds" layout="row">
-                <snippet id="id" card="false"></snippet>
+            <div class="parent" ng-repeat="obj in collabAndTeamSnippetIds" layout="row">
+                <snippet id="obj.id" card="false" class="{{(obj.type === 'team') ? 'team' : 'collab'}}"></snippet>
             </div>
         </md-expansion-panel-group>
     </div>
