@@ -10,8 +10,8 @@
 <md-card ng-show="{{card}}" md-theme="{{ 'default' }}" md-theme-watch>
     <md-card-title>
         <md-card-title-text>
-            <p contenteditable ng-model="snippet.subject" class="md-headline">{{ snippet.subject }}</p>
-            <p contenteditable ng-model="snippet.contents" class="md-subhead">{{ snippet.contents }}</p>
+            <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline">{{ snippet.subject }}</p>
+            <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead">{{ snippet.contents }}</p>
         </md-card-title-text>
     </md-card-title>
     <md-card-actions id="snippetImages" layout="row" layout-align="end center">
