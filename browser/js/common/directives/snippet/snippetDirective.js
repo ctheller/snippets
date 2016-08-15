@@ -4,11 +4,13 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
         templateUrl: 'js/common/directives/snippet/snippet.html',
         scope: {
             id: '=',
+            card: '@',
             users: '='
         },
         link: function(scope, element, attributes) {
             // do a get request for snippet info from database
             // use scope.id
+            scope.card = false;
 
             scope.snippet = {};
 
@@ -33,9 +35,9 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
 
             scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';
 
-            scope.collapse = function () {
+            scope.collapse = function() {
                 $mdExpansionPanel(scope.id).collapse();
-            }
+            };
 
 
             // after it comes back set scope.title, body, collaborator

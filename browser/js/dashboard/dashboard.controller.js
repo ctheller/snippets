@@ -12,6 +12,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     $scope.draggables = [
         {icon: 'people'}, {icon: 'person'}
     ];
+    $scope.card = true;
     $scope.dragged = [];
     $scope.reportIds = null;
     $scope.teamSnippetIds = null;

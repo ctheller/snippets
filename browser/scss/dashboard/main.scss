@@ -50,6 +50,20 @@
     background-color: #BDBDBD;
 }
 
+.snippet-container::-webkit-scrollbar-track {
+    background-color: $extremely-light-grey;
+}
+
+.snippet-container::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    background-color: $extremely-light-grey;
+}
+
+.snippet-container::-webkit-scrollbar-thumb {
+    background-color: #BDBDBD;
+}
+
 .report-container {
     .parent {
         md-card:first-of-type {
@@ -62,15 +76,27 @@
     margin-bottom: 5px;
 }
 
+.snippet-container {
+    overflow: auto;
+}
+
 // .report-container:hover {
 //     overflow-y: scroll;
 // }
-
-.block-title {
+.report-title {
     margin-top: 15px;
     margin-bottom: 5px;
 }
 
+.team-title {
+    margin-top: 11px;
+    margin-left: 10px;
+}
+
 snippet {
     width: 100%;
+}
+
+.snippet-container {
+    margin: 0 10px;
 }
