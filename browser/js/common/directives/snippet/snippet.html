@@ -1,4 +1,4 @@
-<md-card ng-show="card" md-theme="{{ 'default' }}" md-theme-watch>
+<md-card ng-show="{{card}}" md-theme="{{ 'default' }}" md-theme-watch>
     <md-card-title>
         <md-card-title-text>
             <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline"></p>
@@ -13,8 +13,7 @@
         </div>
     </md-card-actions>
 </md-card>
-<!-- </md-content> -->
-<md-expansion-panel ng-hide="card" md-component-id="{{id}}">
+<md-expansion-panel ng-hide="{{card}}" md-component-id="{{id}}">
     <md-expansion-panel-collapsed>
         <div class="md-summary collapsed-title" ng-model="snippet.subject">
             {{ snippet.subject }}
