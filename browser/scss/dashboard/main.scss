@@ -1,7 +1,7 @@
 @import '../color';
 .dashboard-wrapper {
     height: 100%;
-    // overflow: hidden;
+    overflow: hidden;
 }
 
 .editing-panel-wrapper {
@@ -41,12 +41,26 @@
 }
 
 .report-container::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 8px;
+    height: 3px;
     background-color: $extremely-light-grey;
 }
 
 .report-container::-webkit-scrollbar-thumb {
+    background-color: #BDBDBD;
+}
+
+.snippet-container::-webkit-scrollbar-track {
+    background-color: $extremely-light-grey;
+}
+
+.snippet-container::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    background-color: $extremely-light-grey;
+}
+
+.snippet-container::-webkit-scrollbar-thumb {
     background-color: #BDBDBD;
 }
 
@@ -56,17 +70,33 @@
             margin-left: 0;
         }
     }
-    overflow: hidden;
+    // overflow-x: none;
+    // overflow-y: hidden;
+    overflow: auto;
     margin-bottom: 5px;
 }
 
-.report-container:hover {
-    margin-bottom: 0px;
-    overflow: scroll;
+.snippet-container {
+    overflow: auto;
 }
 
-.block-title {
-    margin: 0px 20px;
-    margin-bottom: -12px;
-    margin-top: 14px;
+// .report-container:hover {
+//     overflow-y: scroll;
+// }
+.report-title {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.team-title {
+    margin-top: 11px;
+    margin-left: 10px;
+}
+
+snippet {
+    width: 100%;
+}
+
+.snippet-container {
+    margin: 0 10px;
 }
