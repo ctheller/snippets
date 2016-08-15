@@ -13,6 +13,7 @@ function PopupCtrl($mdDialog, $scope) {
       parent: angular.element(document.body),
       targetEvent: $event,
       clickOutsideToClose:true,
+      //see if I can just change this line below to scope
       scope: $scope.$new()
     })
   }

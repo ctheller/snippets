@@ -59,11 +59,13 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
             updates['/snippets/' +  newSnippetKey] = data;
 
             result.forEach(function(userId) {
-                updates['/users/' + userId + '/snippets/asTeamMember/' + newSnippetKey] = true;
+                updates[`/users/${userId}/snippets/asTeamMember/${newSnippetKey}`] = true;
             });
 
             return ref.update(updates);
         });
+
+        //handle error (return something) return something from create!!
     };
 
     Snippet.duplicateAsTemplate = function(snippetId) {
@@ -72,6 +74,8 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         Snippet.create(dataToTransfer);
     };
 
+
+    //return statement on 82 not doing anything. Think about returns in general!
     Snippet.delete = function(snippetId) {
         var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
         var removeSnippetFromCollaborators = function(collaborators) {

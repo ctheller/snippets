@@ -21,6 +21,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
 
             Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet');
 
+            //ng-repeat through object directly instead!!
             scope.$watch('snippet', function(newValue, oldValue) {
                 if (newValue)
                     var i = 0;

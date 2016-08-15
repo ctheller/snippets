@@ -1,17 +1,8 @@
-<!-- <div>
-  <form name='snippet'>
-    <input type="text" name="title" ng-model="snippet.title">
-    <input type="textarea" name="body" ng-model="snippet.body">
-  </form>
-</div> -->
-<!-- {{ collaborators }}
-<h1 ng-repeat="collaborator in collaborators">{{ collaborator }}</h1> -->
-<!-- <md-content flex layout="column"> -->
 <md-card ng-show="{{card}}" md-theme="{{ 'default' }}" md-theme-watch>
     <md-card-title>
         <md-card-title-text>
-            <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline">{{ snippet.subject }}</p>
-            <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead">{{ snippet.contents }}</p>
+            <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline"></p>
+            <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead"></p>
         </md-card-title-text>
     </md-card-title>
     <md-card-actions id="snippetImages" layout="row" layout-align="end center">
@@ -32,16 +23,14 @@
     <md-expansion-panel-expanded>
         <md-expansion-panel-content>
             <div class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
-                {{ snippet.subject }}
             </div>
             <div class="md-summary" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents">
-                {{ snippet.contents }}
             </div>
             <div id="snippetImages" layout="row" layout-align="end center">
                 <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
                 <div class="snippetImages img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index">
                     <span ng-click="removeCollaborator(collaborator.id)" class="close"><i class="material-icons"> clear</i></span>
-                    <img class="collaborator-avatar" ng-src="{{ collaborator.photoUrl }}" style="z-index: {{ collaborators.length - index }}">
+                    <img class="collaborator-avatar" ng-src="{{ collaborator.photoUrl }}">
                 </div>
             </div>
         </md-expansion-panel-content>
