@@ -44,27 +44,7 @@ app.controller('ToolbarCtrl', function($scope, $interval, $mdSidenav, $rootScope
         // updates the profile in the DB using 3-way binding
         Users.getProfile(uid).$bindTo($scope, "user");
 
-    }
-
-    // $scope.toggleSelect = function() {
-    //     if($scope.isPopupVisible) { 
-    //         console.log('setting to hide');
-    //         $scope.isPopupVisible = false; 
-    //         console.log($scope.isPopupVisible, 'hi')
-    //     }
-    //     else { 
-    //         console.log('showing')
-    //         $scope.isPopupVisible = true; 
-    //     }
-    // }
-
-    $scope.toggleOn = function() {
-        $scope.isPopupVisible = true;
-    }
-
-    $scope.toggleOff = function() {
-        $scope.isPopupVisible = false;
-    }
+    };
 
     $scope.toggle = function() {
         $mdSidenav('left').toggle();
@@ -72,11 +52,13 @@ app.controller('ToolbarCtrl', function($scope, $interval, $mdSidenav, $rootScope
         else $rootScope.$emit('close');
     };
 
+
     $scope.isLoggedIn = function() {
         return AuthService.isAuthenticated();
     };
 
     $scope.logout = function() {
+        console.log('hot in here');
         Auth.$signOut();
         $state.go('home');
     };
