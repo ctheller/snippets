@@ -3,6 +3,10 @@ let firebase = require("firebase");
 let Chance = require('chance');
 let ref = firebase.database().ref("organizations");
 let chance = new Chance();
+let jsonfile = require('jsonfile')
+var file = '/Users/grodriguez/desktop/seed.json';
+
+
 
 // var orgs = {
 //   'someOtherOne' : {
@@ -42,10 +46,12 @@ function buildSeed () {
   let managerCLevel = [];
   let managerTopLevel = [];
   let managerMidLevel = [];
+  let lowestLevel = [];
 
   // create users
   for (let i=0; i<250; i++) {
-    let username = chance.string({length: 10});
+    // no  $ # [ ] / or .
+    let username = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 10});
     toReturn.users[username] = {
       email: chance.email(),
       first_name: chance.first(),
@@ -64,33 +70,113 @@ function buildSeed () {
       managerMidLevel.push(username);
       toReturn.users[username].manager = chance.pickone(managerTopLevel);
     } else {
+      lowestLevel.push(username);
       toReturn.users[username].manager = chance.pickone(managerMidLevel);
     }
   }
 
-  // do team member after creating users
-  for (let user1 in toReturn.users) {
-    for (let user2 in toReturn.users) {
-      if (user1 !== user2 && toReturn.users[user1].manager === toReturn.users[user2].manager) {
-        if (toReturn.users[user1].asTeamMember) {
-          toReturn.users[user1].asTeamMember[user2] = true;
-        } else {
-          toReturn.users[user1].asTeamMember = {};
-          toReturn.users[user1].asTeamMember[user2] = true;
+  // create snippets
+  toReturn.snippets = {};
+  for (let i=0; i<500; i++) {
+    let snippetId = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 15});
+    toReturn.snippets[snippetId] = {
+      contents: chance.paragraph(),
+      subject: chance.sentence({words: 6}),
+      submitted: chance.bool({likelihood: 50}),
+      dateAdded: chance.integer({min: Date.now() - 1.814e+9, max: Date.now()})
+    };
+
+    let randomUser = chance.pickone(Object.keys(toReturn.users));
+    toReturn.snippets[snippetId].owner = randomUser;
+    toReturn.snippets[snippetId].team = toReturn.users[randomUser].manager;
+
+    // add snippet Id to owner's table
+    if(!toReturn.users[randomUser].snippets) {
+      toReturn.users[randomUser].snippets = {};
+    }
+    if (!toReturn.users[randomUser].snippets.asOwner) {
+      toReturn.users[randomUser].snippets.asOwner = {};
+    }
+    toReturn.users[randomUser].snippets.asOwner[snippetId] = true;
+
+    let level;
+    if (managerCLevel.indexOf(randomUser) !== -1) {
+      level = managerCLevel;
+    } else if (managerTopLevel.indexOf(randomUser) !== -1) {
+      level = managerTopLevel;
+    } else if (managerMidLevel.indexOf(randomUser) !== -1) {
+      level = managerMidLevel;
+    } else if (lowestLevel.indexOf(randomUser) !== -1) {
+      level = lowestLevel;
+    }
+
+    let teammates = [];
+    for (let user in toReturn.users) {
+      if (toReturn.users[user].manager === toReturn.users[randomUser].manager) {
+        teammates.push(user);
+      }
+    }
+    let collabLoop = chance.integer({min: 0, max: 4});
+    for (let i=0; i<collabLoop; i++) {
+      if (!toReturn.snippets[snippetId].collaborators) {
+        toReturn.snippets[snippetId].collaborators = {};
+      }
+      if (chance.bool({likelihood: 80})) {
+        // collaborators come from teammates array
+          let userToAdd = teammates[chance.integer({min: 0, max: teammates.length-1})];
+          toReturn.snippets[snippetId].collaborators[userToAdd] = true;
+        // add to collaborators table
+        if(!toReturn.users[userToAdd].snippets) {
+          toReturn.users[userToAdd].snippets = {};
         }
+        if (!toReturn.users[userToAdd].snippets.asCollaborator) {
+          toReturn.users[userToAdd].snippets.asCollaborator = {};
+        }
+        toReturn.users[userToAdd].snippets.asCollaborator[snippetId] = true;
+      } else {
+        // collaborators come from org (on your level) array
+        let userToAdd = level[chance.integer({min: 0, max: teammates.length-1})];
+        toReturn.snippets[snippetId].collaborators[userToAdd] = true;
+        // add to collaborators table
+        if(!toReturn.users[userToAdd].snippets) {
+          toReturn.users[userToAdd].snippets = {};
+        }
+        if (!toReturn.users[userToAdd].snippets.asCollaborator) {
+          toReturn.users[userToAdd].snippets.asCollaborator = {};
+        }
+        toReturn.users[userToAdd].snippets.asCollaborator[snippetId] = true;
       }
     }
   }
-  // create snippets
-  toReturn.snippets = {};
-  for (let i=0; i<100; i++) {
-    let snippetId = chance.string({length: 15});
+
+  // ADD snippets asTeamMembers to users
+    // loop through snippets
+  for (let snippetKey in toReturn.snippets) {
+    // get team aka manager ID
+    let manager = toReturn.snippets[snippetKey].team;
+    // loop through user table
+    for (let userKey in toReturn.users) {
+      // if user.manager === managerID && user !== snippet.owner
+      if (toReturn.snippets[snippetKey].owner !== userKey && toReturn.users[userKey].manager === manager) {
+        // user.snippets.asTeamMember exists?, if not add {}
+        if(!toReturn.users[userKey].snippets) {
+          toReturn.users[userKey].snippets = {};
+        }
+        if (!toReturn.users[userKey].snippets.asTeamMember) {
+          toReturn.users[userKey].snippets.asTeamMember = {};
+        }
+        // user.snippets.asTeamMember[snippetId] = true
+        toReturn.users[userKey].snippets.asTeamMember[snippetKey] = true;
+      }
+    }
+
   }
-
-  // Associate snippets to users (and vice versa?)
-
-
   return toReturn;
 }
 
 console.log(buildSeed())
+
+let obj = buildSeed();
+jsonfile.writeFile(file, obj, function (err) {
+  console.error(err)
+});
