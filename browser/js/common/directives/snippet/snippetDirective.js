@@ -1,4 +1,4 @@
-app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel) {
+app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel, Users) {
     return {
         restrict: 'E',
         templateUrl: 'js/common/directives/snippet/snippet.html',
