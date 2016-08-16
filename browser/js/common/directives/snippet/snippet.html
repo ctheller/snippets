@@ -18,13 +18,13 @@
 </md-card>
 <md-expansion-panel ng-hide="{{card}}" md-component-id="{{id}}">
     <md-expansion-panel-collapsed>
-        <div class="md-summary collapsed-title" ng-model="snippet.subject">
+        <div id="snippetTitle" class="md-summary collapsed-title" ng-model="snippet.subject">
             {{ snippet.subject }}
         </div>
     </md-expansion-panel-collapsed>
     <md-expansion-panel-expanded>
         <md-expansion-panel-content>
-            <div class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
+            <div id="snippetTitle" class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
             </div>
             <div class="md-summary" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents">
             </div>
