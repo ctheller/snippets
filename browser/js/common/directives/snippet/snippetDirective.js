@@ -8,11 +8,26 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             users: '='
         },
         link: function(scope, element, attributes) {
+
             // do a get request for snippet info from database
             // use scope.id
             scope.card = false;
 
             scope.snippet = {};
+
+            scope.submitSnippet = function($event){
+ 
+                if (!scope.snippet.submitted) {
+                    setTimeout(scope.snippet.submitted = true, 2250);
+                }
+                else {
+                    scope.snippet.submitted = false;
+                }
+            }
+
+            element.click(function(event){
+                event.preventDefault();
+            })
 
             scope.removeCollaborator = function(userId) {
                 scope.snippet.collaborators[userId] = null;

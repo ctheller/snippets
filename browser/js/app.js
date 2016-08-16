@@ -2,7 +2,7 @@
 
 window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ngAnimate', 'ngMaterial', 'ngAria', 'ngMessages', 'angularResizable', 'firebase', 'ngDragDrop', 'ngSanitize', 'ngFileUpload', 'ngImgCrop', 'material.components.expansionPanels']);
 
-app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
+app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $anchorScrollProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
     $locationProvider.html5Mode(true);
     // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
@@ -23,6 +23,8 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
 
     // This is the absolutely vital part, without this, changes will not cascade down through the DOM.
     $mdThemingProvider.alwaysWatchTheme(true);
+
+    $anchorScrollProvider.disableAutoScrolling();
 })
 
 
