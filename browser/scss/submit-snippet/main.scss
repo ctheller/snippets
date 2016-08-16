@@ -61,6 +61,16 @@ submit-snippet {
   font-size:17px;
   color: white;
   content: "";
+  transition: all 0.25s ease;
+  &:hover {
+      background: #ef5350;
+      border: 2px solid #ef5350;
+      &:after {
+        font-family: 'Material Icons';
+        content: "undo";
+        -webkit-font-feature-settings: 'liga';
+      }
+    }
   &:after {
     font-family: 'Material Icons';
     content: "done";
