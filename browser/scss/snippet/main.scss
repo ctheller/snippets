@@ -66,3 +66,24 @@ snippet {
         }
     }
 }
+
+#snippetTitle {
+    width: 70%;
+}
+
+md-card-title {
+    padding-top: 0 !important;
+    md-card-title-text {
+        padding-top: 0 !important;
+        #contenttext {
+        margin-top: 0 !important;
+        }
+    }
+}
+
+/* Rules for using icons as white on a dark background. */
+
+.btn-floating.sentbtn {font-weight: bold; background: rgba(0, 0, 0, 0.05); box-shadow: none; margin-top: 20px; cursor: default}
+.btn-floating.sentbtn.submitted { background: rgb(0, 204, 0)}
+
+

@@ -1,9 +1,12 @@
 <md-card ng-show="{{card}}" md-theme="{{ 'default' }}" md-theme-watch>
     <md-card-title>
         <md-card-title-text>
-            <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline"></p>
-            <p contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead"></p>
+            <p ng-if="!snippet.submitted" id="snippetTitle" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline"></p>
+            <p ng-if="snippet.submitted" id="snippetTitle" ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline">{{snippet.subject}}</p>
+            <p ng-if="!snippet.submitted" id="contenttext" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead"></p>
+            <p ng-if="snippet.submitted" id="contenttext" ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead">{{snippet.contents}}</p>
         </md-card-title-text>
+        <submit-snippet ng-class="{'finishit': snippet.submitted}" ng-click="submitSnippet($event)" submitted="snippet.submitted"></submit-snippet>
     </md-card-title>
     <md-card-actions id="snippetImages" layout="row" layout-align="end center">
         <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
