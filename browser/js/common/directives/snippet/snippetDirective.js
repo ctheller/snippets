@@ -45,7 +45,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 for (var key in scope.snippet.collaborators) {
                     scope.collaborators[i] = {};
                     scope.collaborators[i].id = key;
-                    scope.collaborators[i].photoUrl = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
+                    scope.collaborators[i].photoUrl = $rootScope.users[key].photoUrl || '/files/default-profile.png';
                     i++;
                 }
             }, true);
