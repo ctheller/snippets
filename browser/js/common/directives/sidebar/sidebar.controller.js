@@ -3,7 +3,7 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
     $scope.items = [
         { label: 'Home', state: 'home', icon: 'home' },
         { label: 'Profile', state: 'profile', icon: 'person' },
-        { label: 'Dashboard', state: 'dashboard', icon: 'inbox' },
+        { label: 'Dashboard', state: 'dashboard.week({week:0})', icon: 'inbox' },
         { label: 'Members', state: 'membersOnly', icon: 'casino' }
     ];
 
