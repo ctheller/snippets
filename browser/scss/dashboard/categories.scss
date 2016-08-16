@@ -1,0 +1,46 @@
+.team-collab-tabs {
+    li.all-tab {
+        .active,
+        a:hover {
+            color: black;
+            border-bottom: 3px solid $blue;
+        }
+    }
+    li.team-tab {
+        .active,
+        a:hover {
+            color: black;
+            border-bottom: 3px solid $green;
+        }
+    }
+    li.collab-tab {
+        .active,
+        a:hover {
+            color: black;
+            border-bottom: 3px solid $orange;
+        }
+    }
+    .tab a {
+        color: black;
+        border-bottom: none;
+    }
+    .indicator {
+        height: 0;
+    }
+}
+
+snippet {
+    &.team {
+        md-expansion-panel {
+            border-right: 3px solid $green;
+        }
+    }
+}
+
+snippet {
+    &.collab {
+        md-expansion-panel {
+            border-right: 3px solid $orange;
+        }
+    }
+}
