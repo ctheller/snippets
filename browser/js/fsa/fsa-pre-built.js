@@ -84,7 +84,7 @@
                         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     });
                 })
-                
+
 
             }
             else {
