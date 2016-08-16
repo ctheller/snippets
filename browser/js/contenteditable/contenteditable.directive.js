@@ -1,13 +1,13 @@
 'use strict';
 
-app.directive('contenteditable', function () {
+app.directive('contenteditable', function ($sanitize) {
   return {
     restrict: 'A',
     require: '?ngModel',
     link: function (scope, element, attrs, ngModel) {
       if (!ngModel) return;
       function read() {
-        ngModel.$setViewValue(element.html());
+        ngModel.$setViewValue($sanitize(element.html()));
       }
       ngModel.$render = function () {
         element.html(ngModel.$viewValue || '');
