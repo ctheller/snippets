@@ -100,3 +100,16 @@ snippet {
 .snippet-container {
     margin: 0 10px;
 }
+
+md-expansion-panel-group[md-component-id='report-panel'] {
+    cursor: move;
+}
+
+md-expansion-panel-group[md-component-id='team-panel'] {
+    cursor: pointer;
+    md-expansion-panel-content {
+        .md-summary, .md-title {
+            cursor: text;
+        }
+    }
+}

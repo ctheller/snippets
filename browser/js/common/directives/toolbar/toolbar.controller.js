@@ -1,20 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $interval, $mdSidenav, $rootScope, $state, AuthService, AUTH_EVENTS, Auth, $mdDialog, $mdPanel) {
-
-    $scope.user = null;
-
-    var setUser = function() {
-        $scope.user = AuthService.getLoggedInUser();
-    };
-
-    var removeUser = function() {
-        $scope.user = null;
-    };
-
-    setUser();
-
-    $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
-    $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
-    $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
+app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
 
     $scope.sidebarOpen = "false";
 
@@ -50,11 +34,6 @@ app.controller('ToolbarCtrl', function($scope, $interval, $mdSidenav, $rootScope
         $mdSidenav('left').toggle();
         if ($mdSidenav('left').isOpen()) $rootScope.$emit('open');
         else $rootScope.$emit('close');
-    };
-
-
-    $scope.isLoggedIn = function() {
-        return AuthService.isAuthenticated();
     };
 
     $scope.logout = function() {

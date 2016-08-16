@@ -22,7 +22,22 @@ app.factory("Users", function($firebaseObject, $firebaseArray) {
         return $firebaseObject(profileRef);
     };
 
-    return Users;
+    Users.removeAsCollaborator = function(userId, snippetId) {
+        firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(null);
+    }
 
+    Users.addAsCollaborator = function(userId, snippetId) {
+        firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(true);
+    }
+
+    Users.addAsManager = function(userId, snippetId) {
+        firebase.database().ref('users/'+ userId +"/snippets/asManager/" + snippetId).set(true);
+    }
+
+    Users.removeAsManager = function(userId, snippetId) {
+        firebase.database().ref('users/'+ userId +"/snippets/asManager/" + snippetId).set(null);
+    }
+
+    return Users;
 
 });
