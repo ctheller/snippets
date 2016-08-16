@@ -1,4 +1,5 @@
-<md-card>
+<img ng-show="user" ng-click="toggle()" class="circle-profile menu-open-button" md-whiteframe-1dp ng-src="{{user.photoUrl || 'files/default-profile.png'}}" ng-cloak>
+<md-card ng-show="isPopupVisible" id="profile-card">
     <md-card-header>
         <md-card-avatar>
             <img class="md-avatar-icon" ng-src="{{user.photoUrl || 'files/default-profile.png'}}" />

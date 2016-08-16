@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, $rootScope, $state, AuthService, AUTH_EVENTS, Auth, $mdDialog) {
+app.controller('ToolbarCtrl', function($scope, $interval, $mdSidenav, $rootScope, $state, AuthService, AUTH_EVENTS, Auth, $mdDialog, $mdPanel) {
 
     $scope.user = null;
 
@@ -24,18 +24,47 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, $rootScope, $state, A
         };
     };
 
+    function ProfileCtrl($scope, $mdDialog, Auth, Users) {
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
 
-    $scope.viewProfile = function(ev) {
-  
-        $mdDialog.show({
-            clickOutsideToClose: true,
-            scope: $scope,
-            preserveScope: true,
-            controller: DialogController,
-            templateUrl: 'js/profile/profileCard.html',
-            parent: angular.element(document.body)
-        });
-    };
+        // clicking save closes the dialog
+        $scope.saveProfile = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+
+        // fetches the user's unique id to look up the user profile
+        var uid = Auth.$getAuth().uid;
+
+        // updates the profile in the DB using 3-way binding
+        Users.getProfile(uid).$bindTo($scope, "user");
+
+    }
+
+    // $scope.toggleSelect = function() {
+    //     if($scope.isPopupVisible) { 
+    //         console.log('setting to hide');
+    //         $scope.isPopupVisible = false; 
+    //         console.log($scope.isPopupVisible, 'hi')
+    //     }
+    //     else { 
+    //         console.log('showing')
+    //         $scope.isPopupVisible = true; 
+    //     }
+    // }
+
+    $scope.toggleOn = function() {
+        $scope.isPopupVisible = true;
+    }
+
+    $scope.toggleOff = function() {
+        $scope.isPopupVisible = false;
+    }
 
     $scope.toggle = function() {
         $mdSidenav('left').toggle();
