@@ -1,6 +1,7 @@
 app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelpers, AUTH_EVENTS, Snippet) {
 
-    var setScope = function() {
+    var setScope = function(){
+        console.log("scope updated");
         $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys($rootScope.user.snippets.asTeamMember) : [];
         console.log($scope.teamSnippetIds,'???')
         $scope.teamSnippetIds = $scope.teamSnippetIds.map(id => {
@@ -38,6 +39,9 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
             setScope();
         })
     }
+
+    $scope.card = true;
+    $scope.dragged = [];
 
     $scope.toggle = function() {
         $mdSidenav('right').toggle();
