@@ -1,7 +1,7 @@
 let creds = require('../../../credentials/creds.json');
 let firebase = require("firebase");
 let Chance = require('chance');
-let ref = firebase.database().ref("organizations");
+let ref = firebase.database().ref();
 let chance = new Chance();
 let jsonfile = require('jsonfile');
 
@@ -197,6 +197,7 @@ var nickObj = {
   email: "nicolaas.koster@gmail.com",
   first_name: "Nicky",
   last_name: "Koster",
+  photoUrl: 'https://randomuser.me/api/portraits/men/42.jpg'
 };
 
 var chrisObj = {
@@ -209,7 +210,7 @@ var chrisObj = {
 
 for (let i=0; i< toReplace.length; i++) { //
   // to replace
-  console.log(toReplace[i]);
+  // console.log(toReplace[i]);
 
   // insert team members data
   let newGuy;
@@ -262,14 +263,7 @@ for (let i=0; i< toReplace.length; i++) { //
 
 
 
-
-
 // console.log(seedy);
-
-// ref.set(seedy)
-// .then(function(result) {
-//   console.log('success: ', result);
-// });
 
 // write to local hard drive
 var file = '/Users/grodriguez/desktop/seed.json';
@@ -277,3 +271,9 @@ let obj = seedy;
 jsonfile.writeFile(file, obj, function (err) {
   console.error(err);
 });
+
+  // // send to live database ----- THROWS ERRORS?
+  // ref.set(seedy)
+  // .then(function(result) {
+  //   console.log('success: ', result);
+  // });
