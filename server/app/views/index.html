@@ -54,7 +54,7 @@
         <img class="snippetLogo" src="/files/snippetLogo.png">
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
     </md-toolbar>
-    <div role="main" layout="row" flex>
+    <div id="main" layout="row" flex>
         <!-- temperary controller -->
         <md-content class="pushing" layout="column">
             <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-disable-backdrop="">
@@ -82,7 +82,7 @@
                 </md-content>
             </md-sidenav>
         </md-content>
-        <md-content resize-main flex="auto" layout="column" class="md-sidenav-push-in-target pushed" layout-padding="">
+        <md-content resize-main flex="auto" layout="column" class="md-sidenav-push-in-target pushed main-wrapper" layout-padding="">
             <ui-view resize-main></ui-view>
             <!-- <div ui-view class="ui-view-wrapper"></div> -->
         </md-content>

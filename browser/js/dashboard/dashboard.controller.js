@@ -1,10 +1,8 @@
 app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelpers, AUTH_EVENTS, Snippet) {
 
-    console.log($scope.currentWeek);
 
     var dateFilter = function(obj){
-        return _.pickBy(obj, function(value){
-            var snippetCreated = new Date(Date.parse(value));
+        return _.pickBy(obj, function(snippetCreated){
             var diff = (snippetCreated - $scope.currentWeek)/(1000*60*60*24);
             return (diff < 7 && diff > 0);
         })
@@ -18,7 +16,8 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys(dateFilter($rootScope.user.snippets.asTeamMember)) : [];
         $scope.collabSnippetIds = $rootScope.user.snippets.asCollaborator ? Object.keys(dateFilter($rootScope.user.snippets.asCollaborator)) : [];
         $scope.reportSnippetIds = $rootScope.user.snippets.asManager ? Object.keys(dateFilter($rootScope.user.snippets.asManager)) : [];
-        console.log($scope.reportSnippetIds)
+        console.log($scope.teamSnippetIds);
+        console.log($rootScope.user)
         $scope.teamSnippetIds = $scope.teamSnippetIds.map(id => {
             var obj = {};
             obj.id = id;
@@ -62,16 +61,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     };
 
     $scope.newSnippet = {};
-
-    $scope.showSnippetForm = function(ev) {
-        $mdDialog.show({
-            controller: MdHelpers.dialogCtrl,
-            templateUrl: 'js/dashboard/new-snippet-form.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true
-        });
-    };
 
     $scope.draggables = [
         { icon: 'people' }, { icon: 'person' }

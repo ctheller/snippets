@@ -26,9 +26,6 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
     //need better way to access the parent scope here
     var snippet = $scope.$parent.$parent.snippet;
 
-    console.log("SNIPPET", snippet);
-
-
     // list of `employee` value/display objects
     self.employees        = loadAll();
     self.querySearch   = querySearch;

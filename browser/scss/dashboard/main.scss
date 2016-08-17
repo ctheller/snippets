@@ -6,6 +6,20 @@
     overflow: hidden;
 }
 
+.dashboard {
+    height: 100%;
+}
+
+.dashboard-ui-view-wrapper {
+    ui-view {
+        height: 100%;
+    }
+}
+
+div.dashboard-ui-view-wrapper {
+    height: 100%;
+}
+
 .editing-panel-wrapper {
     // overflow-x: auto;
     overflow-x: hidden;
@@ -24,6 +38,10 @@
     border-bottom: none;
     border-left: 1px solid #e6e3e3;
     background-color: $extremely-light-grey;
+}
+
+.add-snippet-btn-col {
+    justify-content: flex-end;
 }
 
 .add-snippet-btn {
@@ -74,12 +92,13 @@
     }
     // overflow-x: none;
     // overflow-y: hidden;
-    overflow: auto;
+    overflow-y: scroll;
     margin-bottom: 5px;
 }
 
 .snippet-container {
-    overflow: auto;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 // .report-container:hover {
@@ -130,9 +149,10 @@ md-expansion-panel-group[md-component-id='team-panel'] {
     }
     span {
         display: inline-block;
-        width: 92%;
+        width: 88%;
         position: absolute;
         text-align: center;
         top: 25px;
     }
 }
+

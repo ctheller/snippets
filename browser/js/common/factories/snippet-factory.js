@@ -48,7 +48,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         var currentUser = AuthService.getLoggedInUser();
         data.team = currentUser.manager;
         data.owner = currentUser.$id;
-        data.createdAt = Date();
+        data.createdAt = Date.now();
         data.submitted = false;
         var obj = {};
         obj[currentUser.$id] = true;
