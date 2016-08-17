@@ -2,8 +2,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
 
     var dateFilter = function(obj){
-        return _.pickBy(obj, function(value){
-            var snippetCreated = new Date(Date.parse(value));
+        return _.pickBy(obj, function(snippetCreated){
             var diff = (snippetCreated - $scope.currentWeek)/(1000*60*60*24);
             return (diff < 7 && diff > 0);
         })

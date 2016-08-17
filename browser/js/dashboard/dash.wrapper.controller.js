@@ -4,8 +4,8 @@ app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers)
 
 	var d = new Date();
 	d.setDate(d.getDate() - d.getDay() + ($scope.currentWeekNum * 7));
-
-	$scope.currentWeek = d;
+	
+	$scope.currentWeek = d.valueOf();
 
 	$scope.displayWeek = "Week of " + d.toDateString();
 
