@@ -37,8 +37,12 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
     };
 
     $scope.logout = function() {
-        console.log('hot in here');
         Auth.$signOut();
         $state.go('home');
     };
+
+    $scope.availableSearchParams = [
+        { key: "name", name: "Name", placeholder: "Name:", allowMultiple: true },
+        { key: "email", name: "Email", placeholder: "Email:", allowMultiple: true }
+    ];
 });
