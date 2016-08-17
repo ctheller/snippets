@@ -42,7 +42,7 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
     };
 
     $scope.availableSearchParams = [
-        { key: "name", name: "Name", placeholder: "Name...", allowMultiple: true },
-        { key: "email", name: "City", placeholder: "City...", allowMultiple: true }
+        { key: "name", name: "Name", placeholder: "Name:", allowMultiple: true },
+        { key: "email", name: "Email", placeholder: "Email:", allowMultiple: true }
     ];
 });

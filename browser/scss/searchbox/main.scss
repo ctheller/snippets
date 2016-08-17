@@ -1,0 +1,16 @@
+.advancedSearchBox {
+    input:focus {
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    input[name="value"] {
+        font-size: 12px;
+    }
+    .value {
+        font-size: 12px
+    }
+    input[name="searchbox"] {
+        color: black;
+    }
+    font-size: 12px;
+}
