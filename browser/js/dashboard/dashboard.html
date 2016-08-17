@@ -24,8 +24,13 @@
         <snippet-tabs layout="row">
         </snippet-tabs>
         <md-expansion-panel-group md-component-id="team-panel" id="all-tab-panel" ng-show="true" multiple>
-            <div class="parent" ng-repeat="obj in collabAndTeamSnippetIds" layout="row">
-                <snippet id="obj.id" card="false" class="{{(obj.type === 'team') ? 'team' : 'collab'}}"></snippet>
+            <div class="parent" ng-repeat="obj in allSnippetIds" layout="row">
+                <snippet id="obj.id" card="false" class="{{(obj.type === 'team') ? 'team' : ((obj.type === 'mine') ? 'mine' : 'collab')}}"></snippet>
+            </div>
+        </md-expansion-panel-group>
+        <md-expansion-panel-group md-component-id="team-panel" id="my-tab-panel" multiple>
+            <div class="parent" ng-repeat="obj in mySnippetIds" layout="row">
+                <snippet id="obj.id" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
         <md-expansion-panel-group md-component-id="team-panel" id="team-tab-panel" multiple>
