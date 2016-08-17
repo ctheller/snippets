@@ -17,6 +17,7 @@
             md-min-length="0"
             placeholder="Who would you like to add?">
           <md-item-template>
+            <img class="snippetImg btn-floating btn-md img-wrap" ng-src="{{item.photoUrl || '/files/default-profile.png'}}">
             <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
           </md-item-template>
           <md-not-found>
