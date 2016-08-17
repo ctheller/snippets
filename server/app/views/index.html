@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="/angular-material-expansion-panel/dist/md-expansion-panel.css">
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="stylesheet" type="text/css" href="/ng-img-crop/compile/minified/ng-img-crop.css">
-    <link rel="stylesheet" type="text/css" href="/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css">
     <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/materialize-css/dist/js/materialize.min.js"></script>
@@ -30,7 +29,7 @@
     <script src="/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
     <script type="text/javascript" src="/angular-material-expansion-panel/dist/md-expansion-panel.js"></script>
     <script type="text/javascript" src="/angular-dragdrop/src/angular-dragdrop.js"></script>
-    <script type="text/javascript" src="/angular-advanced-searchbox/dist/angular-advanced-searchbox.js"></script>
+    <script type="text/javascript" src="/js/common/angular-advanced-searchbox/angular-advanced-searchbox.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
     <script>
@@ -54,11 +53,12 @@
         <md-icon class="lnr" ng-click="toggle()"><i class="material-icons">menu</i></md-icon>
         <img class="snippetLogo" src="/files/snippetLogo.png">
         <!-- search bar -->
-        <nit-advanced-searchbox ng-model="searchParams" parameters="availableSearchParams" placeholder="Search...">
+        <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search...">
         </nit-advanced-searchbox>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
     </md-toolbar>
     <div id="main" layout="row" flex>
+
         <!-- temperary controller -->
         <md-content class="pushing" layout="column">
             <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-disable-backdrop="">

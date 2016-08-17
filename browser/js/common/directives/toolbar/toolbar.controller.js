@@ -45,4 +45,6 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
         { key: "name", name: "Name", placeholder: "Name:", allowMultiple: true },
         { key: "email", name: "Email", placeholder: "Email:", allowMultiple: true }
     ];
+
+    $scope.searchParams = {};
 });
