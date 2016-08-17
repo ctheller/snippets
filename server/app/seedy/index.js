@@ -17,6 +17,21 @@ function addOneOrg (seedObj) {
   let managerMidLevel = [];
   let lowestLevel = [];
 
+
+  // create org obj
+  if (!seedObj.organizations) {
+    seedObj.organizations = {};
+  }
+
+  let orgName = chance.word() + ' Inc';
+  seedObj.organizations[orgName] = {
+    dueDay: {
+      day: chance.integer({min: 0, max: 6}),
+      time: chance.hour({twentyfour: true}) * 100
+    },
+    users: {}
+  };
+
   // create users
   for (let i=0; i<250; i++) {
 
@@ -27,7 +42,8 @@ function addOneOrg (seedObj) {
       first_name: chance.first(),
       isAdmin: chance.bool({likelihood: 5}),
       last_name: chance.last(),
-      photoUrl : `https://randomuser.me/api/portraits/${chance.pickone(['men', 'women'])}/${chance.integer({min: 0, max: 99})}.jpg`
+      photoUrl : `https://randomuser.me/api/portraits/${chance.pickone(['men', 'women'])}/${chance.integer({min: 0, max: 99})}.jpg`,
+      organization: orgName
     };
 
   // do managers after creating users
@@ -150,20 +166,7 @@ function addOneOrg (seedObj) {
     }
   }
 
-  // create org obj
-  if (!seedObj.organizations) {
-    seedObj.organizations = {};
-  }
-
-  let orgName = chance.word() + ' Inc';
-  seedObj.organizations[orgName] = {
-    dueDay: {
-      day: chance.integer({min: 0, max: 6}),
-      time: chance.hour({twentyfour: true}) * 100
-    },
-    users: {}
-  };
-
+  // add all users to organization's table
   for (let i=0; i<wholeOrg.length; i++) {
     seedObj.organizations[orgName].users[wholeOrg[i]] = true;
   }
