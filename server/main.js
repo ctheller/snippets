@@ -1,13 +1,14 @@
 'use strict';
 var chalk = require('chalk');
-var db = require('./db');
+// var db = require('./db');
 var snippetNanny = require('./app/SnippetNanny');
+// var seedDatabase = require('./app/seedy');
 
 // Create a node server instance! cOoL!
 var server = require('http').createServer();
 
 var createApplication = function () {
-    var app = require('./app')(db);
+    var app = require('./app')(); // used to read require('./app')(db)
     server.on('request', app); // Attach the Express application.
     require('./io')(server);   // Attach socket.io.
 };
@@ -22,6 +23,9 @@ var startServer = function () {
 
 };
 
-db.sync().then(createApplication).then(startServer).catch(function (err) {
-    console.error(chalk.red(err.stack));
-});
+createApplication();
+startServer();
+
+// db.sync().then(createApplication).then(startServer).catch(function (err) {
+//     console.error(chalk.red(err.stack));
+// });

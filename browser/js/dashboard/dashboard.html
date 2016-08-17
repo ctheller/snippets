@@ -10,8 +10,6 @@
             </div>
         </md-expansion-panel-group>
     </div>
-    <!-- tab for filtering snippet origin -->
-
     <!-- team view if im a manager -->
     <div set-height layout="column" class="snippet-container" flex="noshrink" ng-if="isManager">
         <div class="team-title" layout="row" flex="noshrink" ng-cloak>Your Team</div>
@@ -23,19 +21,24 @@
     <div layout="column" class="snippet-container" flex="grow" ng-if="!isManager">
         <snippet-tabs layout="row">
         </snippet-tabs>
-        <md-expansion-panel-group md-component-id="team-panel" id="all-tab-panel" ng-show="true" multiple>
-            <div class="parent" ng-repeat="obj in collabAndTeamSnippetIds" layout="row">
-                <snippet id="obj.id" card="false" class="{{(obj.type === 'team') ? 'team' : 'collab'}}"></snippet>
+        <md-expansion-panel-group md-component-id="all-panel" id="all-tab-panel" ng-show="true" multiple>
+            <div class="parent" ng-repeat="obj in allSnippetIds" layout="row">
+                <snippet id="obj.id" type="'all'" card="false" class="{{(obj.type === 'team') ? 'team' : ((obj.type === 'mine') ? 'mine' : 'collab')}}"></snippet>
+            </div>
+        </md-expansion-panel-group>
+        <md-expansion-panel-group md-component-id="my-panel" id="my-tab-panel" multiple>
+            <div class="parent" ng-repeat="obj in mySnippetIds" layout="row">
+                <snippet id="obj.id" type="obj.type" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
         <md-expansion-panel-group md-component-id="team-panel" id="team-tab-panel" multiple>
             <div class="parent" ng-repeat="obj in teamSnippetIds" layout="row">
-                <snippet id="obj.id" card="false"></snippet>
+                <snippet id="obj.id" type="obj.type" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
-        <md-expansion-panel-group md-component-id="team-panel" id="collab-tab-panel" multiple>
+        <md-expansion-panel-group md-component-id="collab-panel" id="collab-tab-panel" multiple>
             <div class="parent" ng-repeat="obj in collabSnippetIds" layout="row">
-                <snippet id="obj.id" card="false"></snippet>
+                <snippet id="obj.id" type="obj.type" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
     </div>

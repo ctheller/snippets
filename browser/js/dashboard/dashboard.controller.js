@@ -8,14 +8,25 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         })
     }
 
+    var mapSnippetId = function (id) {
+
+    }
+
     var setScope = function(){
         if (!$rootScope.user.snippets) {
-            $scope.teamSnippetIds = $scope.collabSnippetIds = $scope.collabAndTeamSnippetIds = $scope.reportSnippetIds = [];
+            $scope.teamSnippetIds = $scope.collabSnippetIds = $scope.collabAndTeamSnippetIds = $scope.reportSnippetIds = $scope.mySnippetIds = $scope.allSnippetIds = [];
             return;
         }
+        $scope.mySnippetIds = $rootScope.user.snippets.asOwner ? Object.keys(dateFilter($rootScope.user.snippets.asOwner)) : [];
         $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys(dateFilter($rootScope.user.snippets.asTeamMember)) : [];
         $scope.collabSnippetIds = $rootScope.user.snippets.asCollaborator ? Object.keys(dateFilter($rootScope.user.snippets.asCollaborator)) : [];
         $scope.reportSnippetIds = $rootScope.user.snippets.asManager ? Object.keys(dateFilter($rootScope.user.snippets.asManager)) : [];
+        $scope.mySnippetIds = $scope.teamSnippetIds.map(id => {
+            var obj = {};
+            obj.id = id;
+            obj.type = 'mine'
+            return obj;
+        });
         $scope.teamSnippetIds = $scope.teamSnippetIds.map(id => {
             var obj = {};
             obj.id = id;
@@ -29,6 +40,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
             return obj;
         });
         $scope.collabAndTeamSnippetIds = _.unionBy($scope.collabSnippetIds, $scope.teamSnippetIds, 'id');
+        $scope.allSnippetIds = _.unionBy($scope.mySnippetIds, $scope.collabAndTeamSnippetIds, 'id');
         $scope.isManager = false;
         if ($rootScope.user['reports']) {
             $scope.isManager = true;
