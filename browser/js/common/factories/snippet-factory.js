@@ -1,4 +1,4 @@
-app.factory("Snippet", function($firebaseObject, AuthService, Users) {
+app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope) {
 
     var Snippet = {};
 
@@ -45,9 +45,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
     //TEAM SNIPPETS COME FROM WITHIN (but actually... all snippets should be added to an entire team upon creation)
 
     Snippet.create = function(data) {
-        console.log(data, '?');
         var currentUser = AuthService.getLoggedInUser();
-        console.log('here', currentUser)
         data.team = currentUser.manager;
         data.owner = currentUser.$id;
         data.dateAdded = Date.now();
@@ -56,7 +54,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         obj[currentUser.$id] = true;
         data.collaborators = obj;
         var newSnippetKey = ref.child("snippets").push().key;
-
         var teammateIds = Users.findUsersMatchingManager(currentUser.manager);
         var updates = {};
         updates['/snippets/' + newSnippetKey] = data;
