@@ -3,45 +3,14 @@ let firebase = require("firebase");
 let Chance = require('chance');
 let ref = firebase.database().ref("organizations");
 let chance = new Chance();
-let jsonfile = require('jsonfile')
-var file = '/Users/grodriguez/desktop/seed.json';
+let jsonfile = require('jsonfile');
 
+let seedy = {};
 
-
-// var orgs = {
-//   'someOtherOne' : {
-//     'dueDay' : {
-//       'day' : 6,
-//       'time' : 1300
-//     },
-//     'users' : {
-//       '3' : true,
-//       '4' : true
-//     }
-//   },
-//   'monstersInc' : {
-//     'dueDay' : {
-//       'day' : 4,
-//       'time' : 1700
-//     },
-//     'users' : {
-//       'We8iLkQsY3OEeAYoSuOuLFsBjzu2' : true
-//     }
-//   }
-// };
-
-
-// ref.set(orgs)
-// .then(function(result) {
-//   console.log('success: ', result);
-// });
-
-
-function buildSeed () {
-  var toReturn = {};
-
-  // generate org chart
-  toReturn.users = {};
+function addOneOrg (seedObj) {
+  if (!seedObj.users) {
+    seedObj.users = {};
+  }
 
   let managerCLevel = [];
   let managerTopLevel = [];
@@ -50,9 +19,10 @@ function buildSeed () {
 
   // create users
   for (let i=0; i<250; i++) {
+
     // no  $ # [ ] / or .
     let username = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 10});
-    toReturn.users[username] = {
+    seedObj.users[username] = {
       email: chance.email(),
       first_name: chance.first(),
       isAdmin: chance.bool({likelihood: 5}),
@@ -65,39 +35,43 @@ function buildSeed () {
       managerCLevel.push(username);
     } else if (i < 25) {
       managerTopLevel.push(username);
-      toReturn.users[username].manager = chance.pickone(managerCLevel);
+      seedObj.users[username].manager = chance.pickone(managerCLevel);
     } else if (i < 75) {
       managerMidLevel.push(username);
-      toReturn.users[username].manager = chance.pickone(managerTopLevel);
+      seedObj.users[username].manager = chance.pickone(managerTopLevel);
     } else {
       lowestLevel.push(username);
-      toReturn.users[username].manager = chance.pickone(managerMidLevel);
+      seedObj.users[username].manager = chance.pickone(managerMidLevel);
     }
   }
 
+  let wholeOrg = managerCLevel.concat(managerTopLevel).concat(managerMidLevel).concat(lowestLevel);
+
   // create snippets
-  toReturn.snippets = {};
+  if(!seedObj.snippets) {
+    seedObj.snippets = {};
+  }
   for (let i=0; i<500; i++) {
     let snippetId = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 15});
-    toReturn.snippets[snippetId] = {
+    seedObj.snippets[snippetId] = {
       contents: chance.paragraph(),
       subject: chance.sentence({words: 6}),
       submitted: chance.bool({likelihood: 50}),
       dateAdded: chance.integer({min: Date.now() - 1.814e+9, max: Date.now()})
     };
 
-    let randomUser = chance.pickone(Object.keys(toReturn.users));
-    toReturn.snippets[snippetId].owner = randomUser;
-    toReturn.snippets[snippetId].team = toReturn.users[randomUser].manager;
+    let randomUser = chance.pickone(wholeOrg);
+    seedObj.snippets[snippetId].owner = randomUser;
+    seedObj.snippets[snippetId].team = seedObj.users[randomUser].manager;
 
     // add snippet Id to owner's table
-    if(!toReturn.users[randomUser].snippets) {
-      toReturn.users[randomUser].snippets = {};
+    if(!seedObj.users[randomUser].snippets) {
+      seedObj.users[randomUser].snippets = {};
     }
-    if (!toReturn.users[randomUser].snippets.asOwner) {
-      toReturn.users[randomUser].snippets.asOwner = {};
+    if (!seedObj.users[randomUser].snippets.asOwner) {
+      seedObj.users[randomUser].snippets.asOwner = {};
     }
-    toReturn.users[randomUser].snippets.asOwner[snippetId] = true;
+    seedObj.users[randomUser].snippets.asOwner[snippetId] = true;
 
     let level;
     if (managerCLevel.indexOf(randomUser) !== -1) {
@@ -111,72 +85,195 @@ function buildSeed () {
     }
 
     let teammates = [];
-    for (let user in toReturn.users) {
-      if (toReturn.users[user].manager === toReturn.users[randomUser].manager) {
+    for (let user in seedObj.users) {
+      if (seedObj.users[user].manager === seedObj.users[randomUser].manager) {
         teammates.push(user);
       }
     }
     let collabLoop = chance.integer({min: 0, max: 4});
     for (let i=0; i<collabLoop; i++) {
-      if (!toReturn.snippets[snippetId].collaborators) {
-        toReturn.snippets[snippetId].collaborators = {};
+      if (!seedObj.snippets[snippetId].collaborators) {
+        seedObj.snippets[snippetId].collaborators = {};
       }
       if (chance.bool({likelihood: 80})) {
         // collaborators come from teammates array
           let userToAdd = teammates[chance.integer({min: 0, max: teammates.length-1})];
-          toReturn.snippets[snippetId].collaborators[userToAdd] = true;
+          seedObj.snippets[snippetId].collaborators[userToAdd] = true;
         // add to collaborators table
-        if(!toReturn.users[userToAdd].snippets) {
-          toReturn.users[userToAdd].snippets = {};
+        if(!seedObj.users[userToAdd].snippets) {
+          seedObj.users[userToAdd].snippets = {};
         }
-        if (!toReturn.users[userToAdd].snippets.asCollaborator) {
-          toReturn.users[userToAdd].snippets.asCollaborator = {};
+        if (!seedObj.users[userToAdd].snippets.asCollaborator) {
+          seedObj.users[userToAdd].snippets.asCollaborator = {};
         }
-        toReturn.users[userToAdd].snippets.asCollaborator[snippetId] = true;
+        seedObj.users[userToAdd].snippets.asCollaborator[snippetId] = true;
       } else {
         // collaborators come from org (on your level) array
-        let userToAdd = level[chance.integer({min: 0, max: teammates.length-1})];
-        toReturn.snippets[snippetId].collaborators[userToAdd] = true;
+        let randomTeammate = chance.integer({min: 0, max: level.length-1});
+        let userToAdd = level[randomTeammate];
+
+        seedObj.snippets[snippetId].collaborators[userToAdd] = true;
         // add to collaborators table
-        if(!toReturn.users[userToAdd].snippets) {
-          toReturn.users[userToAdd].snippets = {};
+        if(!seedObj.users[userToAdd].snippets) {
+          seedObj.users[userToAdd].snippets = {};
         }
-        if (!toReturn.users[userToAdd].snippets.asCollaborator) {
-          toReturn.users[userToAdd].snippets.asCollaborator = {};
+        if (!seedObj.users[userToAdd].snippets.asCollaborator) {
+          seedObj.users[userToAdd].snippets.asCollaborator = {};
         }
-        toReturn.users[userToAdd].snippets.asCollaborator[snippetId] = true;
+        seedObj.users[userToAdd].snippets.asCollaborator[snippetId] = true;
       }
     }
   }
 
   // ADD snippets asTeamMembers to users
     // loop through snippets
-  for (let snippetKey in toReturn.snippets) {
+  for (let snippetKey in seedObj.snippets) {
     // get team aka manager ID
-    let manager = toReturn.snippets[snippetKey].team;
+    let manager = seedObj.snippets[snippetKey].team;
     // loop through user table
-    for (let userKey in toReturn.users) {
+    for (let userKey in seedObj.users) {
       // if user.manager === managerID && user !== snippet.owner
-      if (toReturn.snippets[snippetKey].owner !== userKey && toReturn.users[userKey].manager === manager) {
+      if (seedObj.snippets[snippetKey].owner !== userKey && seedObj.users[userKey].manager === manager) {
         // user.snippets.asTeamMember exists?, if not add {}
-        if(!toReturn.users[userKey].snippets) {
-          toReturn.users[userKey].snippets = {};
+        if(!seedObj.users[userKey].snippets) {
+          seedObj.users[userKey].snippets = {};
         }
-        if (!toReturn.users[userKey].snippets.asTeamMember) {
-          toReturn.users[userKey].snippets.asTeamMember = {};
+        if (!seedObj.users[userKey].snippets.asTeamMember) {
+          seedObj.users[userKey].snippets.asTeamMember = {};
         }
         // user.snippets.asTeamMember[snippetId] = true
-        toReturn.users[userKey].snippets.asTeamMember[snippetKey] = true;
+        seedObj.users[userKey].snippets.asTeamMember[snippetKey] = true;
       }
     }
-
   }
-  return toReturn;
+
+  // create org obj
+  if (!seedObj.organizations) {
+    seedObj.organizations = {};
+  }
+
+  let orgName = chance.word() + ' Inc';
+  seedObj.organizations[orgName] = {
+    dueDay: {
+      day: chance.integer({min: 0, max: 6}),
+      time: chance.hour({twentyfour: true}) * 100
+    },
+    users: {}
+  };
+
+  for (let i=0; i<wholeOrg.length; i++) {
+    seedObj.organizations[orgName].users[wholeOrg[i]] = true;
+  }
 }
 
-console.log(buildSeed())
+addOneOrg(seedy);
+addOneOrg(seedy);
+addOneOrg(seedy);
 
-let obj = buildSeed();
+// inserting team members into database
+var organs = Object.keys(seedy.organizations);
+var pickedOrgan = chance.pickone(organs);
+var organUsers = seedy.organizations[pickedOrgan].users;
+var toReplace = chance.pickset(Object.keys(organUsers), 4);
+
+var gabeObj = {
+  id: 'We8iLkQsY3OEeAYoSuOuLFsBjzu2',
+  email: "grod220@gmail.com",
+  photoUrl: "https://lh4.googleusercontent.com/-AqkAdKInFSU/AAAAAAAAAAI/AAAAAAAAKtI/-n_yz9wAC9U/s96-c/photo.jpg",
+  first_name: "Gabe",
+  last_name: "Rodriguez",
+};
+
+var tammyObj = {
+  id: 'me4lpzRP3OUFzDjzpu11Utx323Q2',
+  email: "tctammychu@gmail.com",
+  photoUrl: "https://lh4.googleusercontent.com/-oYfo7EWvvj0/AAAAAAAAAAI/AAAAAAAAAU8/dt8TeNi4nco/s96-c/photo.jpg",
+  first_name: "Tammy",
+  last_name: "Chu",
+};
+
+var nickObj = {
+  id: 'eTeGzfSeoxPMx1qwCV8PwUtCii53',
+  email: "nicolaas.koster@gmail.com",
+  first_name: "Nicky",
+  last_name: "Koster",
+};
+
+var chrisObj = {
+  id: 'kKCwoTNYpURej7sv3bKMcy7oMKI3',
+  email: "ctheller12@gmail.com",
+  photoUrl: "https://lh4.googleusercontent.com/-SUsrR9RW9dM/AAAAAAAAAAI/AAAAAAAAA4M/f9GV-l536rc/s96-c/photo.jpg",
+  first_name: "Chris",
+  last_name: "Heller",
+};
+
+for (let i=0; i< toReplace.length; i++) { //
+  // to replace
+  console.log(toReplace[i]);
+
+  // insert team members data
+  let newGuy;
+  if (i === 0) {
+    newGuy = gabeObj;
+  } else if (i === 1) {
+    newGuy = tammyObj;
+  } else if(i === 2) {
+    newGuy = nickObj;
+  } else if(i === 3) {
+    newGuy = chrisObj;
+  }
+
+  // delete old property
+  delete organUsers[toReplace[i]];
+  // add user to org
+  organUsers[newGuy.id] = true;
+
+  // loop through snippets
+  for (let snippetKey in seedy.snippets) {
+    // if owner is replace[i], then replace with me
+    if (seedy.snippets[snippetKey].owner === toReplace[i]) {
+      seedy.snippets[snippetKey].owner = newGuy.id;
+    }
+    // if collaborators, delete and add me
+    if (seedy.snippets[snippetKey].collaborators && seedy.snippets[snippetKey].collaborators[toReplace[i]]) {
+      delete seedy.snippets[snippetKey].collaborators[toReplace[i]];
+      seedy.snippets[snippetKey].collaborators[newGuy.id] = true;
+    }
+  }
+  // add newGuy to users table
+  seedy.users[newGuy.id] = {
+    email: newGuy.email,
+    photoUrl: newGuy.photoUrl,
+    first_name: newGuy.first_name,
+    last_name: newGuy.last_name,
+    isAdmin: true
+  };
+  // move over manager
+  seedy.users[newGuy.id].manager = seedy.users[toReplace[i]].manager;
+
+  // move over asOwner, asTeamMember, As collaborator snippets
+  if (seedy.users[toReplace[i]].snippets) {
+    seedy.users[newGuy.id].snippets = seedy.users[toReplace[i]].snippets;
+  }
+
+  // delete user
+  delete seedy.users[toReplace[i]];
+}
+
+
+
+
+
+// console.log(seedy);
+
+// ref.set(seedy)
+// .then(function(result) {
+//   console.log('success: ', result);
+// });
+
+// write to local hard drive
+var file = '/Users/grodriguez/desktop/seed.json';
+let obj = seedy;
 jsonfile.writeFile(file, obj, function (err) {
-  console.error(err)
+  console.error(err);
 });
