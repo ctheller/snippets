@@ -265,7 +265,8 @@ for (let i=0; i< toReplace.length; i++) { //
     photoUrl: newGuy.photoUrl,
     first_name: newGuy.first_name,
     last_name: newGuy.last_name,
-    isAdmin: true
+    isAdmin: true,
+    organization: pickedOrgan
   };
   // move over manager
   seedy.users[newGuy.id].manager = seedy.users[toReplace[i]].manager;
