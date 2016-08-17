@@ -11,6 +11,7 @@ app.factory('MdHelpers', function() {
                 $mdDialog.hide(answer);
             };
             $scope.submitSnippet = function() {
+                console.log($scope.newSnippet)
                 Snippet.create($scope.newSnippet);
                 $mdDialog.cancel();
             };

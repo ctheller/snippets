@@ -45,7 +45,9 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
     //TEAM SNIPPETS COME FROM WITHIN (but actually... all snippets should be added to an entire team upon creation)
 
     Snippet.create = function(data) {
+        console.log(data, '?');
         var currentUser = AuthService.getLoggedInUser();
+        console.log('here', currentUser)
         data.team = currentUser.manager;
         data.owner = currentUser.$id;
         data.dateAdded = Date.now();
@@ -55,17 +57,17 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         data.collaborators = obj;
         var newSnippetKey = ref.child("snippets").push().key;
 
-        Users.findUsersMatchingManager(currentUser.manager, function(result) {
-            var updates = {};
-            updates['/snippets/' +  newSnippetKey] = data;
-            updates[`/users/${currentUser.$id}/snippets/asOwner/${newSnippetKey}`] = data.dateAdded;
+        var teammateIds = Users.findUsersMatchingManager(currentUser.manager);
+        console.log(teammateIds);
+        var updates = {};
+        updates['/snippets/' + newSnippetKey] = data;
+        updates[`/users/${currentUser.$id}/snippets/asOwner/${newSnippetKey}`] = data.dateAdded;
 
-            result.forEach(function(userId) {
-                updates[`/users/${userId}/snippets/asTeamMember/${newSnippetKey}`] = data.dateAdded;
-            });
-
-            return ref.update(updates);
+        teammateIds.forEach(function(userId) {
+            updates[`/users/${userId}/snippets/asTeamMember/${newSnippetKey}`] = data.dateAdded;
         });
+
+        return ref.update(updates);
 
         //handle error (return something) return something from create!!
     };

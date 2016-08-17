@@ -5,10 +5,15 @@ app.factory("Users", function($firebaseObject, $firebaseArray, $rootScope) {
     // create a reference to the database node where we will store our data
     var ref = firebase.database().ref("users");
 
-    Users.findUsersMatchingManager = function(managerId, callback) {
-        ref.orderByChild('manager').equalTo(managerId).once('value', function(snap) {
-            callback(Object.keys(snap.val()));
-        });
+    Users.findUsersMatchingManager = function(managerId) {
+        // console.log('user', managerId)
+        // ref.orderByChild('manager').equalTo(managerId).once('value', function(snap) {
+        //     console.log('snap', snap)
+        //     callback(Object.keys(snap.val()));
+        // });
+        var teammates = $rootScope.users.filter(user => user.manager === managerId);
+        return teammates.map(teammate => teammate.$id);
+
     };
 
     Users.getUsers = function(userIdArray){

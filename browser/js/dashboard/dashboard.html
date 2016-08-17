@@ -11,7 +11,7 @@
         </md-expansion-panel-group>
     </div>
     <!-- team view if im a manager -->
-    <div set-height layout="column" class="snippet-container" flex="noshrink" ng-if="isManager">
+    <div layout="column" class="snippet-container" flex="noshrink" ng-if="isManager">
         <div class="team-title" layout="row" flex="noshrink" ng-cloak>Your Team</div>
         <div layout="row" flex="noshrink" ng-repeat="obj in collabAndTeamSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}" ng-model="collabAndTeamSnippetIds">
             <snippet id="obj.id" card="true" class="{{(obj.type === 'team') ? 'team' : 'collab'}}"></snippet>
