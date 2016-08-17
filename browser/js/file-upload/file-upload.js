@@ -31,6 +31,7 @@ app.controller('ImgUploadCtrl', function ($scope, $state, Upload, $rootScope, $m
           $scope.result = downloadURL;
           firebase.database().ref().child('users').child(name).child('photoUrl').set(downloadURL);
         });
+        ngNotify.set('File uploaded successfully')
         $state.go('profile');
     }
 
