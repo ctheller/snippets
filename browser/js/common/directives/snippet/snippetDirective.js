@@ -45,7 +45,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 for (var key in scope.snippet.collaborators) {
                     scope.collaborators[i] = {};
                     scope.collaborators[i].id = key;
-                    scope.collaborators[i].photoUrl = $rootScope.users[key].photoUrl || 'https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg';
+                    scope.collaborators[i].photoUrl = $rootScope.users[key].photoUrl || '/files/default-profile.png';
                     i++;
                 }
             }, true);
@@ -56,14 +56,6 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 $mdExpansionPanel(scope.id).collapse();
             };
 
-
-            // after it comes back set scope.title, body, collaborator
-
-            // get profile image urls of those collaborators
-            // for each to return array of urls
-
-
-            // scope.collaborators = ['http://joshiscorner.com/files/images/plusButton.png','https://lh3.googleusercontent.com/-E-QnbqHCvOE/AAAAAAAAAAI/AAAAAAAAADU/03NFp88Q3uk/s180-p-k-rw-no/photo.jpg', 'https://lh3.googleusercontent.com/-bOjCfXB8_qU/AAAAAAAAAAI/AAAAAAAAATw/6LnoMFC_ZUc/s180-p-k-rw-no/photo.jpg','http://lh3.googleusercontent.com/-50q0RpvFY0I/AAAAAAAAAAI/AAAAAAAAD6w/rX8SRDUvwds/s180-p-k-rw-no/photo.jpg','https://lh3.googleusercontent.com/-AqkAdKInFSU/AAAAAAAAAAI/AAAAAAAAAAA/AOkcYItBC05GD1jyQ8k3kYGmnmBCn20N7w/s192-c-mo/photo.jpg'];
         }
     };
 });
