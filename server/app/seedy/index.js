@@ -7,6 +7,9 @@ let jsonfile = require('jsonfile');
 
 let seedy = {};
 
+let CLevelPerson;
+let CLevelsOrg;
+
 function addOneOrg (seedObj) {
   if (!seedObj.users) {
     seedObj.users = {};
@@ -32,6 +35,10 @@ function addOneOrg (seedObj) {
     users: {}
   };
 
+  if (!CLevelsOrg) {
+    CLevelsOrg = orgName;
+  }
+
   // create users
   for (let i=0; i<250; i++) {
 
@@ -49,6 +56,9 @@ function addOneOrg (seedObj) {
   // do managers after creating users
     if (i < 5) {
       managerCLevel.push(username);
+      if (!CLevelPerson) {
+        CLevelPerson = username;
+      }
     } else if (i < 25) {
       managerTopLevel.push(username);
       seedObj.users[username].manager = chance.pickone(managerCLevel);
@@ -176,11 +186,11 @@ addOneOrg(seedy);
 addOneOrg(seedy);
 addOneOrg(seedy);
 
-// inserting team members into database
-var organs = Object.keys(seedy.organizations);
-var pickedOrgan = chance.pickone(organs);
-var organUsers = seedy.organizations[pickedOrgan].users;
-var toReplace = chance.pickset(Object.keys(organUsers), 4);
+// getting random users for inserting team members into database
+// var organs = Object.keys(seedy.organizations);
+// var pickedOrgan = chance.pickone(organs);
+// var organUsers = seedy.organizations[pickedOrgan].users;
+// var toReplace = chance.pickset(Object.keys(organUsers), 4);
 
 var gabeObj = {
   id: 'We8iLkQsY3OEeAYoSuOuLFsBjzu2',
@@ -188,6 +198,7 @@ var gabeObj = {
   photoUrl: "https://lh4.googleusercontent.com/-AqkAdKInFSU/AAAAAAAAAAI/AAAAAAAAKtI/-n_yz9wAC9U/s96-c/photo.jpg",
   first_name: "Gabe",
   last_name: "Rodriguez",
+  manager: 'kKCwoTNYpURej7sv3bKMcy7oMKI3'
 };
 
 var tammyObj = {
@@ -196,6 +207,7 @@ var tammyObj = {
   photoUrl: "https://lh4.googleusercontent.com/-oYfo7EWvvj0/AAAAAAAAAAI/AAAAAAAAAU8/dt8TeNi4nco/s96-c/photo.jpg",
   first_name: "Tammy",
   last_name: "Chu",
+  manager: CLevelPerson
 };
 
 var nickObj = {
@@ -203,7 +215,8 @@ var nickObj = {
   email: "nicolaas.koster@gmail.com",
   first_name: "Nicky",
   last_name: "Koster",
-  photoUrl: 'https://randomuser.me/api/portraits/men/42.jpg'
+  photoUrl: 'https://randomuser.me/api/portraits/men/42.jpg',
+  manager: 'kKCwoTNYpURej7sv3bKMcy7oMKI3'
 };
 
 var chrisObj = {
@@ -212,9 +225,13 @@ var chrisObj = {
   photoUrl: "https://lh4.googleusercontent.com/-SUsrR9RW9dM/AAAAAAAAAAI/AAAAAAAAA4M/f9GV-l536rc/s96-c/photo.jpg",
   first_name: "Chris",
   last_name: "Heller",
+  manager: 'me4lpzRP3OUFzDjzpu11Utx323Q2'
 };
 
-for (let i=0; i< toReplace.length; i++) { //
+
+
+// loop to get replace random employee
+for (let i=0; i< 4; i++) { //
   // to replace
   // console.log(toReplace[i]);
 
@@ -230,35 +247,14 @@ for (let i=0; i< toReplace.length; i++) { //
     newGuy = chrisObj;
   }
 
-  // delete old property
-  delete organUsers[toReplace[i]];
-  // add user to org
-  organUsers[newGuy.id] = true;
+  // // delete old property
+  // delete organUsers[toReplace[i]];
+  // // add user to org
+  // organUsers[newGuy.id] = true;
 
-  // loop through snippets
-  for (let snippetKey in seedy.snippets) {
-    // if owner is replace[i], then replace with me
-    if (seedy.snippets[snippetKey].owner === toReplace[i]) {
-      seedy.snippets[snippetKey].owner = newGuy.id;
-    }
-    // if collaborators, delete and add me
-    if (seedy.snippets[snippetKey].collaborators && seedy.snippets[snippetKey].collaborators[toReplace[i]]) {
-      delete seedy.snippets[snippetKey].collaborators[toReplace[i]];
-      seedy.snippets[snippetKey].collaborators[newGuy.id] = true;
-    }
-    // if team is the older ID, replace
-    if (seedy.snippets[snippetKey].team && seedy.snippets[snippetKey].team === toReplace[i]) {
-      seedy.snippets[snippetKey].team = newGuy.id;
-    }
-  }
+  // add user to org (NEW)
+  seedy.organizations[CLevelsOrg][newGuy.id] = true;
 
-  // loop through users
-    // if manager is replace[i], swap with me
-  for (let userKey in seedy.users) {
-    if (seedy.users[userKey].manager && seedy.users[userKey].manager === toReplace[i]) {
-        seedy.users[userKey].manager = newGuy.id;
-    }
-  }
   // add newGuy to users table
   seedy.users[newGuy.id] = {
     email: newGuy.email,
@@ -266,21 +262,58 @@ for (let i=0; i< toReplace.length; i++) { //
     first_name: newGuy.first_name,
     last_name: newGuy.last_name,
     isAdmin: true,
-    organization: pickedOrgan
+    organization: CLevelsOrg,
+    manager: newGuy.manager
   };
-  // move over manager
-  seedy.users[newGuy.id].manager = seedy.users[toReplace[i]].manager;
 
-  // move over asOwner, asTeamMember, As collaborator snippets
-  if (seedy.users[toReplace[i]].snippets) {
-    seedy.users[newGuy.id].snippets = seedy.users[toReplace[i]].snippets;
+  // loop through snippets
+  for (let snippetKey in seedy.snippets) {
+    // // if owner is replace[i], then replace with me
+    // if (seedy.snippets[snippetKey].owner === toReplace[i]) {
+    //   seedy.snippets[snippetKey].owner = newGuy.id;
+    // }
+    // // if collaborators, delete and add me
+    // if (seedy.snippets[snippetKey].collaborators && seedy.snippets[snippetKey].collaborators[toReplace[i]]) {
+    //   delete seedy.snippets[snippetKey].collaborators[toReplace[i]];
+    //   seedy.snippets[snippetKey].collaborators[newGuy.id] = true;
+    // }
+    // if team is the older ID, replace
+    // if (seedy.snippets[snippetKey].team && seedy.snippets[snippetKey].team === toReplace[i]) {
+    //   seedy.snippets[snippetKey].team = newGuy.id;
+    // }
+
+    /// add teams snippets to user
+    if (seedy.snippets[snippetKey].team && seedy.snippets[snippetKey].team === CLevelPerson) {
+      if (!seedy.users[newGuy.id].snippets) {
+        seedy.users[newGuy.id].snippets = {};
+      }
+      if(!seedy.users[newGuy.id].snippets.asTeamMember) {
+        seedy.users[newGuy.id].snippets.asTeamMember = {};
+      }
+      seedy.users[newGuy.id].snippets.asTeamMember[snippetKey] = seedy.snippets[snippetKey].dateAdded;
+    }
+
   }
 
-  // delete user
-  delete seedy.users[toReplace[i]];
+  // // loop through users
+  //   // if manager is replace[i], swap with me
+  // for (let userKey in seedy.users) {
+  //   if (seedy.users[userKey].manager && seedy.users[userKey].manager === toReplace[i]) {
+  //       seedy.users[userKey].manager = newGuy.id;
+  //   }
+  // }
+
+  // // move over manager
+  // seedy.users[newGuy.id].manager = seedy.users[toReplace[i]].manager;
+
+  // // move over asOwner, asTeamMember, As collaborator snippets
+  // if (seedy.users[toReplace[i]].snippets) {
+  //   seedy.users[newGuy.id].snippets = seedy.users[toReplace[i]].snippets;
+  // }
+
+  // // delete user
+  // delete seedy.users[toReplace[i]];
 }
-
-
 
 // console.log(seedy);
 
@@ -291,9 +324,7 @@ jsonfile.writeFile(file, obj, function (err) {
   console.error(err);
 });
 
-
-
-  // // send to live database
+  // // send to live database ---- THROWS ERRORS?
   // ref.set(seedy)
   // .then(function(result) {
   //   console.log('success: ', result);
