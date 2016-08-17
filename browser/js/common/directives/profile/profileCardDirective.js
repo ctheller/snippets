@@ -20,6 +20,11 @@ app.directive('profileCard', function($rootScope, Auth, $state, $document) {
                 scope.isPopupVisible = !scope.isPopupVisible;
             }
 
+            scope.editProfile = function(){
+                scope.isPopupVisible = false;
+                $state.go('profile');
+            }
+
             $document.on('click', function(event) {
                 var isClickedElementChildOfPopup = element
                     .find(event.target)
