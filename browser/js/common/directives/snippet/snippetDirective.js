@@ -44,10 +44,9 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 scope.collaborators = [];
                 if (!scope.snippet.collaborators) return;
                 for (var key in scope.snippet.collaborators) {
-                    scope.collaborators[i] = {};
-                    scope.collaborators[i].id = key;
-                    scope.collaborators[i].photoUrl = $rootScope.users[key].photoUrl || '/files/default-profile.png';
-                    i++;
+                    Users.getById(key).then(function(user){
+                        scope.collaborators.push(user);
+                    })
                 }
             }, true);
 

@@ -1,6 +1,6 @@
-app.controller('ImgUploadCtrl', function ($scope, Upload, $rootScope) {
+app.controller('ImgUploadCtrl', function ($scope, $state, Upload, $rootScope, $mdDialog) {
 
-    $scope.clear = function(){
+    $scope.clear = function($event){
         $scope.result = null;
     }
 
@@ -31,6 +31,7 @@ app.controller('ImgUploadCtrl', function ($scope, Upload, $rootScope) {
           $scope.result = downloadURL;
           firebase.database().ref().child('users').child(name).child('photoUrl').set(downloadURL);
         });
-
+        $state.go('profile');
     }
+
 });

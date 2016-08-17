@@ -48,7 +48,7 @@
         ]);
     });
 
-    app.service('AuthService', function ($rootScope, AUTH_EVENTS, Auth, $state, $firebaseObject, Users) {
+    app.service('AuthService', function ($rootScope, AUTH_EVENTS, Auth, $state, $firebaseObject, Organizations, Users) {
 
         var user = null;
 
@@ -80,15 +80,19 @@
 
                 $rootScope.userFirebaseObj = user;
                 user.$bindTo($rootScope, 'user').then(function(){
-                    Users.getAll().$bindTo($rootScope, 'users').then(function(){
-                        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    });
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    Organizations.get().$loaded().then(function(org){
+                        $rootScope.organization = org;
+                        Users.getUsers(Object.keys(org.users)).then(function(result){
+                            $rootScope.users = result;
+                        })
+                    })
                 })
-
 
             }
             else {
                 $rootScope.user = null;
+                $rootScope.users = null;
                 $rootScope.userRef = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 $state.go('home');

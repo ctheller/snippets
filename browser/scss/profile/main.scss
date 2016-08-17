@@ -12,3 +12,27 @@
 #edit-profile-button {
 	margin-right: 15px;
 }
+
+.img-avatar-container{
+	max-height: 100px; 
+}
+
+.md-title-small{
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.md-subhead-small{
+	font-size: 14px;
+}
+
+.float-left{
+	float:left;
+	margin: 2px;
+}
+
+.clearfix:after {
+    content:" ";
+    display:block;
+    clear:both;
+}
