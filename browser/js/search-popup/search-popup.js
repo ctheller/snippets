@@ -39,7 +39,7 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
     };
     self.finish = function($event, selectedUserId) {
 
-      Users.addAsCollaborator(selectedUserId, snippet.$id);
+      Users.addAsCollaborator(selectedUserId, snippet.$id, snippet.dateAdded);
 
       if (!snippet.collaborators) {
         var obj = {};

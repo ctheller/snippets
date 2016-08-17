@@ -48,7 +48,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         var currentUser = AuthService.getLoggedInUser();
         data.team = currentUser.manager;
         data.owner = currentUser.$id;
-        data.createdAt = Date.now();
+        data.dateAdded = Date.now();
         data.submitted = false;
         var obj = {};
         obj[currentUser.$id] = true;
@@ -58,9 +58,10 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         Users.findUsersMatchingManager(currentUser.manager, function(result) {
             var updates = {};
             updates['/snippets/' +  newSnippetKey] = data;
+            updates[`/users/${currentUser.$id}/snippets/asOwner/${newSnippetKey}`] = data.dateAdded;
 
             result.forEach(function(userId) {
-                updates[`/users/${userId}/snippets/asTeamMember/${newSnippetKey}`] = data.createdAt;
+                updates[`/users/${userId}/snippets/asTeamMember/${newSnippetKey}`] = data.dateAdded;
             });
 
             return ref.update(updates);

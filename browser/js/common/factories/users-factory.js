@@ -26,17 +26,18 @@ app.factory("Users", function($firebaseObject, $firebaseArray) {
         firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(null);
     }
 
-    Users.addAsCollaborator = function(userId, snippetId) {
-        firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(true);
+    Users.addAsCollaborator = function(userId, snippetId, snippetCreationTime) {
+        console.log(snippetCreationTime);
+        firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(snippetCreationTime);
     }
 
-    Users.addAsManager = function(userId, snippetId) {
-        firebase.database().ref('users/'+ userId +"/snippets/asManager/" + snippetId).set(true);
-    }
+    // Users.addAsManager = function(userId, snippetId) {
+    //     firebase.database().ref('users/'+ userId +"/snippets/asManager/" + snippetId).set(true);
+    // }
 
-    Users.removeAsManager = function(userId, snippetId) {
-        firebase.database().ref('users/'+ userId +"/snippets/asManager/" + snippetId).set(null);
-    }
+    // Users.removeAsManager = function(userId, snippetId) {
+    //     firebase.database().ref('users/'+ userId +"/snippets/asManager/" + snippetId).set(null);
+    // }
 
     return Users;
 
