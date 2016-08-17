@@ -19,6 +19,7 @@
     "angular-dragdrop": "^1.0.13",
     "jquery": "^3.1.0",
     "ng-img-crop": "ngImgCrop#^0.3.2",
-    "angular-material-expansion-panel": "^0.6.1"
+    "angular-material-expansion-panel": "^0.6.1",
+    "angular-advanced-searchbox": "^3.0.0"
   }
 }
