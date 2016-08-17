@@ -4,7 +4,12 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   background-color: $extremely-light-grey;
   overflow: hidden;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -18,9 +23,15 @@ body {
   }
 }
 
+.main-wrapper {
+  height: 100%;
+  ui-view {
+    height: 100%;
+  }
+}
+
 #main {
-  padding-top: 60px;
-  margin: 0 auto;
+  height: 100%;
 }
 
 @import 'directives/main';
