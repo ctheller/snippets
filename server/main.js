@@ -2,7 +2,7 @@
 var chalk = require('chalk');
 // var db = require('./db');
 var snippetNanny = require('./app/SnippetNanny');
-var seedDatabase = require('./app/seedy');
+// var seedDatabase = require('./app/seedy');
 
 // Create a node server instance! cOoL!
 var server = require('http').createServer();
