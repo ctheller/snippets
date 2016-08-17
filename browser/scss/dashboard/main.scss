@@ -140,9 +140,10 @@ md-expansion-panel-group[md-component-id='team-panel'] {
     margin-top: 0px;
     background-color: #eaeaec;
     width: 100%;
+    display: block;
     margin-bottom: 10px;
     border-radius: 10px;
-    .left-one,.right-one {
+    .left-one, .right-one {
         padding: 5px;
     }
     .right-one {
@@ -150,7 +151,8 @@ md-expansion-panel-group[md-component-id='team-panel'] {
     }
     span {
         display: inline-block;
-        width: 86%;
+        align: center;
+        width: 84%;
         position: absolute;
         text-align: center;
         top: 25px;

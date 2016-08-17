@@ -58,7 +58,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         var newSnippetKey = ref.child("snippets").push().key;
 
         var teammateIds = Users.findUsersMatchingManager(currentUser.manager);
-        console.log(teammateIds);
         var updates = {};
         updates['/snippets/' + newSnippetKey] = data;
         updates[`/users/${currentUser.$id}/snippets/asOwner/${newSnippetKey}`] = data.dateAdded;
