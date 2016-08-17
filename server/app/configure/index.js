@@ -18,6 +18,6 @@ module.exports = function (app, db) {
     // variable inside of server/app/configure/app-variables.js
     app.use(app.getValue('log'));
 
-    require('./authentication')(app, db);
+    // require('./authentication')(app, db);
 
 };
