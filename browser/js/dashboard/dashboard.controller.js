@@ -52,7 +52,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         $rootScope.userFirebaseObj.$watch(function() {
             setScope();
         })
-        console.log("ALL USERS", $rootScope.users);
     });
 
     if ($scope.user) {

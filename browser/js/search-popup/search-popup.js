@@ -69,13 +69,14 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
     function loadAll() {
       
       var allEmployees = [];
-      for (var key in $rootScope.users) {
-        if ($rootScope.users[key] && $rootScope.users[key].first_name) {
-          allEmployees.push({value: ($rootScope.users[key].first_name+" "+$rootScope.users[key].last_name).toLowerCase(), 
-                             display: ($rootScope.users[key].first_name+" "+$rootScope.users[key].last_name),
-                             id: key})
-        }
-      }
+      
+      $rootScope.users.forEach(function(user){
+        allEmployees.push({
+          value: (user.first_name+" "+user.last_name).toLowerCase(),
+          display: (user.first_name+" "+user.last_name),
+          id: user.$id
+        })
+      })
 
       return allEmployees;
     }
