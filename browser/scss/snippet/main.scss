@@ -40,6 +40,12 @@
     opacity: 1;
 }
 
+#uparrow {
+    text-align: center;
+    width: 100%;
+    font-size: 30px;
+}
+
 .collaborator-avatar {
     border-radius: 50%;
     max-width: 40px;
@@ -49,22 +55,6 @@
 .collapsed-title {
     font-size: 20px;
     font-weight: 600;
-}
-
-snippet {
-    &.team {
-        md-expansion-panel {
-            border-left: 3px solid $green;
-        }
-    }
-}
-
-snippet {
-    &.collab {
-        md-expansion-panel {
-            border-left: 3px solid $orange;
-        }
-    }
 }
 
 #snippetTitle {

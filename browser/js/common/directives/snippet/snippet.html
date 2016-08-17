@@ -1,12 +1,12 @@
 <md-card ng-show="{{card}}" md-theme="{{ 'default' }}" md-theme-watch>
     <md-card-title>
         <md-card-title-text>
-            <p ng-if="!snippet.submitted" id="snippetTitle" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline"></p>
+            <p ng-if="!snippet.submitted" placeholder="Subject" id="snippetTitle" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline"></p>
             <p ng-if="snippet.submitted" id="snippetTitle" ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline">{{snippet.subject}}</p>
             <p ng-if="!snippet.submitted" id="contenttext" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead"></p>
             <p ng-if="snippet.submitted" id="contenttext" ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead">{{snippet.contents}}</p>
         </md-card-title-text>
-        <submit-snippet ng-class="{'finishit': snippet.submitted}" ng-click="submitSnippet($event)" submitted="snippet.submitted"></submit-snippet>
+        <submit-snippet ng-class="{'submitted-snippet': snippet.submitted}" ng-click="submitSnippet($event)" submitted="snippet.submitted"></submit-snippet>
     </md-card-title>
     <md-card-actions id="snippetImages" layout="row" layout-align="end center">
         <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
@@ -18,13 +18,13 @@
 </md-card>
 <md-expansion-panel ng-hide="{{card}}" md-component-id="{{id}}">
     <md-expansion-panel-collapsed>
-        <div class="md-summary collapsed-title" ng-model="snippet.subject">
+        <div id="snippetTitle" class="md-summary collapsed-title" ng-model="snippet.subject">
             {{ snippet.subject }}
         </div>
     </md-expansion-panel-collapsed>
     <md-expansion-panel-expanded>
         <md-expansion-panel-content>
-            <div class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
+            <div id="snippetTitle" class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
             </div>
             <div class="md-summary" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents">
             </div>
@@ -36,8 +36,8 @@
                 </div>
             </div>
         </md-expansion-panel-content>
-        <md-expansion-panel-footer md-no-sticky="true" class="collapse-btn">
-            <md-button ng-click="collapse()">Collapse</md-button>
+        <md-expansion-panel-footer ng-click="collapse()" md-no-sticky="true" class="collapse-btn">
+            <span id="uparrow"><i class="material-icons">keyboard_arrow_up</i></span>
         </md-expansion-panel-footer>
     </md-expansion-panel-expanded>
 </md-expansion-panel>

@@ -1,17 +1,17 @@
 <div layout="row" class="dashboard-wrapper" ng-cloak>
-    <!-- reports -->
+    <!-- reports / hide if im not a manager -->
     <div class="report-container" layout="column" flex="50" ng-if="isManager">
         <div class="report-title" layout="row" ng-cloak>
             Your reports
         </div>
-
         <md-expansion-panel-group md-component-id="report-panel" multiple>
             <div class="parent" ng-repeat="id in reportSnippetIds" layout="row" data-drag="true" ng-model="reportSnippetIds" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, placeholder: 'keep'}">
-
                 <snippet id="id" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
     </div>
+    <!-- tab for filtering snippet origin -->
+
     <!-- team view if im a manager -->
     <div layout="column" class="snippet-container" flex="grow" ng-if="isManager">
         <div class="team-title" layout="row" flex="noshrink" ng-cloak>Your Team</div>
@@ -21,9 +21,21 @@
     </div>
     <!-- team + collab view if im not a manager -->
     <div layout="column" class="snippet-container" flex="grow" ng-if="!isManager">
-        <md-expansion-panel-group md-component-id="team-panel" multiple>
+        <snippet-tabs layout="row">
+        </snippet-tabs>
+        <md-expansion-panel-group md-component-id="team-panel" id="all-tab-panel" ng-show="true" multiple>
             <div class="parent" ng-repeat="obj in collabAndTeamSnippetIds" layout="row">
                 <snippet id="obj.id" card="false" class="{{(obj.type === 'team') ? 'team' : 'collab'}}"></snippet>
+            </div>
+        </md-expansion-panel-group>
+        <md-expansion-panel-group md-component-id="team-panel" id="team-tab-panel" multiple>
+            <div class="parent" ng-repeat="obj in teamSnippetIds" layout="row">
+                <snippet id="obj.id" card="false"></snippet>
+            </div>
+        </md-expansion-panel-group>
+        <md-expansion-panel-group md-component-id="team-panel" id="collab-tab-panel" multiple>
+            <div class="parent" ng-repeat="obj in collabSnippetIds" layout="row">
+                <snippet id="obj.id" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
     </div>

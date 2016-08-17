@@ -1,24 +1,37 @@
 app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelpers, AUTH_EVENTS, Snippet) {
 
-    var setScope = function() {
-        $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys($rootScope.user.snippets.asTeamMember) : [];
-        console.log($scope.teamSnippetIds,'???')
+    console.log($scope.currentWeek);
+
+    var dateFilter = function(obj){
+        return _.pickBy(obj, function(value){
+            var snippetCreated = new Date(Date.parse(value));
+            var diff = (snippetCreated - $scope.currentWeek)/(1000*60*60*24);
+            return (diff < 7 && diff > 0);
+        })
+    }
+
+    var setScope = function(){
+        if (!$rootScope.user.snippets) {
+            $scope.teamSnippetIds = $scope.collabSnippetIds = $scope.collabAndTeamSnippetIds = $scope.reportSnippetIds = [];
+            return;
+        }
+        $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys(dateFilter($rootScope.user.snippets.asTeamMember)) : [];
+        $scope.collabSnippetIds = $rootScope.user.snippets.asCollaborator ? Object.keys(dateFilter($rootScope.user.snippets.asCollaborator)) : [];
+        $scope.reportSnippetIds = $rootScope.user.snippets.asManager ? Object.keys(dateFilter($rootScope.user.snippets.asManager)) : [];
+        console.log($scope.reportSnippetIds)
         $scope.teamSnippetIds = $scope.teamSnippetIds.map(id => {
             var obj = {};
             obj.id = id;
             obj.type = 'team'
             return obj;
-        })
-        console.log($scope.teamSnippetIds,'???')
-        $scope.collabSnippetIds = $rootScope.user.snippets.asCollaborator ? Object.keys($rootScope.user.snippets.asCollaborator) : [];
+        });
         $scope.collabSnippetIds = $scope.collabSnippetIds.map(id => {
             var obj = {};
             obj.id = id;
             obj.type = 'collab';
             return obj;
-        })
-        $scope.reportSnippetIds = $rootScope.user.snippets.asManager ? Object.keys($rootScope.user.snippets.asManager) : [];
-        $scope.collabAndTeamSnippetIds = _.union($scope.collabSnippetIds, $scope.teamSnippetIds);
+        });
+        $scope.collabAndTeamSnippetIds = _.unionBy($scope.collabSnippetIds, $scope.teamSnippetIds, 'id');
         $scope.isManager = false;
         if ($rootScope.user['reports']) {
             $scope.isManager = true;
@@ -38,6 +51,9 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
             setScope();
         })
     }
+
+    $scope.card = true;
+    $scope.dragged = [];
 
     $scope.toggle = function() {
         $mdSidenav('right').toggle();

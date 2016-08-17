@@ -128,7 +128,23 @@ md-list-item {
 .circle-profile {
     border-radius: 50%;
     max-width: 40px;
+    max-height: 40px;
     margin: auto 2px;
     position: absolute;
     right: 15px;
+    top: 10px;
 }
+
+.circle-profile-card {
+    border-radius: 50%;
+    max-width: 40px;
+    max-height: 40px;
+    margin: auto 2px;
+}
+
+.bottom-card-section {
+    background-color: rgb(245, 245, 245);
+    margin: 0;
+    padding: 8px;
+}
+

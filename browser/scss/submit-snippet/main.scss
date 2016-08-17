@@ -37,31 +37,11 @@ submit-snippet {
   }
 }
 
-.onclic {
-  width: 30px;
-  border-width:3px;
-  font-size:0;
-
-  &:after {
-    content: "";
-  }
-}
-.validateit {
-  font-size:17px;
-  color: white;
-  content: "";
-  background: $green;
-  &:after {
-    content: "";
-  }
-}
-.finishit {
+.submitted-snippet {
   width: 30px;
   background: $green;
   font-size:17px;
   color: white;
-  content: "";
-  transition: all 0.25s ease;
   &:hover {
       background: #ef5350;
       border: 2px solid #ef5350;

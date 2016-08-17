@@ -1,0 +1,16 @@
+<img ng-show="user" ng-click="toggleSelect()" class="circle-profile menu-open-button" md-whiteframe-1dp ng-src="{{user.photoUrl || 'files/default-profile.png'}}" ng-cloak>
+<md-card ng-show="isPopupVisible" id="profile-card">
+    <md-card-header>
+        <md-card-avatar>
+            <img class="md-avatar-icon circle-profile-card" ng-src="{{user.photoUrl || 'files/default-profile.png'}}" />
+        </md-card-avatar>
+        <md-card-header-text>
+            <span class="md-title">{{user.first_name}} {{user.last_name}}</span>
+            <span class="md-subhead">{{user.email}}</span>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-actions class="bottom-card-section" layout="row" layout-align="end center">
+        <md-button id="edit-profile-button" class="md-primary" ui-sref="profile">Edit profile</md-button>
+        <md-button class="md-raised" ng-click="logout()">Sign out</md-button>
+    </md-card-actions>
+</md-card>

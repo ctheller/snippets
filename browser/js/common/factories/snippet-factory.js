@@ -48,6 +48,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         var currentUser = AuthService.getLoggedInUser();
         data.team = currentUser.manager;
         data.owner = currentUser.$id;
+        data.createdAt = Date();
         data.submitted = false;
         var obj = {};
         obj[currentUser.$id] = true;
@@ -59,7 +60,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
             updates['/snippets/' +  newSnippetKey] = data;
 
             result.forEach(function(userId) {
-                updates[`/users/${userId}/snippets/asTeamMember/${newSnippetKey}`] = true;
+                updates[`/users/${userId}/snippets/asTeamMember/${newSnippetKey}`] = data.createdAt;
             });
 
             return ref.update(updates);

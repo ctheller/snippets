@@ -1,4 +1,6 @@
 @import '../color';
+@import 'categories';
+
 .dashboard-wrapper {
     height: 100%;
     overflow: hidden;
@@ -111,5 +113,26 @@ md-expansion-panel-group[md-component-id='team-panel'] {
         .md-summary, .md-title {
             cursor: text;
         }
+    }
+}
+
+#dateNav {
+    margin-top: 0px;
+    background-color: #eaeaec;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    .left-one,.right-one {
+        padding: 5px;
+    }
+    .right-one {
+        float: right;
+    }
+    span {
+        display: inline-block;
+        width: 92%;
+        position: absolute;
+        text-align: center;
+        top: 25px;
     }
 }
