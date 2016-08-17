@@ -51,6 +51,9 @@ function addOneOrg (seedObj) {
   if(!seedObj.snippets) {
     seedObj.snippets = {};
   }
+  // console.log(new Date(chance.integer({min: Date.now() - 1.814e+9, max: Date.now()})))
+  // console.log(Date.parse(Date()))
+  // console.log(new Date())
   for (let i=0; i<500; i++) {
     let snippetId = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 15});
     seedObj.snippets[snippetId] = {
@@ -71,7 +74,7 @@ function addOneOrg (seedObj) {
     if (!seedObj.users[randomUser].snippets.asOwner) {
       seedObj.users[randomUser].snippets.asOwner = {};
     }
-    seedObj.users[randomUser].snippets.asOwner[snippetId] = true;
+    seedObj.users[randomUser].snippets.asOwner[snippetId] = seedObj.snippets[snippetId].dateAdded;
 
     let level;
     if (managerCLevel.indexOf(randomUser) !== -1) {
@@ -106,7 +109,7 @@ function addOneOrg (seedObj) {
         if (!seedObj.users[userToAdd].snippets.asCollaborator) {
           seedObj.users[userToAdd].snippets.asCollaborator = {};
         }
-        seedObj.users[userToAdd].snippets.asCollaborator[snippetId] = true;
+        seedObj.users[userToAdd].snippets.asCollaborator[snippetId] = seedObj.snippets[snippetId].dateAdded;
       } else {
         // collaborators come from org (on your level) array
         let randomTeammate = chance.integer({min: 0, max: level.length-1});
@@ -120,7 +123,7 @@ function addOneOrg (seedObj) {
         if (!seedObj.users[userToAdd].snippets.asCollaborator) {
           seedObj.users[userToAdd].snippets.asCollaborator = {};
         }
-        seedObj.users[userToAdd].snippets.asCollaborator[snippetId] = true;
+        seedObj.users[userToAdd].snippets.asCollaborator[snippetId] = seedObj.snippets[snippetId].dateAdded;
       }
     }
   }
@@ -142,7 +145,7 @@ function addOneOrg (seedObj) {
           seedObj.users[userKey].snippets.asTeamMember = {};
         }
         // user.snippets.asTeamMember[snippetId] = true
-        seedObj.users[userKey].snippets.asTeamMember[snippetKey] = true;
+        seedObj.users[userKey].snippets.asTeamMember[snippetKey] = seedObj.snippets[snippetKey].dateAdded;
       }
     }
   }
@@ -240,6 +243,18 @@ for (let i=0; i< toReplace.length; i++) { //
       delete seedy.snippets[snippetKey].collaborators[toReplace[i]];
       seedy.snippets[snippetKey].collaborators[newGuy.id] = true;
     }
+    // if team is the older ID, replace
+    if (seedy.snippets[snippetKey].team && seedy.snippets[snippetKey].team === toReplace[i]) {
+      seedy.snippets[snippetKey].team = newGuy.id;
+    }
+  }
+
+  // loop through users
+    // if manager is replace[i], swap with me
+  for (let userKey in seedy.users) {
+    if (seedy.users[userKey].manager && seedy.users[userKey].manager === toReplace[i]) {
+        seedy.users[userKey].manager = newGuy.id;
+    }
   }
   // add newGuy to users table
   seedy.users[newGuy.id] = {
@@ -272,7 +287,9 @@ jsonfile.writeFile(file, obj, function (err) {
   console.error(err);
 });
 
-  // // send to live database ----- THROWS ERRORS?
+
+
+  // // send to live database
   // ref.set(seedy)
   // .then(function(result) {
   //   console.log('success: ', result);
