@@ -20,6 +20,13 @@
             border-bottom: 3px solid $orange;
         }
     }
+    li.my-tab {
+        .active,
+        a:hover {
+            color: black;
+            border-bottom: 3px solid $yellow;
+        }
+    }
     .tab a {
         color: black;
         border-bottom: none;
@@ -41,6 +48,14 @@ snippet {
     &.collab {
         md-expansion-panel {
             border-right: 3px solid $orange;
+        }
+    }
+}
+
+snippet {
+    &.mine {
+        md-expansion-panel {
+            border-right: 3px solid $yellow;
         }
     }
 }
