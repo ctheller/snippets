@@ -1,4 +1,4 @@
-<div layout="row" class="dashboard-wrapper" ng-cloak>
+<div layout="row" class="dashboard" ng-cloak>
     <!-- reports / hide if im not a manager -->
     <div class="report-container" layout="column" flex="50" ng-if="isManager">
         <div class="report-title" layout="row" ng-cloak>
@@ -13,7 +13,7 @@
     <!-- tab for filtering snippet origin -->
 
     <!-- team view if im a manager -->
-    <div layout="column" class="snippet-container" flex="grow" ng-if="isManager">
+    <div set-height layout="column" class="snippet-container" flex="noshrink" ng-if="isManager">
         <div class="team-title" layout="row" flex="noshrink" ng-cloak>Your Team</div>
         <div layout="row" flex="noshrink" ng-repeat="obj in collabAndTeamSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}" ng-model="collabAndTeamSnippetIds">
             <snippet id="obj.id" card="true" class="{{(obj.type === 'team') ? 'team' : 'collab'}}"></snippet>
@@ -39,8 +39,4 @@
             </div>
         </md-expansion-panel-group>
     </div>
-    <!-- floating btn -->
-    <md-button class="md-fab add-snippet-btn" flex="noshrink" aria-label="add snippet" ng-click="showSnippetForm($event)">
-        <md-icon><i class="material-icons">add</i></md-icon>
-    </md-button>
 </div>
