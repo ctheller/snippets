@@ -17,7 +17,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys(dateFilter($rootScope.user.snippets.asTeamMember)) : [];
         $scope.collabSnippetIds = $rootScope.user.snippets.asCollaborator ? Object.keys(dateFilter($rootScope.user.snippets.asCollaborator)) : [];
         $scope.reportSnippetIds = $rootScope.user.snippets.asManager ? Object.keys(dateFilter($rootScope.user.snippets.asManager)) : [];
-        $scope.mySnippetIds = $scope.teamSnippetIds.map(function(id) {return {id: id, type: 'mine'}});
+        $scope.mySnippetIds = $scope.mySnippetIds.map(function(id) {return {id: id, type: 'mine'}});
         $scope.teamSnippetIds = $scope.teamSnippetIds.map(function(id) {return {id: id, type: 'team'}});
         $scope.collabSnippetIds = $scope.collabSnippetIds.map(function(id) {return {id: id, type: 'collab'}});
         $scope.reportSnippetIds = $scope.reportSnippetIds.map(function(id) {return {id: id, type: 'report'}});
