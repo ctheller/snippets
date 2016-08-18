@@ -1,45 +1,27 @@
-<!-- <div class="col-xs-12 col-sm-6 col-md-6">
-
-    <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-
-        <alert type="danger" ng-show="error">
-            {{ error }}
-        </alert>
-
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="login-password">Password</label>
-            <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-</div> -->
-
-<div id="auth" class="col-xs-12 col-sm-6 col-md-6">
-    <md-button ng-click="googleLogin()" class="md-raised">Login with Google</md-button>
+<div layout="column" layout-align="center center">
+<h2 class="md-headline no-bottom-margin">Login to Snipyt</h2>
+<h3 class="md-subhead no-top-margin">Please enter your e-mail and password</h3>
 </div>
-
-<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-
-    <alert type="danger" ng-show="error">
+<form layout-margin id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+    <alert type="danger" ng-show="error" class="red-text darken-2">
         {{ error }}
     </alert>
-
     <div class="form-group">
         <label for="email">Email address</label>
         <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
     </div>
-    <div class="form-group">
+    <div layout="column" class="form-group">
         <label for="login-password">Password</label>
         <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+        <a href="" ui-sref="recovery">Reset my password</a>
+        <div layout-margin layout-align="center center" layout="row">
+            <button type="submit" class="btn btn-default blue darken-1">Login</button>
+            <button ui-sref="signup" class="btn btn-default blue darken-1">Sign up</button>
+        </div>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-    <p ui-sref="forgotPassword" ng-click="forgotPassword()">I forgot my password :(</p>
 </form>
-
-<div>
-    <md-button ui-sref="signup" class="md-raised">Sign up</md-button>
+<div layout="row" layout-align="space-around center" id="auth" class="col-xs-12 col-sm-6 col-md-6">
+    <md-button ng-click="googleLogin()">
+    <md-icon md-svg-src="/files/btn_google_light_normal_ios.svg"></md-icon>
+    Sign in with Google</md-button>
 </div>
