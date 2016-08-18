@@ -26,10 +26,6 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 }
             }
 
-            element.click(function(event){
-                event.preventDefault();
-            })
-
             scope.removeCollaborator = function(userId) {
                 scope.snippet.collaborators[userId] = null;
                 Users.removeAsCollaborator(userId, scope.id);
@@ -57,6 +53,10 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             };
 
             scope.delete = Snippet.delete;
+
+            element.on('dblclick', function(){
+                
+            })
 
         }
     };

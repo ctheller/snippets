@@ -1,5 +1,8 @@
 app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelpers, AUTH_EVENTS, Snippet) {
 
+    $scope.dragOn = function(){
+        $scope.draggingNow = true;
+    }
 
     var dateFilter = function(obj){
         return _.pickBy(obj, function(snippetCreated){
@@ -63,6 +66,17 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     $scope.createNewSnippet = function(e, ui) {
         var snippetCopyId = ui.draggable.scope().obj.id;
         Snippet.duplicateAsTemplate(snippetCopyId);
+    }
+
+
+    $scope.selectSnippet = function(e, ui){
+        if (!$rootScope.selectedSnippetIds) $rootScope.selectedSnippetIds = [];
+        var snippetId = ui.draggable.scope().obj.id;
+        var idx = $rootScope.selectedSnippetIds.indexOf(snippetId);
+        if (idx === -1) {
+            $rootScope.selectedSnippetIds.push(snippetId);
+        }
+        console.log($rootScope.selectedSnippetIds);
     }
 
 });
