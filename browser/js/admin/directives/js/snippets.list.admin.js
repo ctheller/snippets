@@ -1,0 +1,1 @@
+snippets.list.admin.js
