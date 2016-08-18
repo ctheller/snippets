@@ -85,6 +85,7 @@ submit-snippet {
   &:after {
     position: relative;
     font-family: 'Material Icons';
+    top: 0px;
     content: "done";
     -webkit-font-feature-settings: 'liga';
   }
