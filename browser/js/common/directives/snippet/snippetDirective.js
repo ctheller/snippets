@@ -56,6 +56,8 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 $mdExpansionPanel(scope.id + scope.type).collapse();
             };
 
+            scope.delete = Snippet.delete;
+
         }
     };
 });

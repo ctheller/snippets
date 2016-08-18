@@ -72,6 +72,25 @@ md-card-title {
     }
 }
 
+.btn-floating.deleteit {
+    box-shadow: none;
+    width: 30px;
+    height: 30px;
+    font-size: 6px;
+    margin-top: 8px;
+    padding-bottom: 5px;
+    i {
+        font-size: 18px;
+    }
+}
+
+.btn-floating.deleteit.deleteForPanelOpen {
+  position: absolute;
+  top: 0;
+  right: 25px;
+}
+
+
 /* Rules for using icons as white on a dark background. */
 
 .btn-floating.sentbtn {
