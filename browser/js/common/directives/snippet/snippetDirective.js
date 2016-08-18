@@ -55,7 +55,21 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             scope.delete = Snippet.delete;
 
             element.on('dblclick', function(){
-                
+                if (element.hasClass('selectedForExport')) element.removeClass('selectedForExport')
+                else element.addClass('selectedForExport');
+
+                if (!$rootScope.selectedSnippetIds) $rootScope.selectedSnippetIds = [];
+
+                var idx = $rootScope.selectedSnippetIds.indexOf(scope.id);
+                if (idx === -1) {
+                    $rootScope.selectedSnippetIds.push(scope.id);
+                } else {
+                    $rootScope.selectedSnippetIds.splice(idx, 1);
+                }
+
+                console.log($rootScope.selectedSnippetIds);
+                $rootScope.$apply();
+
             })
 
         }

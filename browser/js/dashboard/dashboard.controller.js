@@ -1,4 +1,4 @@
-app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelpers, AUTH_EVENTS, Snippet) {
+app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelpers, AUTH_EVENTS, Snippet, Email) {
 
     $scope.dragOn = function(){
         $scope.draggingNow = true;
@@ -69,14 +69,19 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     }
 
 
-    $scope.selectSnippet = function(e, ui){
-        if (!$rootScope.selectedSnippetIds) $rootScope.selectedSnippetIds = [];
-        var snippetId = ui.draggable.scope().obj.id;
-        var idx = $rootScope.selectedSnippetIds.indexOf(snippetId);
-        if (idx === -1) {
-            $rootScope.selectedSnippetIds.push(snippetId);
-        }
-        console.log($rootScope.selectedSnippetIds);
+    // $scope.selectSnippet = function(e, ui){
+    //     if (!$rootScope.selectedSnippetIds) $rootScope.selectedSnippetIds = [];
+    //     var snippetId = ui.draggable.scope().obj.id;
+    //     var idx = $rootScope.selectedSnippetIds.indexOf(snippetId);
+    //     if (idx === -1) {
+    //         $rootScope.selectedSnippetIds.push(snippetId);
+    //     }
+    //     console.log($rootScope.selectedSnippetIds);
+    // }
+
+    $scope.exportToEmail = function(){
+        console.log("exporting to email");
+        Email.compose();
     }
 
 });

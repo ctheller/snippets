@@ -125,6 +125,12 @@ md-card-title {
     
 }
 
+.selectedForExport {
+    md-expansion-panel {
+            border-left: 15px yellow solid;
+        }
+}
+
 
 .btn-floating.sentbtn.submitted { background: rgb(0, 204, 0)}
 
