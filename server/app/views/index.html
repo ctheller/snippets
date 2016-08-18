@@ -53,8 +53,11 @@
         <md-icon class="lnr" ng-click="toggle()"><i class="material-icons">menu</i></md-icon>
         <img class="snippetLogo" src="/files/snippetLogo.png">
         <!-- search bar -->
+        <form ng-submit="sendSearchQuery()">
         <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search...">
         </nit-advanced-searchbox>
+        <button type="submit">submit</button>
+        </form>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
     </md-toolbar>
     <div id="main" layout="row" flex>

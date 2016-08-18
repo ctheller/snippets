@@ -10,7 +10,7 @@
  ***************************************************/
 
 // Your Firebase instance where we will listen and write search results
-exports.FB_URL   = 'https://elastic-search-test-b22fb.firebaseio.com/';
+exports.FB_URL   = 'https://snippets-2f32c.firebaseio.com';
 
 // The path in your Firebase where clients will write search requests
 exports.FB_REQ   = 'search/request';
@@ -62,15 +62,10 @@ else {
 
 exports.paths = [
    {
-      path:  "users",
+      path:  "snippets",
       index: "firebase",
-      type:  "user"
-   },
-   {
-      path:  "messages",
-      index: "firebase",
-      type:  "message",
-      fields: ['msg', 'name'],
+      type:  "snippet",
+      fields: ['collaborators', 'contents', 'dateAdded', 'owner', 'subject', 'team'],
       filter: function(data) { return data.name !== 'system'; }
    }
 ];

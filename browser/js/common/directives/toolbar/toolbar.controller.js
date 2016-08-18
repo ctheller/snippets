@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
+app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state) {
 
     $scope.sidebarOpen = "false";
 
@@ -42,9 +42,37 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
     };
 
     $scope.availableSearchParams = [
-        { key: "name", name: "Name", placeholder: "Name:", allowMultiple: true },
-        { key: "email", name: "Email", placeholder: "Email:", allowMultiple: true }
+        { key: "owner", name: "Name", placeholder: "Name:", allowMultiple: true },
+        { key: "contents", name: "content", placeholder: "contains:", allowMultiple: true }
     ];
 
     $scope.searchParams = {};
+    $scope.sendSearchQuery = function() {
+        var key = Object.keys($scope.searchParams)[0]
+        doSearch(key, makeTerm($scope.searchParams[key]))
+    }
+
+    var PATH = 'search';
+    var database = firebase.database();
+
+    function doSearch(type, query) {
+        var index = 'firebase';
+        var ref = database.ref().child(PATH);
+        var key = ref.child('request').push({ index: index, type: type, query: query }).key;
+        ref.child('response/' + key).on('value', showResults);
+    }
+
+    function showResults(snap) {
+        if (!snap.exists()) {
+            return; } // wait until we get data
+        var data = snap.val();
+        console.log(data, 'elastic search is awesome');
+        $state.go('search');
+    }
+
+    function makeTerm(term) {
+        if (!term.match(/^\*/)) { term = '*' + term; }
+        if (!term.match(/\*$/)) { term += '*'; }
+        return term;
+    }
 });
