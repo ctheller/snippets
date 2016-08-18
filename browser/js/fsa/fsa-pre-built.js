@@ -64,7 +64,7 @@
         var setUser = function(){
             if (Auth.$getAuth()) {
                 console.log("Hit Set Rootscope info FN");
-                
+
                 var id = Auth.$getAuth().uid;
 
                 //check if user is in the DB already
@@ -90,16 +90,15 @@
                         })
                     })
                 })
-
             }
             else {
                 $rootScope.user = null;
                 $rootScope.users = null;
                 $rootScope.userRef = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-                $state.go('home');
+                $state.go('splash');
             }
-        }
+        };
 
         this.setUser = setUser;
 

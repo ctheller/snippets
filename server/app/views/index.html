@@ -47,13 +47,12 @@
     <script src='/angularfire/dist/angularfire.min.js'></script>
     <script src="/main.js"></script>
 </head>
-
 <body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
     <md-toolbar class="main-toolbar md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl" md-theme="blue">
-        <md-icon class="lnr" ng-click="toggle()"><i class="material-icons">menu</i></md-icon>
+        <md-icon class="lnr" ng-click="toggle()" ng-show="user"><i class="material-icons">menu</i></md-icon>
         <img class="snippetLogo" src="/files/snippetLogo.png">
         <!-- search bar -->
-        <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search...">
+        <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search..."  ng-show="user">
         </nit-advanced-searchbox>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
     </md-toolbar>
