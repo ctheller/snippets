@@ -13,7 +13,7 @@
     <!-- team view if im a manager -->
     <div layout="column" class="snippet-container" flex="50" ng-if="isManager">
         <div>Your Team</div>
-        <div layout="row" flex="noshrink" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}" ng-model="allSnippetIds">
+        <div layout="row" flex="noshrink" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}" ng-model="allSnippetIds">
             <snippet id="obj.id" card="true"></snippet>
         </div>
     </div>
