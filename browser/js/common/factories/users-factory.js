@@ -9,7 +9,6 @@ app.factory("Users", function($firebaseObject, $firebaseArray, $rootScope) {
         
         var teammates = $rootScope.users.filter(user => user.manager === managerId);
         return teammates.map(teammate => teammate.$id);
-
     };
 
     Users.getUsers = function(userIdArray){

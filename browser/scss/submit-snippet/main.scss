@@ -4,8 +4,35 @@ $gray: #bbbbbb;
   font-family: 'Roboto', sans-serif;
 }
 
+submit-snippet.forExpPanel {
+  &:after {
+    content: "submit";
+    position: relative;
+    top: -12px;
+  }
+}
+
+submit-snippet.forExpPanel.submitted-snippet {
+  &:after {
+    position: relative;
+    font-family: 'Material Icons';
+    content: "done";
+    -webkit-font-feature-settings: 'liga';
+  }
+}
+
+submit-snippet.forExpPanelOpen {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  &:after {
+    position: relative;
+    top: 0px;
+  }
+}
+
 submit-snippet {
-  margin-top: 10px;
+  margin-top: 8px;
   outline:none;
   height: 30px;
   text-align: center;
@@ -14,6 +41,8 @@ submit-snippet {
   background: #fff;
   border: 2px solid $green;
   color:$green;
+
+
   letter-spacing:1px;
   text-shadow:0;
   content:"submit";
@@ -30,6 +59,8 @@ submit-snippet {
   }
   &:after {
     content: "submit";
+    position: inherit;
+    top: -10px;
   }
   &:active {
     //letter-spacing: 2px;
@@ -52,6 +83,7 @@ submit-snippet {
       }
     }
   &:after {
+    position: relative;
     font-family: 'Material Icons';
     content: "done";
     -webkit-font-feature-settings: 'liga';

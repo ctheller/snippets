@@ -20,14 +20,17 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         $scope.mySnippetIds = $scope.teamSnippetIds.map(function(id) {return {id: id, type: 'mine'}});
         $scope.teamSnippetIds = $scope.teamSnippetIds.map(function(id) {return {id: id, type: 'team'}});
         $scope.collabSnippetIds = $scope.collabSnippetIds.map(function(id) {return {id: id, type: 'collab'}});
+        $scope.reportSnippetIds = $scope.reportSnippetIds.map(function(id) {return {id: id, type: 'report'}});
         $scope.collabAndTeamSnippetIds = _.unionBy($scope.collabSnippetIds, $scope.teamSnippetIds, 'id');
         $scope.allSnippetIds = _.unionBy($scope.mySnippetIds, $scope.collabAndTeamSnippetIds, 'id');
         $scope.isManager = false;
         if ($rootScope.user['reports']) {
-            $scope.isManager = true;
+            $scope.isManager = false;
         }
 
-        // $scope.reportSnippetIds = ["-KPPZT29sYqvv14KI5hJ"];
+        // //FOR DEVELOPMENT ONLY::
+        // $scope.reportSnippetIds = ["-KPPZT29sYqvv14KI5hJ", "GaT704CdvvMKxcj", "gqPHWiBGQu3kgRX"];
+        // $scope.reportSnippetIds = $scope.reportSnippetIds.map(function(id) {return {id: id, type: 'report'}});
     }
 
 
