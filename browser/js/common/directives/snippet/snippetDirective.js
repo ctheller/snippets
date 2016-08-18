@@ -16,13 +16,13 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
 
             scope.snippet = {};
 
-            scope.toggleSubmit = function($event){
+            scope.toggleSubmit = function(){
 
                 if (!scope.snippet.submitted) {
-                    setTimeout(Snippet.submit(scope.id, $rootScope.user.manager), 2250);
+                    Snippet.submit(scope.id, $rootScope.user.manager);
                 }
                 else {
-                    Snippet.unsubmit(scope.id, $rootScope.user.manager)
+                    Snippet.unsubmit(scope.id, $rootScope.user.manager);
                 }
             }
 
