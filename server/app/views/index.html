@@ -50,11 +50,14 @@
 <body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
     <md-toolbar class="main-toolbar md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl" md-theme="blue">
         <md-icon class="lnr" ng-click="toggle()" ng-show="user"><i class="material-icons">menu</i></md-icon>
-        <img class="snippetLogo" src="/files/snippetLogo.png">
+        <a href="{{ user ? '/dashboard/0' : '/splash' }}">
+            <img class="snippetLogo" src="/files/snippetLogo.png">
+        </a>
         <!-- search bar -->
         <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search..."  ng-show="user">
         </nit-advanced-searchbox>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
+        <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user" ui-sref="login">Get started</a>
     </md-toolbar>
     <div id="main" layout="row" flex>
 

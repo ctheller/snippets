@@ -47,4 +47,5 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
     ];
 
     $scope.searchParams = {};
+
 });

@@ -90,6 +90,7 @@
                         })
                     })
                 })
+                $state.go('dashboard.week');
             }
             else {
                 $rootScope.user = null;

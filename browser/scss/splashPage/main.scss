@@ -52,3 +52,14 @@
   margin-top: 10px;
   font-size: 30px;
 }
+
+.getStarted {
+  position: absolute;
+  right: 15px;
+  color: #26689c !important;
+  text-transform: none;
+  &.btn {
+    padding: 0 17px;
+    font-size: 18px;
+  }
+}
