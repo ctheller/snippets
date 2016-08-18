@@ -9,8 +9,12 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth, User
         return user.$id === $scope.userCopy.manager;
     });
 
-    var manager_name = managerObj[0].first_name + ' ' + managerObj[0].last_name;
+    var manager_name = "";
 
+    if(managerObj.length > 0){
+        manager_name = managerObj[0].first_name + ' ' + managerObj[0].last_name;    
+    } else { manager_name = ""}
+    
     angular.extend($scope.userCopy, {'manager_name': manager_name});
 
     // updates the profile upon clicking submit
@@ -30,5 +34,12 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth, User
         }).catch(function(err) {
             console.log('Synchronization failed, error code:', err);
         })
+    }
+
+    $scope.sendPasswordReset = function(){
+        console.log(Auth);
+        Auth.$sendPasswordResetEmail($scope.userCopy.email)
+        .then(function(){console.log('Password reset email sent')})
+        .catch(function(err){console.log('Password reset email failed to send. Error code:', err)});
     }
 });

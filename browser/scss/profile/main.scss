@@ -9,6 +9,11 @@
 
 }
 
+.toolbar-profile{
+  background-color: darkgray;
+  color: white;
+}
+
 #edit-profile-button {
 	margin-right: 15px;
 }
@@ -24,6 +29,10 @@
 
 .md-subhead-small{
 	font-size: 14px;
+}
+
+.no-side-margin {
+  margin: 4px 0px;
 }
 
 .float-left{
