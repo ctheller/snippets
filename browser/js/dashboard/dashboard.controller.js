@@ -25,7 +25,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         $scope.allSnippetIds = _.unionBy($scope.mySnippetIds, $scope.collabAndTeamSnippetIds, 'id');
         $scope.isManager = false;
         if ($rootScope.user['reports']) {
-            $scope.isManager = false;
+            $scope.isManager = true;
         }
 
         // //FOR DEVELOPMENT ONLY::
