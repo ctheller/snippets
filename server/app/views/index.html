@@ -58,7 +58,6 @@
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
     </md-toolbar>
     <div id="main" layout="row" flex>
-
         <!-- temperary controller -->
         <md-content class="pushing" layout="column">
             <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-disable-backdrop="">
@@ -67,6 +66,10 @@
                         <md-list-item class="sidebar-item state {{item.state}}" ng-repeat="item in items" ui-sref-active="active">
                             <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
                             <p ui-sref="{{item.state}}">{{ item.label }}</p>
+                        </md-list-item>
+                        <md-list-item ng-show="isAdmin" class="sidebar-item state admin" ui-sref-active="active">
+                            <md-icon class="lnr"><i class="material-icons">supervisor_account</i></md-icon>
+                            <p ui-sref="admin">Admin</p>
                         </md-list-item>
                         <!-- <md-list-item> NOT IN USE
                             <md-icon class="lnr"><i class="material-icons">'person'</i></md-icon>
