@@ -1,31 +1,24 @@
 app.config(function($stateProvider) {
 
-    $stateProvider.state('login', {
-        url: '/login',
-        templateUrl: 'js/login/login.html',
-        controller: 'LoginCtrl'
+    $stateProvider.state('recovery', {
+        url: '/recovery',
+        templateUrl: 'js/recovery/recovery.html',
+        controller: 'RecoveryCtrl'
     });
-
 });
 
-app.controller('LoginCtrl', function($scope, $mdToast, $state, AuthService, Auth) {
-
-    $scope.googleLogin = AuthService.login;
-
-    $scope.login = {};
-    $scope.error = null;
-
-    $scope.sendLogin = function(loginInfo) {
-        $scope.firebaseUser = null;
-        $scope.error = null;
-        Auth.$signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
-            .then(function(authData) {
-                console.log('Logged in as:', authData.uid);
+app.controller('RecoveryCtrl', function($scope, $mdToast, Auth, $state) {
+    $scope.sendRecovery = function(userData) {
+        if ($scope.recoveryForm.$error.email) $scope.error = 'Please enter a valid email';
+        else {
+            console.log(userData);
+            Auth.$sendPasswordResetEmail(userData.email).
+            then(function() {
                 var last = {
                     bottom: false,
-                    top: true,
+                    top: false,
                     left: false,
-                    right: true
+                    right: false
                 };
 
                 $scope.toastPosition = angular.extend({}, last);
@@ -55,13 +48,12 @@ app.controller('LoginCtrl', function($scope, $mdToast, $state, AuthService, Auth
 
                 $mdToast.show(
                     $mdToast.simple()
-                    .textContent('Login successful.')
+                    .textContent('Password reset e-mail sent. Please check your inbox.')
                     .position(pinTo)
-                    .hideDelay(3000)
+                    .hideDelay(5000)
                 );
-                $state.go('dashboard.week');
             }).catch(function(err) {
-                console.log('Authentication failed:', err);
+                console.log('Password reset failed failed:', err);
                 var last = {
                     bottom: false,
                     top: true,
@@ -96,11 +88,19 @@ app.controller('LoginCtrl', function($scope, $mdToast, $state, AuthService, Auth
 
                 $mdToast.show(
                     $mdToast.simple()
-                    .textContent('Username or password incorrect. Please try again')
+                    .textContent('Error sending password reset. Please try again')
                     .position(pinTo)
                     .hideDelay(3000)
                 );
             });
-    };
+        }
 
-});
+    }
+
+    // $scope.sendPasswordReset = function(){
+    //        console.log(Auth);
+    //        Auth.$sendPasswordResetEmail($scope.userCopy.email)
+    //        .then(function(){console.log('Password reset email sent')})
+    //        .catch(function(err){console.log('Password reset email failed to send. Error code:', err)});
+    //    }
+})
