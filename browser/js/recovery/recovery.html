@@ -1,0 +1,16 @@
+<div layout="column" layout-align="center center">
+    <h2 class="md-headline no-bottom-margin">Enter your e-mail</h2>
+    <h3 class="md-subhead no-top-margin">You will be sent an e-mail to reset your password</h3>
+</div>
+<div>
+    <form layout-margin name="recoveryForm" ng-submit="sendRecovery(recovery)" layout="column" layout-align="center center" novalidate>
+        <alert type="danger" class="red-text darken-2" ng-show="error">
+            {{ error }}
+        </alert>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" ng-model="recovery.email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        <button type="submit" class="btn btn-default blue darken-1">Reset password</button>
+    </form>
+</div>

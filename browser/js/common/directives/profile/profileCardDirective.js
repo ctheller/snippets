@@ -8,10 +8,10 @@ app.directive('profileCard', function($rootScope, Auth, $state, $document) {
         link: function(scope, element, attr) {
 
             scope.logout = function() {
-                console.log('hot in here');
                 Auth.$signOut();
                 scope.isPopupVisible = false;
-                $state.go('home');
+                $rootScope.users = null;
+                $state.go('login');
             };
 
             scope.isPopupVisible = false;

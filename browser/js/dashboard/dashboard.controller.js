@@ -61,7 +61,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     ];
 
     $scope.createNewSnippet = function(e, ui) {
-        var snippetCopyId = ui.draggable.scope().id;
+        var snippetCopyId = ui.draggable.scope().obj.id;
         Snippet.duplicateAsTemplate(snippetCopyId);
     }
 
