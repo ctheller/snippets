@@ -26,7 +26,7 @@
         <div id="snippetTitle" class="md-summary collapsed-title" ng-model="snippet.subject">
             {{ snippet.subject }}
         </div>
-                <submit-snippet class="forExpPanel" ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
+                <submit-snippet ng-if="type!=='report'" class="forExpPanel" ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
 
     </md-expansion-panel-collapsed>
     <md-expansion-panel-expanded>
@@ -34,7 +34,7 @@
 
             <div id="snippetTitle" class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
             </div>
-            <submit-snippet class="forExpPanelOpen" ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
+            <submit-snippet ng-show="type!=='report'" class="forExpPanelOpen" ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
             <div class="md-summary" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents">
             </div>
             <div id="snippetImages" layout="row" layout-align="end center">
