@@ -1,4 +1,4 @@
-app.factory("Snippet", function($firebaseObject, AuthService, Users) {
+app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope) {
 
     var Snippet = {};
 
@@ -42,12 +42,25 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
             });
     }
 
+    Snippet.submit = function(snippetId, managerId){
+        console.log('submitting', snippetId, managerId);
+        var updates = {};
+        updates['/snippets/' + snippetId +"/submitted"] = true;
+        updates[`/users/${managerId}/snippets/asManager/${snippetId}`] = Date.now();
+        return ref.update(updates);
+    }
+
+    Snippet.unsubmit = function(snippetId, managerId){
+        var updates = {};
+        updates['/snippets/' + snippetId +"/submitted"] = false;
+        updates[`/users/${managerId}/snippets/asManager/${snippetId}`] = null;
+        return ref.update(updates);
+    }
+
     //TEAM SNIPPETS COME FROM WITHIN (but actually... all snippets should be added to an entire team upon creation)
 
     Snippet.create = function(data) {
-        console.log(data, '?');
         var currentUser = AuthService.getLoggedInUser();
-        console.log('here', currentUser)
         data.team = currentUser.manager;
         data.owner = currentUser.$id;
         data.dateAdded = Date.now();
@@ -56,7 +69,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         obj[currentUser.$id] = true;
         data.collaborators = obj;
         var newSnippetKey = ref.child("snippets").push().key;
-
         var teammateIds = Users.findUsersMatchingManager(currentUser.manager);
         var updates = {};
         updates['/snippets/' + newSnippetKey] = data;
@@ -82,32 +94,49 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
 
     //return statement on 82 not doing anything. Think about returns in general!
+    // Snippet.delete = function(snippetId) {
+    //     var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
+    //     var removeSnippetFromCollaborators = function(collaborators) {
+    //         collaborators.forEach(collaborator => {
+    //             collaborator = Users.getProfile(collaborator);
+    //             return collaborator.$loaded().then(function() {
+    //                 if (collaborator.snippets.asTeamMember.hasOwnProperty(snippetId)) {
+    //                     collaborator.snippets.asTeamMember[snippetId] = null;
+    //                     collaborator.$save();
+    //                 }
+    //                 if (collaborator.snippets.asCollaborator.hasOwnProperty(snippetId)) {
+    //                     collaborator.snippets.asCollaborator[snippetId] = null;
+    //                     collaborator.$save();
+    //                 }
+    //             })
+    //         });
+    //     }
+    //     snippet.$loaded().then(function() {
+    //         var collaborators = _.keys(snippet.collaborators);
+    //         Users.findUsersMatchingManager(snippet.team, function(members) {
+    //             collaborators = _.union(members, collaborators);
+    //             removeSnippetFromCollaborators(collaborators);
+    //         });
+    //         snippet.$remove();
+    //     });
+    // };
+
     Snippet.delete = function(snippetId) {
         var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
-        var removeSnippetFromCollaborators = function(collaborators) {
-            collaborators.forEach(collaborator => {
-                collaborator = Users.getProfile(collaborator);
-                return collaborator.$loaded().then(function() {
-                    if (collaborator.snippets.asTeamMember.hasOwnProperty(snippetId)) {
-                        collaborator.snippets.asTeamMember[snippetId] = null;
-                        collaborator.$save();
-                    }
-                    if (collaborator.snippets.asCollaborator.hasOwnProperty(snippetId)) {
-                        collaborator.snippets.asCollaborator[snippetId] = null;
-                        collaborator.$save();
-                    }
-                })
-            });
-        }
-        snippet.$loaded().then(function() {
+        return snippet.$loaded().then(function(){
+            var updates = {};
             var collaborators = _.keys(snippet.collaborators);
-            Users.findUsersMatchingManager(snippet.team, function(members) {
-                collaborators = _.union(members, collaborators);
-                removeSnippetFromCollaborators(collaborators);
-            });
-            snippet.$remove();
-        });
-    };
+            collaborators.forEach(function(collab){
+                updates[`/users/${collab}/snippets/asTeamMember/${snippetId}`] = null;
+                updates[`/users/${collab}/snippets/asCollaborator/${snippetId}`] = null;
+                updates[`/users/${collab}/snippets/asManager/${snippetId}`] = null;
+            })
+            updates[`/users/${snippet.team}/snippets/asManager/${snippetId}`] = null;
+            updates[`/users/${snippet.owner}/snippets/asOwner/${snippetId}`] = null;
+            updates['/snippets/' + snippetId] = null;
+            return ref.update(updates);
+        })
+    }
 
     return Snippet;
 

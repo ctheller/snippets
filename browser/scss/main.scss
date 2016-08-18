@@ -34,6 +34,12 @@ body {
   height: 100%;
 }
 
+md-list-item {
+    > a {
+        margin: 0 !important;
+    }
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';

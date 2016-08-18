@@ -63,6 +63,8 @@
 
         var setUser = function(){
             if (Auth.$getAuth()) {
+                console.log("Hit Set Rootscope info FN");
+                
                 var id = Auth.$getAuth().uid;
 
                 //check if user is in the DB already

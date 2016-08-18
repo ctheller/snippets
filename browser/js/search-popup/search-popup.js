@@ -74,7 +74,8 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
         allEmployees.push({
           value: (user.first_name+" "+user.last_name).toLowerCase(),
           display: (user.first_name+" "+user.last_name),
-          id: user.$id
+          id: user.$id,
+          photoUrl: user.photoUrl 
         })
       })
 

@@ -6,11 +6,7 @@ app.factory("Users", function($firebaseObject, $firebaseArray, $rootScope) {
     var ref = firebase.database().ref("users");
 
     Users.findUsersMatchingManager = function(managerId) {
-        // console.log('user', managerId)
-        // ref.orderByChild('manager').equalTo(managerId).once('value', function(snap) {
-        //     console.log('snap', snap)
-        //     callback(Object.keys(snap.val()));
-        // });
+        
         var teammates = $rootScope.users.filter(user => user.manager === managerId);
         return teammates.map(teammate => teammate.$id);
 
@@ -42,17 +38,8 @@ app.factory("Users", function($firebaseObject, $firebaseArray, $rootScope) {
     }
 
     Users.addAsCollaborator = function(userId, snippetId, snippetCreationTime) {
-        console.log(snippetCreationTime);
         firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(snippetCreationTime);
     }
-
-    // Users.addAsManager = function(userId, snippetId) {
-    //     firebase.database().ref('users/'+ userId +"/snippets/asManager/" + snippetId).set(true);
-    // }
-
-    // Users.removeAsManager = function(userId, snippetId) {
-    //     firebase.database().ref('users/'+ userId +"/snippets/asManager/" + snippetId).set(null);
-    // }
 
     return Users;
 

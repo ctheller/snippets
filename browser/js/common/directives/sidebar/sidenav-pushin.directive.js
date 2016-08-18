@@ -3,6 +3,7 @@ app.directive('sidenavPushIn', function($rootScope) {
         restrict: 'A',
         require: '^mdSidenav',
         link: function($scope, element, attr, sidenavCtrl) {
+
             var body = angular.element(document.body);
             body.addClass('md-sidenav-push-in');
             var cssClass = (element.hasClass('md-sidenav-left') ? 'md-sidenav-left' : 'md-sidenav-right') + '-open';
