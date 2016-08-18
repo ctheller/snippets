@@ -26,6 +26,8 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         if ($rootScope.user['reports']) {
             $scope.isManager = true;
         }
+
+        // $scope.reportSnippetIds = ["-KPPZT29sYqvv14KI5hJ"];
     }
 
 

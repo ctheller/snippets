@@ -42,6 +42,21 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope)
             });
     }
 
+    Snippet.submit = function(snippetId, managerId){
+        console.log('submitting', snippetId, managerId);
+        var updates = {};
+        updates['/snippets/' + snippetId +"/submitted"] = true;
+        updates[`/users/${managerId}/snippets/asManager/${snippetId}`] = Date.now();
+        return ref.update(updates);
+    }
+
+    Snippet.unsubmit = function(snippetId, managerId){
+        var updates = {};
+        updates['/snippets/' + snippetId +"/submitted"] = false;
+        updates[`/users/${managerId}/snippets/asManager/${snippetId}`] = null;
+        return ref.update(updates);
+    }
+
     //TEAM SNIPPETS COME FROM WITHIN (but actually... all snippets should be added to an entire team upon creation)
 
     Snippet.create = function(data) {
