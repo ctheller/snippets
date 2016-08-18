@@ -198,7 +198,8 @@ var gabeObj = {
   photoUrl: "https://lh4.googleusercontent.com/-AqkAdKInFSU/AAAAAAAAAAI/AAAAAAAAKtI/-n_yz9wAC9U/s96-c/photo.jpg",
   first_name: "Gabe",
   last_name: "Rodriguez",
-  manager: 'kKCwoTNYpURej7sv3bKMcy7oMKI3'
+  manager: 'kKCwoTNYpURej7sv3bKMcy7oMKI3',
+  reports: {}
 };
 
 var tammyObj = {
@@ -207,7 +208,10 @@ var tammyObj = {
   photoUrl: "https://lh4.googleusercontent.com/-oYfo7EWvvj0/AAAAAAAAAAI/AAAAAAAAAU8/dt8TeNi4nco/s96-c/photo.jpg",
   first_name: "Tammy",
   last_name: "Chu",
-  manager: CLevelPerson
+  manager: CLevelPerson,
+  reports: {
+    'kKCwoTNYpURej7sv3bKMcy7oMKI3': true
+  }
 };
 
 var nickObj = {
@@ -216,7 +220,8 @@ var nickObj = {
   first_name: "Nicky",
   last_name: "Koster",
   photoUrl: 'https://randomuser.me/api/portraits/men/42.jpg',
-  manager: 'kKCwoTNYpURej7sv3bKMcy7oMKI3'
+  manager: 'kKCwoTNYpURej7sv3bKMcy7oMKI3',
+  reports: {}
 };
 
 var chrisObj = {
@@ -225,10 +230,16 @@ var chrisObj = {
   photoUrl: "https://lh4.googleusercontent.com/-SUsrR9RW9dM/AAAAAAAAAAI/AAAAAAAAA4M/f9GV-l536rc/s96-c/photo.jpg",
   first_name: "Chris",
   last_name: "Heller",
-  manager: 'me4lpzRP3OUFzDjzpu11Utx323Q2'
+  manager: 'me4lpzRP3OUFzDjzpu11Utx323Q2',
+  reports: {
+    'We8iLkQsY3OEeAYoSuOuLFsBjzu2': true,
+    'eTeGzfSeoxPMx1qwCV8PwUtCii53': true
+  }
 };
 
 
+console.log(CLevelPerson);
+console.log(CLevelsOrg);
 
 // loop to get replace random employee
 for (let i=0; i< 4; i++) { //
@@ -253,7 +264,7 @@ for (let i=0; i< 4; i++) { //
   // organUsers[newGuy.id] = true;
 
   // add user to org (NEW)
-  seedy.organizations[CLevelsOrg][newGuy.id] = true;
+  seedy.organizations[CLevelsOrg].users[newGuy.id] = true;
 
   // add newGuy to users table
   seedy.users[newGuy.id] = {
@@ -263,7 +274,8 @@ for (let i=0; i< 4; i++) { //
     last_name: newGuy.last_name,
     isAdmin: true,
     organization: CLevelsOrg,
-    manager: newGuy.manager
+    manager: newGuy.manager,
+    reports: newGuy.reports
   };
 
   // loop through snippets
@@ -283,7 +295,7 @@ for (let i=0; i< 4; i++) { //
     // }
 
     /// add teams snippets to user
-    if (seedy.snippets[snippetKey].team && seedy.snippets[snippetKey].team === CLevelPerson) {
+    if (seedy.snippets[snippetKey].team && seedy.snippets[snippetKey].team === newGuy.manager) {
       if (!seedy.users[newGuy.id].snippets) {
         seedy.users[newGuy.id].snippets = {};
       }
@@ -310,6 +322,7 @@ for (let i=0; i< 4; i++) { //
   // if (seedy.users[toReplace[i]].snippets) {
   //   seedy.users[newGuy.id].snippets = seedy.users[toReplace[i]].snippets;
   // }
+
 
   // // delete user
   // delete seedy.users[toReplace[i]];
