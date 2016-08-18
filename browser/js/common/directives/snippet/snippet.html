@@ -7,6 +7,7 @@
             <p ng-if="snippet.submitted" id="contenttext" ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead">{{snippet.contents}}</p>
         </md-card-title-text>
         <submit-snippet ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
+        <a ng-click="delete(snippet.$id)" ng-show="type!=='report'" class="deleteit btn-floating btn-xs red lighten-2"><i class="material-icons">delete</i></a>
     </md-card-title>
     <md-card-actions id="snippetImages" layout="row" layout-align="end center">
         <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
@@ -27,6 +28,7 @@
             {{ snippet.subject }}
         </div>
                 <submit-snippet ng-if="type!=='report'" class="forExpPanel" ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
+                <a style="opacity:0" class=" deleteit btn-floating btn-xs red lighten-2"><i class="material-icons">delete</i></a>
 
     </md-expansion-panel-collapsed>
     <md-expansion-panel-expanded>
@@ -35,6 +37,7 @@
             <div id="snippetTitle" class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
             </div>
             <submit-snippet ng-show="type!=='report'" class="forExpPanelOpen" ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
+            <a ng-click="delete(snippet.$id)" ng-show="type!=='report'" class="deleteForPanelOpen deleteit btn-floating btn-xs red lighten-2"><i class="material-icons">delete</i></a>
             <div class="md-summary" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents">
             </div>
             <div id="snippetImages" layout="row" layout-align="end center">
