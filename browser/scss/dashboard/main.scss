@@ -159,3 +159,35 @@ md-expansion-panel-group[md-component-id='team-panel'] {
     }
 }
 
+#export-box {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    transition: all .5s ease;
+    opacity: 0;
+    background-color: #eaeaec;
+    border: 3px steelblue dashed;
+    position: relative;
+    bottom: -20px;
+    span {
+        font-size: 40px;
+        opacity: .1;
+        text-align: center;
+        width: 100%;
+        display: block;
+        position: absolute;
+        top: 40px;
+    }
+}
+
+#export-box.ui-droppable-active {
+    transition: all .5s ease;
+    opacity: 1;
+}
+
+#export-button {
+    margin-top: 10px;
+    width: 40px;
+}
+
+
