@@ -7,7 +7,7 @@ app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers)
 
 	$scope.currentWeek = d.valueOf();
 
-	$scope.displayWeek = "Week of " + d.toDateString();
+	$scope.displayWeek = ($scope.currentWeekNum) ? "Week of " + d.toDateString() : "This Week";
 
     $scope.showSnippetForm = function(ev) {
         $mdDialog.show({
