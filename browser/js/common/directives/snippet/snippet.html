@@ -11,7 +11,7 @@
     <md-card-actions id="snippetImages" layout="row" layout-align="end center">
         <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
         <div class="snippetImg btn-floating btn-md img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index">
-           <!--  <span ng-click="removeCollaborator(collaborator.$id)" class="close"><i class="material-icons"> clear</i></span> -->
+            <span ng-click="removeCollaborator(collaborator.$id)" class="close"><i class="material-icons"> clear</i></span>
 
             <md-tooltip>{{collaborator.first_name}} {{collaborator.last_name}}</md-tooltip>
             <img ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}" style="z-index: {{ collaborators.length - index }}">
