@@ -59,15 +59,15 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
         var index = 'firebase';
         var ref = database.ref().child(PATH);
         var key = ref.child('request').push({ index: index, type: type, query: query }).key;
-        ref.child('response/' + key).on('value', showResults);
+        ref.child('response/' + key).on('value', sendResults);
     }
 
-    function showResults(snap) {
+    function sendResults(snap) {
         if (!snap.exists()) {
             return; } // wait until we get data
         var data = snap.val();
-        console.log(data, 'elastic search is awesome');
-        $state.go('search');
+        var result = {'data': data};
+        $state.go('search', {'result': result});
     }
 
     function makeTerm(term) {
