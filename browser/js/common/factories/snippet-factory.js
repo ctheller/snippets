@@ -106,6 +106,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope)
             })
             updates[`/users/${snippet.team}/snippets/asManager/${snippetId}`] = null;
             updates[`/users/${snippet.owner}/snippets/asOwner/${snippetId}`] = null;
+            updates[`/users/${snippet.owner}/snippets/asTeamMember/${snippetId}`] = null;
             updates['/snippets/' + snippetId] = null;
             return ref.update(updates);
         })

@@ -6,7 +6,8 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             id: '=',
             type: '=',
             card: '@',
-            users: '='
+            users: '=',
+            currentWeekNum: '='
         },
         link: function(scope, element, attributes) {
 
@@ -43,6 +44,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                     Users.getById(key).then(function(user){
                         scope.collaborators.push(user);
                     })
+
                 }
             }, true);
 
@@ -55,6 +57,9 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             scope.delete = Snippet.delete;
 
             element.on('dblclick', function(){
+                //only for report snippets
+                if (!element.hasClass('fromReport')) return;
+
                 if (element.hasClass('selectedForExport')) element.removeClass('selectedForExport')
                 else element.addClass('selectedForExport');
 
@@ -67,7 +72,6 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                     $rootScope.selectedSnippetIds.splice(idx, 1);
                 }
 
-                console.log($rootScope.selectedSnippetIds);
                 $rootScope.$apply();
 
             })

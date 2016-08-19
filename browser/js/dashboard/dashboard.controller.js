@@ -12,6 +12,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     }
 
     var setScope = function(){
+        console.log("scope set");
         if (!$rootScope.user.snippets) {
             $scope.teamSnippetIds = $scope.collabSnippetIds = $scope.collabAndTeamSnippetIds = $scope.reportSnippetIds = $scope.mySnippetIds = $scope.allSnippetIds = [];
             return;
@@ -80,7 +81,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     // }
 
     $scope.exportToEmail = function(){
-        console.log("exporting to email");
         Email.compose();
     }
 
