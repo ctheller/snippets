@@ -39,13 +39,7 @@ app.directive('focusInput', function($document, $rootScope) {
             });
             searchbox.focus(function() {
                 $document.bind("keypress", function(event) {
-                    // if (event.which === 13) {
-                        // event.preventDefault();
-                        console.log(searchbox.val())
-                        // setTimeout(function() {
-                            searchbtn.click();
-                        // }, 300)
-                    // }
+                    searchbtn.click();
                 });
             })
         }
