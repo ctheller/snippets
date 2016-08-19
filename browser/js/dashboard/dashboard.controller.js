@@ -9,8 +9,8 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     }
 
     var setScope = function(){
+        console.log("scope set");
         $scope.allSnippetIds = Snippet.getSnippetIdsWithInfo($rootScope.user);
-        
     }
 
     //on page refresh or initial login
@@ -25,7 +25,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     //to return to state and see things
     if ($scope.user) {
         setScope();
-            
         if ($rootScope.unwatchUser) $rootScope.unwatchUser();
         $rootScope.unwatchUser = $scope.userFirebaseObj.$watch(function() {
             setScope();
