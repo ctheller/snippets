@@ -21,7 +21,7 @@ function PopupCtrl($mdDialog, $scope) {
 
 function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
 
-    var self = this;
+  var self = this;
 
     //need better way to access the parent scope here
     var snippet = $scope.$parent.$parent.snippet;
