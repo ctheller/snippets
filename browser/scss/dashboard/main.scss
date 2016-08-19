@@ -84,10 +84,9 @@ div.dashboard-ui-view-wrapper {
 .snippet-container {
     height: 100%;
     overflow-y: scroll;
-    div:nth-child(1) {
-            margin-left: 8px;
-    margin-top: 15px;
-    margin-bottom: -4px;
+    .team-title {
+        margin-left: 8px;
+        margin-top: 15px;
     }
 }
 
@@ -108,7 +107,6 @@ snippet {
 // .snippet-container {
 //     margin: 0 10px;
 // }
-
 md-expansion-panel-group[md-component-id='report-panel'] {
     cursor: move;
 }

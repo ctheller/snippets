@@ -16,10 +16,16 @@
     </div>
     <!-- team view if im a manager -->
     <div layout="column" class="snippet-container" flex="50" ng-if="user.reports">
-        <div>Your Team</div>
-        <div ng-if="dateInRange(obj.date)" layout="row" flex="noshrink" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}">
+        <div class="team-title">Your Team</div>
+        <md-expansion-panel-group md-component-id="manager-team-panel" multiple>
+            <div ng-if="dateInRange(obj.date)" class="parent" layout="row" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}">
+                <snippet id="obj.id" type="'all'" card="false" class="{{(obj.type === 'team') ? 'team' : ((obj.type === 'mine') ? 'mine' : 'collab')}}"></snippet>
+            </div>
+        </md-expansion-panel-group>
+
+     <!--    <div ng-if="dateInRange(obj.date)" layout="row" flex="noshrink" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}">
             <snippet id="obj.id" card="true"></snippet>
-        </div>
+        </div> -->
     </div>
 
     <!-- team + collab view if im not a manager -->

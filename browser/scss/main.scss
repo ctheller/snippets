@@ -44,7 +44,7 @@ md-list-item {
   bottom: auto !important;
   left: auto !important;
   top: 60px;
-  right:7%;  
+  right:7%;
 }
 
 .toastCreated {
@@ -65,6 +65,20 @@ md-list-item {
 
 .toastAddCollab {
   background-color: #2196f3;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: $extremely-light-grey;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    background-color: $extremely-light-grey;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #BDBDBD;
 }
 
 @import 'directives/main';
