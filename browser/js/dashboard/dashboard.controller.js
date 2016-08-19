@@ -10,6 +10,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
     var setScope = function(){
         $scope.allSnippetIds = Snippet.getSnippetIdsWithInfo($rootScope.user);
+        
     }
 
     //on page refresh or initial login
