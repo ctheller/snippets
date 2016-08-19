@@ -4,39 +4,19 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         $scope.draggingNow = true;
     }
 
-    var dateFilter = function(obj){
-        return _.pickBy(obj, function(snippetCreated){
-            var diff = (snippetCreated - $scope.currentWeek)/(1000*60*60*24);
-            return (diff < 7 && diff > 0);
-        })
+    $scope.dateInRange = function(date){
+        return ((date - $scope.currentWeek)/(1000*60*60*24) < 7 && (date - $scope.currentWeek)/(1000*60*60*24) > 0);
     }
 
     var setScope = function(){
-        if (!$rootScope.user.snippets) {
-            $scope.teamSnippetIds = $scope.collabSnippetIds = $scope.collabAndTeamSnippetIds = $scope.reportSnippetIds = $scope.mySnippetIds = $scope.allSnippetIds = [];
-            return;
-        }
-        $scope.mySnippetIds = $rootScope.user.snippets.asOwner ? Object.keys(dateFilter($rootScope.user.snippets.asOwner)) : [];
-        $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys(dateFilter($rootScope.user.snippets.asTeamMember)) : [];
-        $scope.collabSnippetIds = $rootScope.user.snippets.asCollaborator ? Object.keys(dateFilter($rootScope.user.snippets.asCollaborator)) : [];
-        $scope.reportSnippetIds = $rootScope.user.snippets.asManager ? Object.keys(dateFilter($rootScope.user.snippets.asManager)) : [];
-        $scope.mySnippetIds = $scope.mySnippetIds.map(function(id) {return {id: id, type: 'mine'}});
-        $scope.teamSnippetIds = $scope.teamSnippetIds.map(function(id) {return {id: id, type: 'team'}});
-        $scope.collabSnippetIds = $scope.collabSnippetIds.map(function(id) {return {id: id, type: 'collab'}});
-        $scope.reportSnippetIds = $scope.reportSnippetIds.map(function(id) {return {id: id, type: 'report'}});
-        $scope.collabAndTeamSnippetIds = _.unionBy($scope.collabSnippetIds, $scope.teamSnippetIds, 'id');
-        $scope.allSnippetIds = _.unionBy($scope.mySnippetIds, $scope.collabAndTeamSnippetIds, 'id');
-        $scope.isManager = false;
-        if ($rootScope.user['reports']) {
-            $scope.isManager = true;
-        }
+        $scope.allSnippetIds = Snippet.getSnippetIdsWithInfo($rootScope.user);
     }
-
 
     //on page refresh or initial login
     $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
         setScope();
-        $rootScope.userFirebaseObj.$watch(function() {
+        if ($rootScope.unwatchUser) $rootScope.unwatchUser();
+        $rootScope.unwatchUser = $scope.userFirebaseObj.$watch(function() {
             setScope();
         })
     });
@@ -44,8 +24,12 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     //to return to state and see things
     if ($scope.user) {
         setScope();
+        if ($rootScope.unwatchUser) $rootScope.unwatchUser();
+        $rootScope.unwatchUser = $scope.userFirebaseObj.$watch(function() {
+            setScope();
+        });
     }
-
+    
     $scope.card = true;
     $scope.dragged = [];
 
@@ -62,20 +46,13 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     ];
 
     $scope.createNewSnippet = function(e, ui) {
-        var snippetCopyId = ui.draggable.scope().obj.id;
-        Snippet.duplicateAsTemplate(snippetCopyId);
+        var snippetCopyId = ui.draggable.scope().key;
+        Snippet.duplicateAsTemplate(snippetCopyId).then(function(){
+            Materialize.toast('Snippet copied', 1250, 'toastCopied');
+        }).catch(function(){
+            Materialize.toast('Copy Failed', 2000, 'toastFail');
+        })
     }
-
-
-    // $scope.selectSnippet = function(e, ui){
-    //     if (!$rootScope.selectedSnippetIds) $rootScope.selectedSnippetIds = [];
-    //     var snippetId = ui.draggable.scope().obj.id;
-    //     var idx = $rootScope.selectedSnippetIds.indexOf(snippetId);
-    //     if (idx === -1) {
-    //         $rootScope.selectedSnippetIds.push(snippetId);
-    //     }
-    //     console.log($rootScope.selectedSnippetIds);
-    // }
 
     $scope.exportToEmail = function(){
         Email.compose();

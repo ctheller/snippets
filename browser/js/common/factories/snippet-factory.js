@@ -1,4 +1,4 @@
-app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope, $q) {
+app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
     var Snippet = {};
 
@@ -43,7 +43,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope,
     }
 
     Snippet.submit = function(snippetId, managerId){
-        console.log('submitting', snippetId, managerId);
         var updates = {};
         updates['/snippets/' + snippetId +"/submitted"] = true;
         updates[`/users/${managerId}/snippets/asManager/${snippetId}`] = Date.now();
@@ -84,11 +83,10 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope,
     };
 
     Snippet.duplicateAsTemplate = function(snippetId) {
-        console.log(snippetId);
         var fromSnippet = Snippet.getSnippetById(snippetId);
-        fromSnippet.$loaded().then(function() {
+        return fromSnippet.$loaded().then(function() {
             var dataToTransfer = { subject: fromSnippet.subject, contents: fromSnippet.contents };
-            Snippet.create(dataToTransfer);
+            return Snippet.create(dataToTransfer);
         })
 
     };
@@ -106,10 +104,40 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope,
             })
             updates[`/users/${snippet.team}/snippets/asManager/${snippetId}`] = null;
             updates[`/users/${snippet.owner}/snippets/asOwner/${snippetId}`] = null;
+            updates[`/users/${snippet.owner}/snippets/asCollaborator/${snippetId}`] = null;
             updates[`/users/${snippet.owner}/snippets/asTeamMember/${snippetId}`] = null;
             updates['/snippets/' + snippetId] = null;
             return ref.update(updates);
         })
+    }
+
+
+
+    Snippet.getSnippetIdsWithInfo = function(user){
+        if (!user || !user.snippets) return [];
+
+        var ownedSnippetIds = user.snippets.asOwner ? user.snippets.asOwner : {};
+        var mappedOwnedIds = [];
+        _.forEach(ownedSnippetIds, function(value, key){
+            mappedOwnedIds.push({id: key, date: value, type: 'mine'});
+        })
+
+        var teamSnippetIds = user.snippets.asTeamMember ? user.snippets.asTeamMember : {};
+        var mappedTeamIds = [];
+        _.forEach(teamSnippetIds, function(value, key){
+            mappedTeamIds.push({id: key, date: value, type: 'team'});
+        })
+
+        var collabSnippetIds = user.snippets.asCollaborator ? user.snippets.asCollaborator : {};
+        var mappedCollabIds = [];
+        _.forEach(collabSnippetIds, function(value, key){
+            mappedCollabIds.push({id: key, date: value, type: 'collab'});
+        })
+        
+        return _.unionBy(mappedOwnedIds, _.unionBy(mappedCollabIds, mappedTeamIds, 'id'), 'id');
+
+
+        
     }
 
     return Snippet;

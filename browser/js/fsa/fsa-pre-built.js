@@ -63,7 +63,6 @@
 
         var setUser = function(){
             if (Auth.$getAuth()) {
-                console.log("Hit Set Rootscope info FN");
                 
                 var id = Auth.$getAuth().uid;
 
@@ -81,6 +80,18 @@
                 user = $firebaseObject(ref.child(id));
                 $rootScope.userFirebaseObj = user;
                 user.$bindTo($rootScope, 'user').then(function(){
+
+                    //Set up listeners for Collaboration
+                    var initializing = true;
+                    ref.child(id).child('snippets').child('asCollaborator').on('child_added', function(){
+                        if (!initializing) Materialize.toast('Added as Collaborator', 1250, 'toastAddCollab');
+                    });
+                    initializing = false;
+                    ref.child(id).child('snippets').child('asCollaborator').on('child_removed', function(){
+                        Materialize.toast('Removed as Collaborator', 1250, 'toastDeleted');
+                    });
+
+
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     Organizations.get().$loaded().then(function(org){
                         $rootScope.organization = org;
