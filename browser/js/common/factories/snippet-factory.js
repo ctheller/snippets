@@ -111,6 +111,37 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope,
         })
     }
 
+    //{snippets:{asCollaborator:{"id":"strDate", 'id2':'strDate'}}}
+    [{id:'', date:'', type:''}]
+
+
+    Snippet.getSnippetIdsWithInfo = function(user){
+        if (!user || !user.snippets) return [];
+
+        var ownedSnippetIds = user.snippets.asOwner ? user.snippets.asOwner : {};
+        var mappedOwnedIds = [];
+        _.forEach(ownedSnippetIds, function(value, key){
+            mappedOwnedIds.push({id: key, date: value, type: 'mine'});
+        })
+
+        var teamSnippetIds = user.snippets.asTeamMember ? user.snippets.asTeamMember : {};
+        var mappedTeamIds = [];
+        _.forEach(teamSnippetIds, function(value, key){
+            mappedTeamIds.push({id: key, date: value, type: 'team'});
+        })
+
+        var collabSnippetIds = user.snippets.asCollaborator ? user.snippets.asCollaborator : {};
+        var mappedCollabIds = [];
+        _.forEach(collabSnippetIds, function(value, key){
+            mappedCollabIds.push({id: key, date: value, type: 'collab'});
+        })
+        
+        return _.unionBy(mappedOwnedIds, _.unionBy(mappedCollabIds, mappedTeamIds, 'id'), 'id');
+
+
+        
+    }
+
     return Snippet;
 
 });
