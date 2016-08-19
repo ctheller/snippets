@@ -63,7 +63,7 @@
 
         var setUser = function(){
             if (Auth.$getAuth()) {
-                
+
                 var id = Auth.$getAuth().uid;
 
                 //check if user is in the DB already
@@ -101,15 +101,17 @@
                     })
                 })
 
+                // SHOULD BE REPLACED BY LOADING SCREEN
+                $state.go('dashboard.week', {'week': 0});
             }
             else {
                 $rootScope.user = null;
                 $rootScope.users = null;
                 $rootScope.userRef = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-                $state.go('home');
+                $state.go('splash');
             }
-        }
+        };
 
         this.setUser = setUser;
 
