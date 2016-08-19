@@ -63,7 +63,6 @@
 
         var setUser = function(){
             if (Auth.$getAuth()) {
-                console.log("Hit Set Rootscope info FN");
                 
                 var id = Auth.$getAuth().uid;
 

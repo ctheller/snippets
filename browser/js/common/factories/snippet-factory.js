@@ -94,7 +94,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope,
 
 
     Snippet.delete = function(snippetId) {
-        console.log(snippetId);
         var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
         return snippet.$loaded().then(function(){
             var updates = {};
@@ -109,10 +108,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope,
             updates[`/users/${snippet.owner}/snippets/asCollaborator/${snippetId}`] = null;
             updates[`/users/${snippet.owner}/snippets/asTeamMember/${snippetId}`] = null;
             updates['/snippets/' + snippetId] = null;
-            console.log('setting the updates');
-            return ref.update(updates).then(function(result){
-                return result;
-            })
+            return ref.update(updates);
         })
     }
 
