@@ -1,4 +1,4 @@
-<md-dialog aria-label="Autocomplete Dialog Example" ng-cloak>
+<md-dialog aria-label="Autocomplete Dialog Example">
   <md-toolbar>
     <div class="md-toolbar-tools blue darken-1">
       <h2>Add Collaborator:</h2>
@@ -9,7 +9,7 @@
   <md-dialog-content style="width: 600px">
     <div style="width: 600px" id="search-popup" class="md-dialog-content">
       <form style="width: 400px" ng-submit="$event.preventDefault()">
-        <md-autocomplete
+        <md-autocomplete 
             md-selected-item="ctrl.selectedItem"
             md-search-text="ctrl.searchText"
             md-items="item in ctrl.querySearch(ctrl.searchText)"

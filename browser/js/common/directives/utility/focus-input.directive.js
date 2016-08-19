@@ -1,9 +1,9 @@
-app.directive('focusInput', function($document) {
+app.directive('focusInput', function($document, $rootScope) {
     return {
         restrict: 'A',
         link: function(scope, elem, attrs) {
             var searchbox = elem.find('input[name="searchbox"]');
-            var searchbtn = $document.find('.search-btn');
+            var searchbtn = $document.find('#elasticsearch-btn');
             var setActive = function() {
                 elem.css({
                     backgroundColor: 'white',
@@ -16,10 +16,14 @@ app.directive('focusInput', function($document) {
             }
             elem.bind('click', function() {
                 searchbox.focus();
-                setActive()
+                setActive();
+                searchbox.val('');
+                $rootScope.$emit('clearNgModel')
             });
             searchbox.bind('click', function() {
                 setActive();
+                searchbox.val('');
+                $rootScope.$emit('clearNgModel')
             });
             searchbox.focusout(function() {
                 if ($('input[name="value"]').length === 0) {
@@ -31,10 +35,16 @@ app.directive('focusInput', function($document) {
                         color: 'white'
                     });
                 }
-                searchbox.val('');
                 elem.removeClass('z-depth-2');
-
             });
+            searchbox.focus(function() {
+                $document.bind("keypress", function(event) {
+                    searchbtn.click();
+                    if (event.which == 13) {
+                        searchbox.blur();
+                    }
+                });
+            })
         }
     }
 });

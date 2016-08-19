@@ -51,12 +51,20 @@ md-list-item {
   background-color: #1ecd97;
 }
 
+.toastCopied {
+  background-color: #1ecd97;
+}
+
 .toastDeleted {
   background-color: #ef5350;
 }
 
 .toastFail {
   background-color: #ef5350;
+}
+
+.toastAddCollab {
+  background-color: #2196f3;
 }
 
 @import 'directives/main';
@@ -72,4 +80,5 @@ md-list-item {
 @import 'profile/main';
 @import 'searchbox/main';
 @import 'angular-advanced-searchbox/main';
+@import 'splashPage/main';
 @import 'recovery/main';

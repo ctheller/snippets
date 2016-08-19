@@ -77,8 +77,6 @@ div.dashboard-ui-view-wrapper {
             margin-left: 0;
         }
     }
-    // overflow-x: none;
-    // overflow-y: hidden;
     overflow-y: scroll;
     margin-bottom: 5px;
 }
@@ -107,9 +105,9 @@ snippet {
     width: 100%;
 }
 
-.snippet-container {
-    margin: 0 10px;
-}
+// .snippet-container {
+//     margin: 0 10px;
+// }
 
 md-expansion-panel-group[md-component-id='report-panel'] {
     cursor: move;
@@ -130,6 +128,7 @@ md-expansion-panel-group[md-component-id='team-panel'] {
     background-color: #eaeaec;
     width: 100%;
     display: block;
+    cursor: pointer;
     margin-bottom: 10px;
     border-radius: 10px;
     .left-one,

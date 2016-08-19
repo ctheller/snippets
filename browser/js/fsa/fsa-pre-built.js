@@ -63,8 +63,7 @@
 
         var setUser = function(){
             if (Auth.$getAuth()) {
-                console.log("Hit Set Rootscope info FN");
-                
+
                 var id = Auth.$getAuth().uid;
 
                 //check if user is in the DB already
@@ -81,6 +80,18 @@
                 user = $firebaseObject(ref.child(id));
                 $rootScope.userFirebaseObj = user;
                 user.$bindTo($rootScope, 'user').then(function(){
+
+                    //Set up listeners for Collaboration
+                    var initializing = true;
+                    ref.child(id).child('snippets').child('asCollaborator').on('child_added', function(){
+                        if (!initializing) Materialize.toast('Added as Collaborator', 1250, 'toastAddCollab');
+                    });
+                    initializing = false;
+                    ref.child(id).child('snippets').child('asCollaborator').on('child_removed', function(){
+                        Materialize.toast('Removed as Collaborator', 1250, 'toastDeleted');
+                    });
+
+
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     Organizations.get().$loaded().then(function(org){
                         $rootScope.organization = org;
@@ -90,15 +101,17 @@
                     })
                 })
 
+                // SHOULD BE REPLACED BY LOADING SCREEN
+                $state.go('dashboard.week', {'week': 0});
             }
             else {
                 $rootScope.user = null;
                 $rootScope.users = null;
                 $rootScope.userRef = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-                $state.go('home');
+                $state.go('splash');
             }
-        }
+        };
 
         this.setUser = setUser;
 

@@ -1,9 +1,13 @@
-app.factory('Search', function ($state) {
+app.factory('Search', function ($state, $rootScope) {
     var PATH = 'search';
     var database = firebase.database();
+    var searchParams = {};
 
     function sendSearchQuery (params) {
-        doSearch(makeTerm(params));
+        searchParams = params;
+        var terms = makeTerm(searchParams);
+        if (terms === '*') return
+        doSearch(terms);
     }
 
     function doSearch(query) {
@@ -16,18 +20,17 @@ app.factory('Search', function ($state) {
 
     function sendResults(snap) {
         if (!snap.exists()) {
-            return;
-        } // wait until we get data
+            return;// wait until we get data
+        }
         var data = snap.val();
         var result = { 'data': data };
-        $state.go('search', { 'result': result });
+        if (data.hits) $state.go('search', { 'result': result });
     }
 
-
-
     function makeTerm(params) {
+        console.log($rootScope.user.organization);
         var keys = Object.keys(params);
-        var searching = [];
+        var searching = ['organization:' + $rootScope.user.organization];
         var term;
         for (var key in params) {
             term = params[key]
