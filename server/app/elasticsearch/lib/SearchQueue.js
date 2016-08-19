@@ -38,16 +38,15 @@ SearchQueue.prototype = {
     _process: function(snap) {
         var dat = snap.val();
         var key = snap.key;
-
+        // user org sent from query
+        // todo add an AND clause to q
+        // AND organization: user.org
         if (this._assertValidSearch(key, dat)) {
-            // Perform (a very simple) ElasticSearch query
             console.log(JSON.stringify(dat.query))
-            // query = JSON.stringify(query);
             this.esc.search({
                 index: dat.index,
                 type: 'snippet',
                 q: dat.query
-                // q: 'contents:rep'
             }, function(error, response) {
                 if (error) {
                     this._reply(key, { error: error, total: 0 });
