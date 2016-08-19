@@ -1,4 +1,4 @@
-app.factory('Search', function ($state) {
+app.factory('Search', function ($state, $rootScope) {
     var PATH = 'search';
     var database = firebase.database();
     var searchParams = {};
@@ -28,8 +28,9 @@ app.factory('Search', function ($state) {
     }
 
     function makeTerm(params) {
+        console.log($rootScope.user.organization);
         var keys = Object.keys(params);
-        var searching = [];
+        var searching = ['organization:' + $rootScope.user.organization];
         var term;
         for (var key in params) {
             term = params[key]
