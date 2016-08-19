@@ -1,4 +1,4 @@
-app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers) {
+app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers, $element) {
 
 	$scope.currentWeekNum = parseInt($state.params.week);
     
@@ -25,5 +25,10 @@ app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers)
             clickOutsideToClose: true
         });
     };
+
+    $scope.$on('$stateChangeStart', function(){
+        $element.remove();
+    });
+
 
 });
