@@ -16,6 +16,12 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
             $scope.teamSnippetIds = $scope.collabSnippetIds = $scope.collabAndTeamSnippetIds = $scope.reportSnippetIds = $scope.mySnippetIds = $scope.allSnippetIds = [];
             return;
         }
+
+        //WANT TO AVOID RUNNING THIS WHOLE THING AFTER EVERY CHANGE
+        //WHEN THE WATCH IS SET AND YOU TRANSITION AWAY AND THEN BACK, DOESN'T REFRESH CORRECTLY
+        //LOSES REFERENCE TO CORRECT SCOPE SINCE SCOPE REINSTANTIATED.
+        //SHOULD UNASSIGN WATCH AND REASSIGN IT EVERY SINGLE TIME PAGE IS REVISITED
+
         $scope.mySnippetIds = $rootScope.user.snippets.asOwner ? Object.keys(dateFilter($rootScope.user.snippets.asOwner)) : [];
         $scope.teamSnippetIds = $rootScope.user.snippets.asTeamMember ? Object.keys(dateFilter($rootScope.user.snippets.asTeamMember)) : [];
         $scope.collabSnippetIds = $rootScope.user.snippets.asCollaborator ? Object.keys(dateFilter($rootScope.user.snippets.asCollaborator)) : [];
@@ -73,7 +79,11 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
     $scope.createNewSnippet = function(e, ui) {
         var snippetCopyId = ui.draggable.scope().obj.id;
-        Snippet.duplicateAsTemplate(snippetCopyId);
+        Snippet.duplicateAsTemplate(snippetCopyId).then(function(){
+            Materialize.toast('Snippet copied', 1250, 'toastCopied');
+        }).catch(function(){
+            Materialize.toast('Copy Failed', 2000, 'toastFail');
+        })
     }
 
 
