@@ -53,11 +53,12 @@
         <md-icon class="lnr" ng-click="toggle()"><i class="material-icons">menu</i></md-icon>
         <img class="snippetLogo" src="/files/snippetLogo.png">
         <!-- search bar -->
-        <!-- <form ng-submit=""> -->
+        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate>
+
         <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
         </nit-advanced-searchbox>
-        <md-icon class="search-btn" ng-click="sendSearchQuery()"><i class="material-icons">search</i></md-icon>
-        <!-- </form> -->
+        <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
+        </form>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
     </md-toolbar>
     <div id="main" layout="row" flex>

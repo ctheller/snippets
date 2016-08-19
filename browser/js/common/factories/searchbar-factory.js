@@ -1,9 +1,13 @@
 app.factory('Search', function ($state) {
     var PATH = 'search';
     var database = firebase.database();
+    var searchParams = {};
 
     function sendSearchQuery (params) {
-        doSearch(makeTerm(params));
+        searchParams = params;
+        var terms = makeTerm(searchParams);
+        if (terms === '*') return
+        doSearch(terms);
     }
 
     function doSearch(query) {
@@ -20,10 +24,8 @@ app.factory('Search', function ($state) {
         } // wait until we get data
         var data = snap.val();
         var result = { 'data': data };
-        $state.go('search', { 'result': result });
+        if (data.hits) $state.go('search', { 'result': result });
     }
-
-
 
     function makeTerm(params) {
         var keys = Object.keys(params);
