@@ -3,7 +3,11 @@ let creds = require('../../credentials/creds.json');
 firebase.initializeApp({
   serviceAccount: creds.serviceAccount,
   databaseURL: "https://snippets-2f32c.firebaseio.com",
+  databaseAuthVariableOverride: {
+    uid: "snipyt-is-awesome"
+  }
 });
+console.log('here')
 let db = firebase.database();
 let ref = firebase.app().database();
 
