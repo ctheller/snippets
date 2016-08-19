@@ -41,6 +41,8 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
 
       Users.addAsCollaborator(selectedUserId, snippet.$id, snippet.dateAdded);
 
+      if (!selectedUserId || !snippet.$id) return;
+
       if (!snippet.collaborators) {
         var obj = {};
         obj[selectedUserId] = true;

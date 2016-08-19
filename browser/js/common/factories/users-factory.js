@@ -13,6 +13,7 @@ app.factory("Users", function($firebaseObject, $firebaseArray, $rootScope) {
 
     Users.getUsers = function(userIdArray){
         var gettingUsers =  userIdArray.map(function(id){
+            if (!id) return;
             return Users.getById(id);
         });
         return Promise.all(gettingUsers);
@@ -20,6 +21,7 @@ app.factory("Users", function($firebaseObject, $firebaseArray, $rootScope) {
     }
 
     Users.getById = function(userId){
+        if (!userId) return;
         var thisUser = $firebaseObject(ref.child(userId));
         return thisUser.$loaded().then(function(){
             return thisUser;
@@ -27,6 +29,7 @@ app.factory("Users", function($firebaseObject, $firebaseArray, $rootScope) {
     }
 
     Users.getProfile = function(userId) {
+        if (!userId) return;
         var profileRef = ref.child(userId);
         // return it as a synchronized object
         return $firebaseObject(profileRef);

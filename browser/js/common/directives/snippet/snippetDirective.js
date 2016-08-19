@@ -44,6 +44,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                     Users.getById(key).then(function(user){
                         scope.collaborators.push(user);
                     })
+
                 }
             }, true);
 
