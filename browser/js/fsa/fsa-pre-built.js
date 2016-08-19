@@ -90,6 +90,8 @@
                         })
                     })
                 })
+
+                // SHOULD BE REPLACED BY LOADING SCREEN
                 $state.go('dashboard.week');
             }
             else {
