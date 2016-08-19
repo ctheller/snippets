@@ -72,7 +72,7 @@
                             <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
                             <p ui-sref="{{item.state}}">{{ item.label }}</p>
                         </md-list-item>
-                        <md-list-item ng-show="isAdmin" class="sidebar-item state admin" ui-sref-active="active">
+                        <md-list-item ng-show="user.isAdmin" class="sidebar-item state admin" ui-sref-active="active">
                             <md-icon class="lnr"><i class="material-icons">supervisor_account</i></md-icon>
                             <p ui-sref="admin">Admin</p>
                         </md-list-item>

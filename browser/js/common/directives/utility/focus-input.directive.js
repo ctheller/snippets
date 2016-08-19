@@ -31,6 +31,7 @@ app.directive('focusInput', function($document) {
                         color: 'white'
                     });
                 }
+                searchbox.val('');
                 elem.removeClass('z-depth-2');
 
             });

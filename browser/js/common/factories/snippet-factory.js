@@ -1,4 +1,4 @@
-app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope) {
+app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope, $q) {
 
     var Snippet = {};
 
