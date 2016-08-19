@@ -37,10 +37,12 @@ app.factory("Users", function($firebaseObject, $firebaseArray, $rootScope) {
 
     Users.removeAsCollaborator = function(userId, snippetId) {
         firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(null);
+        firebase.database().ref('snippets/'+ snippetId +"/collaborators/" + userId).set(null);
     }
 
     Users.addAsCollaborator = function(userId, snippetId, snippetCreationTime) {
         firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(snippetCreationTime);
+        firebase.database().ref('snippets/'+ snippetId +"/collaborators/" + userId).set(true);
     }
 
     return Users;
