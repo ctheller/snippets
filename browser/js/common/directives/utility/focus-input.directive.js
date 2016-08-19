@@ -3,19 +3,23 @@ app.directive('focusInput', function($document) {
         restrict: 'A',
         link: function(scope, elem, attrs) {
             var searchbox = elem.find('input[name="searchbox"]');
-
+            var searchbtn = $document.find('.search-btn');
+            var setActive = function() {
+                elem.css({
+                    backgroundColor: 'white',
+                    transition: 'background-color 0.1s ease'
+                });
+                searchbtn.css({
+                    color: '#64b5f6'
+                });
+                elem.addClass('z-depth-2');
+            }
             elem.bind('click', function() {
                 searchbox.focus();
-                elem.css({
-                    backgroundColor: 'white',
-                    transition: 'background-color 0.1s ease'
-                });
+                setActive()
             });
             searchbox.bind('click', function() {
-                elem.css({
-                    backgroundColor: 'white',
-                    transition: 'background-color 0.1s ease'
-                });
+                setActive();
             });
             searchbox.focusout(function() {
                 if ($('input[name="value"]').length === 0) {
@@ -23,7 +27,11 @@ app.directive('focusInput', function($document) {
                         backgroundColor: '#64b5f6',
                         transition: 'background-color 0.1s ease'
                     });
+                    searchbtn.css({
+                        color: 'white'
+                    });
                 }
+                elem.removeClass('z-depth-2');
 
             });
         }
