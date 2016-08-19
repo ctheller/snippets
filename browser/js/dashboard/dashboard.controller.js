@@ -12,7 +12,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     }
 
     var setScope = function(){
-        console.log("scope set");
         if (!$rootScope.user.snippets) {
             $scope.teamSnippetIds = $scope.collabSnippetIds = $scope.collabAndTeamSnippetIds = $scope.reportSnippetIds = $scope.mySnippetIds = $scope.allSnippetIds = [];
             return;
@@ -31,13 +30,10 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         if ($rootScope.user['reports']) {
             $scope.isManager = true;
         }
-
-        // //FOR DEVELOPMENT ONLY::
-        // $scope.reportSnippetIds = ["-KPPZT29sYqvv14KI5hJ", "GaT704CdvvMKxcj", "gqPHWiBGQu3kgRX"];
-        // $scope.reportSnippetIds = $scope.reportSnippetIds.map(function(id) {return {id: id, type: 'report'}});
     }
 
 
+    //on page refresh or initial login
     $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
         setScope();
         $rootScope.userFirebaseObj.$watch(function() {
@@ -45,6 +41,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         })
     });
 
+    //to return to state and see things
     if ($scope.user) {
         setScope();
     }
