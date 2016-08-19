@@ -117,11 +117,15 @@
 }
 
 .techImg {
-  max-width: 75%;
+  max-width: 85%;
   display:block;
   margin: 0 auto;
 }
 
 .teamImage {
   border-radius: 50%;
+}
+
+.cardMinHeight {
+  min-height: 173px;
 }
