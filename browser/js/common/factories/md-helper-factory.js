@@ -11,8 +11,11 @@ app.factory('MdHelpers', function() {
                 $mdDialog.hide(answer);
             };
             $scope.submitSnippet = function() {
-                console.log($scope.newSnippet)
-                Snippet.create($scope.newSnippet);
+                Snippet.create($scope.newSnippet).then(function(){
+                    Materialize.toast('Snippet created', 1250, 'toastCreated');
+                }).catch(function(){
+                    Materialize.toast('Error creating snippet', 2000, 'toastFail');
+                });
                 $mdDialog.cancel();
             };
         }

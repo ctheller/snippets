@@ -54,7 +54,15 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 $mdExpansionPanel(scope.id + scope.type).collapse();
             };
 
-            scope.delete = Snippet.delete;
+            scope.delete = function(snippetId){
+                Snippet.delete(snippetId).then(function(){
+                    Materialize.toast('Snippet deleted', 1250, 'toastDeleted');
+                }).catch(function(){
+                    Materialize.toast('Error deleting', 2000, 'toastFail');
+                })
+
+            }
+
 
             element.on('dblclick', function(){
                 //only for report snippets

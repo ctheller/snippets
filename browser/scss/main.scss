@@ -40,6 +40,25 @@ md-list-item {
     }
 }
 
+#toast-container {
+  bottom: auto !important;
+  left: auto !important;
+  top: 60px;
+  right:7%;  
+}
+
+.toastCreated {
+  background-color: #1ecd97;
+}
+
+.toastDeleted {
+  background-color: #ef5350;
+}
+
+.toastFail {
+  background-color: #ef5350;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
