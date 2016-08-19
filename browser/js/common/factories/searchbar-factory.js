@@ -20,8 +20,8 @@ app.factory('Search', function ($state) {
 
     function sendResults(snap) {
         if (!snap.exists()) {
-            return;
-        } // wait until we get data
+            return;// wait until we get data
+        }
         var data = snap.val();
         var result = { 'data': data };
         if (data.hits) $state.go('search', { 'result': result });
