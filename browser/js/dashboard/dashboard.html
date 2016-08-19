@@ -23,7 +23,7 @@
     </div>
 
     <!-- team + collab view if im not a manager -->
-    <div layout="column" class="snippet-container" flex="grow" ng-if="!user.reports">
+    <div layout="column" class="snippet-container" flex="grow" ng-if="!user.reports" ng-cloak>
         <snippet-tabs layout="row">
         </snippet-tabs>
         <md-expansion-panel-group md-component-id="all-panel" id="all-tab-panel" ng-show="true" multiple>
