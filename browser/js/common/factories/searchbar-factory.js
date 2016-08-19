@@ -21,12 +21,7 @@ app.factory('Search', function ($state) {
             return;
         } // wait until we get data
         var data = snap.val();
-        // snap.ref.off('value', sendResults);
-        // snap.ref.remove();
         var result = { 'data': data };
-        // fix sendSearchQuery here
-        // don't scale well, need a way to handle error
-        // if (data.error) sendSearchQuery(searchParams);
         if (data.hits) $state.go('search', { 'result': result });
     }
 

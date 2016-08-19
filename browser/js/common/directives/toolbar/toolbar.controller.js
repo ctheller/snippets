@@ -46,13 +46,16 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
         { key: "contents", name: "contains", placeholder: "contains:", allowMultiple: true }
     ];
 
-    $rootScope.$on('clearNgModel', function() {
+    $rootScope.$on('clearNgModel', function () {
+        console.log('clear')
         $scope.searchParams = {};
-    })
+    });
     $scope.sendSearchQuery = function() {
         if (!_.isEmpty($scope.searchParams)) {
-            Search.sendSearchQuery(newValue)
-        }
+            $scope.$watchCollection('searchParams', function(newVal, oldVal, scope) {
+                Search.sendSearchQuery(scope.searchParams)
+            }, true)
 
+        }
     }
 });
