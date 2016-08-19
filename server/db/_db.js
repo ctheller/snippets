@@ -1,7 +1,8 @@
-var path = require('path');
-var Sequelize = require('sequelize');
-
-var env = require(path.join(__dirname, '../env'));
-var db = new Sequelize(env.DATABASE_URI, { logging: env.LOGGING });
-
+var firebase = require('firebase');
+let creds = require('../../credentials/creds.json');
+firebase.initializeApp({
+  serviceAccount: creds.serviceAccount,
+  databaseURL: "https://snippets-2f32c.firebaseio.com",
+});
+let db = firebase.database();
 module.exports = db;

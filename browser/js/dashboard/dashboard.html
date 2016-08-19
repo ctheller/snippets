@@ -6,17 +6,24 @@
         </div>
         <md-expansion-panel-group md-component-id="report-panel" multiple>
             <div class="parent" ng-repeat="obj in reportSnippetIds" layout="row" data-drag="true" ng-model="reportSnippetIds" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, placeholder: 'keep'}">
-                <snippet id="obj.id" type="obj.type" card="false"></snippet>
+                <snippet class="fromReport" id="obj.id" type="obj.type" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
+        <div ng-show="selectedSnippetIds.length && !currentWeekNum" id="export-button" ng-cloak>
+            <a ng-click="exportToEmail()" class="export-button waves-effect waves-light btn purple lighten-2"><i class="material-icons">email</i></a>
+        </div>
+        <!-- <div id="export-box" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'selectSnippet(e, ui)'}">
+            <span>Add To Email</span>
+        </div> -->
     </div>
     <!-- team view if im a manager -->
     <div layout="column" class="snippet-container" flex="50" ng-if="isManager">
         <div>Your Team</div>
-        <div layout="row" flex="noshrink" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onOver:'createNewSnippet(e, ui)'}" ng-model="allSnippetIds">
+        <div layout="row" flex="noshrink" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}">
             <snippet id="obj.id" card="true"></snippet>
         </div>
     </div>
+
     <!-- team + collab view if im not a manager -->
     <div layout="column" class="snippet-container" flex="grow" ng-if="!isManager">
         <snippet-tabs layout="row">

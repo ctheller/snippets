@@ -79,7 +79,6 @@
 
                 //Get user info from db:
                 user = $firebaseObject(ref.child(id));
-
                 $rootScope.userFirebaseObj = user;
                 user.$bindTo($rootScope, 'user').then(function(){
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);

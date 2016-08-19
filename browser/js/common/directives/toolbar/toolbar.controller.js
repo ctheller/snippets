@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
+app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search) {
 
     $scope.sidebarOpen = "false";
 
@@ -42,10 +42,52 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope) {
     };
 
     $scope.availableSearchParams = [
-        { key: "name", name: "Name", placeholder: "Name:", allowMultiple: true },
-        { key: "email", name: "Email", placeholder: "Email:", allowMultiple: true }
+        { key: "subject", name: "subject", placeholder: "subject:", allowMultiple: true },
+        { key: "contents", name: "contains", placeholder: "contains:", allowMultiple: true }
     ];
 
     $scope.searchParams = {};
+
+    $scope.sendSearchQuery = function() {
+        Search.sendSearchQuery($scope.searchParams)
+        // doSearch(makeTerm($scope.searchParams));
+    }
+
+    // var PATH = 'search';
+    // var database = firebase.database();
+
+    // function doSearch(query) {
+    //     var index = 'firebase';
+    //     var ref = database.ref().child(PATH);
+    //     var type = 'snippet';
+    //     var key = ref.child('request').push({ index: index, type: type, query: query }).key;
+    //     ref.child('response/' + key).on('value', sendResults);
+    // }
+
+    // function sendResults(snap) {
+    //     if (!snap.exists()) {
+    //         return;
+    //     } // wait until we get data
+    //     var data = snap.val();
+    //     var result = { 'data': data };
+    //     $state.go('search', { 'result': result });
+    // }
+
+
+
+    // function makeTerm(params) {
+    //     var keys = Object.keys(params);
+    //     var searching = [];
+    //     var term;
+    //     for (var key in params) {
+    //         term = params[key]
+    //         if (!term.match(/^\*/)) { term = '*' + term; }
+    //         if (!term.match(/\*$/)) { term += '*'; }
+    //         var queryStr = (key !== 'query') ? ('' + key + ':' + term) : (term)
+
+    //         searching.push(queryStr);
+    //     }
+    //     return searching.join(' AND ');
+    // }
 
 });

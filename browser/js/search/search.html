@@ -1,0 +1,9 @@
+<div layout="row">
+    <div layout="column" flex="100">
+        <md-expansion-panel-group md-component-id="search-panel" multiple>
+            <div class="parent" ng-repeat="obj in snippets" layout="row">
+                <snippet id="obj.id" type="obj.type" card="false"></snippet>
+            </div>
+        </md-expansion-panel-group>
+    </div>
+</div>

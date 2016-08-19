@@ -1,14 +1,15 @@
 'use strict'
+
 let CronJob = require('cron').CronJob;
 let creds = require('../../../credentials/creds.json');
 let nodemailer = require('nodemailer');
 let firebase = require("firebase");
 
-firebase.initializeApp({
-  serviceAccount: creds.serviceAccount,
-  databaseURL: "https://snippets-2f32c.firebaseio.com",
-});
-let db = firebase.database();
+// firebase.initializeApp({
+//   serviceAccount: creds.serviceAccount,
+//   databaseURL: "https://snippets-2f32c.firebaseio.com",
+// });
+let db = require('../../db');
 let ref = db.ref("organizations"); /// specify "users" as a parameter to get users table, etc.
 let refUsers = db.ref("users");
 
