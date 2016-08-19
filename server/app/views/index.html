@@ -55,9 +55,9 @@
         </a>
         <!-- search bar -->
         <!-- <form ng-submit=""> -->
-        <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
+        <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search" ng-show="user">
         </nit-advanced-searchbox>
-        <md-icon class="search-btn" ng-click="sendSearchQuery()"><i class="material-icons">search</i></md-icon>
+        <md-icon class="search-btn" ng-click="sendSearchQuery()"><i class="material-icons" ng-show="user">search</i></md-icon>
         <!-- </form> -->
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
         <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user" ui-sref="login">Get started</a>

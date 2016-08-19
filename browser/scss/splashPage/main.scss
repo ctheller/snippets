@@ -8,7 +8,6 @@
   background-color: #ccc;
   background-size: cover;
   min-height: 370px;
-  /*min-width: 50px;*/
   background-image: url("/files/hero.jpg");
 }
 
@@ -47,4 +46,78 @@
     padding: 0 17px;
     font-size: 18px;
   }
+}
+
+.topTitle {
+  font-weight: 300;
+  font-size: 22px;
+  text-align: center;
+}
+
+.bottomSubtext {
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+}
+
+.splashPadRow {
+  padding: 30px 15% 0 15%;
+  margin-bottom: 0px;
+}
+
+.splashPadRowCard {
+  padding: 0 15% 0 15%;
+  margin-bottom: 0px;
+}
+
+.splashImg {
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+}
+
+.fullbleedy {
+  background-size: cover;
+  min-height: 280px;
+  margin-top: 130px;
+  padding: 1px 0 0 15%;
+}
+
+.fullbleedyKeinMargin {
+  background-size: cover;
+  min-height: 260px;
+  padding: 1px 15% 0 15%;
+  margin-top: 40px;
+}
+
+.macbookHero {
+  max-width: 650px;
+  margin-top: -130px;
+  float: right;
+}
+
+.bleedyTitle {
+  font-size: 50px;
+  font-weight: 200;
+}
+
+.biggerPlz {
+  font-size: 16px;
+}
+
+.bottomSubtext {
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+}
+
+.techUsed {
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.techImg {
+  max-width: 75%;
+  display:block;
+  margin: 0 auto;
 }
