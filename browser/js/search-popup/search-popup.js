@@ -37,7 +37,7 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
     self.cancel = function($event) {
       $mdDialog.cancel();
     };
-    
+
     self.finish = function($event, selectedUserId) {
 
       if (!selectedUserId || !snippet.$id) return;
@@ -87,7 +87,7 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
       var lowercaseQuery = angular.lowercase(query);
 
       return function filterFn(employee) {
-        return (employee.value.indexOf(lowercaseQuery) === 0);
+        return (employee.value.indexOf(lowercaseQuery) !== -1);
       };
 
     }
