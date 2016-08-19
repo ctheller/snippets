@@ -9,7 +9,7 @@ let firebase = require("firebase");
 //   serviceAccount: creds.serviceAccount,
 //   databaseURL: "https://snippets-2f32c.firebaseio.com",
 // });
-let db = require('../../db');
+let db = require('../../db').db;
 let ref = db.ref("organizations"); /// specify "users" as a parameter to get users table, etc.
 let refUsers = db.ref("users");
 

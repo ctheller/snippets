@@ -2,15 +2,6 @@
 var path = require('path');
 var express = require('express');
 var app = express();
-var firebase = require('firebase');
-var token = require('../tokenGenerator');
-var db = require('../db');
-firebase.auth().signInWithCustomToken(token).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
-});
 
 var ElasticSearch = require('elasticsearch'),
    conf          = require('./elasticsearch/config'),

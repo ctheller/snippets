@@ -5,5 +5,6 @@ firebase.initializeApp({
   databaseURL: "https://snippets-2f32c.firebaseio.com",
 });
 let db = firebase.database();
+let ref = firebase.app().database();
 
-module.exports = db;
+module.exports = {db: db, ref: ref};
