@@ -5,16 +5,26 @@ app.directive('resizeMain', function($rootScope, $document, $window) {
             var sidebarWidth = 200;
             var body = angular.element($document[0].body);
             var sidebarOpen = false;
+            var resetPushedWidth = function() {
+                element.css({ 'max-width': body[0].clientWidth - sidebarWidth + 'px', 'transition': 'width 0.5s ease' });
+            }
+            var resetExpandedWidth = function() {
+                element.css({ 'max-width': body[0].clientWidth + 'px', 'transition': 'width 0.5s ease' });
+            }
+            var resetWidthOnSidebarEvent = function() {
+                if (!sidebarOpen) resetExpandedWidth()
+                else resetPushedWidth()
+            }
+            resetWidthOnSidebarEvent();
             angular.element($window).bind('resize', function() {
-                if (!sidebarOpen) element.css({'max-width': body[0].clientWidth + 'px', 'transition': 'width 0.5s ease'});
-                else element.css({'max-width': body[0].clientWidth - sidebarWidth + 'px', 'transition': 'width 0.5s ease'});
+                resetWidthOnSidebarEvent();
             });
             $rootScope.$on('open', function() {
-                element.css({'max-width': body[0].clientWidth - sidebarWidth + 'px', 'transition': 'width 0.5s ease'});
+                resetPushedWidth()
                 sidebarOpen = true;
             });
             $rootScope.$on('close', function() {
-                element.css({'max-width': body[0].clientWidth + 'px', 'transition': 'width 0.5s ease'});
+                resetExpandedWidth()
                 sidebarOpen = false;
             });
         }
