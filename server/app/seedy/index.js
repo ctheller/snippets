@@ -15,6 +15,7 @@ function addOneOrg (seedObj) {
     seedObj.users = {};
   }
 
+  let CEO = [];
   let managerCLevel = [];
   let managerTopLevel = [];
   let managerMidLevel = [];
@@ -50,12 +51,16 @@ function addOneOrg (seedObj) {
       isAdmin: chance.bool({likelihood: 5}),
       last_name: chance.last(),
       photoUrl : `https://randomuser.me/api/portraits/${chance.pickone(['men', 'women'])}/${chance.integer({min: 0, max: 99})}.jpg`,
-      organization: orgName
+      organization: orgName,
+      reports: {}
     };
 
   // do managers after creating users
-    if (i < 5) {
+    if (i === 0) {
+      CEO.push(username);
+    } else if (i < 6) {
       managerCLevel.push(username);
+      seedObj.users[username].manager = CEO[0];
       if (!CLevelPerson) {
         CLevelPerson = username;
       }
@@ -71,15 +76,22 @@ function addOneOrg (seedObj) {
     }
   }
 
-  let wholeOrg = managerCLevel.concat(managerTopLevel).concat(managerMidLevel).concat(lowestLevel);
+  let wholeOrg = CEO.concat(managerCLevel).concat(managerTopLevel).concat(managerMidLevel).concat(lowestLevel);
+
+  // add reports to manager's object
+  wholeOrg.forEach(function(user) {
+    wholeOrg.forEach(function(user2) {
+      if (user !== user2 && seedObj.users[user2].manager === user) {
+        seedObj.users[user].reports[user2] = true;
+      }
+    });
+  });
 
   // create snippets
   if(!seedObj.snippets) {
     seedObj.snippets = {};
   }
-  // console.log(new Date(chance.integer({min: Date.now() - 1.814e+9, max: Date.now()})))
-  // console.log(Date.parse(Date()))
-  // console.log(new Date())
+
   for (let i=0; i<500; i++) {
     let snippetId = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 15});
     seedObj.snippets[snippetId] = {
@@ -92,6 +104,7 @@ function addOneOrg (seedObj) {
     let randomUser = chance.pickone(wholeOrg);
     seedObj.snippets[snippetId].owner = randomUser;
     seedObj.snippets[snippetId].team = seedObj.users[randomUser].manager;
+    seedObj.snippets[snippetId].organization = seedObj.users[randomUser].organization;
 
     // add snippet Id to owner's table
     if(!seedObj.users[randomUser].snippets) {
@@ -103,7 +116,9 @@ function addOneOrg (seedObj) {
     seedObj.users[randomUser].snippets.asOwner[snippetId] = seedObj.snippets[snippetId].dateAdded;
 
     let level;
-    if (managerCLevel.indexOf(randomUser) !== -1) {
+    if (CEO.indexOf(randomUser) !== -1) {
+      level = CEO;
+    } else if (managerCLevel.indexOf(randomUser) !== -1) {
       level = managerCLevel;
     } else if (managerTopLevel.indexOf(randomUser) !== -1) {
       level = managerTopLevel;
