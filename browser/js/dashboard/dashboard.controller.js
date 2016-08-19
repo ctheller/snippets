@@ -33,10 +33,13 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     }
 
 
+
     //on page refresh or initial login
     $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
         setScope();
-        $rootScope.userFirebaseObj.$watch(function() {
+        $rootScope.transitionedToDash = true;
+        $scope.userFirebaseObj.$watch(function() {
+            console.log('scope set login');
             setScope();
         })
     });
@@ -44,6 +47,13 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     //to return to state and see things
     if ($scope.user) {
         setScope();
+        if (!$rootScope.transitionedToDash) {
+            $scope.userFirebaseObj.$watch(function() {
+                console.log('scope set state change');
+                setScope();
+            });
+            $rootScope.transitionedToDash = true;
+        }
     }
 
     $scope.card = true;
