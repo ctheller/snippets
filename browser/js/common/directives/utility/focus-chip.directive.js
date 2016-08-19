@@ -28,9 +28,6 @@ app.directive('focusChip', function ($document) {
             elem.focusout(function () {
                 searchbar.removeClass('z-depth-2');
             });
-            searchbox.focusout(function () {
-
-            })
         }
     }
 })

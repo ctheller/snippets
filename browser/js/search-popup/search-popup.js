@@ -21,7 +21,7 @@ function PopupCtrl($mdDialog, $scope) {
 
 function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
 
-    var self = this;
+  var self = this;
 
     //need better way to access the parent scope here
     var snippet = $scope.$parent.$parent.snippet;
@@ -37,19 +37,15 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
     self.cancel = function($event) {
       $mdDialog.cancel();
     };
-    self.finish = function($event, selectedUserId) {
 
-      Users.addAsCollaborator(selectedUserId, snippet.$id, snippet.dateAdded);
+    self.finish = function($event, selectedUserId) {
 
       if (!selectedUserId || !snippet.$id) return;
 
-      if (!snippet.collaborators) {
-        var obj = {};
-        obj[selectedUserId] = true;
-        snippet.collaborators = obj;
-      } else {
-        snippet.collaborators[selectedUserId] = true;
-      }
+      if (snippet.collaborators && snippet.collaborators[selectedUserId]) return $mdDialog.hide();
+
+      Users.addAsCollaborator(selectedUserId, snippet.$id, snippet.dateAdded);
+
       $mdDialog.hide();
     };
 
@@ -91,7 +87,7 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
       var lowercaseQuery = angular.lowercase(query);
 
       return function filterFn(employee) {
-        return (employee.value.indexOf(lowercaseQuery) === 0);
+        return (employee.value.indexOf(lowercaseQuery) !== -1);
       };
 
     }

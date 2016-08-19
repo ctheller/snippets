@@ -1,4 +1,4 @@
-app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $mdToast, $mdDialog) {
+app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $mdToast, $mdDialog, $element) {
 
     $scope.clear = function($event) {
         $scope.result = null;
@@ -75,5 +75,9 @@ app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $md
 
         $state.go('profile');
     }
+
+    $scope.$on('$stateChangeStart', function(){
+        $element.remove();
+    });
 
 });

@@ -46,48 +46,18 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
         { key: "contents", name: "contains", placeholder: "contains:", allowMultiple: true }
     ];
 
-    $scope.searchParams = {};
+
+    $rootScope.$on('clearNgModel', function () {
+        console.log('clear')
+        $scope.searchParams = {};
+    });
 
     $scope.sendSearchQuery = function() {
-        Search.sendSearchQuery($scope.searchParams)
-        // doSearch(makeTerm($scope.searchParams));
+        if (!_.isEmpty($scope.searchParams)) {
+            $scope.$watchCollection('searchParams', function(newVal, oldVal, scope) {
+                Search.sendSearchQuery(scope.searchParams)
+            }, true)
+        }
     }
-
-    // var PATH = 'search';
-    // var database = firebase.database();
-
-    // function doSearch(query) {
-    //     var index = 'firebase';
-    //     var ref = database.ref().child(PATH);
-    //     var type = 'snippet';
-    //     var key = ref.child('request').push({ index: index, type: type, query: query }).key;
-    //     ref.child('response/' + key).on('value', sendResults);
-    // }
-
-    // function sendResults(snap) {
-    //     if (!snap.exists()) {
-    //         return;
-    //     } // wait until we get data
-    //     var data = snap.val();
-    //     var result = { 'data': data };
-    //     $state.go('search', { 'result': result });
-    // }
-
-
-
-    // function makeTerm(params) {
-    //     var keys = Object.keys(params);
-    //     var searching = [];
-    //     var term;
-    //     for (var key in params) {
-    //         term = params[key]
-    //         if (!term.match(/^\*/)) { term = '*' + term; }
-    //         if (!term.match(/\*$/)) { term += '*'; }
-    //         var queryStr = (key !== 'query') ? ('' + key + ':' + term) : (term)
-
-    //         searching.push(queryStr);
-    //     }
-    //     return searching.join(' AND ');
-    // }
 
 });

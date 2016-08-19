@@ -32,6 +32,14 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $
 // This app.run is for controlling access to specific states.
 app.run(function($rootScope, AuthService, $state) {
 
+    // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
+    //     console.log("started state change", event.currentScope);
+    // });
+    
+    // $rootScope.$on('$stateChangeSuccess', function(){
+    //     console.log("finished state change");
+    // });
+
     // The given state requires an authenticated user.
     var destinationStateRequiresAuth = function(state) {
         return state.data && state.data.authenticate;
@@ -64,5 +72,6 @@ app.run(function($rootScope, AuthService, $state) {
         }
 
     });
+
 
 });

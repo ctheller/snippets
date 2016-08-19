@@ -28,23 +28,20 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             }
 
             scope.removeCollaborator = function(userId) {
-                scope.snippet.collaborators[userId] = null;
                 Users.removeAsCollaborator(userId, scope.id);
             }
 
             Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet');
 
             //ng-repeat through object directly instead!!
-            scope.$watch('snippet', function(newValue, oldValue) {
-                if (newValue)
-                    var i = 0;
+            scope.$watch('snippet', function() {
+                
                 scope.collaborators = [];
                 if (!scope.snippet.collaborators) return;
                 for (var key in scope.snippet.collaborators) {
                     Users.getById(key).then(function(user){
                         scope.collaborators.push(user);
                     })
-
                 }
             }, true);
 
@@ -60,7 +57,6 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 }).catch(function(){
                     Materialize.toast('Error deleting', 2000, 'toastFail');
                 })
-
             }
 
 
