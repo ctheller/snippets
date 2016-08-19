@@ -5,7 +5,9 @@ app.factory('Search', function ($state) {
 
     function sendSearchQuery (params) {
         searchParams = params;
-        doSearch(makeTerm(searchParams));
+        var terms = makeTerm(searchParams);
+        if (terms === '*') return
+        doSearch(terms);
     }
 
     function doSearch(query) {

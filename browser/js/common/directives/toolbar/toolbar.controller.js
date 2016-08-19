@@ -55,7 +55,6 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
             $scope.$watchCollection('searchParams', function(newVal, oldVal, scope) {
                 Search.sendSearchQuery(scope.searchParams)
             }, true)
-
         }
     }
 });
