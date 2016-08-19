@@ -1,4 +1,4 @@
-app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope, $q) {
+app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
     var Snippet = {};
 
@@ -43,7 +43,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope,
     }
 
     Snippet.submit = function(snippetId, managerId){
-        console.log('submitting', snippetId, managerId);
         var updates = {};
         updates['/snippets/' + snippetId +"/submitted"] = true;
         updates[`/users/${managerId}/snippets/asManager/${snippetId}`] = Date.now();

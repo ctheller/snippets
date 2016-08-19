@@ -36,14 +36,12 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             //ng-repeat through object directly instead!!
             scope.$watch('snippet', function() {
                 
-                var i = 0;
                 scope.collaborators = [];
                 if (!scope.snippet.collaborators) return;
                 for (var key in scope.snippet.collaborators) {
                     Users.getById(key).then(function(user){
                         scope.collaborators.push(user);
                     })
-
                 }
             }, true);
 

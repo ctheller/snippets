@@ -73,7 +73,5 @@ app.run(function($rootScope, AuthService, $state) {
 
     });
 
-    //add lodash to angular view
-    $rootScope._ = window._;
 
 });

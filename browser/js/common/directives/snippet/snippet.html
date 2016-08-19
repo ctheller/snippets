@@ -15,7 +15,7 @@
             <span ng-click="removeCollaborator(collaborator.$id)" class="close"><i class="material-icons"> clear</i></span>
 
             <md-tooltip>{{collaborator.first_name}} {{collaborator.last_name}}</md-tooltip>
-            <img ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}" style="z-index: {{ collaborators.length - index }}" ng-cloak>
+            <img ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}" ng-cloak>
             </div>
         </div>
         
