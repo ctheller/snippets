@@ -1,9 +1,11 @@
 app.factory('Search', function ($state) {
     var PATH = 'search';
     var database = firebase.database();
+    var searchParams = {};
 
     function sendSearchQuery (params) {
-        doSearch(makeTerm(params));
+        searchParams = params;
+        doSearch(makeTerm(searchParams));
     }
 
     function doSearch(query) {
@@ -19,11 +21,14 @@ app.factory('Search', function ($state) {
             return;
         } // wait until we get data
         var data = snap.val();
+        // snap.ref.off('value', sendResults);
+        // snap.ref.remove();
         var result = { 'data': data };
-        $state.go('search', { 'result': result });
+        // fix sendSearchQuery here
+        // don't scale well, need a way to handle error
+        // if (data.error) sendSearchQuery(searchParams);
+        if (data.hits) $state.go('search', { 'result': result });
     }
-
-
 
     function makeTerm(params) {
         var keys = Object.keys(params);
