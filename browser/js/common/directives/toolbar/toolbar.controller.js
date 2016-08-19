@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state) {
+app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search) {
 
     $scope.sidebarOpen = "false";
 
@@ -42,37 +42,50 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
     };
 
     $scope.availableSearchParams = [
-        { key: "owner", name: "Name", placeholder: "Name:", allowMultiple: true },
-        { key: "contents", name: "content", placeholder: "contains:", allowMultiple: true }
+        { key: "subject", name: "subject", placeholder: "subject:", allowMultiple: true },
+        { key: "contents", name: "contains", placeholder: "contains:", allowMultiple: true }
     ];
 
     $scope.searchParams = {};
     $scope.sendSearchQuery = function() {
-        var key = Object.keys($scope.searchParams)[0]
-        doSearch(key, makeTerm($scope.searchParams[key]))
+        Search.sendSearchQuery($scope.searchParams)
+        // doSearch(makeTerm($scope.searchParams));
     }
 
-    var PATH = 'search';
-    var database = firebase.database();
+    // var PATH = 'search';
+    // var database = firebase.database();
 
-    function doSearch(type, query) {
-        var index = 'firebase';
-        var ref = database.ref().child(PATH);
-        var key = ref.child('request').push({ index: index, type: type, query: query }).key;
-        ref.child('response/' + key).on('value', sendResults);
-    }
+    // function doSearch(query) {
+    //     var index = 'firebase';
+    //     var ref = database.ref().child(PATH);
+    //     var type = 'snippet';
+    //     var key = ref.child('request').push({ index: index, type: type, query: query }).key;
+    //     ref.child('response/' + key).on('value', sendResults);
+    // }
 
-    function sendResults(snap) {
-        if (!snap.exists()) {
-            return; } // wait until we get data
-        var data = snap.val();
-        var result = {'data': data};
-        $state.go('search', {'result': result});
-    }
+    // function sendResults(snap) {
+    //     if (!snap.exists()) {
+    //         return;
+    //     } // wait until we get data
+    //     var data = snap.val();
+    //     var result = { 'data': data };
+    //     $state.go('search', { 'result': result });
+    // }
 
-    function makeTerm(term) {
-        if (!term.match(/^\*/)) { term = '*' + term; }
-        if (!term.match(/\*$/)) { term += '*'; }
-        return term;
-    }
+
+
+    // function makeTerm(params) {
+    //     var keys = Object.keys(params);
+    //     var searching = [];
+    //     var term;
+    //     for (var key in params) {
+    //         term = params[key]
+    //         if (!term.match(/^\*/)) { term = '*' + term; }
+    //         if (!term.match(/\*$/)) { term += '*'; }
+    //         var queryStr = (key !== 'query') ? ('' + key + ':' + term) : (term)
+
+    //         searching.push(queryStr);
+    //     }
+    //     return searching.join(' AND ');
+    // }
 });
