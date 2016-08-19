@@ -61,7 +61,6 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 }).catch(function(){
                     Materialize.toast('Error deleting', 2000, 'toastFail');
                 })
-
             }
 
 

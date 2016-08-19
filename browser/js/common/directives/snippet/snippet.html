@@ -15,7 +15,7 @@
             <span ng-click="removeCollaborator(collaborator.$id)" class="close"><i class="material-icons"> clear</i></span>
 
             <md-tooltip>{{collaborator.first_name}} {{collaborator.last_name}}</md-tooltip>
-            <img ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}" style="z-index: {{ collaborators.length - index }}">
+            <img ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}" style="z-index: {{ collaborators.length - index }}" ng-cloak>
             </div>
         </div>
         
@@ -45,7 +45,7 @@
                 <div class="snippetImages img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index">
                     <span ng-show="type!=='report'" ng-click="removeCollaborator(collaborator.$id)" class="close expansion"><i class="material-icons"> clear</i></span>
                     <md-tooltip>{{collaborator.first_name}} {{collaborator.last_name}}</md-tooltip>
-                    <img class="collaborator-avatar" ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}">
+                    <img class="collaborator-avatar" ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}" ng-cloak>
                 </div>
             </div>
         </md-expansion-panel-content>

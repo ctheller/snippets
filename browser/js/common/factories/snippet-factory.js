@@ -111,8 +111,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope,
         })
     }
 
-    //{snippets:{asCollaborator:{"id":"strDate", 'id2':'strDate'}}}
-    [{id:'', date:'', type:''}]
 
 
     Snippet.getSnippetIdsWithInfo = function(user){

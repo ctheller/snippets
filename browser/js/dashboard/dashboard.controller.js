@@ -15,9 +15,8 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     //on page refresh or initial login
     $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
         setScope();
-        $rootScope.transitionedToDash = true;
-        $scope.userFirebaseObj.$watch(function() {
-            console.log('scope set login');
+        if ($rootScope.unwatchUser) $rootScope.unwatchUser();
+        $rootScope.unwatchUser = $scope.userFirebaseObj.$watch(function() {
             setScope();
         })
     });
@@ -25,15 +24,13 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     //to return to state and see things
     if ($scope.user) {
         setScope();
-        if (!$rootScope.transitionedToDash) {
-            $scope.userFirebaseObj.$watch(function() {
-                console.log('scope set state change');
-                setScope();
-            });
-            $rootScope.transitionedToDash = true;
-        }
+            
+        if ($rootScope.unwatchUser) $rootScope.unwatchUser();
+        $rootScope.unwatchUser = $scope.userFirebaseObj.$watch(function() {
+            setScope();
+        });
     }
-
+    
     $scope.card = true;
     $scope.dragged = [];
 
@@ -57,17 +54,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
             Materialize.toast('Copy Failed', 2000, 'toastFail');
         })
     }
-
-
-    // $scope.selectSnippet = function(e, ui){
-    //     if (!$rootScope.selectedSnippetIds) $rootScope.selectedSnippetIds = [];
-    //     var snippetId = ui.draggable.scope().obj.id;
-    //     var idx = $rootScope.selectedSnippetIds.indexOf(snippetId);
-    //     if (idx === -1) {
-    //         $rootScope.selectedSnippetIds.push(snippetId);
-    //     }
-    //     console.log($rootScope.selectedSnippetIds);
-    // }
 
     $scope.exportToEmail = function(){
         Email.compose();
