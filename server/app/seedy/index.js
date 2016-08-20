@@ -214,7 +214,13 @@ var gabeObj = {
   first_name: "Gabe",
   last_name: "Rodriguez",
   manager: 'kKCwoTNYpURej7sv3bKMcy7oMKI3',
-  reports: {}
+  reports: {},
+  snippets: {
+    asOwner: {},
+    asTeamMember: {},
+    asCollaborator: {},
+    asManager: {}
+  }
 };
 
 var tammyObj = {
@@ -226,6 +232,12 @@ var tammyObj = {
   manager: CLevelPerson,
   reports: {
     'kKCwoTNYpURej7sv3bKMcy7oMKI3': true
+  },
+  snippets: {
+    asOwner: {},
+    asTeamMember: {},
+    asCollaborator: {},
+    asManager: {}
   }
 };
 
@@ -236,7 +248,13 @@ var nickObj = {
   last_name: "Koster",
   photoUrl: 'https://randomuser.me/api/portraits/men/42.jpg',
   manager: 'kKCwoTNYpURej7sv3bKMcy7oMKI3',
-  reports: {}
+  reports: {},
+  snippets: {
+    asOwner: {},
+    asTeamMember: {},
+    asCollaborator: {},
+    asManager: {}
+  }
 };
 
 var chrisObj = {
@@ -249,15 +267,18 @@ var chrisObj = {
   reports: {
     'We8iLkQsY3OEeAYoSuOuLFsBjzu2': true,
     'eTeGzfSeoxPMx1qwCV8PwUtCii53': true
+  },
+  snippets: {
+    asOwner: {},
+    asTeamMember: {},
+    asCollaborator: {},
+    asManager: {}
   }
 };
 
-
-console.log(CLevelPerson);
-console.log(CLevelsOrg);
-
 // loop to get replace random employee
-for (let i=0; i< 4; i++) { //
+for (let i=0; i< 4; i++) {
+
   // to replace
   // console.log(toReplace[i]);
 
@@ -290,37 +311,51 @@ for (let i=0; i< 4; i++) { //
     isAdmin: true,
     organization: CLevelsOrg,
     manager: newGuy.manager,
-    reports: newGuy.reports
+    reports: newGuy.reports,
+    snippets: newGuy.snippets
   };
 
-  // loop through snippets
-  for (let snippetKey in seedy.snippets) {
-    // // if owner is replace[i], then replace with me
-    // if (seedy.snippets[snippetKey].owner === toReplace[i]) {
-    //   seedy.snippets[snippetKey].owner = newGuy.id;
-    // }
-    // // if collaborators, delete and add me
-    // if (seedy.snippets[snippetKey].collaborators && seedy.snippets[snippetKey].collaborators[toReplace[i]]) {
-    //   delete seedy.snippets[snippetKey].collaborators[toReplace[i]];
-    //   seedy.snippets[snippetKey].collaborators[newGuy.id] = true;
-    // }
-    // if team is the older ID, replace
-    // if (seedy.snippets[snippetKey].team && seedy.snippets[snippetKey].team === toReplace[i]) {
-    //   seedy.snippets[snippetKey].team = newGuy.id;
-    // }
+  for (let i=0; i<28; i++) {
+    let sampleSnip = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 10}) + '--SEEDY';
+    seedy.snippets[sampleSnip] = snipGenerator();
+    seedy.snippets[sampleSnip].owner = newGuy.id;
+    let arrOfUsers = Object.keys(seedy.organizations[CLevelsOrg].users);
 
-    /// add teams snippets to user
-    if (seedy.snippets[snippetKey].team && seedy.snippets[snippetKey].team === newGuy.manager) {
-      if (!seedy.users[newGuy.id].snippets) {
-        seedy.users[newGuy.id].snippets = {};
-      }
-      if(!seedy.users[newGuy.id].snippets.asTeamMember) {
-        seedy.users[newGuy.id].snippets.asTeamMember = {};
-      }
-      seedy.users[newGuy.id].snippets.asTeamMember[snippetKey] = seedy.snippets[snippetKey].dateAdded;
+    let amountOfCollabs = chance.integer({min: 0, max: 4});
+    for (let i=0; i<amountOfCollabs; i++) {
+      let randosId = chance.pickone(arrOfUsers);
+      seedy.snippets[sampleSnip].collaborators[randosId] = true;
+    }
+    let randoX = chance.pickone(arrOfUsers);
+    let weightz;
+    if (newGuy.first_name === 'Chris' || newGuy.first_name === 'Tammy') {
+     weightz = [10,2,5];
+    } else {
+     weightz = [10,4,8];
     }
 
+    let typeSnip = chance.weighted(['asTeamMember', 'asOwner', 'asCollaborator'], weightz);
+    if (typeSnip === 'asOwner') {
+      seedy.snippets[sampleSnip].organization = CLevelsOrg;
+      seedy.users[newGuy.id].snippets.asTeamMember[sampleSnip] = seedy.snippets[sampleSnip].dateAdded;
+      seedy.users[newGuy.id].snippets.asOwner[sampleSnip] = seedy.snippets[sampleSnip].dateAdded;
+      seedy.snippets[sampleSnip].team = newGuy.manager;
+      seedy.snippets[sampleSnip].collaborators[newGuy.id] = true;
+    } else if (typeSnip === 'asTeamMember') {
+      seedy.users[newGuy.id].snippets[typeSnip][sampleSnip] = seedy.snippets[sampleSnip].dateAdded;
+      seedy.snippets[sampleSnip].owner = randoX;
+      seedy.snippets[sampleSnip].collaborators[randoX] = true;
+      seedy.snippets[sampleSnip].team = newGuy.manager;
+    } else if (typeSnip === 'asCollaborator') {
+      seedy.users[newGuy.id].snippets[typeSnip][sampleSnip] = seedy.snippets[sampleSnip].dateAdded;
+      seedy.snippets[sampleSnip].collaborators[newGuy.id] = true;
+      seedy.snippets[sampleSnip].owner = randoX;
+      seedy.snippets[sampleSnip].collaborators[randoX] = true;
+    }
   }
+
+
+
 
   // // loop through users
   //   // if manager is replace[i], swap with me
@@ -343,6 +378,20 @@ for (let i=0; i< 4; i++) { //
   // delete seedy.users[toReplace[i]];
 }
 
+ // loop through snippets
+  for (let snippetKey in seedy.snippets) {
+    if (seedy.snippets[snippetKey].team) {
+      let theManager = seedy.snippets[snippetKey].team;
+      if (!seedy.users[theManager].snippets) {
+        seedy.users[theManager].snippets = {};
+      }
+      if (!seedy.users[theManager].snippets.asManager) {
+        seedy.users[theManager].snippets.asManager = {};
+      }
+      seedy.users[theManager].snippets.asManager[snippetKey] = seedy.snippets[snippetKey].dateAdded;
+    }
+  }
+
 // console.log(seedy);
 
 // write to local hard drive
@@ -357,3 +406,59 @@ jsonfile.writeFile(file, obj, function (err) {
   // .then(function(result) {
   //   console.log('success: ', result);
   // });
+
+
+  // HELPER FUNCTIONS
+  function snipGenerator () {
+
+    function contentsGen() {
+
+      let eventName = chance.pickone([`${chance.capitalize(chance.word())}Con`, 'Executive Summit', 'Acceleration 2016', 'Matching event', chance.capitalize(chance.word()), 'HalfStack Fair', 'SEAN Week', `${chance.capitalize(chance.word())} Festival`, 'Creative Camp', `${chance.capitalize(chance.word())} Gala`, `${chance.capitalize(chance.word())} Design Awards`]);
+      let eventSentence = chance.pickone([
+                                         `${eventName} launches to fanfare`,
+                                         `This year's ${eventName} brings huge crowds`,
+                                         `Over ${chance.integer({min: 36, max: 122})} press mentions featuring ${eventName}`,
+                                         `Trained year's ${eventName} brings huge crowds`,
+                                         `Debuted new research at ${eventName} on local market challenges and ROI.`,
+                                         `${chance.pickone(['Started', 'Wrapped up', 'Ended', 'Commissioned', 'Sourced', 'Explored'])} partnership with ${chance.name()}`,
+                                         `Hosted ${eventName} in ${chance.city()} with ${chance.integer({min: 36, max: 122})} execs.`]);
+      let eventContents = chance.pickone([
+                                         `${eventName} is a partnership between the Ministry of Finance in ${chance.country({ full: true })}, SAP and Upwork to educate, certify and build capacity for 200k developers. Our announcement of the winners for the best Apps received widespread press coverage.`,
+                                         `Our university outreach exceeded all expectations (see full report) and trained 3k ppl at <$10 CPT incl. 400+ user-generated Social Media posts and 120+ PR articles (45M reach). H3 Outlook: Extend format for and scale it to 20+ with regional focus for local endorsement.`,
+                                         `Continuing big company push and featuring a lineup of global & local speakers, and a sales activation plan. 27% uplift in "${eventName} helps me understand the industry" from pre & post survey.`]);
+
+      let productName = chance.pickone(['CodecCourse', 'EngineUtilityv2', 'LifeStrong', 'MegaDash', 'WikiStack Courseware', 'CryptoPass', 'Stackspace', 'Trip Planner', 'Juke', `Pledge v${chance.integer()}`, 'GraceShopper', 'CompilerDuo', 'Middler']);
+      let productSentence = chance.pickone([
+                                           `Sales of ${productName} ${chance.pickone(['increase by', 'decrease by', 'see an uplift of', 'see a downturn of', 'drop by', 'lift by'])} ${chance.integer({min: 55, max: 122})}%`,
+                                           `New product ${productName} launches in ${chance.integer({min: 3, max: 32})} languages`,
+                                           `Launched the Developer Preview of ${productName} in ${chance.city()}`,
+                                           `${chance.pickone(['Rolled out', 'Launched', 'Released', 'Introduced', 'Unveiled', 'Opened beta testing for'])} ${productName}`,
+                                           `${productName} marketing campaign in ${chance.country({ full: true })} kicked off`]);
+      let productContents = chance.pickone([
+                                           `As part of our plan to anchor ${productName} within the local culture, celebrated the 22nd Anniversary of the inauguration of David Yang with a local marketing campaign inspired by this legendary artist from ${chance.country({ full: true })}. Enthusiastic press reactions (including TV and print), endorsement on Twitter and positive users`,
+                                           `The partnership with leading ${chance.country()} telco to offer all their customers a 4 month free trial of ${productName} has delivered ${chance.integer({min: 55, max: 122})}k new trials in the last 4 months. The offer was extended until July to continue growth.`,
+                                           `This cross-functional effort showed that ${productName} is great for the community. Our commitment to help  has been received with amazement, counting 100s of thankful tweets, calls and emails.`,
+                                           `The pilot targets the million dollar advertising opportunity that exists within the client portfolio of markets in ${chance.country()}, by increasing our share of total advertising spend with the Top 1K clients in our portfolio.`]);
+      let eventObj = {
+        subject: eventSentence,
+        contents: eventContents
+      }
+
+      let productObj = {
+        subject: productSentence,
+        contents: productContents
+      }
+
+     return chance.pickone([eventObj, productObj])
+
+    }
+
+    let toReturn = contentsGen();
+    return {
+      subject: toReturn.subject,
+      contents: toReturn.contents,
+      submitted: chance.bool({likelihood: 50}),
+      dateAdded: chance.integer({min: Date.now() - 1.814e+9, max: Date.now()}),
+      collaborators: {}
+    };
+  }
