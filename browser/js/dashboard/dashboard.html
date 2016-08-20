@@ -1,6 +1,6 @@
 <div layout="row" flex="100">
-    <div layout="column" flex="50">
-        <div layout="row" class="split-view-title" ng-if="user.reports">
+    <div layout="column" flex="50" ng-if="user.reports">
+        <div layout="row" class="split-view-title">
             <div layout="column" flex="grow">Your reports</div>
             <md-icon layout="column" flex="5" ng-click="(!reportsExpanded) ? expandAllReports() : collapseAllReports()"><i class="material-icons" ng-class="{'expanded': reportsExpanded}"></i></md-icon>
         </div>
