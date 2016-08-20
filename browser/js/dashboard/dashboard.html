@@ -5,7 +5,7 @@
             <md-icon layout="column" flex="5" ng-click="(!reportsExpanded) ? expandAllReports() : collapseAllReports()"><i class="material-icons" ng-class="{'expanded': reportsExpanded}"></i></md-icon>
         </div>
     </div>
-    <div layout="column" flex="50">
+    <div layout="column" flex="{{(user.reports) ? 50 : 100}}">
         <div layout="row" class="split-view-title">
             <div layout="column" flex="grow">Your Team</div>
             <md-icon layout="column" flex="5" ng-click="(!teamSnippetsExpanded) ? expandAllTeamSnippets() : collapseAllTeamSnippets()"><i class="material-icons" ng-class="{'expanded': teamSnippetsExpanded}"></i></md-icon>
