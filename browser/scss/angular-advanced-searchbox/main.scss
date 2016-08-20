@@ -12,7 +12,6 @@
     padding: 0 9px;
     cursor: text;
     line-height: 38px;
-    width: 60%;
     position: absolute;
     left: 220px;
     top: 5px;
@@ -110,7 +109,8 @@
     color: #fff;
 }
 
-input[name="searchbox"], .search-parameter {
+input[name="searchbox"],
+.search-parameter {
     position: relative;
     left: 40px;
 }
@@ -118,4 +118,57 @@ input[name="searchbox"], .search-parameter {
 .search-btn {
     position: relative;
     left: 60px;
+}
+
+// customization
+@import '../media-query-mixins';
+
+.advancedSearchBox {
+    .value {}
+    input[name="value"] {
+        font-size: 12px;
+    }
+    input[name="searchbox"] {
+        color: white;
+        &:focus {
+            color: black;
+        }
+    }
+    input {
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    .value {
+        font-size: 12px
+    }
+    font-size: 12px;
+    @include desktop {
+        width: 60%;
+    }
+    @include tablet {
+        width: 40%;
+    }
+    @include phone {
+        width: 20%;
+    }
+}
+
+#elasticsearch-btn {
+    transition: none;
+    background-color: transparent;
+    box-shadow: none;
+    position: relative;
+    left: 45px;
+    &:focus {
+        background-color: transparent;
+        box-shadow: none;
+    }
+    &:hover {
+        background-color: transparent;
+        box-shadow: none;
+    }
+    &:active {
+        background-color: transparent;
+        box-shadow: none;
+    }
 }
