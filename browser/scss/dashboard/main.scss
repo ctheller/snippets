@@ -84,29 +84,36 @@ div.dashboard-ui-view-wrapper {
 .snippet-container {
     height: 100%;
     overflow-y: scroll;
-    .team-title {
-        margin-left: 8px;
-        margin-top: 15px;
+}
+
+.split-view-title {
+    margin: 5px 0;
+}
+
+.split-view-title md-icon,
+.split-view-title md-icon {
+    cursor: pointer;
+    *:active {
+        outline: none;
     }
 }
 
-.report-title {
-    margin-top: 15px;
-    margin-bottom: 5px;
+.split-view-title md-icon i.material-icons {
+    &:after {
+        content: "zoom_out_map";
+    }
+}
+.split-view-title md-icon i.material-icons.expanded {
+    &:after {
+        content: "remove";
+    }
 }
 
-.team-title {
-    margin-top: 11px;
-    margin-left: 10px;
-}
 
 snippet {
     width: 100%;
 }
 
-// .snippet-container {
-//     margin: 0 10px;
-// }
 md-expansion-panel-group[md-component-id='report-panel'] {
     cursor: move;
 }

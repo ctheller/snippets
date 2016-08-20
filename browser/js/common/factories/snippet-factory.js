@@ -133,11 +133,20 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         _.forEach(collabSnippetIds, function(value, key){
             mappedCollabIds.push({id: key, date: value, type: 'collab'});
         })
-        
+
         return _.unionBy(mappedOwnedIds, _.unionBy(mappedCollabIds, mappedTeamIds, 'id'), 'id');
 
 
-        
+
+    }
+
+    Snippet.getSnippetPanelIds = function (snippetArr, filterFn, type) {
+        var snippetsInView = snippetArr.filter(obj => {
+            return filterFn(obj.date)
+        });
+        return snippetsInView.map(obj => {
+            return obj['id'] + type;
+        });
     }
 
     return Snippet;
