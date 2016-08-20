@@ -65,7 +65,7 @@ exports.paths = [
       path:  "snippets",
       index: "firebase",
       type:  "snippet",
-      fields: ['collaborators', 'contents', 'dateAdded', 'owner', 'subject', 'team'],
+      fields: ['collaborators', 'contents', 'dateAdded', 'owner', 'subject', 'team', 'organization'],
       filter: function(data) { return data.name !== 'system'; }
    }
 ];
