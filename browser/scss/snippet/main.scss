@@ -18,6 +18,7 @@
     position: relative;
     display: inline-block;
 }
+
 .close {
     position: absolute;
     top: 0px;
@@ -35,8 +36,9 @@
     height: 42px;
     color: white;
 }
+
 .close:hover {
-    background-color: rgba(100,0,0,.7);
+    background-color: rgba(100, 0, 0, .7);
     opacity: 1;
 }
 
@@ -57,8 +59,9 @@
     height: 40px;
     color: white;
 }
+
 .close.expansion:hover {
-    background-color: rgba(100,0,0,.7);
+    background-color: rgba(100, 0, 0, .7);
     opacity: 1;
 }
 
@@ -89,7 +92,7 @@ md-card-title {
     md-card-title-text {
         padding-top: 0 !important;
         #contenttext {
-        margin-top: 0 !important;
+            margin-top: 0 !important;
         }
     }
 }
@@ -107,34 +110,26 @@ md-card-title {
 }
 
 .btn-floating.deleteit.deleteForPanelOpen {
-  position: absolute;
-  top: 0;
-  right: 25px;
+    position: absolute;
+    top: 0;
+    right: 25px;
 }
 
-
-/* Rules for using icons as white on a dark background. */
-
+// Rules for using icons as white on a dark background.
 .btn-floating.sentbtn {
     font-weight: bold;
     background: rgba(0, 0, 0, 0.05);
     box-shadow: none;
     margin-top: 20px;
     cursor: default;
-
-    
 }
 
 .selectedForExport {
     md-expansion-panel {
-            border-left: 15px yellow solid;
-        }
+        border-left: 15px yellow solid;
+    }
 }
 
-
-.btn-floating.sentbtn.submitted { background: rgb(0, 204, 0)}
-
-
-
-
-
+.btn-floating.sentbtn.submitted {
+    background: rgb(0, 204, 0)
+}

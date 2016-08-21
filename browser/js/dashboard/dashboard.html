@@ -1,9 +1,68 @@
-<div layout="row" class="report-snippet-wrapper" ng-cloak>
-    <!-- reports / hide if im not a manager -->
-    <div class="report-container" layout="column" flex="50" ng-if="user.reports">
-        <div class="report-title" layout="row" ng-cloak>
-            Your reports
+<div layout="row" flex="100" ng-if="user.reports">
+    <div layout="column"
+        flex="{{ (expandedView === 'split') ? 50 : 100}}"
+        ng-show="expandedView !== 'team'">
+        <div layout="row" class="split-view-title report-title">
+            <div layout="column" flex="grow">Your reports</div>
+            <md-icon
+                layout="column" flex="5"
+                ng-click="(!reportsExpanded) ? expandAllReports() : collapseAllReports()">
+                    <i class="material-icons expand"
+                        ng-class="{'expanded': reportsExpanded}"></i>
+                    </md-icon>
+            <md-icon
+                layout="column" flex="5"
+                ng-click="(expandedView === 'split') ? expandView('reports') : collapseView()">
+                    <i class="material-icons expand-view"
+                        ng-class="{'expanded-view' : (expandedView !== 'split')}"></i>
+            </md-icon>
         </div>
+    </div>
+    <div layout="column"
+        flex="{{ (expandedView === 'split') ? 50 : 100 }}"
+        ng-show="expandedView !== 'reports'">
+        <div layout="row"
+            class="split-view-title team-title"
+            ng-class="{ 'no-margin' : (expandedView === 'team') }">
+            <div layout="column" flex="grow" ng-class="{'hide-title': (expandedView === 'team')}">Your Team</div>
+            <md-icon
+                layout="column" flex="5"
+                ng-click="(!teamSnippetsExpanded) ? expandAllTeamSnippets(activePanel) : collapseAllTeamSnippets(activePanel)">
+                    <i class="material-icons expand"
+                        ng-class="{'expanded': teamSnippetsExpanded}"></i>
+            </md-icon>
+            <md-icon
+                layout="column" flex="5"
+                ng-click="(expandedView === 'split') ? expandView('team') : collapseView()">
+                    <i class="material-icons expand-view"
+                        ng-class="{'expanded-view' : (expandedView !== 'split')}"></i>
+            </md-icon>
+        </div>
+    </div>
+</div>
+<div layout="row tab-container" ng-show="!user.reports || (expandedView === 'team')" flex="100">
+    <snippet-tabs layout="row" active-panel="activePanel" flex="grow">
+    </snippet-tabs>
+    <ui layout="column" flex="5" ng-if="!user.reports">
+        <li layout="row">
+            <md-icon layout="column" flex="100"
+            class="expand-icon"
+            ng-click="(!teamSnippetsExpanded) ? expandAllTeamSnippets(activePanel) : collapseAllTeamSnippets(activePanel)">
+                <i class="material-icons" ng-class="{'expanded': teamSnippetsExpanded}"></i>
+            </md-icon>
+        </li>
+    </ui>
+</div>
+<div
+    layout="row" class="report-snippet-wrapper"
+    flex="100"
+    ng-cloak>
+    <!-- reports / hide if im not a manager -->
+    <div class="report-container expansion-panel-container"
+        layout="column" style="margin-right: 5px"
+        ng-if="user.reports"
+        flex="{{ (expandedView === 'split') ? 50 : 100}}"
+        ng-show="expandedView === 'split' || expandedView === 'reports'">
         <md-expansion-panel-group md-component-id="report-panel" multiple>
             <div ng-if="dateInRange(value)" class="parent" ng-repeat="(key, value) in user.snippets.asManager" layout="row" data-drag="true" ng-model="user.snippets.asManager" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, placeholder: 'keep'}">
                 <snippet class="fromReport" id="key" type="'report'" card="false"></snippet>
@@ -12,36 +71,58 @@
         <div ng-show="selectedSnippetIds.length && !currentWeekNum" id="export-button" ng-cloak>
             <a ng-click="exportToEmail()" class="export-button waves-effect waves-light btn purple lighten-2"><i class="material-icons">email</i></a>
         </div>
-
     </div>
     <!-- team view if im a manager -->
-    <div layout="column" class="snippet-container" flex="50" ng-if="user.reports">
-        <div>Your Team</div>
-        <div ng-if="dateInRange(obj.date)" layout="row" flex="noshrink" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}">
-            <snippet id="obj.id" card="true"></snippet>
-        </div>
-    </div>
-
-    <!-- team + collab view if im not a manager -->
-    <div layout="column" class="snippet-container" flex="grow" ng-if="!user.reports" ng-cloak>
-        <snippet-tabs layout="row">
-        </snippet-tabs>
-        <md-expansion-panel-group md-component-id="all-panel" id="all-tab-panel" ng-show="true" multiple>
-            <div ng-if="dateInRange(obj.date)" class="parent" ng-repeat="obj in allSnippetIds" layout="row">
-                <snippet id="obj.id" type="'all'" card="false" class="{{(obj.type === 'team') ? 'team' : ((obj.type === 'mine') ? 'mine' : 'collab')}}"></snippet>
+    <div
+    class="snippet-container expansion-panel-container"
+    layout="column" style="margin-left: 5px"
+    ng-if="user.reports"
+    flex="50"
+    ng-show="expandedView === 'split'">
+        <md-expansion-panel-group
+        md-component-id="manager-team-panel" multiple
+        ng-if="(expandedView === 'split')">
+            <div ng-if="dateInRange(obj.date)" class="parent" layout="row" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}">
+                <snippet id="obj.id" type="'all'" card="false" class="fromTeam {{(obj.type === 'mine') ? 'mine' : ((obj.type === 'team') ? 'team' : 'collab')}}"></snippet>
             </div>
         </md-expansion-panel-group>
-        <md-expansion-panel-group md-component-id="my-panel" id="my-tab-panel" multiple>
+    </div>
+    <!-- team + collab view if im not a manager -->
+    <div
+    layout="column"
+    class="snippet-container expansion-panel-container"
+    flex="grow"
+    ng-class="{'negative-margin-right' : (expandedView === 'team' || !user.reports)}"
+    ng-if="!user.reports || expandedView === 'team'"
+    ng-cloak>
+        <md-expansion-panel-group
+        md-component-id="all-panel" id="all-tab-panel"
+        ng-show="activePanel === 'all'"
+        ng-if="!user.reports || (expandedView === 'team')" multiple>
+            <div ng-if="dateInRange(obj.date)" class="parent" ng-repeat="obj in allSnippetIds" layout="row">
+                <snippet id="obj.id" type="'all'" card="false" class="{{(obj.type === 'mine') ? 'mine' : ((obj.type === 'team') ? 'team' : 'collab')}}"></snippet>
+            </div>
+        </md-expansion-panel-group>
+        <md-expansion-panel-group
+        md-component-id="my-panel" id="my-tab-panel"
+        ng-show="activePanel === 'mine'"
+        ng-if="!user.reports || (expandedView === 'team')"  multiple>
             <div ng-if="dateInRange(value)" class="parent" ng-repeat="(key, value) in user.snippets.asOwner" layout="row">
                 <snippet id="key" type="'mine'" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
-        <md-expansion-panel-group md-component-id="team-panel" id="team-tab-panel" multiple>
+        <md-expansion-panel-group
+        md-component-id="team-panel" id="team-tab-panel"
+        ng-show="activePanel === 'team'"
+        ng-if="!user.reports || (expandedView === 'team')"  multiple>
             <div ng-if="dateInRange(value)" class="parent" ng-repeat="(key, value) in user.snippets.asTeamMember" layout="row">
                 <snippet id="key" type="'team'" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
-        <md-expansion-panel-group md-component-id="collab-panel" id="collab-tab-panel" multiple>
+        <md-expansion-panel-group
+        md-component-id="collab-panel" id="collab-tab-panel"
+        ng-show="activePanel === 'collab'"
+        ng-if="!user.reports || (expandedView === 'team')"  multiple>
             <div ng-if="dateInRange(value)" class="parent" ng-repeat="(key, value) in user.snippets.asCollaborator" layout="row">
                 <snippet id="key" type="'collab'" card="false"></snippet>
             </div>

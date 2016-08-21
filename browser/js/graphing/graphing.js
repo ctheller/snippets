@@ -3,7 +3,7 @@ app.config(function ($stateProvider) {
         url: '/graph',
         controller: 'GraphCtrl',
         templateUrl: 'js/graphing/graphing.html'
-    })
+    });
 });
 
 app.controller('GraphCtrl', function($scope, $rootScope){
