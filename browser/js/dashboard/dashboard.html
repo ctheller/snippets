@@ -92,7 +92,7 @@
     layout="column"
     class="snippet-container expansion-panel-container"
     flex="grow"
-    ng-class="{'negative-margin-right' : (expandedView === 'team')}"
+    ng-class="{'negative-margin-right' : (expandedView === 'team' || !user.reports)}"
     ng-if="!user.reports || expandedView === 'team'"
     ng-cloak>
         <md-expansion-panel-group
