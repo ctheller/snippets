@@ -1,10 +1,21 @@
 <div layout="row">
     <div layout="column" flex="100">
         <div layout="row" style="margin: 15px 0">All results</div>
-        <md-expansion-panel-group md-component-id="search-panel" multiple>
+        <md-expansion-panel-group md-component-id="search-panel" ng-if="searchOption === 'snippet'" multiple>
             <div class="parent" ng-repeat="obj in snippets" layout="row">
                 <snippet id="obj.id" type="obj.type" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
+        <md-content layout="row" ng-if="searchOption === 'user'">
+            <md-list layout="column" flex>
+                <md-list-item class="md-3-line" ng-repeat="user in users" ng-click="null">
+                    <img ng-src="{{user.photoUrl}}" class="md-avatar"/>
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ user.first_name + ' ' + user.last_name }}</h3>
+                        <h4>{{ user.email }}</h4>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
     </div>
 </div>

@@ -41,21 +41,32 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
         $state.go('home');
     };
 
-    $scope.availableSearchParams = [
-        { key: "subject", name: "subject", placeholder: "subject:", allowMultiple: true },
-        { key: "contents", name: "contains", placeholder: "contains:", allowMultiple: true }
-    ];
+    $scope.searchFor = 'snippet';
 
+    $scope.userSearchParams = Search.userSearchParams
+
+    $scope.snippetSearchParams = Search.snippetSearchParams
+
+    $scope.availableSearchParams = $scope.snippetSearchParams;
+
+    $scope.setSearchParams = function (option) {
+        if (option === 'colleague') {
+            $scope.availableSearchParams = $scope.userSearchParams;
+            $scope.searchFor = 'user';
+        } else if (option === 'snippet') {
+            $scope.availableSearchParams = $scope.snippetSearchParams;
+            $scope.searchFor = 'snippet';
+        }
+    }
 
     $rootScope.$on('clearNgModel', function () {
-        console.log('clear')
         $scope.searchParams = {};
     });
 
     $scope.sendSearchQuery = function() {
         if (!_.isEmpty($scope.searchParams)) {
             $scope.$watchCollection('searchParams', function(newVal, oldVal, scope) {
-                Search.sendSearchQuery(scope.searchParams)
+                Search.sendSearchQuery(scope.searchFor, scope.searchParams)
             }, true)
         }
     }

@@ -122,7 +122,6 @@ input[name="searchbox"],
 
 // customization
 @import '../media-query-mixins';
-
 .advancedSearchBox {
     .value {}
     input[name="value"] {
@@ -154,6 +153,7 @@ input[name="searchbox"],
 }
 
 #elasticsearch-btn {
+    margin-top: -5px;
     transition: none;
     background-color: transparent;
     box-shadow: none;
@@ -170,5 +170,22 @@ input[name="searchbox"],
     &:active {
         background-color: transparent;
         box-shadow: none;
+    }
+}
+
+.search-option-dropdown {
+    position: relative;
+    top: 5px;
+    @include desktop {
+        left: 53vw;
+    }
+    @include tablet {
+        left: 31vw;
+    }
+    @include phone {
+        left: 9vw;
+    }
+    .dropdown-content {
+        margin-top: -12px;
     }
 }

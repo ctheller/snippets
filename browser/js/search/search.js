@@ -4,7 +4,7 @@ app.config(function ($stateProvider) {
         url: '/search',
         controller: 'SearchCtrl',
         templateUrl: 'js/search/search.html',
-        params: {'result': null, 'searchParams': null}
+        params: {'result': null, 'type': null}
 
     });
 

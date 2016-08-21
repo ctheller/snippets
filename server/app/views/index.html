@@ -47,6 +47,7 @@
     <script src='/angularfire/dist/angularfire.min.js'></script>
     <script src="/main.js"></script>
 </head>
+
 <body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
     <md-toolbar class="main-toolbar md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl" md-theme="blue">
         <md-icon class="lnr" ng-click="toggle()" ng-show="user"><i class="material-icons">menu</i></md-icon>
@@ -54,14 +55,25 @@
             <img class="snippetLogo" src="/files/snippetLogo.png">
         </a>
         <!-- search bar -->
-
         <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate>
-
-        <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
-        </nit-advanced-searchbox>
-        <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
+            <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
+            </nit-advanced-searchbox>
+            <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
+            <md-menu md-position-mode="target-right target" class="search-option-dropdown">
+                <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin><i class="material-icons">keyboard_arrow_down</i></md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item ng-repeat="item in ['colleague', 'snippet']">
+                        <md-button ng-click="setSearchParams(item)">
+                            <div layout="row" flex>
+                                <p flex>Looking for a {{item}}</p>
+                            </div>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
         </form>
-
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
         <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user" ui-sref="login">Get started</a>
     </md-toolbar>
