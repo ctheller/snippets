@@ -3,6 +3,11 @@ let creds = require('../../credentials/creds.json');
 firebase.initializeApp({
   serviceAccount: creds.serviceAccount,
   databaseURL: "https://snippets-2f32c.firebaseio.com",
+  databaseAuthVariableOverride: {
+    uid: "snipyt-is-awesome"
+  }
 });
 let db = firebase.database();
-module.exports = db;
+let ref = firebase.app().database();
+
+module.exports = {db: db, ref: ref};
