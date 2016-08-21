@@ -103,12 +103,44 @@ div.dashboard-ui-view-wrapper {
         content: "zoom_out_map";
     }
 }
+
 .split-view-title md-icon i.material-icons.expanded {
     &:after {
         content: "remove";
     }
 }
 
+.snippet-container {
+    list-style: none;
+}
+
+.snippet-container md-icon {
+    text-align: center;
+    align-self: center;
+    background-color: white;
+    cursor: pointer;
+    text-align: center;
+    height: 48px;
+    margin-bottom: -48px;
+    *:active {
+        outline: none;
+    }
+    i {
+        margin: 12px 0;
+    }
+}
+
+.snippet-container md-icon i.material-icons {
+    &:after {
+        content: "zoom_out_map";
+    }
+}
+
+.snippet-container md-icon i.material-icons.expanded {
+    &:after {
+        content: "remove";
+    }
+}
 
 snippet {
     width: 100%;

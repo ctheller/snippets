@@ -145,7 +145,8 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
             return filterFn(obj.date)
         });
         return snippetsInView.map(obj => {
-            return obj['id'] + type;
+            if (type !== 'all') return obj['id'] + type;
+            else return obj['id'] + obj['type'];
         });
     }
 
