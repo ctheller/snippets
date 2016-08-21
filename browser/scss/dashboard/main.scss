@@ -1,5 +1,14 @@
 @import '../color';
 @import 'categories';
+.no-margin {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.hide-title {
+    opacity: 0;
+}
+
 .dashboard-wrapper {
     height: 100%;
     overflow: hidden;
@@ -7,6 +16,7 @@
 
 .report-snippet-wrapper {
     height: 100%;
+    margin-right: -8px;
 }
 
 .dashboard-ui-view-wrapper {
@@ -84,31 +94,100 @@ div.dashboard-ui-view-wrapper {
 .snippet-container {
     height: 100%;
     overflow-y: scroll;
+    &.negative-margin-right {
+        margin-right: -8px;
+    }
 }
 
-.split-view-title {
-    margin: 5px 0;
+.split-view-title.team-title {
+    background: white;
+    margin-left: 5px;
+    padding: 5px 3px;
+    margin-right: 8px;
+    border-bottom: 1px solid #f2f2f2;
+    div {
+        margin-left: 18px;
+    }
+    &.no-margin {
+        margin: 0;
+    }
+}
+
+.split-view-title.report-title {
+    margin: 0;
+    background: white;
+    padding: 5px 3px;
+    margin-right: 13px;
+    border-bottom: 1px solid #f2f2f2;
+    div {
+        margin-left: 18px;
+    }
 }
 
 .split-view-title md-icon,
 .split-view-title md-icon {
     cursor: pointer;
+    margin-right: 8px;
     *:active {
         outline: none;
     }
 }
 
-.split-view-title md-icon i.material-icons {
+.split-view-title md-icon i.material-icons.expand-view {
+    &:after {
+        content: "add";
+    }
+}
+
+.split-view-title md-icon i.material-icons.expand-view.expanded-view {
+    &:after {
+        content: "undo";
+    }
+}
+
+.split-view-title md-icon i.material-icons.expand {
     &:after {
         content: "zoom_out_map";
     }
 }
-.split-view-title md-icon i.material-icons.expanded {
+
+.split-view-title md-icon i.material-icons.expand.expanded {
     &:after {
         content: "remove";
     }
 }
 
+.tab-container {
+    list-style: none;
+}
+
+.expand-icon {
+    text-align: center;
+    align-self: center;
+    background-color: white;
+    cursor: pointer;
+    text-align: center;
+    height: 48px;
+    margin-bottom: -48px;
+    *:active {
+        outline: none;
+    }
+    i {
+        margin: 12px 0;
+    }
+}
+
+.expand-icon i.material-icons {
+    &:after {
+        content: "zoom_out_map";
+    }
+}
+
+.expand-icon i.material-icons.expanded {
+    &:after {
+        content: "remove";
+    }
+}
 
 snippet {
     width: 100%;
