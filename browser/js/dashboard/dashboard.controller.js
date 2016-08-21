@@ -43,11 +43,9 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     ];
 
     $scope.createNewSnippet = function(e, ui) {
-        console.log(ui.draggable.scope())
         var snippetCopyId = ui.draggable.scope().key;
         Snippet.duplicateAsTemplate(snippetCopyId).then(function() {
             Materialize.toast('Snippet copied', 1250, 'toastCopied');
-            console.log($scope.allSnippetIds.length)
         }).catch(function() {
             Materialize.toast('Copy Failed', 2000, 'toastFail');
         })
