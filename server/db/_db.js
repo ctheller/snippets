@@ -7,7 +7,6 @@ firebase.initializeApp({
     uid: "snipyt-is-awesome"
   }
 });
-console.log('here')
 let db = firebase.database();
 let ref = firebase.app().database();
 
