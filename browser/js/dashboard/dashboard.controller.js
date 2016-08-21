@@ -43,9 +43,11 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     ];
 
     $scope.createNewSnippet = function(e, ui) {
+        console.log(ui.draggable.scope())
         var snippetCopyId = ui.draggable.scope().key;
         Snippet.duplicateAsTemplate(snippetCopyId).then(function() {
             Materialize.toast('Snippet copied', 1250, 'toastCopied');
+            console.log($scope.allSnippetIds.length)
         }).catch(function() {
             Materialize.toast('Copy Failed', 2000, 'toastFail');
         })
@@ -91,16 +93,14 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         $scope.teamSnippetsExpanded = false;
     }
 
-    $scope.checkOverflow = function($event) {
-        if ($event.target.offsetHeight < $event.target.scrollHeight ||
-            $event.target.offsetWidth < $event.target.scrollWidth) {
-            // your element have overflow
-            console.log('overflow')
-        } else {
-            // your element doesn't have overflow
-        }
-    };
-
+    // report, team, split
+    $scope.expandedView = 'split';
+    $scope.expandView = function(view) {
+        $scope.expandedView = view;
+    }
+    $scope.collapseView = function () {
+        $scope.expandedView = 'split';
+    }
 
     var getArrayOfSnippets = function(type) {
         if (type === 'all') {

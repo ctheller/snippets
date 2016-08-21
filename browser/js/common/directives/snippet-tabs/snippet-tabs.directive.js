@@ -17,9 +17,7 @@ app.directive('snippetTabs', function($document) {
                     var activePanelType, activeTab;
                     elem.bind('click', function() {
                         activeTab = elem.find('a.active');
-                        // scope.$apply(function () {
-                            scope.activePanel = getPanelType(activeTab.attr('href'));
-                        // })
+                        scope.activePanel = getPanelType(activeTab.attr('href'));
                     })
                 }
             }
