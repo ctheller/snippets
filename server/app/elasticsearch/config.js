@@ -67,6 +67,13 @@ exports.paths = [
       type:  "snippet",
       fields: ['collaborators', 'contents', 'dateAdded', 'owner', 'subject', 'team', 'organization'],
       filter: function(data) { return data.name !== 'system'; }
+   },
+   {
+      path:  "users",
+      index: "firebase",
+      type:  "user",
+      fields: ['email', 'first_name', 'last_name', 'organization', 'photoUrl'],
+      // filter: function(data) { return data.name !== 'system'; }
    }
 ];
 

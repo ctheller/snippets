@@ -12,28 +12,6 @@ function SearchQueue(esc, reqRef, resRef, cleanupInterval) {
     this._nextInterval();
 }
 
-// index: 'twitter',
-//   type: 'tweets',
-// body: {
-//   query: {
-//     match: {
-//       body: 'elasticsearch'
-//     }
-//   }
-// }
-
-// {
-// "query": {
-//   "bool": {
-//     "must": dataFromFrontEnd
-//   }
-// }
-// }
-// dataFromFrontEnd = [
-//   {"term": {"subject": "something"}},
-//   {}
-// ]
-
 SearchQueue.prototype = {
     _process: function(snap) {
         var dat = snap.val();
@@ -41,11 +19,12 @@ SearchQueue.prototype = {
         // user org sent from query
         // todo add an AND clause to q
         // AND organization: user.org
+        console.log(dat);
         if (this._assertValidSearch(key, dat)) {
             console.log(JSON.stringify(dat.query))
             this.esc.search({
                 index: dat.index,
-                type: 'snippet',
+                type: dat.type,
                 q: dat.query
             }, function(error, response) {
                 if (error) {
