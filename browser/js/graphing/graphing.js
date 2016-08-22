@@ -11,11 +11,16 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('GraphCtrl', function($scope, $rootScope, Graph, getSnips){
+app.controller('GraphCtrl', function($scope, $rootScope, getSnips){
 
-    console.log(getSnips);
+
+
+    $scope.canvasStyle = {width: '300px', height: '300px'};
+    // console.log(getSnips.data);
     $scope.$on('$viewContentLoaded', function(){
-        WordCloud(document.getElementById('wordCloud'), { list: $scope.tags } );
+        setTimeout(function() {
+            WordCloud(document.getElementById('wordCloud'), { list: getSnips.data } );
+        }, 5000);
     //     // $scope.getWeekSnippets($rootScope.user.organization)
     //     // .then(function(result) {
     //     //    console.log(result);
@@ -23,6 +28,6 @@ app.controller('GraphCtrl', function($scope, $rootScope, Graph, getSnips){
     //     // WordCloud(document.getElementById('wordCloud'), { list: $scope.tags } );
     });
 
-    $scope.tags = [['foo', 12], ['bar', 6], ['Gabe', 80]];
+    // $scope.tags = [['foo', 12], ['bar', 6], ['Gabe', 80]];
 
 });

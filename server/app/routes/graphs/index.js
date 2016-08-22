@@ -25,12 +25,27 @@ router.post('/', function(req,res,next) {
       }
     }
 
+    let wordCloudData = {};
+
     for (let filt in filtered) {
-      filtered[filt]
+      let textArr = filtered[filt].contents.split(' ').concat(filtered[filt].subject.split(' '));
+      for (let i=0; i<textArr.length; i++) {
+        if (!wordCloudData[textArr[i]]) {
+          wordCloudData[textArr[i]] = 1;
+        } else {
+          wordCloudData[textArr[i]]++;
+        }
+      }
+    }
+    let toReturn = [];
+    let blacklist = ['of', 'and','a', 'with', 'in', 'the', 'The', '&', 'from', 'that', 'this', 'This', 'by', 'Our', 'our', 'for', 'to'];
+    for (let word in wordCloudData) {
+      if (blacklist.indexOf(word) === -1) {
+        toReturn.push([word, wordCloudData[word]]);
+      }
     }
 
-
-    res.json(filtered);
+    res.json(toReturn);
   })
   .catch(function(error) {
     console.log(error);
