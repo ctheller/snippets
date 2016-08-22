@@ -9,14 +9,14 @@
             <md-icon
                 layout="column" flex="5"
                 ng-click="(!reportsExpanded) ? expandAllReports() : collapseAllReports()">
-                    <i class="material-icons expand"
-                        ng-class="{'expanded': reportsExpanded}"></i>
+                    <i class="material-icons expand-view"
+                        ng-class="{'expanded-view': reportsExpanded}"></i>
                     </md-icon>
             <md-icon
                 layout="column" flex="5"
                 ng-click="(expandedView === 'split') ? expandView('reports') : collapseView()">
-                    <i class="material-icons expand-view"
-                        ng-class="{'expanded-view' : (expandedView !== 'split')}"></i>
+                    <i class="material-icons expand"
+                        ng-class="{'expanded' : (expandedView !== 'split')}"></i>
             </md-icon>
         </div>
     </div>
@@ -30,14 +30,14 @@
             <md-icon
                 layout="column" flex="5"
                 ng-click="(!teamSnippetsExpanded) ? expandAllTeamSnippets(activePanel) : collapseAllTeamSnippets(activePanel)">
-                    <i class="material-icons expand"
-                        ng-class="{'expanded': teamSnippetsExpanded}"></i>
+                    <i class="material-icons expand-view"
+                        ng-class="{'expanded-view': teamSnippetsExpanded}"></i>
             </md-icon>
             <md-icon
                 layout="column" flex="5"
                 ng-click="(expandedView === 'split') ? expandView('team') : collapseView()">
-                    <i class="material-icons expand-view"
-                        ng-class="{'expanded-view' : (expandedView !== 'split')}"></i>
+                    <i class="material-icons expand"
+                        ng-class="{'expanded' : (expandedView !== 'split')}"></i>
             </md-icon>
         </div>
     </div>

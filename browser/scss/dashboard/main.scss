@@ -133,6 +133,10 @@ div.dashboard-ui-view-wrapper {
     }
 }
 
+md-icon.material-icons.layout-column.flex-5 {
+    outline: none;
+}
+
 .split-view-title md-icon i.material-icons.expand-view {
     &:after {
         content: "add";
@@ -141,19 +145,19 @@ div.dashboard-ui-view-wrapper {
 
 .split-view-title md-icon i.material-icons.expand-view.expanded-view {
     &:after {
-        content: "undo";
+        content: "remove";
     }
 }
 
 .split-view-title md-icon i.material-icons.expand {
     &:after {
-        content: "zoom_out_map";
+        content: "fullscreen";
     }
 }
 
 .split-view-title md-icon i.material-icons.expand.expanded {
     &:after {
-        content: "remove";
+        content: "fullscreen_exit";
     }
 }
 
