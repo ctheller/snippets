@@ -3,6 +3,7 @@ app.factory('Search', function($state, $rootScope) {
     var database = firebase.database();
     var searchParams = {};
     var searchOption = null;
+    var previousUrl = null;
 
     var userSearchParams = [
         { key: "first_name", name: "first name", placeholder: "first name:", allowMultiple: true },
@@ -15,7 +16,8 @@ app.factory('Search', function($state, $rootScope) {
         { key: "contents", name: "contains", placeholder: "contains:", allowMultiple: true },
     ];
 
-    function sendSearchQuery(searchFor, params) {
+    function sendSearchQuery(searchFor, params, url) {
+        previousUrl = url;
         searchParams = params;
         searchOption = searchFor;
         var terms = makeTerm(searchParams);
@@ -37,7 +39,8 @@ app.factory('Search', function($state, $rootScope) {
         }
         var data = snap.val();
         var result = { 'data': data };
-        if (data.hits) $state.go('search', { 'result': result, 'type': searchOption });
+        console.log(previousUrl);
+        if (data.hits) $state.go('search', { 'result': result, 'type': searchOption, 'goBackTo': previousUrl});
     }
 
     function makeTerm(params) {

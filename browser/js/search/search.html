@@ -1,6 +1,9 @@
 <div layout="row">
     <div layout="column" flex="100">
-        <div layout="row" style="margin: 15px 0">All results</div>
+        <div layout="row" style="margin: 15px 0">
+            <md-icon ng-click="goBack()"><i class="material-icons">keyboard_backspace</i></md-icon>
+            <p>All results</p>
+        </div>
         <md-expansion-panel-group md-component-id="search-panel" ng-if="searchOption === 'snippet'" multiple>
             <div class="parent" ng-repeat="obj in snippets" layout="row">
                 <snippet id="obj.id" type="obj.type" card="false"></snippet>
@@ -9,7 +12,7 @@
         <md-content layout="row" ng-if="searchOption === 'user'">
             <md-list layout="column" flex>
                 <md-list-item class="md-3-line" ng-repeat="user in users">
-                    <img ng-src="{{user.photoUrl}}" class="md-avatar"/>
+                    <img ng-src="{{user.photoUrl}}" class="md-avatar" />
                     <div class="md-list-item-text" layout="column">
                         <h3>{{ user.first_name + ' ' + user.last_name }}</h3>
                         <h4>{{ user.email }}</h4>
