@@ -1,5 +1,7 @@
 <div layout="row" flex="100" ng-if="user.reports">
+
     <div layout="column"
+        id="snippetBox"
         flex="{{ (expandedView === 'split') ? 50 : 100}}"
         ng-show="expandedView !== 'team'">
         <div layout="row" class="split-view-title report-title">
@@ -63,17 +65,20 @@
         ng-if="user.reports"
         flex="{{ (expandedView === 'split') ? 50 : 100}}"
         ng-show="expandedView === 'split' || expandedView === 'reports'">
+
+        <div ng-show="selectedSnippetIds.length && !currentWeekNum" id="export-button" ng-cloak>
+            <a ng-click="exportToEmail()" class="export-button waves-effect waves-light btn purple lighten-2"><i class="material-icons">email</i></a>
+        </div>
+
         <md-expansion-panel-group md-component-id="report-panel" multiple>
             <div ng-if="dateInRange(value)" class="parent" ng-repeat="(key, value) in user.snippets.asManager" layout="row" data-drag="true" ng-model="user.snippets.asManager" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, placeholder: 'keep'}">
                 <snippet class="fromReport" id="key" type="'report'" card="false"></snippet>
             </div>
         </md-expansion-panel-group>
-        <div ng-show="selectedSnippetIds.length && !currentWeekNum" id="export-button" ng-cloak>
-            <a ng-click="exportToEmail()" class="export-button waves-effect waves-light btn purple lighten-2"><i class="material-icons">email</i></a>
-        </div>
     </div>
     <!-- team view if im a manager -->
     <div
+    data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}"
     class="snippet-container expansion-panel-container"
     layout="column" style="margin-left: 5px"
     ng-if="user.reports"
@@ -82,7 +87,7 @@
         <md-expansion-panel-group
         md-component-id="manager-team-panel" multiple
         ng-if="(expandedView === 'split')">
-            <div ng-if="dateInRange(obj.date)" class="parent" layout="row" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}">
+            <div ng-if="dateInRange(obj.date)" class="parent" layout="row" ng-repeat="obj in allSnippetIds">
                 <snippet id="obj.id" type="'all'" card="false" class="fromTeam {{(obj.type === 'mine') ? 'mine' : ((obj.type === 'team') ? 'team' : 'collab')}}"></snippet>
             </div>
         </md-expansion-panel-group>

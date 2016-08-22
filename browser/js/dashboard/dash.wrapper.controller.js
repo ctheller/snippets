@@ -1,7 +1,7 @@
-app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers, $element) {
+app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers) {
 
 	$scope.currentWeekNum = parseInt($state.params.week);
-    
+
     $scope.go = function(weekNum){
         $scope.loaded = false;
         $state.go('dashboard.week', {week: weekNum}, { reload: true });
@@ -14,8 +14,6 @@ app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers,
 
 	$scope.displayWeek = ($scope.currentWeekNum) ? "Week of " + d.toDateString() : "This Week";
 
-    $scope.loaded = true;
-
     $scope.showSnippetForm = function(ev) {
         $mdDialog.show({
             controller: MdHelpers.dialogCtrl,
@@ -25,10 +23,5 @@ app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers,
             clickOutsideToClose: true
         });
     };
-
-    $scope.$on('$stateChangeStart', function(){
-        $element.remove();
-    });
-
 
 });

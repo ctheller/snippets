@@ -94,12 +94,8 @@ function addOneOrg (seedObj) {
 
   for (let i=0; i<500; i++) {
     let snippetId = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 15});
-    seedObj.snippets[snippetId] = {
-      contents: chance.paragraph(),
-      subject: chance.sentence({words: 6}),
-      submitted: chance.bool({likelihood: 50}),
-      dateAdded: chance.integer({min: Date.now() - 1.814e+9, max: Date.now() + 800000000})
-    };
+
+    seedObj.snippets[snippetId] = snipGenerator();
 
     let randomUser = chance.pickone(wholeOrg);
     seedObj.snippets[snippetId].owner = randomUser;

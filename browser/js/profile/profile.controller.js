@@ -1,4 +1,4 @@
-app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth, Users, $element) {
+app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth) {
 
     // fetches the user's unique id to look up the user profile
     var uid = Auth.$getAuth().uid;
@@ -11,11 +11,11 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth, User
 
     var manager_name = "";
 
-    if(managerObj.length > 0){
-        manager_name = managerObj[0].first_name + ' ' + managerObj[0].last_name;    
-    } else { manager_name = ""}
-    
-    angular.extend($scope.userCopy, {'manager_name': manager_name});
+    if (managerObj.length > 0) {
+        manager_name = managerObj[0].first_name + ' ' + managerObj[0].last_name;
+    } else { manager_name = "" }
+
+    angular.extend($scope.userCopy, { 'manager_name': manager_name });
 
     // updates the profile upon clicking submit
     $scope.saveProfile = function(userData) {
@@ -36,14 +36,14 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth, User
         })
     }
 
-    $scope.sendPasswordReset = function(){
+    $scope.sendPasswordReset = function() {
         console.log(Auth);
         Auth.$sendPasswordResetEmail($scope.userCopy.email)
-        .then(function(){console.log('Password reset email sent')})
-        .catch(function(err){console.log('Password reset email failed to send. Error code:', err)});
+            .then(function() { console.log('Password reset email sent') })
+            .catch(function(err) { console.log('Password reset email failed to send. Error code:', err) });
     }
 
-    $scope.$on('$stateChangeStart', function(){
+    $scope.$on('$stateChangeStart', function() {
         $element.remove();
     });
 });
