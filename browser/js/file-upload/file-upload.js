@@ -1,4 +1,4 @@
-app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $mdToast, $mdDialog, $element) {
+app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $mdToast, $mdDialog) {
 
     $scope.clear = function($event) {
         $scope.result = null;
@@ -26,58 +26,19 @@ app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $md
             },
             function(error) {
                 $scope.errorMsg = error.code;
+                Materialize.toast('Photo upload Failed', 1250, 'toastFailed');
             },
             function() {
                 // Upload completed successfully, now we can get the download URL
                 var downloadURL = uploadTask.snapshot.downloadURL;
                 $scope.result = downloadURL;
                 firebase.database().ref().child('users').child(name).child('photoUrl').set(downloadURL);
+                Materialize.toast('Photo uploaded successfully', 1250, 'toastAddCollab');
             });
 
-        var last = {
-            bottom: false,
-            top: true,
-            left: false,
-            right: true
-        };
 
-        $scope.toastPosition = angular.extend({}, last);
+            $scope.picFile = null;
 
-        $scope.getToastPosition = function() {
-            sanitizePosition();
-
-            return Object.keys($scope.toastPosition)
-                .filter(function(pos) {
-                    return $scope.toastPosition[pos];
-                })
-                .join(' ');
-        };
-
-        function sanitizePosition() {
-            var current = $scope.toastPosition;
-
-            if (current.bottom && last.top) current.top = false;
-            if (current.top && last.bottom) current.bottom = false;
-            if (current.right && last.left) current.left = false;
-            if (current.left && last.right) current.right = false;
-
-            last = angular.extend({}, current);
         }
-
-        var pinTo = $scope.getToastPosition();
-
-        $mdToast.show(
-            $mdToast.simple()
-            .textContent('Photo uploaded successfully')
-            .position(pinTo)
-            .hideDelay(4000)
-        );
-
-        $state.go('profile');
-    }
-
-    $scope.$on('$stateChangeStart', function(){
-        $element.remove();
-    });
 
 });

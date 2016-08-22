@@ -10,7 +10,19 @@
         <md-content layout="column" class="md-padding">
             <h3 class="md-title-small float-left">{{user.first_name}} {{user.last_name}}</h2>
             <h4 class="md-subhead-small float-left">{{user.email}}</h3>
-            <md-button class="md-primary md-raised no-side-margin blue darken-1" ui-sref="membersOnly">Upload new picture</md-button>
+            <div ng-controller="ImgUploadCtrl">
+                <form name="imageUploader">
+                    <md-button class="md-primary md-raised blue darken-2" ng-click="clear()" ngf-select ng-model="picFile" accept="image/*">
+                        Upload New Picture</md-button>
+                    <div ng-show="picFile" ngf-drop ng-model="picFile" ngf-pattern="image/*"
+                         class="cropArea">
+                        <img-crop image="picFile  | ngfDataUrl"                 
+                        result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                        </img-crop>
+                    </div>
+                    <md-button class="md-primary md-raised blue darken-2" ng-show="picFile && !result" ng-click="upload(croppedDataUrl)">Submit</md-button> 
+                </form>
+            </div>
         </md-content>
     </md-content>
     <md-content layout-padding>
