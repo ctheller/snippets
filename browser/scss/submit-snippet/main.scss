@@ -6,11 +6,10 @@ $gray: #bbbbbb;
 
 submit-snippet.forExpPanel {
   &:after {
-    font-family: 'Material Icons';
-    content: "done";
-    -webkit-font-feature-settings: 'liga';
+    content: "submit";
     position: relative;
     top: -12px;
+    border-radius: 4px;
   }
 }
 
@@ -38,16 +37,16 @@ submit-snippet {
   outline:none;
   height: 30px;
   text-align: center;
-  width: 30px;
-  border-radius:40px;
+  width: 80px;
+  border-radius: 4px;
   background: #fff;
   border: 2px solid $green;
   color:$green;
+
+
   letter-spacing:1px;
   text-shadow:0;
-  font-family: 'Material Icons';
-  content: "done";
-  -webkit-font-feature-settings: 'liga';
+  content:"submit";
   font:{
     size:17px;
     weight:bold;
@@ -60,9 +59,7 @@ submit-snippet {
     background: $green;
   }
   &:after {
-    font-family: 'Material Icons';
-    content: "done";
-    -webkit-font-feature-settings: 'liga';
+    content: "submit";
     position: inherit;
     top: -10px;
   }
@@ -76,6 +73,7 @@ submit-snippet {
   width: 30px;
   background: $green;
   font-size:17px;
+
   color: white;
   &:hover {
       background: #ef5350;

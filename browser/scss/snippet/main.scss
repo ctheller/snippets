@@ -103,6 +103,7 @@ md-card-title {
     height: 30px;
     font-size: 6px;
     margin-top: 8px;
+    border-radius: 4px;
     padding-bottom: 5px;
     i {
         font-size: 20px;
@@ -114,6 +115,7 @@ md-card-title {
     position: absolute;
     top: 0;
     right: 25px;
+    border-radius: 4px;
 }
 
 // Rules for using icons as white on a dark background.
