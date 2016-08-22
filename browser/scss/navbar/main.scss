@@ -123,6 +123,9 @@ md-list-item {
     &.dashboard i {
         color: $green;
     }
+    &.graphing i {
+        color: $amber;
+    }
     &.admin i {
         color: $green;
     }

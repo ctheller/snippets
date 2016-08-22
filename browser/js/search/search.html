@@ -8,7 +8,7 @@
         </md-expansion-panel-group>
         <md-content layout="row" ng-if="searchOption === 'user'">
             <md-list layout="column" flex>
-                <md-list-item class="md-3-line" ng-repeat="user in users" ng-click="null">
+                <md-list-item class="md-3-line" ng-repeat="user in users">
                     <img ng-src="{{user.photoUrl}}" class="md-avatar"/>
                     <div class="md-list-item-text" layout="column">
                         <h3>{{ user.first_name + ' ' + user.last_name }}</h3>
