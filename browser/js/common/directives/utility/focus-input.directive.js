@@ -2,6 +2,7 @@ app.directive('focusInput', function($document, $rootScope) {
     return {
         restrict: 'A',
         link: function(scope, elem, attrs) {
+            var searchOptionMenu = $document.find('md-menu-content');
             var searchbox = elem.find('input[name="searchbox"]');
             var searchbtn = $document.find('#elasticsearch-btn');
             var setActive = function() {
@@ -25,6 +26,9 @@ app.directive('focusInput', function($document, $rootScope) {
                 searchbox.val('');
                 $rootScope.$emit('clearNgModel')
             });
+            searchbox.bind('focus', function() {
+                setActive();
+            });
             searchbox.focusout(function() {
                 if ($('input[name="value"]').length === 0) {
                     elem.css({
@@ -44,6 +48,9 @@ app.directive('focusInput', function($document, $rootScope) {
                         searchbox.blur();
                     }
                 });
+            });
+            searchOptionMenu.bind('click', function () {
+                searchbox.focus();
             })
         }
     }

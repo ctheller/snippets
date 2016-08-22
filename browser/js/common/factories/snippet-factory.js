@@ -42,16 +42,16 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
             });
     }
 
-    Snippet.submit = function(snippetId, managerId){
+    Snippet.submit = function(snippetId, managerId) {
         var updates = {};
-        updates['/snippets/' + snippetId +"/submitted"] = true;
+        updates['/snippets/' + snippetId + "/submitted"] = true;
         updates[`/users/${managerId}/snippets/asManager/${snippetId}`] = Date.now();
         return ref.update(updates);
     }
 
-    Snippet.unsubmit = function(snippetId, managerId){
+    Snippet.unsubmit = function(snippetId, managerId) {
         var updates = {};
-        updates['/snippets/' + snippetId +"/submitted"] = false;
+        updates['/snippets/' + snippetId + "/submitted"] = false;
         updates[`/users/${managerId}/snippets/asManager/${snippetId}`] = null;
         return ref.update(updates);
     }
@@ -94,10 +94,10 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
     Snippet.delete = function(snippetId) {
         var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
-        return snippet.$loaded().then(function(){
+        return snippet.$loaded().then(function() {
             var updates = {};
             var collaborators = _.keys(snippet.collaborators);
-            collaborators.forEach(function(collab){
+            collaborators.forEach(function(collab) {
                 updates[`/users/${collab}/snippets/asTeamMember/${snippetId}`] = null;
                 updates[`/users/${collab}/snippets/asCollaborator/${snippetId}`] = null;
                 updates[`/users/${collab}/snippets/asManager/${snippetId}`] = null;
@@ -111,28 +111,35 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
         })
     }
 
+    Snippet.ownedSnippetIds = [];
+    Snippet.teamSnippetIds = [];
+    Snippet.collabSnippetIds = [];
 
-
-    Snippet.getSnippetIdsWithInfo = function(user){
+    Snippet.getSnippetIdsWithInfo = function(user) {
         if (!user || !user.snippets) return [];
 
         var ownedSnippetIds = user.snippets.asOwner ? user.snippets.asOwner : {};
         var mappedOwnedIds = [];
-        _.forEach(ownedSnippetIds, function(value, key){
-            mappedOwnedIds.push({id: key, date: value, type: 'mine'});
+        _.forEach(ownedSnippetIds, function(value, key) {
+            mappedOwnedIds.push({ id: key, date: value, type: 'mine' });
         })
+        Snippet.ownedSnippetIds = mappedOwnedIds;
 
         var teamSnippetIds = user.snippets.asTeamMember ? user.snippets.asTeamMember : {};
         var mappedTeamIds = [];
-        _.forEach(teamSnippetIds, function(value, key){
-            mappedTeamIds.push({id: key, date: value, type: 'team'});
-        })
+        _.forEach(teamSnippetIds, function(value, key) {
+            mappedTeamIds.push({ id: key, date: value, type: 'team' });
+        });
+
+        Snippet.teamSnippetIds = mappedTeamIds;
 
         var collabSnippetIds = user.snippets.asCollaborator ? user.snippets.asCollaborator : {};
         var mappedCollabIds = [];
-        _.forEach(collabSnippetIds, function(value, key){
-            mappedCollabIds.push({id: key, date: value, type: 'collab'});
+        _.forEach(collabSnippetIds, function(value, key) {
+            mappedCollabIds.push({ id: key, date: value, type: 'collab' });
         })
+
+        Snippet.collabSnippetIds = collabSnippetIds;
 
         return _.unionBy(mappedOwnedIds, _.unionBy(mappedCollabIds, mappedTeamIds, 'id'), 'id');
 
@@ -140,7 +147,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
 
     }
 
-    Snippet.getSnippetPanelIds = function (snippetArr, filterFn, type) {
+    Snippet.getSnippetPanelIds = function(snippetArr, filterFn, type) {
         var snippetsInView = snippetArr.filter(obj => {
             return filterFn(obj.date)
         });
