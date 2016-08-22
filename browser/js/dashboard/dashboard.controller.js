@@ -108,20 +108,11 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
                 return obj;
             });
         } else if (type === 'mine') {
-            return _.reduce($rootScope.user.snippets.asOwner, function(acc, value, key) {
-                acc.push({ id: key, date: value });
-                return acc;
-            }, []);
+            return Snippet.ownedSnippetIds;
         } else if (type === 'team') {
-            return _.reduce($rootScope.user.snippets.asTeamMember, function(acc, value, key) {
-                acc.push({ id: key, date: value });
-                return acc;
-            }, []);
+            return Snippet.teamSnippetIds;
         } else if (type === 'collab') {
-            return _.reduce($rootScope.user.snippets.asCollaborator, function(acc, value, key) {
-                acc.push({ id: key, date: value });
-                return acc;
-            }, []);
+            return Snippet.collabSnippetIds;
         }
     }
 });

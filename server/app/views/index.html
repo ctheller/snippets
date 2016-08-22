@@ -50,12 +50,12 @@
 
 <body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
     <md-toolbar class="main-toolbar md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl" md-theme="blue">
-        <md-icon class="lnr" ng-click="toggle()" ng-show="user"><i class="material-icons">menu</i></md-icon>
+        <md-icon class="lnr" ng-click="toggle()" ng-if="user"><i class="material-icons">menu</i></md-icon>
         <a href="{{ user ? '/dashboard/0' : '/splash' }}">
             <img class="snippetLogo" src="/files/snippetLogo.png">
         </a>
         <!-- search bar -->
-        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate>
+        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate ng-if="user">
             <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
             </nit-advanced-searchbox>
             <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
@@ -80,7 +80,7 @@
     <div id="main" layout="row" flex>
         <!-- temperary controller -->
         <md-content class="pushing" layout="column">
-            <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" md-disable-backdrop="">
+            <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" ng-if="user">
                 <md-content layout-padding="" ng-controller="SidebarCtrl">
                     <md-list ng-cloak>
                         <md-list-item class="sidebar-item state {{item.state}}" ng-repeat="item in items" ui-sref-active="active">
