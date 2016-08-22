@@ -25,7 +25,9 @@ router.post('/', function(req,res,next) {
       }
     }
 
-
+    for (let filt in filtered) {
+      filtered[filt]
+    }
 
 
     res.json(filtered);
