@@ -4,11 +4,11 @@ app.config(function($stateProvider) {
             templateUrl: 'js/admin/home/admin.html',
             controller: 'adminCtrl'
         })
-        .state('admin.users', {
-            url: '/admin/users',
-            templateUrl: 'js/admin/users/users.admin.html',
-            controller: 'usersAdminCtrl'
-        })
+        // .state('admin.users', {
+        //     url: '/users',
+        //     templateUrl: 'js/admin/users/users.admin.html',
+        //     controller: 'usersAdminCtrl'
+        // })
         .state('admin.snippets', {
             url: '/admin/snippets',
             templateUrl: 'js/admin/snippets/snippets.admin.html',
@@ -23,4 +23,13 @@ app.config(function($stateProvider) {
                 }
             }
         })
+});
+
+
+app.config(function($stateProvider) {
+    $stateProvider.state('adminUserProfile', {
+        url: '/admin/users/:userId',
+        templateUrl: 'js/admin/users/user.admin.html',
+        controller: 'AdminProfileCtrl'
+    })
 });

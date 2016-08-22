@@ -18,4 +18,4 @@ app.controller('TabController', function() {
         return this.tab === tabId;
     };
 
-})
+});

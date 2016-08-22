@@ -4,9 +4,9 @@
         <admin-tabs layout="row">
         </admin-tabs>
         <md-list style="margin-top:40px" ng-show="tab.selected('Users')">
-            <md-list-item ng-repeat="user in users" ng-click="goToPerson(person.name, $event)" class="noright white" layout="row">
+            <md-list-item ng-repeat="(key, user) in users" ui-sref="adminUserProfile({userId: user.$id })" class="noright white" layout="row">
                 <img ng-src="{{ user.photoUrl }}" class="md-avatar" />
-                <p>{{ user.first_name }} {{ user.last_name }}</p>
+                <p>{{key}}. {{ user.first_name }} {{ user.last_name }}</p>
                 <!-- <md-icon md-svg-icon="communication:email" ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3"></md-icon>
                 <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon> -->
             </md-list-item>

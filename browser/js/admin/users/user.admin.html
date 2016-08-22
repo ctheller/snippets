@@ -1,15 +1,15 @@
 <div layout="column" ng-cloak class="md-inline-form">
     <div class="md-toolbar-tools toolbar-profile">
-        <h3 class="ng-binding">Profile page</h3>
+        <h3 class="ng-binding">Profile page - Admin Access</h3>
         <span flex class="flex"></span>
     </div>
     <md-content layout="row" class="clearfix md-padding">
         <md-card-avatar>
-            <img class="md-avatar-icon img-avatar-container md-padding" ng-src="{{user.photoUrl || 'files/default-profile.png'}}" />
+            <img class="md-avatar-icon img-avatar-container md-padding" ng-src="{{userCopy.photoUrl || 'files/default-profile.png'}}" />
         </md-card-avatar>
         <md-content layout="column" class="md-padding">
-            <h3 class="md-title-small float-left">{{user.first_name}} {{user.last_name}}</h2>
-            <h4 class="md-subhead-small float-left">{{user.email}}</h3>
+            <h3 class="md-title-small float-left">{{userCopy.first_name}} {{userCopy.last_name}}</h2>
+            <h4 class="md-subhead-small float-left">{{userCopy.email}}</h3>
             <md-button class="md-primary md-raised no-side-margin blue darken-1" ui-sref="membersOnly">Upload new picture</md-button>
         </md-content>
     </md-content>
