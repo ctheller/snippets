@@ -98,7 +98,7 @@ function addOneOrg (seedObj) {
       contents: chance.paragraph(),
       subject: chance.sentence({words: 6}),
       submitted: chance.bool({likelihood: 50}),
-      dateAdded: chance.integer({min: Date.now() - 1.814e+9, max: Date.now()})
+      dateAdded: chance.integer({min: Date.now() - 1.814e+9, max: Date.now() + 800000000})
     };
 
     let randomUser = chance.pickone(wholeOrg);
@@ -315,7 +315,7 @@ for (let i=0; i< 4; i++) {
     snippets: newGuy.snippets
   };
 
-  for (let i=0; i<28; i++) {
+  for (let i=0; i<50; i++) {
     let sampleSnip = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 10}) + '--SEEDY';
     seedy.snippets[sampleSnip] = snipGenerator();
     seedy.snippets[sampleSnip].owner = newGuy.id;
@@ -458,7 +458,7 @@ jsonfile.writeFile(file, obj, function (err) {
       subject: toReturn.subject,
       contents: toReturn.contents,
       submitted: chance.bool({likelihood: 50}),
-      dateAdded: chance.integer({min: Date.now() - 1.814e+9, max: Date.now()}),
+      dateAdded: chance.integer({min: Date.now() - 1.814e+9, max: Date.now() + 800000000}),
       collaborators: {}
     };
   }
