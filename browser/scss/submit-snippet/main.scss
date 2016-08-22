@@ -6,7 +6,9 @@ $gray: #bbbbbb;
 
 submit-snippet.forExpPanel {
   &:after {
-    content: "submit";
+    font-family: 'Material Icons';
+    content: "done";
+    -webkit-font-feature-settings: 'liga';
     position: relative;
     top: -12px;
   }
@@ -36,16 +38,16 @@ submit-snippet {
   outline:none;
   height: 30px;
   text-align: center;
-  width: 100px;
+  width: 30px;
   border-radius:40px;
   background: #fff;
   border: 2px solid $green;
   color:$green;
-
-
   letter-spacing:1px;
   text-shadow:0;
-  content:"submit";
+  font-family: 'Material Icons';
+  content: "done";
+  -webkit-font-feature-settings: 'liga';
   font:{
     size:17px;
     weight:bold;
@@ -58,7 +60,9 @@ submit-snippet {
     background: $green;
   }
   &:after {
-    content: "submit";
+    font-family: 'Material Icons';
+    content: "done";
+    -webkit-font-feature-settings: 'liga';
     position: inherit;
     top: -10px;
   }
