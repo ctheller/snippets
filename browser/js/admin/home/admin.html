@@ -1,1 +1,26 @@
-<h1>Cool admin page, hein?</h1>
+<div layout="row" class="report-snippet-wrapper" ng-cloak>
+    <!-- team + collab view if im not a manager -->
+    <div layout="column" class="snippet-container" flex="100" ng-if="true">
+        <admin-tabs layout="row">
+        </admin-tabs>
+        <md-subheader class="md-no-sticky">Users</md-subheader>
+        <md-expansion-panel-group md-component-id="admin-users-panel" id="all-users-panel" ng-show="true" multiple>
+         <!--    <div class="parent" ng-repeat="obj in users" layout="row">
+                <user id="obj.id" type="'all'" card="false"></user>
+            </div> -->
+            <md-list>
+            <md-list-item ng-repeat="user in users" ng-click="goToPerson(person.name, $event)" class="noright" layout="row">
+                <img ng-src="{{ user.photoUrl }}" class="md-avatar" />
+                <p>{{ user.first_name }} {{ user.last_name }}</p>
+                <!-- <md-icon md-svg-icon="communication:email" ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3"></md-icon>
+                <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon> -->
+            </md-list-item>
+            </md-list>
+        </md-expansion-panel-group>
+        <md-expansion-panel-group md-component-id="admin-snippets-panel" id="all-snippets-panel" multiple>
+            <div class="parent" ng-repeat="obj in mySnippetIds" layout="row">
+                <snippet id="obj.id" type="obj.type" card="false"></snippet>
+            </div>
+        </md-expansion-panel-group>
+    </div>
+</div>
