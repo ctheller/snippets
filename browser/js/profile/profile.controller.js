@@ -1,4 +1,4 @@
-app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth, Users, $element) {
+app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth) {
 
     // fetches the user's unique id to look up the user profile
     var uid = Auth.$getAuth().uid;
@@ -43,7 +43,4 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth, User
         .catch(function(err){console.log('Password reset email failed to send. Error code:', err)});
     }
 
-    $scope.$on('$stateChangeStart', function(){
-        $element.remove();
-    });
 });

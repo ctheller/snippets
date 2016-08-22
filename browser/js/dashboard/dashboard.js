@@ -5,7 +5,7 @@ app.config(function ($stateProvider) {
         abstract:true,
         templateUrl: 'js/dashboard/dashwrapper.html'
     }).state('dashboard.week', {
-    	url: '/:week',
+    	url: '/{week}',
     	templateUrl: 'js/dashboard/dashboard.html',
     	controller: 'DashboardCtrl'
     })

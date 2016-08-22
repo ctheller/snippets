@@ -74,6 +74,7 @@
     </div>
     <!-- team view if im a manager -->
     <div
+    data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}"
     class="snippet-container expansion-panel-container"
     layout="column" style="margin-left: 5px"
     ng-if="user.reports"
@@ -82,7 +83,7 @@
         <md-expansion-panel-group
         md-component-id="manager-team-panel" multiple
         ng-if="(expandedView === 'split')">
-            <div ng-if="dateInRange(obj.date)" class="parent" layout="row" ng-repeat="obj in allSnippetIds" data-drop="true" jqyoui-droppable="{multiple:true, onDrop:'createNewSnippet(e, ui)'}">
+            <div ng-if="dateInRange(obj.date)" class="parent" layout="row" ng-repeat="obj in allSnippetIds">
                 <snippet id="obj.id" type="'all'" card="false" class="fromTeam {{(obj.type === 'mine') ? 'mine' : ((obj.type === 'team') ? 'team' : 'collab')}}"></snippet>
             </div>
         </md-expansion-panel-group>

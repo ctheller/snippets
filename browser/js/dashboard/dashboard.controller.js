@@ -1,5 +1,9 @@
 app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelpers, AUTH_EVENTS, Snippet, Email, $mdExpansionPanel) {
 
+    $scope.reportsExpanded = false;
+    $scope.activePanel = 'all';
+    $scope.teamSnippetsExpanded = false;
+
     $scope.dragOn = function() {
         $scope.draggingNow = true;
     }
@@ -9,7 +13,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     }
 
     var setScope = function() {
-        console.log("this was hit");
         $scope.allSnippetIds = Snippet.getSnippetIdsWithInfo($rootScope.user);
     }
 
@@ -56,9 +59,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         Email.compose();
     }
 
-    $scope.reportsExpanded = false;
-    $scope.activePanel = 'all';
-    $scope.teamSnippetsExpanded = false;
     $scope.expandAllReports = function() {
         var reports = _.reduce($rootScope.user.snippets.asManager, function(acc, value, key) {
             acc.push({ id: key, date: value });
