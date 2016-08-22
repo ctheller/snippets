@@ -52,7 +52,8 @@ function addOneOrg (seedObj) {
       last_name: chance.last(),
       photoUrl : `https://randomuser.me/api/portraits/${chance.pickone(['men', 'women'])}/${chance.integer({min: 0, max: 99})}.jpg`,
       organization: orgName,
-      reports: {}
+      reports: {},
+      deletedUser: chance.bool({likelihood: 2})
     };
 
   // do managers after creating users
@@ -308,7 +309,8 @@ for (let i=0; i< 4; i++) {
     organization: CLevelsOrg,
     manager: newGuy.manager,
     reports: newGuy.reports,
-    snippets: newGuy.snippets
+    snippets: newGuy.snippets,
+    deletedUser: false
   };
 
   for (let i=0; i<50; i++) {
