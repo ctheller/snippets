@@ -11,5 +11,51 @@
                 <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon> -->
             </md-list-item>
         </md-list>
+        <div ng-show="tab.selected('Other')">
+            <h2>{{user.organization}}</h2>
+            <md-input-container>
+            <h5>Snippet Due Date:</h5>
+            </md-input-container>
+            <md-input-container>
+                <md-select ng-model="day.number" placeholder="Day" class="md-no-underline">
+                  <md-option value="0">Sunday</md-option>
+                  <md-option value="1">Monday</md-option>
+                  <md-option value="2">Tuesday</md-option>
+                  <md-option value="3">Wednesday</md-option>
+                  <md-option value="4">Thursday</md-option>
+                  <md-option value="5">Friday</md-option>
+                  <md-option value="6">Saturday</md-option>
+                  <md-option value="7">Sunday</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <md-select ng-model="day.hour" placeholder="Time of Day" class="md-no-underline">
+                  <md-option value="100">1:00am</md-option>
+                  <md-option value="200">2:00am</md-option>
+                  <md-option value="300">3:00am</md-option>
+                  <md-option value="400">4:00am</md-option>
+                  <md-option value="500">5:00am</md-option>
+                  <md-option value="600">6:00am</md-option>
+                  <md-option value="700">7:00am</md-option>
+                  <md-option value="800">8:00am</md-option>
+                  <md-option value="900">9:00am</md-option>
+                  <md-option value="1000">10:00am</md-option>
+                  <md-option value="1100">11:00am</md-option>
+                  <md-option value="1200">12:00pm</md-option>
+                  <md-option value="1300">1:00pm</md-option>
+                  <md-option value="1400">2:00pm</md-option>
+                  <md-option value="1500">3:00pm</md-option>
+                  <md-option value="1600">4:00pm</md-option>
+                  <md-option value="1700">5:00pm</md-option>
+                  <md-option value="1800">6:00pm</md-option>
+                  <md-option value="1900">7:00pm</md-option>
+                  <md-option value="2000">8:00pm</md-option>
+                  <md-option value="2100">9:00pm</md-option>
+                  <md-option value="2200">10:00pm</md-option>
+                  <md-option value="2300">11:00pm</md-option>
+                  <md-option value="0">12:00am</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
     </div>
 </div>
