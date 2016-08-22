@@ -260,6 +260,10 @@ md-expansion-panel-group[md-component-id='team-panel'] {
 }
 
 #export-button {
-    margin-top: 10px;
-    width: 40px;
+    width: 100%;
+    border-radius: 0;
+    a.export-button {
+     width:100%;
+     border-radius: 0;
+    }
 }
