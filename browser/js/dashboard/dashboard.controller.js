@@ -9,6 +9,7 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     }
 
     var setScope = function() {
+        console.log("this was hit");
         $scope.allSnippetIds = Snippet.getSnippetIdsWithInfo($rootScope.user);
     }
 

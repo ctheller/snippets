@@ -215,18 +215,19 @@ md-expansion-panel-group[md-component-id='team-panel'] {
     cursor: pointer;
     margin-bottom: 10px;
     border-radius: 10px;
-    .left-one,
-    .right-one {
-        padding: 5px;
-    }
-    .right-one {
-        float: right;
-    }
-    span {
+    #displayweek {
+
+        .left-one {
+            float: left;
+        }
+        .right-one {
+            float: right;
+        }
+    
         display: inline-block;
         align: center;
-        width: 84%;
-        position: absolute;
+        width: 100%;
+        position: inherit;
         text-align: center;
         top: 25px;
     }
