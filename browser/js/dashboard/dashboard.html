@@ -1,5 +1,6 @@
 <div layout="row" flex="100" ng-if="user.reports">
     <div layout="column"
+        id="snippetBox"
         flex="{{ (expandedView === 'split') ? 50 : 100}}"
         ng-show="expandedView !== 'team'">
         <div layout="row" class="split-view-title report-title">
