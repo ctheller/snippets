@@ -35,11 +35,11 @@ app.factory('Search', function($state, $rootScope) {
 
     function sendResults(snap) {
         if (!snap.exists()) {
-            return; // wait until we get data
+            $state.go('search', { 'result': null, 'type': searchOption, 'goBackTo': previousUrl});
+            return
         }
         var data = snap.val();
         var result = { 'data': data };
-        console.log(previousUrl);
         if (data.hits) $state.go('search', { 'result': result, 'type': searchOption, 'goBackTo': previousUrl});
     }
 
