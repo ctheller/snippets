@@ -101,8 +101,6 @@
                     })
                 })
 
-                // SHOULD BE REPLACED BY LOADING SCREEN
-                $state.go('dashboard.week', {'week': 0});
             }
             else {
                 $rootScope.user = null;

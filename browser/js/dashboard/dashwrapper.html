@@ -1,13 +1,11 @@
 <div layout="row" class="dashboard-wrapper" ng-cloak>
-    <div layout="column" flex style="height: 100%">
-        <div ng-if="loaded" layout="row" id="dateNav">
-            <a ng-click="go(currentWeekNum-1)">
+    <div layout="column" flex style="height: 95%">
+        <div layout="row" id="dateNav">
+            <div id="displayweek" ng-cloak><a ng-click="go(currentWeekNum-1)">
                 <i class="left-one material-icons">keyboard_arrow_left</i>
-            </a>
-            <span id="displayweek" ng-cloak>{{displayWeek}}</span>
-            <a ng-if="currentWeekNum<0" ng-click="go(currentWeekNum+1)" >
+            </a>{{displayWeek}}<a ng-if="currentWeekNum<0" ng-click="go(currentWeekNum+1)" >
                 <i class="right-one material-icons">keyboard_arrow_right</i>
-            </a>
+            </a></div>
         </div>
         <div layout="row" class="dashboard-ui-view-wrapper">
             <ui-view></ui-view>
@@ -15,7 +13,7 @@
     </div>
     <!-- floating btn -->
     <div layout="column add-snippet-btn-col">
-        <md-button class="md-fab add-snippet-btn blue darken-3" aria-label="add snippet" ng-click="showSnippetForm($event)">
+        <md-button class="md-fab add-snippet-btn blue darken-1" aria-label="add snippet" ng-click="showSnippetForm($event)">
             <md-icon><i class="material-icons">create</i></md-icon>
         </md-button>
     </div>
