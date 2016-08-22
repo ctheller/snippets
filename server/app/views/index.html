@@ -55,7 +55,7 @@
             <img class="snippetLogo" src="/files/snippetLogo.png">
         </a>
         <!-- search bar -->
-        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate ng-if="user">
+        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate ng-show="user">
             <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
             </nit-advanced-searchbox>
             <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
@@ -75,7 +75,7 @@
             </md-menu>
         </form>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
-        <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user" ui-sref="login">Get started</a>
+        <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user && siteLoaded" ui-sref="login">Get started</a>
     </md-toolbar>
     <div id="main" layout="row" flex>
         <!-- temperary controller -->
