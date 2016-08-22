@@ -1,0 +1,10 @@
+<!-- HTML NOT CURRENTLY IN USE -->
+
+<md-list title="usersList" style="margin-top:40px" ng-show="selected:users">
+    <md-list-item ng-repeat="user in users" ng-click="goToPerson(person.name, $event)" class="noright" layout="row">
+        <img ng-src="{{ user.photoUrl }}" class="md-avatar" />
+        <p>{{ user.first_name }} {{ user.last_name }}</p>
+        <!-- <md-icon md-svg-icon="communication:email" ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3"></md-icon>
+                <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon> -->
+    </md-list-item>
+</md-list>
