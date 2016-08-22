@@ -102,17 +102,14 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
     var getArrayOfSnippets = function(type) {
         if (type === 'all') {
-            var snippetIds = _.cloneDeep($scope.allSnippetIds);
+            var snippetIds = _.cloneDeep($scope.allSnippetIds); // clone instead of mutating allSnippetIds
             return snippetIds.map(obj => {
                 obj.type = 'all'
                 return obj;
             });
-        } else if (type === 'mine') {
-            return Snippet.ownedSnippetIds;
-        } else if (type === 'team') {
-            return Snippet.teamSnippetIds;
-        } else if (type === 'collab') {
-            return Snippet.collabSnippetIds;
         }
+        else if (type === 'mine') return Snippet.ownedSnippetIds;
+        else if (type === 'team') return Snippet.teamSnippetIds;
+        else if (type === 'collab') return Snippet.collabSnippetIds;
     }
 });
