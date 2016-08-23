@@ -1,5 +1,8 @@
 app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search) {
 
+    $rootScope.$state = $state;
+
+
     $scope.sidebarOpen = "false";
 
     function DialogController($scope, $mdDialog) {
@@ -31,6 +34,7 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
     };
 
     $scope.toggle = function() {
+        console.log($state.is('graphing'))
         $mdSidenav('left').toggle();
         if ($mdSidenav('left').isOpen()) $rootScope.$emit('open');
         else $rootScope.$emit('close');

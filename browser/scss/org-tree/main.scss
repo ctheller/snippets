@@ -4,8 +4,8 @@
 
 .node circle {
     fill: #fff;
-    // stroke: $blue;
-    // stroke-width: 2px;
+    stroke: steelblue;
+    stroke-width: 2px;
 }
 
 .node text {
@@ -14,6 +14,13 @@
 
 .link {
     fill: none;
-    stroke: #ccc;
+    stroke: steelblue;
     stroke-width: 1.5px;
+}
+
+.org-tree-wrapper {
+    align-items: flex-start;
+    justify-content: center;
+    margin: 30px;
+    width: 100%;
 }

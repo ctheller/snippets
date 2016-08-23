@@ -161,4 +161,29 @@ md-list-item {
     padding: 8px;
 }
 
+#toolbar-padding {
+    display: none;
+    &.active {
+        z-index: 9999;
+        display: block;
+        height: 70px;
+        background-color: #2196F3;
+        transition: display 0.1s ease;
+    }
+}
 
+.main-toolbar {
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .12);
+    &.active {
+        box-shadow: none;
+    }
+}
+
+.main-wrapper {
+    &.active {
+        box-shadow: 0 1px 8px 0 rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .12);
+        margin-top: -40px;
+        z-index: 10000;
+        overflow: scroll;
+    }
+}
