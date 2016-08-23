@@ -75,7 +75,7 @@
                 </md-menu-content>
             </md-menu>
         </form>
-        <button ng-click="showSnippetForm($event)" id="createSnippetButton"><img ng-src="files/create.png"><span>Add Snippet</span></button>
+        <button ng-show="user" ng-click="showSnippetForm($event)" id="createSnippetButton"><img ng-src="files/create.png"><span>Add Snippet</span></button>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
         <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user && siteLoaded" ui-sref="login">Get started</a>
     </md-toolbar>
