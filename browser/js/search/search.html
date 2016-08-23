@@ -1,6 +1,12 @@
 <div layout="row">
-    <div layout="column" flex="100">
-        <div layout="row" style="margin: 15px 0">All results</div>
+    <div layout="column" flex="100" ng-if="!results">
+        <p flex="95">No results</p>
+    </div>
+    <div layout="column" flex="100" ng-if="results">
+        <div layout="row" style="margin: 0">
+            <md-icon flex="shrink" ng-click="goBack()"><i class="material-icons">keyboard_backspace</i></md-icon>
+            <p flex="95">All results</p>
+        </div>
         <md-expansion-panel-group md-component-id="search-panel" ng-if="searchOption === 'snippet'" multiple>
             <div class="parent" ng-repeat="obj in snippets" layout="row">
                 <snippet id="obj.id" type="obj.type" card="false"></snippet>
@@ -8,8 +14,8 @@
         </md-expansion-panel-group>
         <md-content layout="row" ng-if="searchOption === 'user'">
             <md-list layout="column" flex>
-                <md-list-item class="md-3-line" ng-repeat="user in users" ng-click="null">
-                    <img ng-src="{{user.photoUrl}}" class="md-avatar"/>
+                <md-list-item class="md-3-line" ng-repeat="user in users">
+                    <img ng-src="{{user.photoUrl}}" class="md-avatar" />
                     <div class="md-list-item-text" layout="column">
                         <h3>{{ user.first_name + ' ' + user.last_name }}</h3>
                         <h4>{{ user.email }}</h4>

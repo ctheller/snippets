@@ -51,7 +51,7 @@
         <div class="search-parameter" ng-repeat="param in parameters | filter:isUnsedParameter | limitTo:parametersDisplayLimit"
           data-key="{{param.key}}"
           ng-mousedown="addSearchParam(param)">
-          Suggestions: {{::param.name}}
+          {{::param.name}}
         </div>
     </div>
 </div>

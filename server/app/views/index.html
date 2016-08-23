@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/angular-material-expansion-panel/dist/md-expansion-panel.css">
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="stylesheet" type="text/css" href="/ng-img-crop/compile/minified/ng-img-crop.css">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
     <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/materialize-css/dist/js/materialize.min.js"></script>
@@ -56,7 +57,7 @@
             <img class="snippetLogo" src="/files/snippetLogo.png">
         </a>
         <!-- search bar -->
-        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate ng-if="user">
+        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate ng-show="user">
             <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
             </nit-advanced-searchbox>
             <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
@@ -76,7 +77,7 @@
             </md-menu>
         </form>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
-        <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user" ui-sref="login">Get started</a>
+        <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user && siteLoaded" ui-sref="login">Get started</a>
     </md-toolbar>
     <div id="main" layout="row" flex>
         <!-- temperary controller -->
@@ -84,14 +85,18 @@
             <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" ng-if="user">
                 <md-content layout-padding="" ng-controller="SidebarCtrl">
                     <md-list ng-cloak>
-                        <md-list-item class="sidebar-item state {{item.state}}" ng-repeat="item in items" ui-sref-active="active">
-                            <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
-                            <p ui-sref="{{item.state}}">{{ item.label }}</p>
+                        <div ui-sref="{{item.state}}" ng-repeat="item in items" ui-sref-active="active">
+                            <md-list-item class="sidebar-item state {{item.state}}">
+                                <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
+                                <p>{{ item.label }}</p>
+                            </md-list-item>
+                        </div>
+                        <div ui-sref-active="active" ui-sref="admin" ng-show="user.isAdmin">
+                        <md-list-item class="sidebar-item state admin">
+                            <md-icon id="nav-label" class="lnr"><i class="material-icons">supervisor_account</i></md-icon>
+                            <p>Admin</p>
                         </md-list-item>
-                        <md-list-item ng-show="user.isAdmin" class="sidebar-item state admin" ui-sref-active="active">
-                            <md-icon class="lnr"><i class="material-icons">supervisor_account</i></md-icon>
-                            <p ui-sref="admin">Admin</p>
-                        </md-list-item>
+                        </div>
                         <!-- <md-list-item> NOT IN USE
                             <md-icon class="lnr"><i class="material-icons">'person'</i></md-icon>
                             <p ng-click="showProfile($event)">Profile</p>

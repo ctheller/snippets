@@ -97,6 +97,7 @@
                         $rootScope.organization = org;
                         Users.getUsers(Object.keys(org.users)).then(function(result){
                             $rootScope.users = result;
+                            $rootScope.siteLoaded = true;
                         })
                     })
                 })
@@ -107,6 +108,7 @@
                 $rootScope.users = null;
                 $rootScope.userRef = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+                $rootScope.siteLoaded = true;
                 $state.go('splash');
             }
         };

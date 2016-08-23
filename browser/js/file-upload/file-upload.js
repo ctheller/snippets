@@ -22,10 +22,11 @@ app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $md
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             function(snapshot) {
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                console.log("uploading");
+                $scope.uploading = true;
             },
             function(error) {
                 $scope.errorMsg = error.code;
+                $scope.uploading = false;
                 Materialize.toast('Photo upload Failed', 1250, 'toastFailed');
             },
             function() {
@@ -34,6 +35,7 @@ app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $md
                 $scope.result = downloadURL;
                 firebase.database().ref().child('users').child(name).child('photoUrl').set(downloadURL);
                 Materialize.toast('Photo uploaded successfully', 1250, 'toastAddCollab');
+                $scope.uploading = false;
             });
 
 

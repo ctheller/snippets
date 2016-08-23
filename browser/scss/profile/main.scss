@@ -9,6 +9,19 @@
 
 }
 
+.profile-button{
+  min-width: 140px; 
+  margin: 5px;
+  text-align: right; 
+  padding: 0 15px
+}
+
+.delete-user-icon{
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
 .toolbar-profile{
   background-color: darkgray;
   color: white;

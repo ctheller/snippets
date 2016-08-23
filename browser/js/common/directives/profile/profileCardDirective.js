@@ -18,12 +18,12 @@ app.directive('profileCard', function($rootScope, Auth, $state, $document) {
 
             scope.toggleSelect = function() {
                 scope.isPopupVisible = !scope.isPopupVisible;
-            }
+            };
 
             scope.editProfile = function(){
                 scope.isPopupVisible = false;
-                $state.go('profile');
-            }
+                $state.go('profile', {userId: scope.user.$id});
+            };
 
             $document.on('click', function(event) {
                 var isClickedElementChildOfPopup = element
