@@ -83,14 +83,18 @@
             <md-sidenav sidenav-push-in class="md-sidenav-left" md-component-id="left" ng-if="user">
                 <md-content layout-padding="" ng-controller="SidebarCtrl">
                     <md-list ng-cloak>
-                        <md-list-item class="sidebar-item state {{item.state}}" ng-repeat="item in items" ui-sref-active="active">
-                            <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
-                            <p ui-sref="{{item.state}}">{{ item.label }}</p>
+                        <div ui-sref="{{item.state}}" ng-repeat="item in items" ui-sref-active="active">
+                            <md-list-item class="sidebar-item state {{item.state}}">
+                                <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
+                                <p>{{ item.label }}</p>
+                            </md-list-item>
+                        </div>
+                        <div ui-sref-active="active" ui-sref="admin" ng-show="user.isAdmin">
+                        <md-list-item class="sidebar-item state admin">
+                            <md-icon id="nav-label" class="lnr"><i class="material-icons">supervisor_account</i></md-icon>
+                            <p>Admin</p>
                         </md-list-item>
-                        <md-list-item ng-show="user.isAdmin" class="sidebar-item state admin" ui-sref-active="active">
-                            <md-icon class="lnr"><i class="material-icons">supervisor_account</i></md-icon>
-                            <p ui-sref="admin">Admin</p>
-                        </md-list-item>
+                        </div>
                         <!-- <md-list-item> NOT IN USE
                             <md-icon class="lnr"><i class="material-icons">'person'</i></md-icon>
                             <p ng-click="showProfile($event)">Profile</p>

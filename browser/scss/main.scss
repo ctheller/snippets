@@ -35,6 +35,10 @@ body {
 }
 
 md-list-item {
+    p,md-icon,i {
+      background: none !important;
+    }
+
     > a {
         margin: 0 !important;
     }
@@ -77,10 +81,16 @@ md-list-item {
     background-color: $extremely-light-grey;
 }
 
+
 *::-webkit-scrollbar-thumb {
-    background-color: #BDBDBD;
+    background-color: $extremely-light-grey;
 }
 
+#nav-label {
+  &:hover {
+    background: none;
+  }
+}
 
 
 ui-view { -webkit-transition: none !important; transition: none !important; }
