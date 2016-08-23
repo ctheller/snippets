@@ -1,21 +1,31 @@
-app.controller('ProfileCtrl', function($scope, $rootScope, $mdDialog, Auth) {
+app.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $mdDialog, Auth) {
 
-    // fetches the user's unique id to look up the user profile
-    var uid = Auth.$getAuth().uid;
+    // fetches the user's unique id from the $stateParams to look up the user profile
+    var uid = $stateParams.userId;
 
-    $scope.userCopy = angular.copy($rootScope.user);
+    var user;
+    var manager;
+    $scope.userCopy = {};
 
-    var managerObj = $rootScope.users.filter(function(user) {
-        return user.$id === $scope.userCopy.manager;
+    function getUserPromise(id){
+        return firebase.database().ref("users/" + id).once('value').then(function(snapshot){
+            return snapshot.val();
+        });
+    }
+
+    // we get the user info using our promise function
+    var getUser = getUserPromise(uid);
+
+    // after we get the user info, we fetch the profile information for his/her manager
+    var getManager = getUser.then(function(user){
+        return getUserPromise(user.manager)
+    })
+
+    // run all the requests, then combine the results and put them on the scope
+    Promise.all([getUser, getManager]).then(function(results){
+        angular.extend($scope.userCopy, results[0]);
+        $scope.userCopy.manager_name = results[1].first_name + ' ' + results[1].last_name;
     });
-
-    var manager_name = "";
-
-    if (managerObj.length > 0) {
-        manager_name = managerObj[0].first_name + ' ' + managerObj[0].last_name;
-    } else { manager_name = "" }
-
-    angular.extend($scope.userCopy, { 'manager_name': manager_name });
 
     // updates the profile upon clicking submit
     $scope.saveProfile = function(userData) {
