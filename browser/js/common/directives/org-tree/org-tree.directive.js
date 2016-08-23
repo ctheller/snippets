@@ -6,7 +6,7 @@ app.directive('orgTree', function() {
             'orgJson': '='
         },
         link: function(scope, elem, attrs) {
-            var margin = { top: 20, right: 20, bottom: 20, left: 20 },
+            var margin = { top: 20, right: 35, bottom: 20, left: 35 },
                 width = 660 - margin.right - margin.left,
                 height = 600 - margin.top - margin.bottom;
 

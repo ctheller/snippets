@@ -59,11 +59,14 @@
             <img class="snippetLogo" src="/files/snippetLogo.png">
         </a>
         <!-- search bar -->
-        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate ng-show="user">
+        <form name="elasticsearch"
+            ng-submit="sendSearchQuery()"
+            novalidate ng-show="user">
             <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
             </nit-advanced-searchbox>
             <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
-            <md-menu md-position-mode="target-right target" class="search-option-dropdown">
+            <md-menu md-position-mode="target-right target" class="search-option-dropdown"
+            md-offset="8 40">
                 <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
                     <md-icon md-menu-origin><i class="material-icons">keyboard_arrow_down</i></md-icon>
                 </md-button>

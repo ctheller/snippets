@@ -43,8 +43,9 @@ app.directive('focusInput', function($document, $rootScope) {
             });
             searchbox.bind("keypress", function(event) {
                 // if (searchbox.is(':focus')) {
-                    searchbtn.click();
+
                     if (event.which == 13) {
+                        searchbtn.click();
                         searchbox.blur();
                     }
                 // }

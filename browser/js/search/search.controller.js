@@ -1,6 +1,7 @@
 app.controller('SearchCtrl', function($scope, $stateParams, $location) {
     $scope.results = ($stateParams.result) ? $stateParams.result.data.hits : null;
     $scope.searchOption = $stateParams.type;
+    console.log($stateParams.goBackTo);
     $scope.goBack = function () {
         $location.path($stateParams.goBackTo);
     }
