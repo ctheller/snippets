@@ -78,12 +78,13 @@ md-list-item {
 *::-webkit-scrollbar {
     width: 8px;
     height: 3px;
-    background-color: $extremely-light-grey;
+    background-color: #fefefe;
 }
 
 
 *::-webkit-scrollbar-thumb {
     background-color: $extremely-light-grey;
+    opacity: .8;
 }
 
 #nav-label {
