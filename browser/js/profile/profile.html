@@ -14,6 +14,10 @@
                 <form name="imageUploader">
                     <md-button class="md-primary md-raised blue darken-2" ng-click="clear()" ngf-select ng-model="picFile" accept="image/*">
                         Upload New Picture</md-button>
+                        <div ng-show="uploading" class="progress">
+                          <div class="indeterminate"></div>
+                      </div>
+
                     <div ng-show="picFile" ngf-drop ng-model="picFile" ngf-pattern="image/*"
                          class="cropArea">
                         <img-crop image="picFile  | ngfDataUrl"                 
