@@ -10,10 +10,14 @@
 }
 
 .profile-button{
-  min-width: 140px; 
+  width: 170px; 
   margin: 5px;
   text-align: right; 
-  padding: 0 15px
+  padding: 0 15px;
+}
+
+.md-button:last-child.activate-user-button-fix  {
+  margin-right: 5px;
 }
 
 .delete-user-icon{
@@ -25,6 +29,8 @@
 .toolbar-profile{
   background-color: darkgray;
   color: white;
+  padding-left: 16px;
+  padding-right: 0px;
 }
 
 #edit-profile-button {
