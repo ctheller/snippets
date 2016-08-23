@@ -163,11 +163,12 @@ md-list-item {
 
 #createSnippetButton {
     position: absolute;
-    background: #64b5f6;
+    background: #ef9c4f;
+    box-shadow: 0px 1px 5px #5085e0;
     border: none;
     border-radius: 5px;
     &:hover {
-        box-shadow: 0px 1px 5px #5085e0;
+        box-shadow: 0px 2px 10px #4372c3
     }
     span {
         padding-bottom: 10px;
