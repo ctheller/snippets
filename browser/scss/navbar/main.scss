@@ -1,4 +1,6 @@
 @import '../color';
+@import '../media-query-mixins';
+
 .snippetLogo {
     width: 88px;
     display: block;
@@ -162,7 +164,9 @@ md-list-item {
 }
 
 #createSnippetButton {
-    position: absolute;
+    position: relative;
+    top: 1px;
+    height: 41px;
     background: #ef9c4f;
     box-shadow: 0px 1px 5px #5085e0;
     border: none;
@@ -180,7 +184,18 @@ md-list-item {
         width: 25px;
         float: left;
     }
-    right: 65px;
+    @include megascreen {
+        left: 59%;
+    }
+    @include desktop {
+        left: 55.5%;
+    }
+    @include tablet {
+        left: 34%;
+    }
+    @include phone {
+        left: 11vw;
+    }
 }
 
 

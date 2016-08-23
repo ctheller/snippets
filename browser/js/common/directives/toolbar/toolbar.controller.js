@@ -72,6 +72,7 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
     $scope.sendSearchQuery = function() {
         if (!_.isEmpty($scope.searchParams)) {
             $scope.$watchCollection('searchParams', function(newVal, oldVal, scope) {
+                console.log(window.location.href)
                 Search.sendSearchQuery(scope.searchFor, scope.searchParams, window.location.href)
             }, true)
         }
