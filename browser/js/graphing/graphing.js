@@ -18,6 +18,10 @@ app.config(function($stateProvider) {
 
 app.controller('GraphCtrl', function($scope, $rootScope, orgJson, getSnips) {
 
+    $scope.notifyServiceOnChage = function(){
+         console.log($scope.windowHeight);
+      };
+
     // $http.get('/api/orgtree/' + $rootScope.user.organization).then(function(result) {
         $scope.orgJson = orgJson;
     // });
@@ -32,7 +36,6 @@ app.controller('GraphCtrl', function($scope, $rootScope, orgJson, getSnips) {
         setTimeout(function() {
             WordCloud(document.getElementById('wordCloud'), { list: getSnips.data, backgroundColor: 'transparent' } );
             let newHeight = (Number(heightToPass.slice(0,-2)) + 5) + 'px';
-            console.log(newHeight);
             $scope.cardStyle = {'height': newHeight};
             $scope.$digest();
         }, 100);
@@ -52,3 +55,33 @@ app.controller('GraphCtrl', function($scope, $rootScope, orgJson, getSnips) {
     // })
 });
 
+
+
+app.directive('resize', function ($window) {
+    return function (scope, element, attr) {
+
+        var w = angular.element($window);
+        scope.$watch(function () {
+            return {
+                'h': window.innerHeight,
+                'w': window.innerWidth
+            };
+        }, function (newValue, oldValue) {
+            console.log(newValue, oldValue);
+            scope.windowHeight = newValue.h;
+            scope.windowWidth = newValue.w;
+
+            scope.resizeWithOffset = function (offsetH) {
+                scope.$eval(attr.notifier);
+                return {
+                    'height': (newValue.h - offsetH) + 'px'
+                };
+            };
+
+        }, true);
+
+        w.bind('resize', function () {
+            scope.$apply();
+        });
+    }
+});
