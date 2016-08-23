@@ -20,10 +20,18 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             scope.toggleSubmit = function(){
 
                 if (!scope.snippet.submitted) {
-                    Snippet.submit(scope.id, $rootScope.user.manager);
+                    Snippet.submit(scope.id, $rootScope.user.manager).then(function(){
+                        Materialize.toast('Snippet submitted', 1250, 'toastSubmitted');
+                    }).catch(function(){
+                        Materialize.toast('Error submitting', 2000, 'toastFail');
+                    });
                 }
                 else {
-                    Snippet.unsubmit(scope.id, $rootScope.user.manager);
+                    Snippet.unsubmit(scope.id, $rootScope.user.manager).then(function(){
+                        Materialize.toast('Snippet recalled', 1250, 'toastDeleted');
+                    }).catch(function(){
+                        Materialize.toast('Error recalling snippet', 2000, 'toastFail');
+                    });
                 }
             }
 
