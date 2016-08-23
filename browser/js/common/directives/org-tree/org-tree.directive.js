@@ -98,7 +98,7 @@ app.directive('orgTree', function() {
                 nodeEnter.append("circle")
                     .attr("r", 1e-6)
                     .style("fill", function(d) {
-                        return 'url(#' + d.id + ')'
+                        return 'url(organization#' + d.id + ')'
                     })
 
                 // Transition nodes to their new position.
@@ -111,7 +111,7 @@ app.directive('orgTree', function() {
                 nodeUpdate.select("circle")
                     .attr("r", 20)
                     .style("fill", function(d) {
-                        return 'url(#' + d.id + ')'
+                        return 'url(organization#' + d.id + ')'
                     })
 
                 nodeUpdate.select("text")
