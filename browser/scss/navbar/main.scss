@@ -161,4 +161,25 @@ md-list-item {
     padding: 8px;
 }
 
+#createSnippetButton {
+    position: absolute;
+    background: #64b5f6;
+    border: none;
+    border-radius: 5px;
+    &:hover {
+        box-shadow: 0px 1px 5px #5085e0;
+    }
+    span {
+        padding-bottom: 10px;
+        font-size: 15px;
+    }
+
+    img {
+        padding-top: 3px;
+        width: 25px;
+        float: left;
+    }
+    right: 65px;
+}
+
 
