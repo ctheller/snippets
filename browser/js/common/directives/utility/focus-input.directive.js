@@ -41,14 +41,14 @@ app.directive('focusInput', function($document, $rootScope) {
                 }
                 elem.removeClass('z-depth-2');
             });
-            searchbox.focus(function() {
-                $document.bind("keypress", function(event) {
-                    searchbtn.click();
-                    if (event.which == 13) {
-                        searchbox.blur();
-                    }
-                });
-            });
+            // searchbox.focus(function() {
+            //     $document.bind("keypress", function(event) {
+            //         searchbtn.click();
+            //         if (event.which == 13) {
+            //             searchbox.blur();
+            //         }
+            //     });
+            // });
             searchOptionMenu.bind('click', function () {
                 searchbox.focus();
             })

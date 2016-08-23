@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search) {
+app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search, $mdDialog, MdHelpers) {
 
     $scope.sidebarOpen = "false";
 
@@ -72,5 +72,15 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
             }, true)
         }
     }
+
+    $scope.showSnippetForm = function(ev) {
+        $mdDialog.show({
+            controller: MdHelpers.dialogCtrl,
+            templateUrl: 'js/dashboard/new-snippet-form.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true
+        });
+    };
 
 });
