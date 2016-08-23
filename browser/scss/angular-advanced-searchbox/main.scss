@@ -189,3 +189,7 @@ input[name="searchbox"],
         margin-top: -12px;
     }
 }
+
+md-list-item.md-button button:focus {
+    background-color: none;
+}
