@@ -21,12 +21,22 @@ app.controller('GraphCtrl', function($scope, $rootScope, orgJson, getSnips) {
     // $http.get('/api/orgtree/' + $rootScope.user.organization).then(function(result) {
         $scope.orgJson = orgJson;
     // });
-    $scope.canvasStyle = {width: '300px', height: '300px'};
     // console.log(getSnips.data);
+    $scope.cardStyle;
+
     $scope.$on('$viewContentLoaded', function(){
+        let widthStr = window.getComputedStyle(document.getElementsByClassName("widthToMeasure")[0], null).width;
+        let widthToPass = (Number(widthStr.slice(0,-2))) + 'px';
+        let heightToPass = window.getComputedStyle(document.getElementsByClassName("widthToMeasure")[0], null).height;
+        $scope.canvasStyle = {width: widthToPass, height: heightToPass};
         setTimeout(function() {
-            WordCloud(document.getElementById('wordCloud'), { list: getSnips.data } );
-        }, 5000);
+            WordCloud(document.getElementById('wordCloud'), { list: getSnips.data, backgroundColor: 'transparent' } );
+            let newHeight = (Number(heightToPass.slice(0,-2)) + 5) + 'px';
+            console.log(newHeight);
+            $scope.cardStyle = {'height': newHeight};
+            $scope.$digest();
+        }, 100);
+
     //     // $scope.getWeekSnippets($rootScope.user.organization)
     //     // .then(function(result) {
     //     //    console.log(result);
@@ -41,3 +51,4 @@ app.controller('GraphCtrl', function($scope, $rootScope, orgJson, getSnips) {
     //  if (tree.hasOwnProperty(user.manager)) tree[user.manager].push(user.$id)
     // })
 });
+
