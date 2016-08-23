@@ -1,10 +1,10 @@
 <md-card ng-show="{{card}}" md-theme="{{ 'default' }}" md-theme-watch>
     <md-card-title>
         <md-card-title-text>
-            <p ng-if="!snippet.submitted" placeholder="Subject" id="snippetTitle" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline"></p>
-            <p ng-if="snippet.submitted" id="snippetTitle" ng-model-options="{debounce: 500}" ng-model="snippet.subject" class="md-headline">{{snippet.subject}}</p>
-            <p ng-if="!snippet.submitted" id="contenttext" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead"></p>
-            <p ng-if="snippet.submitted" id="contenttext" ng-model-options="{debounce: 500}" ng-model="snippet.contents" class="md-subhead">{{snippet.contents}}</p>
+            <p ng-if="!snippet.submitted" placeholder="Subject" id="snippetTitle" contenteditable ng-model-options="{debounce: 1}" ng-model="snippet.subject" class="md-headline"></p>
+            <p ng-if="snippet.submitted" id="snippetTitle" ng-model-options="{debounce: 1}" ng-model="snippet.subject" class="md-headline">{{snippet.subject}}</p>
+            <p ng-if="!snippet.submitted" id="contenttext" contenteditable ng-model-options="{debounce: 1}" ng-model="snippet.contents" class="md-subhead"></p>
+            <p ng-if="snippet.submitted" id="contenttext" ng-model-options="{debounce: 1}" ng-model="snippet.contents" class="md-subhead">{{snippet.contents}}</p>
         </md-card-title-text>
         <submit-snippet ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
         <a ng-click="delete(snippet.$id)" ng-show="type!=='report'" class="deleteit btn-floating btn-xs red lighten-2"><i class="material-icons">delete</i></a>
@@ -34,11 +34,11 @@
     <md-expansion-panel-expanded>
         <md-expansion-panel-content>
 
-            <div id="snippetTitle" class="md-title" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.subject">
+            <div id="snippetTitle" class="md-title" contenteditable ng-model-options="{debounce: 100}" ng-model="snippet.subject">
             </div>
             <submit-snippet ng-show="type!=='report'" class="forExpPanelOpen" ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
             <a ng-click="delete(snippet.$id)" ng-show="type!=='report'" class="deleteForPanelOpen deleteit btn-floating btn-xs red lighten-2"><i class="material-icons">delete</i></a>
-            <div class="md-summary" contenteditable ng-model-options="{debounce: 500}" ng-model="snippet.contents">
+            <div class="md-summary" contenteditable ng-model-options="{debounce: 100}" ng-model="snippet.contents">
             </div>
             <div id="snippetImages" layout="row" layout-align="end center">
                 <a ng-show="type!=='report'" ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>

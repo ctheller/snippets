@@ -15,7 +15,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             // use scope.id
             scope.card = false;
 
-            scope.snippet = {};
+            scope.snippet = {collaborators: {}};
 
             scope.toggleSubmit = function(){
 
@@ -34,7 +34,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet');
 
             //ng-repeat through object directly instead!!
-            scope.$watch('snippet', function() {
+            scope.$watch('snippet.collaborators', function() {
                 
                 scope.collaborators = [];
                 if (!scope.snippet.collaborators) return;
