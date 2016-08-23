@@ -42,13 +42,10 @@ app.directive('focusInput', function($document, $rootScope) {
                 elem.removeClass('z-depth-2');
             });
             searchbox.bind("keypress", function(event) {
-                // if (searchbox.is(':focus')) {
-
-                    if (event.which == 13) {
-                        searchbtn.click();
-                        searchbox.blur();
-                    }
-                // }
+                if (event.which == 13) {
+                    searchbtn.click();
+                    searchbox.blur();
+                }
             });
             searchOptionMenu.bind('click', function() {
                 searchbox.focus();

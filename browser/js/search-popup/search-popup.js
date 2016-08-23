@@ -73,8 +73,13 @@ function DialogCtrl ($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
           value: (user.first_name+" "+user.last_name).toLowerCase(),
           display: (user.first_name+" "+user.last_name),
           id: user.$id,
-          photoUrl: user.photoUrl 
+          photoUrl: user.photoUrl,
+          lastName: user.last_name.toLowerCase()
         })
+      })
+
+      allEmployees.sort(function(a,b){
+        return (a.lastName<b.lastName) ? -1 : 1; 
       })
 
       return allEmployees;

@@ -1,4 +1,4 @@
-app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers) {
+app.controller('DashWrapperCtrl', function($scope, $state) {
 
 	$scope.currentWeekNum = parseInt($state.params.week);
 
@@ -13,15 +13,5 @@ app.controller('DashWrapperCtrl', function($scope, $state, $mdDialog, MdHelpers)
 	$scope.currentWeek = d.valueOf();
 
 	$scope.displayWeek = ($scope.currentWeekNum) ? "Week of " + d.toDateString() : "This Week";
-
-    $scope.showSnippetForm = function(ev) {
-        $mdDialog.show({
-            controller: MdHelpers.dialogCtrl,
-            templateUrl: 'js/dashboard/new-snippet-form.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true
-        });
-    };
 
 });

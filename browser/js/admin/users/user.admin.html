@@ -2,15 +2,17 @@
     <div class="md-toolbar-tools toolbar-profile">
         <h3 class="ng-binding">Profile - Admin Access</h3>
         <span flex class="flex"></span>
-        <md-button class="md-primary md-raised float-left grey black darken-2 profile-button" ng-click="deleteUser()"><i class="material-icons delete-user-icon">delete</i>Delete user</md-button>
+        <md-button ng-show="!userCopy.deletedUser" class="profile-button md-primary md-raised red darken-2 " ng-click="deleteUser()"><i class="material-icons delete-user-icon">loop</i>Deactivate User</md-button>
+        <md-button ng-show="userCopy.deletedUser" class="activate-user-button-fix profile-button md-primary md-raised green darken-2" ng-click="activateUser()"><i class="material-icons delete-user-icon">loop</i>Reactivate User</md-button>
     </div>
     <md-content layout="row" class="clearfix md-padding">
         <md-card-avatar>
             <img class="md-avatar-icon img-avatar-container md-padding" ng-src="{{userCopy.photoUrl || 'files/default-profile.png'}}" />
         </md-card-avatar>
         <md-content layout="column" class="md-padding">
-            <h3 class="md-title-small float-left">{{userCopy.first_name}} {{userCopy.last_name}}</h2>
-            <h4 class="md-subhead-small float-left">{{userCopy.email}}</h3>
+            <h2 class="md-title-small float-left">{{userCopy.first_name}} {{userCopy.last_name}}</h2>
+            <h3 ng-show="userCopy.deletedUser" class="md-title-small float-left"> (de-activated user)</h3>
+            <h4 class="md-subhead-small float-left">{{userCopy.email}}</h4>
             <md-button class="md-primary md-raised no-side-margin blue darken-1" ui-sref="membersOnly">Upload new picture</md-button>
         </md-content>
     </md-content>
