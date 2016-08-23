@@ -1,4 +1,4 @@
-app.controller('HomeController', function ($scope,Users, AuthService, AUTH_EVENTS, $rootScope, $log) {
+app.controller('HomeController', function ($scope,Users, AuthService, AUTH_EVENTS, $rootScope, $log, orgJson) {
 
     $scope.availableSearchParams = [
         { key: "name", name: "Name", placeholder: "Name..." },
@@ -18,5 +18,6 @@ app.controller('HomeController', function ($scope,Users, AuthService, AUTH_EVENT
 
     setUserBinding();
     $rootScope.$on(AUTH_EVENTS.loginSuccess, setUserBinding);
+    $scope.orgJson = orgJson;
 
 });
