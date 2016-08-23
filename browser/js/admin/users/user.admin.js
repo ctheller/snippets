@@ -3,29 +3,30 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $stateParams) {
     //set userID equal to the stateParams $id being passed in
     let uid = $stateParams.userId;
 
-    //put all info for specific user we are querying on the scope
-    firebase.database().ref("users/" + uid).once('value')
-        .then(function(snapshot) {
-            $scope.userCopy = snapshot.val();
+    var user;
+    var manager;
+    $scope.userCopy = {};
 
-            // filter out the managerId
-            var managerObj = $rootScope.users.filter(function(user) {
-                return user.$id === $scope.userCopy.manager;
-            });
+    function getUserPromise(id){
+        return firebase.database().ref("users/" + id).once('value').then(function(snapshot){
+            return snapshot.val();
+        });
+    }
 
-            var manager_name = "";
+    // we get the user info using our promise function
+    var getUser = getUserPromise(uid);
 
-            if (managerObj.length > 0) {
-                manager_name = managerObj[0].first_name + ' ' + managerObj[0].last_name;
-            } else { manager_name = "" }
+    // after we get the user info, we fetch the profile information for his/her manager
+    var getManager = getUser.then(function(user){
+        return getUserPromise(user.manager)
+    })
 
-            angular.extend($scope.userCopy, { 'manager_name': manager_name });
-
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-
+    // run all the requests, then combine the results and put them on the scope
+    Promise.all([getUser, getManager]).then(function(results){
+        angular.extend($scope.userCopy, results[0]);
+        $scope.userCopy.manager_name = results[1].first_name + ' ' + results[1].last_name;
+    });
+  
     // updates the profile upon clicking submit
     $scope.saveProfile = function(userData) {
 
@@ -35,8 +36,9 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $stateParams) {
         profile.update({
             first_name: userData.first_name,
             last_name: userData.last_name,
-            email: userData.email,
-            manager: userData.manager
+            email: userData.email
+                // manager: userData.manager 
+                // MANAGER TO BE COMPLETED USING AUTOCOMPLETE
         }).then(function() {
             console.log('Synchronization success');
         }).catch(function(err) {
@@ -51,5 +53,11 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $stateParams) {
         Auth.$sendPasswordResetEmail(profile.email)
             .then(function() { console.log('Password reset email sent') })
             .catch(function(err) { console.log('Password reset email failed to send. Error code:', err) });
+    }
+
+    $scope.deleteUser = function() {
+        var profile = firebase.database().ref("users/" + uid);
+        console.log(profile.val())
+
     }
 });

@@ -1,7 +1,8 @@
 <div layout="column" ng-cloak class="md-inline-form">
     <div class="md-toolbar-tools toolbar-profile">
-        <h3 class="ng-binding">Profile page - Admin Access</h3>
+        <h3 class="ng-binding">Profile - Admin Access</h3>
         <span flex class="flex"></span>
+        <md-button class="md-primary md-raised float-left grey black darken-2 profile-button" ng-click="deleteUser()"><i class="material-icons delete-user-icon">delete</i>Delete user</md-button>
     </div>
     <md-content layout="row" class="clearfix md-padding">
         <md-card-avatar>
@@ -41,8 +42,8 @@
             </form>
         </div>
         <div layout="row" layout-align="center">
-            <md-button flex="100" class="md-primary md-raised float-left blue darken-1" ng-click="saveProfile(userCopy)">Save profile changes</md-button>
-            <md-button flex="100" class="md-primary md-raised float-left blue darken-1" ng-click="sendPasswordReset()">Reset password</md-button>
+            <md-button flex="90" class="md-primary md-raised float-left blue darken-1" ng-click="saveProfile(userCopy)">Save changes</md-button>
+            <md-button flex="90" class="md-primary md-raised float-left blue darken-1" ng-click="sendPasswordReset()">Reset password</md-button>
         </div>
     </md-content>
 </div>
