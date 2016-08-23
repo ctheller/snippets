@@ -64,7 +64,7 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $state, $statePa
                 console.log(error);
             } else {
                 console.log('userDeleted set to true');
-                $state.go('adminUserProfile', { userId: $scope.user.$id }, { reload: true });
+                $state.go('adminUserProfile', { userId: uid }, { reload: true });
             }
         });
     };
@@ -78,7 +78,7 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $state, $statePa
                 console.log(error);
             } else {
                 console.log('userDeleted set to false');
-                $state.go('adminUserProfile', { userId: $scope.user.$id }, { reload: true });
+                $state.go('adminUserProfile', { userId: uid }, { reload: true });
             }
         });
     };
