@@ -1,6 +1,8 @@
 app.controller('SearchCtrl', function($scope, $stateParams, $location) {
     $scope.results = ($stateParams.result) ? $stateParams.result.data.hits : null;
     $scope.searchOption = $stateParams.type;
+    $scope.snippets = [];
+    $scope.users = [];
     $scope.goBack = function () {
         // location path is relative
         // hardcoded to parse everything after localhost:1337
@@ -15,6 +17,6 @@ app.controller('SearchCtrl', function($scope, $stateParams, $location) {
             }
         });
     } else {
-        $scope.users = $scope.results.map(obj => obj._source);
+        $scope.users = (!$scope.results) ? null : $scope.results.map(obj => obj._source);
     }
 });

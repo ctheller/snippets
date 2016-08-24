@@ -27,6 +27,7 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
 
     var removeUser = function() {
         $scope.user = null;
+        $scope.sidebarOpen = false;
     };
 
     setUser();
