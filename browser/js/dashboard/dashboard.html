@@ -31,7 +31,7 @@
                 layout="column" flex="5"
                 ng-click="(!teamSnippetsExpanded) ? expandAllTeamSnippets(activePanel) : collapseAllTeamSnippets(activePanel)">
                     <i class="material-icons expand-view"
-                        ng-class="{'expanded-view': teamSnippetsExpanded}"></i>
+                        ng-class="{'expanded-view': ((activePanel === 'all') ? allSnippetsExpanded : (activePanel === 'mine') ? ownedSnippetsExpanded : (activePanel === 'team') ? teamSnippetsExpanded : (activePanel === 'collab') ? collabSnippetsExpanded : false) }"></i>
             </md-icon>
             <md-icon
                 layout="column" flex="5"

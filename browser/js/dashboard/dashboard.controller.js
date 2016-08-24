@@ -2,7 +2,10 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
     $scope.reportsExpanded = false;
     $scope.activePanel = 'all';
+    $scope.allSnippetsExpanded = false;
+    $scope.ownedSnippetsExpanded = false;
     $scope.teamSnippetsExpanded = false;
+    $scope.collabSnippetsExpanded = false;
 
     $scope.dragOn = function() {
         $scope.draggingNow = true;
@@ -83,13 +86,20 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         Snippet.getSnippetPanelIds(getArrayOfSnippets(activePanel), $scope.dateInRange, activePanel).forEach(id => {
             $mdExpansionPanel(id).expand();
         });
-        $scope.teamSnippetsExpanded = true;
+        if ($scope.activePanel === 'all') $scope.allSnippetsExpanded = true;
+        else if ($scope.activePanel === 'mine') $scope.ownedSnippetsExpanded = true;
+        else if ($scope.activePanel === 'team') $scope.teamSnippetsExpanded = true;
+        else if ($scope.activePanel === 'collab') $scope.collabSnippetsExpanded = true;
+
     }
     $scope.collapseAllTeamSnippets = function(activePanel) {
         Snippet.getSnippetPanelIds(getArrayOfSnippets(activePanel), $scope.dateInRange, activePanel).forEach(id => {
             $mdExpansionPanel(id).collapse();
         });
-        $scope.teamSnippetsExpanded = false;
+        if ($scope.activePanel === 'all') $scope.allSnippetsExpanded = false;
+        else if ($scope.activePanel === 'mine') $scope.ownedSnippetsExpanded = false;
+        else if ($scope.activePanel === 'team') $scope.teamSnippetsExpanded = false;
+        else if ($scope.activePanel === 'collab') $scope.collabSnippetsExpanded = false;
     }
 
     // report, team, split
@@ -100,6 +110,8 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
     $scope.collapseView = function () {
         $scope.expandedView = 'split';
     }
+
+    // (activePanel === 'all') ? allSnippetsExpanded : (activePanel === 'mine') ? ownedSnippetsExpanded : (activePanel === 'team') ? teamSnippetsExpanded : (activePanel === 'collab') ? collabSnippetsExpanded : false;
 
     var getArrayOfSnippets = function(type) {
         if (type === 'all') {
