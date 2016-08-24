@@ -1,10 +1,10 @@
 <div layout="row">
-    <div layout="column" flex="100" ng-if="!results" style="margin-top:0">
+    <div layout="column" flex="100" ng-if="!results" style="margin-top:-15px">
         <p flex="95">No results</p>
     </div>
     <div layout="column" flex="100" ng-if="results">
-        <div layout="row" style="margin: 0">
-            <md-icon flex="shrink" ng-click="goBack()" style="margin-top:0"><i class="material-icons">keyboard_backspace</i></md-icon>
+        <div layout="row">
+            <md-icon class="search-go-back" flex="shrink" ng-click="goBack()" style="margin-top:0"><i class="material-icons">keyboard_backspace</i></md-icon>
             <p flex="95" style="margin-top:0">All results</p>
         </div>
         <md-expansion-panel-group md-component-id="search-panel" ng-if="searchOption === 'snippet'" multiple>

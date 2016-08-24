@@ -17,6 +17,12 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
         $state.go(state);
     }
 
+    var closeSidebar = function() {
+        $scope.sidebarOpen = false;
+    };
+
+    $rootScope.$on(AUTH_EVENTS.logoutSuccess, closeSidebar);
+
     $scope.sidebarOpen = false;
 
     $rootScope.$on('toggle', function () {
