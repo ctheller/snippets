@@ -1,4 +1,6 @@
 @import '../color';
+@import '../media-query-mixins';
+
 .snippetLogo {
     width: 88px;
     display: block;
@@ -160,5 +162,42 @@ md-list-item {
     margin: 0;
     padding: 8px;
 }
+
+#createSnippetButton {
+    position: relative;
+    top: 1px;
+    height: 41px;
+    background: #ef9c4f;
+    box-shadow: 0px 1px 5px #5085e0;
+    border: none;
+    border-radius: 5px;
+    &:hover {
+        box-shadow: 0px 2px 10px #4372c3
+    }
+    span {
+        padding-bottom: 10px;
+        font-size: 15px;
+    }
+
+    img {
+        padding-top: 3px;
+        width: 25px;
+        float: left;
+    }
+    @include megascreen {
+        left: 59%;
+    }
+    @include desktop {
+        left: 55.5%;
+    }
+    @include tablet {
+        left: 34%;
+    }
+    @include phone {
+        left: 11vw;
+    }
+}
+
+
 
 

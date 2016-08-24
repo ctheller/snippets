@@ -51,12 +51,20 @@ md-list-item {
   right:7%;
 }
 
+.display-none {
+  display: none;
+}
+
 .toastCreated {
-  background-color: #1ecd97;
+  background-color: #ef9c4f;
+}
+
+.toastSubmitted {
+  background-color: #1ECD97;
 }
 
 .toastCopied {
-  background-color: #1ecd97;
+  background-color: #ef9c4f;
 }
 
 .toastDeleted {

@@ -51,17 +51,23 @@
 </head>
 
 <body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
-    <md-toolbar class="main-toolbar md-toolbar-tools md-whiteframe-3dp" ng-controller="ToolbarCtrl" md-theme="blue">
+    <md-toolbar
+        class="main-toolbar md-toolbar-tools"
+        ng-controller="ToolbarCtrl" md-theme="blue"
+        ng-class="{'active': $state.is('home')}">
         <md-icon class="lnr" ng-click="toggle()" ng-if="user"><i class="material-icons">menu</i></md-icon>
         <a href="{{ user ? '/dashboard/0' : '/splash' }}">
             <img class="snippetLogo" src="/files/snippetLogo.png">
         </a>
         <!-- search bar -->
-        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate ng-show="user">
+        <form name="elasticsearch"
+            ng-submit="sendSearchQuery()"
+            novalidate ng-show="user">
             <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
             </nit-advanced-searchbox>
             <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
-            <md-menu md-position-mode="target-right target" class="search-option-dropdown">
+            <md-menu md-position-mode="target-right target" class="search-option-dropdown"
+            md-offset="8 40">
                 <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
                     <md-icon md-menu-origin><i class="material-icons">keyboard_arrow_down</i></md-icon>
                 </md-button>
@@ -76,9 +82,11 @@
                 </md-menu-content>
             </md-menu>
         </form>
+        <button ng-show="user" ng-click="showSnippetForm($event)" id="createSnippetButton"><img ng-src="files/create.png"><span>Add Snippet</span></button>
         <profile-card is-popup-visible="isPopupVisible" toggle-off="toggleOff()" user="user"></profile-card>
         <a class="waves-effect waves-light btn grey lighten-4 getStarted" ng-show="!user && siteLoaded" ui-sref="login">Get started</a>
     </md-toolbar>
+    <div layout="row" id="toolbar-padding" ng-class="{'active': $state.is('home')}"></div>
     <div id="main" layout="row" flex>
         <!-- temperary controller -->
         <md-content class="pushing" layout="column">
@@ -115,7 +123,10 @@
                 </md-content>
             </md-sidenav>
         </md-content>
-        <md-content resize-main flex="auto" layout="column" class="md-sidenav-push-in-target pushed main-wrapper" layout-padding="">
+        <md-content
+        resize-main flex="100" layout="column"
+        class="md-sidenav-push-in-target pushed main-wrapper"
+        ng-class="{'active': $state.is('home')}">
             <ui-view resize-main></ui-view>
             <!-- <div ui-view class="ui-view-wrapper"></div> -->
         </md-content>

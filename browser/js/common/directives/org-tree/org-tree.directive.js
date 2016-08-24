@@ -6,8 +6,8 @@ app.directive('orgTree', function() {
             'orgJson': '='
         },
         link: function(scope, elem, attrs) {
-            var margin = { top: 20, right: 20, bottom: 20, left: 20 },
-                width = 800 - margin.right - margin.left,
+            var margin = { top: 20, right: 35, bottom: 20, left: 35 },
+                width = 660 - margin.right - margin.left,
                 height = 600 - margin.top - margin.bottom;
 
             var i = 0,
@@ -98,7 +98,7 @@ app.directive('orgTree', function() {
                 nodeEnter.append("circle")
                     .attr("r", 1e-6)
                     .style("fill", function(d) {
-                        return 'url(#' + d.id + ')'
+                        return 'url(organization#' + d.id + ')'
                     })
 
                 // Transition nodes to their new position.
@@ -111,7 +111,7 @@ app.directive('orgTree', function() {
                 nodeUpdate.select("circle")
                     .attr("r", 20)
                     .style("fill", function(d) {
-                        return 'url(#' + d.id + ')'
+                        return 'url(organization#' + d.id + ')'
                     })
 
                 nodeUpdate.select("text")
@@ -172,7 +172,6 @@ app.directive('orgTree', function() {
 
             // Toggle children on click.
             function click(d) {
-                console.log(d.children)
                 if (d.children) {
                     d._children = d.children;
                     d.children = null;
@@ -192,13 +191,13 @@ app.directive('orgTree', function() {
                         return d.first_name + ' ' + d.last_name
                     })
                     .attr("x", 15)
-                    .attr("y", -30)
+                    .attr("y", 30)
                     .append("tspan")
                     .text(function(d) {
                         return d.email
                     })
                     .attr("dy", 10)
-                    .attr("y", -30)
+                    .attr("y", 30)
                     .attr("x", 15);
             }
 

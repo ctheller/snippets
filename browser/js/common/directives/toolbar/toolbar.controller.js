@@ -1,4 +1,7 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search) {
+app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search, $mdDialog, MdHelpers) {
+
+    $rootScope.$state = $state;
+
 
     $scope.sidebarOpen = "false";
 
@@ -21,12 +24,6 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
         $scope.answer = function(answer) {
             $mdDialog.hide(answer);
         };
-
-        // fetches the user's unique id to look up the user profile
-        var uid = Auth.$getAuth().uid;
-
-        // updates the profile in the DB using 3-way binding
-        Users.getProfile(uid).$bindTo($scope, "user");
 
     };
 
@@ -72,5 +69,15 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
             }, true)
         }
     }
+
+    $scope.showSnippetForm = function(ev) {
+        $mdDialog.show({
+            controller: MdHelpers.dialogCtrl,
+            templateUrl: 'js/dashboard/new-snippet-form.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true
+        });
+    };
 
 });

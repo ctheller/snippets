@@ -16,6 +16,7 @@ app.config(function($stateProvider) {
     });
 });
 
+
 app.controller('GraphCtrl', function($scope, $rootScope, orgJson, getSnips) {
     $scope.orgJson = orgJson;
     $scope.listData = getSnips.data;

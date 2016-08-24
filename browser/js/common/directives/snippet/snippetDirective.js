@@ -15,15 +15,23 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             // use scope.id
             scope.card = false;
 
-            scope.snippet = {};
+            scope.snippet = {collaborators: {}};
 
             scope.toggleSubmit = function(){
 
                 if (!scope.snippet.submitted) {
-                    Snippet.submit(scope.id, $rootScope.user.manager);
+                    Snippet.submit(scope.id, $rootScope.user.manager).then(function(){
+                        Materialize.toast('Snippet submitted', 1250, 'toastSubmitted');
+                    }).catch(function(){
+                        Materialize.toast('Error submitting', 2000, 'toastFail');
+                    });
                 }
                 else {
-                    Snippet.unsubmit(scope.id, $rootScope.user.manager);
+                    Snippet.unsubmit(scope.id, $rootScope.user.manager).then(function(){
+                        Materialize.toast('Snippet recalled', 1250, 'toastDeleted');
+                    }).catch(function(){
+                        Materialize.toast('Error recalling snippet', 2000, 'toastFail');
+                    });
                 }
             }
 
@@ -34,7 +42,7 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
             Snippet.getSnippetById(scope.id).$bindTo(scope, 'snippet');
 
             //ng-repeat through object directly instead!!
-            scope.$watch('snippet', function() {
+            scope.$watch('snippet.collaborators', function() {
                 
                 scope.collaborators = [];
                 if (!scope.snippet.collaborators) return;
