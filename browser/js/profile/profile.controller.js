@@ -31,10 +31,7 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $mdDial
     $scope.saveProfile = function(userData) {
 
         var profile = firebase.database().ref("users").child(uid);
-        console.log('profile', profile);
 
-        // console.log('what dis', Users.getProfile(uid));
-        // console.log('dis is da userdata', userData);
         profile.update({
             first_name: userData.first_name,
             last_name: userData.last_name,

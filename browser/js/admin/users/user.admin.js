@@ -29,9 +29,7 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
 
     // updates the profile upon clicking submit
     $scope.saveProfile = function(userData) {
-
         var profile = firebase.database().ref("users/" + uid);
-        console.log('profile', profile);
 
         profile.update({
             first_name: userData.first_name,

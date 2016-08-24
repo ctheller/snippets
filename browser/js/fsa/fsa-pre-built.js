@@ -55,6 +55,7 @@
 
         this.login = function(){
             Auth.$signInWithRedirect('google');
+            $state.go('splash');
         };
 
         var unbindUser;
@@ -101,16 +102,24 @@
                         })
                     })
                 })
-            }
-            else {
-                if (unbindUser) unbindUser();
-                $rootScope.users = null;
-                $rootScope.userRef = null;
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            } else {
                 $rootScope.siteLoaded = true;
-                $state.go('splash');
             }
         };
+
+        this.logout = function(){
+            if (unbindUser) {
+                unbindUser();
+            }
+            $rootScope.user = null;
+            $rootScope.users = null;
+            $rootScope.userRef = null;
+            $rootScope.org = null;
+            $rootScope.siteLoaded = true;
+            Auth.$signOut();
+            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            $state.go('splash', { reload: true });
+        }
 
         this.setUser = setUser;
 

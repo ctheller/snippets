@@ -9,9 +9,7 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
 
     $scope.user = null;
 
-    $scope.logout = function() {
-        Auth.$signOut();
-    };
+    $scope.logout = AuthService.logout;
 
     $scope.go = function(state){
         $state.go(state);

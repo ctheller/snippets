@@ -1,4 +1,4 @@
-app.directive('profileCard', function($rootScope, Auth, $state, $document) {
+app.directive('profileCard', function($rootScope, AuthService, $state, $document) {
     return {
         restrict: 'E',
         templateUrl: 'js/common/directives/profile/profileCard.html',
@@ -8,10 +8,8 @@ app.directive('profileCard', function($rootScope, Auth, $state, $document) {
         link: function(scope, element, attr) {
 
             scope.logout = function() {
-                Auth.$signOut();
                 scope.isPopupVisible = false;
-                $rootScope.users = null;
-                $state.go('login');
+                AuthService.logout();
             };
 
             scope.isPopupVisible = false;
