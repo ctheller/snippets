@@ -18,6 +18,8 @@ app.config(function($stateProvider) {
 app.controller('GraphCtrl', function($scope, $rootScope, getSnips, teamSnippetCount) {
     $scope.listData = getSnips.data;
     $scope.teamSnippetCount = teamSnippetCount.data;
+    $scope.snippetCountData = $scope.teamSnippetCount.map(obj => obj.count);
+    $scope.snippetCountLabel = $scope.teamSnippetCount.map(obj => obj.name);
 });
 
 

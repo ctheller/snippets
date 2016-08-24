@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="stylesheet" type="text/css" href="/ng-img-crop/compile/minified/ng-img-crop.css">
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/materialize-css/dist/js/materialize.min.js"></script>
@@ -32,6 +33,8 @@
     <script type="text/javascript" src="/angular-dragdrop/src/angular-dragdrop.js"></script>
     <script type="text/javascript" src="/js/common/angular-advanced-searchbox/angular-advanced-searchbox.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
+    <script src="/chart.js/dist/Chart.min.js"></script>
+    <script src="/angular-chart.js/dist/angular-chart.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
     <script type="text/javascript" src="/wordcloud/src/wordcloud2.js"></script>
     <script>
@@ -51,23 +54,17 @@
 </head>
 
 <body ng-app="FullstackGeneratedApp" class="layout-column" layout="column" flex>
-    <md-toolbar
-        class="main-toolbar md-toolbar-tools"
-        ng-controller="ToolbarCtrl" md-theme="blue"
-        ng-class="{'active': $state.is('home')}">
+    <md-toolbar class="main-toolbar md-toolbar-tools" ng-controller="ToolbarCtrl" md-theme="blue" ng-class="{'active': $state.is('home')}">
         <md-icon class="lnr" ng-click="toggle()" ng-if="user"><i class="material-icons">menu</i></md-icon>
         <a href="{{ user ? '/dashboard/0' : '/splash' }}">
             <img class="snippetLogo" src="/files/snippetLogo.png">
         </a>
         <!-- search bar -->
-        <form name="elasticsearch"
-            ng-submit="sendSearchQuery()"
-            novalidate ng-show="user">
+        <form name="elasticsearch" ng-submit="sendSearchQuery()" novalidate ng-show="user">
             <nit-advanced-searchbox focus-input ng-model="searchParams" parameters="availableSearchParams" placeholder="Search">
             </nit-advanced-searchbox>
             <button class="btn" id="elasticsearch-btn" type="submit"><i class="material-icons">search</i></button>
-            <md-menu md-position-mode="target-right target" class="search-option-dropdown"
-            md-offset="8 40">
+            <md-menu md-position-mode="target-right target" class="search-option-dropdown" md-offset="8 40">
                 <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
                     <md-icon md-menu-origin><i class="material-icons">keyboard_arrow_down</i></md-icon>
                 </md-button>
@@ -100,10 +97,10 @@
                             </md-list-item>
                         </div>
                         <div ui-sref-active="active" ui-sref="admin" ng-show="user.isAdmin">
-                        <md-list-item class="sidebar-item state admin">
-                            <md-icon id="nav-label" class="lnr"><i class="material-icons">supervisor_account</i></md-icon>
-                            <p>Admin</p>
-                        </md-list-item>
+                            <md-list-item class="sidebar-item state admin">
+                                <md-icon id="nav-label" class="lnr"><i class="material-icons">supervisor_account</i></md-icon>
+                                <p>Admin</p>
+                            </md-list-item>
                         </div>
                         <!-- <md-list-item> NOT IN USE
                             <md-icon class="lnr"><i class="material-icons">'person'</i></md-icon>
@@ -123,10 +120,7 @@
                 </md-content>
             </md-sidenav>
         </md-content>
-        <md-content
-        resize-main flex="100" layout="column"
-        class="md-sidenav-push-in-target pushed main-wrapper"
-        ng-class="{'active': $state.is('home')}">
+        <md-content resize-main flex="100" layout="column" class="md-sidenav-push-in-target pushed main-wrapper" ng-class="{'active': $state.is('home')}">
             <ui-view resize-main></ui-view>
             <!-- <div ui-view class="ui-view-wrapper"></div> -->
         </md-content>
