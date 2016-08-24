@@ -141,6 +141,9 @@ input[name="searchbox"],
         font-size: 12px
     }
     font-size: 12px;
+    @include megascreen {
+        width: 60%;
+    }
     @include desktop {
         width: 60%;
     }
@@ -176,6 +179,9 @@ input[name="searchbox"],
 .search-option-dropdown {
     position: relative;
     top: 5px;
+    @include megascreen {
+        left: 54vw;
+    }
     @include desktop {
         left: 53vw;
     }

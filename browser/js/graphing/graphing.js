@@ -7,19 +7,17 @@ app.config(function($stateProvider) {
             getSnips: function(Graph, $rootScope) {
                 return Graph.getWeekSnippets($rootScope.user.organization);
             },
-            orgJson: function($http, $rootScope) {
-                return $http.get('/api/orgtree/' + $rootScope.user.organization).then(function(result) {
-                    return result.data;
-                });
+            teamSnippetCount: function(Graph, $rootScope) {
+                return Graph.getTeamSnippetCount($rootScope.user.organization);
             }
         }
     });
 });
 
 
-app.controller('GraphCtrl', function($scope, $rootScope, orgJson, getSnips) {
-    $scope.orgJson = orgJson;
+app.controller('GraphCtrl', function($scope, $rootScope, getSnips, teamSnippetCount) {
     $scope.listData = getSnips.data;
+    $scope.teamSnippetCount = teamSnippetCount.data;
 });
 
 
