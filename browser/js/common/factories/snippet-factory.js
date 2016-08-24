@@ -1,4 +1,4 @@
-app.factory("Snippet", function($firebaseObject, AuthService, Users) {
+app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope) {
 
     var Snippet = {};
 
@@ -96,6 +96,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
     Snippet.delete = function(snippetId) {
         var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
         return snippet.$loaded().then(function() {
+            console.log(snippet);
             var updates = {};
             var collaborators = _.keys(snippet.collaborators);
             collaborators.forEach(function(collab) {
@@ -103,10 +104,16 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
                 updates[`/users/${collab}/snippets/asCollaborator/${snippetId}`] = null;
                 updates[`/users/${collab}/snippets/asManager/${snippetId}`] = null;
             })
+            updates[`/users/${$rootScope.user.$id}/snippets/asManager/${snippetId}`] = null;
+            updates[`/users/${$rootScope.user.$id}/snippets/asOwner/${snippetId}`] = null;
+            updates[`/users/${$rootScope.user.$id}/snippets/asTeamMember/${snippetId}`] = null;
+            updates[`/users/${$rootScope.user.$id}/snippets/asCollaborator/${snippetId}`] = null;
+            
             updates[`/users/${snippet.team}/snippets/asManager/${snippetId}`] = null;
             updates[`/users/${snippet.owner}/snippets/asOwner/${snippetId}`] = null;
             updates[`/users/${snippet.owner}/snippets/asCollaborator/${snippetId}`] = null;
             updates[`/users/${snippet.owner}/snippets/asTeamMember/${snippetId}`] = null;
+            updates[`/users/${snippet.team}/snippets/asManager/${snippetId}`] = null;
             updates['/snippets/' + snippetId] = null;
             return ref.update(updates);
         })
