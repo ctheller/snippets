@@ -52,13 +52,13 @@
 
         var user;
 
-        var ref = firebase.database().ref().child('users');
+        // var ref = firebase.database().ref().child('users');
 
-        function getUserById(id){
-            return ref.child(id).once('value').then(function(snapshot){
-                return snapshot.val();
-            })
-        }
+        // function getUserById(id){
+        //     return ref.child(id).once('value').then(function(snapshot){
+        //         return snapshot.val();
+        //     })
+        // }
 
         this.login = function(){
             Auth.$signInWithRedirect('google');
