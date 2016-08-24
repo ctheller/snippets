@@ -1,4 +1,4 @@
-app.controller('AdminProfileCtrl', function($scope, $rootScope, $state, $stateParams) {
+app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $state, $stateParams) {
 
     //set userID equal to the stateParams $id being passed in
     let uid = $stateParams.userId;
@@ -55,7 +55,7 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $state, $statePa
             .catch(function(err) { console.log('Password reset email failed to send. Error code:', err) });
     };
 
-    $scope.deleteUser = function() {
+    function deleteUser() {
         var profile = firebase.database().ref("users/" + uid);
         profile.child('deletedUser').transaction(function(current) {
             return true;
@@ -63,11 +63,25 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $state, $statePa
             if (error) {
                 console.log(error);
             } else {
-                console.log('userDeleted set to true');
+                Materialize.toast('User deactivated', 1250, 'toastDeleted');
                 $state.go('adminUserProfile', { userId: uid }, { reload: true });
             }
         });
     };
+
+    $scope.deleteUserWithWarning = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('Are you sure you want to deactivate this user?')
+            .targetEvent(ev)
+            .ok('Confirm')
+            .cancel('Cancel');
+        $mdDialog.show(confirm).then(function() {
+            deleteUser();
+        });
+    };
+
+
 
     $scope.activateUser = function() {
         var profile = firebase.database().ref("users/" + uid);
@@ -77,14 +91,14 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $state, $statePa
             if (error) {
                 console.log(error);
             } else {
-                console.log('userDeleted set to false');
+                Materialize.toast('User reactivated', 1250, 'toastCreated');
                 $state.go('adminUserProfile', { userId: uid }, { reload: true });
             }
         });
     };
 
     $scope.userStatus = function() {
-        if ($scope.userCopy){
+        if ($scope.userCopy) {
             console.log('hello');
         }
     }
