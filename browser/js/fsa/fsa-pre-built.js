@@ -60,6 +60,10 @@
 
         var unbindUser;
 
+        this.getLoggedInUser = function(){
+            return $rootScope.user;
+        }
+
         var setUser = function(){
             if (Auth.$getAuth()) {
 
