@@ -49,7 +49,4 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $mdDial
             .catch(function(err) { console.log('Password reset email failed to send. Error code:', err) });
     }
 
-    $scope.$on('$stateChangeStart', function() {
-        $element.remove();
-    });
 });
