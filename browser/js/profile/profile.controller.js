@@ -3,6 +3,8 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $mdDial
     // fetches the user's unique id from the $stateParams to look up the user profile
     var uid = $stateParams.userId;
 
+    console.log('this is your uid', uid);
+
     var user;
     var manager;
     $scope.userCopy = {};
@@ -49,7 +51,4 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $mdDial
             .catch(function(err) { console.log('Password reset email failed to send. Error code:', err) });
     }
 
-    $scope.$on('$stateChangeStart', function() {
-        $element.remove();
-    });
 });
