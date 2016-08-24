@@ -5,7 +5,7 @@ module.exports = router;
 router.use('/members', require('./members'));
 router.use('/mailer', require('./mailer'));
 router.use('/graphs', require('./graphs'));
-router.use('/orgtree', require('./orgtree'));
+router.use('/org', require('./org'));
 
 // Make sure this is after all of
 // the registered routes!

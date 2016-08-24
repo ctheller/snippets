@@ -25,6 +25,10 @@ app.directive('orgTree', function() {
             var svg = d3.select(elem[0]).append("svg")
                 .attr("width", width + margin.right + margin.left)
                 .attr("height", height + margin.top + margin.bottom)
+                // .attr("width", '100%')
+                // .attr("height", '100%')
+                // .attr('viewBox', '0 0 ' + Math.min(width, height) + ' ' + Math.min(width, height))
+                // .attr('preserveAspectRatio', 'xMinYMin')
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 

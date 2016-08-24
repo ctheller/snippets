@@ -5,7 +5,7 @@ app.config(function ($stateProvider) {
         controller: 'OrgController',
         resolve: {
             orgJson: function($http, $rootScope) {
-                return $http.get('/api/orgtree/' + $rootScope.user.organization).then(function(result) {
+                return $http.get('/api/org/' + $rootScope.user.organization + '/tree').then(function(result) {
                     return result.data;
                 });
             }

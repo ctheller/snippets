@@ -14,7 +14,7 @@ $mega-width: 1300px;
 }
 
 @mixin desktop {
-    @media (min-width: #{$desktop-width}) {
+    @media (min-width: #{$desktop-width}) and (max-width: #{$mega-width - 1px} ) {
         @content;
     }
 }

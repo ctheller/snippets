@@ -42,6 +42,7 @@
     "express-session": "^1.10.3",
     "firebase": "^3.2.1",
     "firebase-token-generator": "^2.0.0",
+    "google-material-color": "^1.2.6",
     "gulp": "^3.8.11",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.5.2",
