@@ -50,12 +50,15 @@
 
     app.service('AuthService', function ($rootScope, AUTH_EVENTS, Auth, $state, $firebaseObject, Organizations, Users) {
 
-        var user = null;
+        var user;
 
-        this.getLoggedInUser = function () {
-            return user;
-        };
+        var ref = firebase.database().ref().child('users');
 
+        function getUserById(id){
+            return ref.child(id).once('value').then(function(snapshot){
+                return snapshot.val();
+            })
+        }
 
         this.login = function(){
             Auth.$signInWithRedirect('google');
@@ -64,24 +67,25 @@
         var unbindUser;
 
         var setUser = function(){
-            console.log("HIT");
+
             if (Auth.$getAuth()) {
 
                 var id = Auth.$getAuth().uid;
 
                 //check if user is in the DB already
                 var ref = firebase.database().ref().child('users');
-                ref.once('value', function(snapshot){
-                    if (!snapshot.hasChild(Auth.$getAuth().uid)) {
-                        var email = Auth.$getAuth().providerData[0].email;
-                        var photoUrl = Auth.$getAuth().providerData[0].photoURL;
-                        ref.child(id).set({email: email, photoUrl: photoUrl, isAdmin: false});
-                    }
-                });
+
+                // ref.child(id).then(function(snapshot){
+                //     console.log('result', snapshot.val());
+                //     return snapshot.val();
+                // }).catch(function(error){
+                //     console.error(error);
+                // })
 
                 //Get user info from db:
                 user = $firebaseObject(ref.child(id));
                 $rootScope.userFirebaseObj = user;
+                
                 user.$bindTo($rootScope, 'user').then(function(unbind){
 
                     unbindUser = unbind;

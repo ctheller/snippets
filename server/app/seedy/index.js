@@ -313,6 +313,7 @@ for (let i=0; i< 4; i++) {
     deletedUser: false
   };
 
+
   for (let i=0; i<50; i++) {
     let sampleSnip = chance.string({pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', length: 10}) + '--SEEDY';
     seedy.snippets[sampleSnip] = snipGenerator();
@@ -389,6 +390,11 @@ for (let i=0; i< 4; i++) {
       seedy.users[theManager].snippets.asManager[snippetKey] = seedy.snippets[snippetKey].dateAdded;
     }
   }
+
+seedy.users[tammyObj.manager].reports[tammyObj.id] = true;
+seedy.users[gabeObj.manager].reports[gabeObj.id] = true;
+seedy.users[nickObj.manager].reports[nickObj.id] = true;
+seedy.users[chrisObj.manager].reports[chrisObj.id] = true;
 
 // console.log(seedy);
 

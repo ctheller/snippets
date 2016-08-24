@@ -1,4 +1,4 @@
-app.controller('HomeController', function ($scope,Users, AuthService, AUTH_EVENTS, $rootScope, $log, orgJson) {
+app.controller('OrgController', function ($scope,Users, AuthService, AUTH_EVENTS, $rootScope, $log, orgJson) {
 
     $scope.availableSearchParams = [
         { key: "name", name: "Name", placeholder: "Name..." },

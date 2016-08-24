@@ -193,3 +193,14 @@ input[name="searchbox"],
 md-list-item.md-button button:focus {
     background-color: none;
 }
+
+form[name=elasticsearch] {
+    &.active {
+        display: none;
+    }
+}
+
+// _md-open-menu-container {
+//     margin-top: 40px;
+//     margin-left: 8px;
+// }

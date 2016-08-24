@@ -13,12 +13,7 @@ app.config(function($stateProvider) {
     });
 });
 
-app.controller('GraphCtrl', function($scope, $rootScope, orgJson) {
-
-    // $http.get('/api/orgtree/' + $rootScope.user.organization).then(function(result) {
-        $scope.orgJson = orgJson;
-    // });
-
+app.controller('GraphCtrl', function($scope, $rootScope, orgJson, AUTH_EVENTS) {
 
     //{topId: {nextLevelId1:{}, nextLevelId2:{ }}}
 
