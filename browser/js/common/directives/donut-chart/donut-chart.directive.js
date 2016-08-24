@@ -362,8 +362,10 @@ app.directive('donutChart', function() {
                 range.push(randomColor('500'));
             }
 
-            var width = 960,
-                height = 500,
+            var data = scope.snippetCount;
+
+            var width = 800,
+                height = 250,
                 radius = Math.min(width, height) / 2;
 
             var color = d3.scale.ordinal()
@@ -376,16 +378,16 @@ app.directive('donutChart', function() {
             var pie = d3.layout.pie()
                 .sort(null)
                 .value(function(d) {
-                    return d.population;
+                    return d.teamSnippetCount;
                 });
 
-            var svg = d3.select("body").append("svg")
+
+
+            var svg = d3.select(elem[0]).append("svg")
                 .attr("width", width)
                 .attr("height", height)
                 .append("g")
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-            var data = scope.snippetCount
 
             var g = svg.selectAll(".arc")
                 .data(pie(data))
@@ -395,7 +397,7 @@ app.directive('donutChart', function() {
             g.append("path")
                 .attr("d", arc)
                 .style("fill", function(d) {
-                    return color(d.data.age);
+                    return color(d.data.name);
                 });
 
             g.append("text")
@@ -403,14 +405,10 @@ app.directive('donutChart', function() {
                     return "translate(" + arc.centroid(d) + ")";
                 })
                 .attr("dy", ".35em")
+                .style("text-anchor", "middle")
                 .text(function(d) {
-                    return d.data.age;
+                    return d.data.teamSnippetCount;
                 });
-
-            function type(d) {
-                d.population = +d.population;
-                return d;
-            }
         }
     }
 })
