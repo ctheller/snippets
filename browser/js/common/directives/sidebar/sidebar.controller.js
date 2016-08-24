@@ -9,10 +9,6 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
 
     $scope.user = null;
 
-    $scope.isLoggedIn = function() {
-        return AuthService.isAuthenticated();
-    };
-
     $scope.logout = function() {
         Auth.$signOut();
     };
@@ -21,20 +17,11 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
         $state.go(state);
     }
 
-    var setUser = function() {
-        $scope.user = AuthService.getLoggedInUser();
-    };
-
-    var removeUser = function() {
-        $scope.user = null;
+    var closeSidebar = function() {
         $scope.sidebarOpen = false;
     };
 
-    setUser();
-
-    $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
-    $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
-    $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
+    $rootScope.$on(AUTH_EVENTS.logoutSuccess, closeSidebar);
 
     $scope.sidebarOpen = false;
 

@@ -47,7 +47,6 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $mdDial
     }
 
     $scope.sendPasswordReset = function() {
-        console.log(Auth);
         Auth.$sendPasswordResetEmail($scope.userCopy.email)
             .then(function() { console.log('Password reset email sent') })
             .catch(function(err) { console.log('Password reset email failed to send. Error code:', err) });
