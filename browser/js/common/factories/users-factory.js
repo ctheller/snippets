@@ -23,7 +23,9 @@ app.factory("Users", function($rootScope) {
         if (!userId) return;
 
        return ref.child(userId).once('value').then(function(snapshot){
-            return snapshot.val();
+            var user = snapshot.val();
+            user.$id = userId;
+            return user;
         })
     }
 
