@@ -52,8 +52,6 @@
 
         var user;
 
-        var id = Auth.$getAuth();
-
         var ref = firebase.database().ref().child('users');
 
         function getUserById(id){
@@ -66,26 +64,31 @@
             Auth.$signInWithRedirect('google');
         };
 
+        var unbindUser;
+
         var setUser = function(){
-            if (id) {
+
+            if (Auth.$getAuth()) {
+
+                var id = Auth.$getAuth().uid;
 
                 //check if user is in the DB already
                 var ref = firebase.database().ref().child('users');
 
-                ref.child(id).then(function(snapshot){
-                    console.log('result', snapshot.val());
-                    return snapshot.val();
-                }).catch(function(error){
-                    console.error(error);
-                })
+                // ref.child(id).then(function(snapshot){
+                //     console.log('result', snapshot.val());
+                //     return snapshot.val();
+                // }).catch(function(error){
+                //     console.error(error);
+                // })
 
                 //Get user info from db:
                 user = $firebaseObject(ref.child(id));
-
-
                 $rootScope.userFirebaseObj = user;
-                user.$bindTo($rootScope, 'user').then(function(){
+                
+                user.$bindTo($rootScope, 'user').then(function(unbind){
 
+                    unbindUser = unbind;
                     //Set up listeners for Collaboration
                     var initializing = true;
                     ref.child(id).child('snippets').child('asCollaborator').on('child_added', function(){
@@ -112,10 +115,9 @@
                         })
                     })
                 })
-
             }
             else {
-                $rootScope.user = null;
+                if (unbindUser) unbindUser();
                 $rootScope.users = null;
                 $rootScope.userRef = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
