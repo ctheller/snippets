@@ -7,8 +7,6 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
         { label: 'Analytics', state: 'graphing', icon: 'show_chart' }
     ];
 
-    $scope.user = null;
-
     $scope.logout = AuthService.logout;
 
     $scope.go = function(state){

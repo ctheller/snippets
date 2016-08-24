@@ -60,6 +60,10 @@
 
         var unbindUser;
 
+        this.getLoggedInUser = function(){
+            return $rootScope.user;
+        }
+
         var setUser = function(){
             if (Auth.$getAuth()) {
 
@@ -67,13 +71,6 @@
 
                 //check if user is in the DB already
                 var ref = firebase.database().ref().child('users');
-
-                // ref.child(id).then(function(snapshot){
-                //     console.log('result', snapshot.val());
-                //     return snapshot.val();
-                // }).catch(function(error){
-                //     console.error(error);
-                // })
 
                 //Get user info from db:
                 user = $firebaseObject(ref.child(id));
