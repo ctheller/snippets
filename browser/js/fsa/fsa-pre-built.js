@@ -50,15 +50,8 @@
 
     app.service('AuthService', function ($rootScope, AUTH_EVENTS, Auth, $state, $firebaseObject, Organizations, Users) {
 
-        var user;
+        var user = null;
 
-        // var ref = firebase.database().ref().child('users');
-
-        // function getUserById(id){
-        //     return ref.child(id).once('value').then(function(snapshot){
-        //         return snapshot.val();
-        //     })
-        // }
 
         this.login = function(){
             Auth.$signInWithRedirect('google');
@@ -68,7 +61,6 @@
         var unbindUser;
 
         var setUser = function(){
-
             if (Auth.$getAuth()) {
 
                 var id = Auth.$getAuth().uid;
@@ -86,7 +78,7 @@
                 //Get user info from db:
                 user = $firebaseObject(ref.child(id));
                 $rootScope.userFirebaseObj = user;
-                
+
                 user.$bindTo($rootScope, 'user').then(function(unbind){
 
                     unbindUser = unbind;
@@ -95,15 +87,9 @@
                     ref.child(id).child('snippets').child('asCollaborator').on('child_added', function(){
                         if (!initializing) Materialize.toast('Added as Collaborator', 1250, 'toastAddCollab');
                     });
-                    ref.child(id).child('snippets').child('asManager').on('child_added', function(){
-                        if (!initializing) Materialize.toast('Received snippet submission', 1250, 'toastSubmitted');
-                    });
                     initializing = false;
                     ref.child(id).child('snippets').child('asCollaborator').on('child_removed', function(){
                         Materialize.toast('Removed as Collaborator', 1250, 'toastDeleted');
-                    });
-                    ref.child(id).child('snippets').child('asManager').on('child_removed', function(){
-                        if (!initializing) Materialize.toast('Snippet submission recalled', 1250, 'toastDeleted');
                     });
 
 

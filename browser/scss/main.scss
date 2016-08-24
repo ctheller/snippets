@@ -107,7 +107,7 @@ ui-view { -webkit-transition: none !important; transition: none !important; }
 
 @import 'directives/main';
 @import 'home/main';
-@import 'about/main';
+@import 'search/main';
 @import 'tutorial/main';
 @import 'login/main';
 @import 'navbar/main';
@@ -119,4 +119,5 @@ ui-view { -webkit-transition: none !important; transition: none !important; }
 @import 'angular-advanced-searchbox/main';
 @import 'splashPage/main';
 @import 'recovery/main';
+@import 'graphs/main';
 @import 'org-tree/main';

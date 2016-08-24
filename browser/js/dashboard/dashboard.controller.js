@@ -2,7 +2,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
     $scope.reportsExpanded = false;
     $scope.activePanel = 'all';
-    $scope.teamSnippetsExpanded = false;
 
     $scope.dragOn = function() {
         $scope.draggingNow = true;
@@ -79,17 +78,45 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
         });
         $scope.reportsExpanded = false;
     }
+
+    $scope.allSnippetsExpanded = false;
+    $scope.ownedSnippetsExpanded = false;
+    $scope.teamSnippetsExpanded = false;
+    $scope.collabSnippetsExpanded = false;
+
     $scope.expandAllTeamSnippets = function(activePanel) {
         Snippet.getSnippetPanelIds(getArrayOfSnippets(activePanel), $scope.dateInRange, activePanel).forEach(id => {
             $mdExpansionPanel(id).expand();
         });
-        $scope.teamSnippetsExpanded = true;
+        if ($scope.activePanel === 'all') $scope.allSnippetsExpanded = true;
+        if ($scope.activePanel === 'mine') $scope.ownedSnippetsExpanded = true;
+        if ($scope.activePanel === 'team') $scope.teamSnippetsExpanded = true;
+        if ($scope.activePanel === 'collab') $scope.collabSnippetsExpanded = true;
+
     }
     $scope.collapseAllTeamSnippets = function(activePanel) {
         Snippet.getSnippetPanelIds(getArrayOfSnippets(activePanel), $scope.dateInRange, activePanel).forEach(id => {
             $mdExpansionPanel(id).collapse();
         });
-        $scope.teamSnippetsExpanded = false;
+        if ($scope.activePanel === 'all') $scope.allSnippetsExpanded = false;
+        if ($scope.activePanel === 'mine') $scope.ownedSnippetsExpanded = false;
+        if ($scope.activePanel === 'team') $scope.teamSnippetsExpanded = false;
+        if ($scope.activePanel === 'collab') $scope.collabSnippetsExpanded = false;
+    }
+
+    $scope.expandOrCollapse = function () {
+        if ($scope.activePanel === 'all') {
+            (!$scope.allSnippetsExpanded) ? $scope.expandAllTeamSnippets('all') : $scope.collapseAllTeamSnippets('all')
+        }
+        if ($scope.activePanel === 'mine') {
+            (!$scope.ownedSnippetsExpanded) ? $scope.expandAllTeamSnippets('mine') : $scope.collapseAllTeamSnippets('mine')
+        }
+        if ($scope.activePanel === 'team')  {
+            (!$scope.teamSnippetsExpanded) ? $scope.expandAllTeamSnippets('team') : $scope.collapseAllTeamSnippets('team')
+        }
+        if ($scope.activePanel === 'collab') {
+            (!$scope.collabSnippetsExpanded) ? $scope.expandAllTeamSnippets('collab') : $scope.collapseAllTeamSnippets('collab')
+        }
     }
 
     // report, team, split

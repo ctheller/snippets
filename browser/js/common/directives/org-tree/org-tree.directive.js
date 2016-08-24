@@ -30,7 +30,6 @@ app.directive('orgTree', function() {
 
             if (scope.orgJson) {
                 root = scope.orgJson;
-                console.log(root)
                 root.x0 = height / 2;
                 root.y0 = 0;
 
