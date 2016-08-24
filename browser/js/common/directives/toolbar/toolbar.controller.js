@@ -1,5 +1,8 @@
 app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search, $mdDialog, MdHelpers) {
 
+    $rootScope.$state = $state;
+
+
     $scope.sidebarOpen = "false";
 
     function DialogController($scope, $mdDialog) {

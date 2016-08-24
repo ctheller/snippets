@@ -1,7 +1,7 @@
 app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AUTH_EVENTS, $mdMedia, MdHelpers, $state, $mdSidenav) {
 
     $scope.items = [
-        { label: 'Home', state: 'home', icon: 'home' },
+        { label: 'Organization', state: 'home', icon: 'home' },
         { label: 'Profile', state: 'profile', icon: 'person' },
         { label: 'Dashboard', state: 'dashboard.week({week:0})', icon: 'inbox' },
         { label: 'Analytics', state: 'graphing', icon: 'show_chart' }

@@ -140,7 +140,7 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users) {
             mappedCollabIds.push({ id: key, date: value, type: 'collab' });
         })
 
-        Snippet.collabSnippetIds = collabSnippetIds;
+        Snippet.collabSnippetIds = mappedCollabIds;
 
         return _.unionBy(mappedOwnedIds, _.unionBy(mappedCollabIds, mappedTeamIds, 'id'), 'id');
 
