@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $state, Search, $mdDialog, MdHelpers) {
+app.controller('ToolbarCtrl', function($scope, $mdSidenav, AuthService, $rootScope, $state, Search, $mdDialog, MdHelpers) {
 
     $rootScope.$state = $state;
 
@@ -11,7 +11,7 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
         };
     };
 
-    function ProfileCtrl($scope, $mdDialog, Auth, Users) {
+    function ProfileCtrl($scope, $mdDialog, Users) {
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -33,10 +33,7 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
         else $rootScope.$emit('close');
     };
 
-    $scope.logout = function() {
-        Auth.$signOut();
-        $state.go('home');
-    };
+    $scope.logout = AuthService.logout;
 
     $scope.searchFor = 'snippet';
 
