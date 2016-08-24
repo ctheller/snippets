@@ -34,11 +34,13 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
         profile.update({
             first_name: userData.first_name,
             last_name: userData.last_name,
-            email: userData.email
+            email: userData.email,
+            isAdmin: userData.isAdmin
                 // manager: userData.manager 
                 // MANAGER TO BE COMPLETED USING AUTOCOMPLETE
         }).then(function() {
             console.log('Synchronization success');
+            $state.go('adminUserProfile', { userId: uid }, { reload: true });
         }).catch(function(err) {
             console.log('Synchronization failed, error code:', err);
         })
