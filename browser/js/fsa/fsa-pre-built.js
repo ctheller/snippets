@@ -61,7 +61,10 @@
             Auth.$signInWithRedirect('google');
         };
 
+        var unbindUser;
+
         var setUser = function(){
+            console.log("HIT");
             if (Auth.$getAuth()) {
 
                 var id = Auth.$getAuth().uid;
@@ -79,8 +82,9 @@
                 //Get user info from db:
                 user = $firebaseObject(ref.child(id));
                 $rootScope.userFirebaseObj = user;
-                user.$bindTo($rootScope, 'user').then(function(){
+                user.$bindTo($rootScope, 'user').then(function(unbind){
 
+                    unbindUser = unbind;
                     //Set up listeners for Collaboration
                     var initializing = true;
                     ref.child(id).child('snippets').child('asCollaborator').on('child_added', function(){
@@ -107,10 +111,9 @@
                         })
                     })
                 })
-
             }
             else {
-                $rootScope.user = null;
+                if (unbindUser) unbindUser();
                 $rootScope.users = null;
                 $rootScope.userRef = null;
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);

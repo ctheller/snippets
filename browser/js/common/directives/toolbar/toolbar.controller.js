@@ -22,12 +22,6 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, Auth, $rootScope, $st
             $mdDialog.hide(answer);
         };
 
-        // fetches the user's unique id to look up the user profile
-        var uid = Auth.$getAuth().uid;
-
-        // updates the profile in the DB using 3-way binding
-        Users.getProfile(uid).$bindTo($scope, "user");
-
     };
 
     $scope.toggle = function() {
