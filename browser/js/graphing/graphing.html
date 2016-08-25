@@ -1,40 +1,19 @@
-  <div class="row">
-        <div class="col s12 m6">
-          <div class="card">
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="card widthToMeasure" ng-style="cardStyle">
             <div class="card-content">
-              <span class="card-title">Organization Tree Overview</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
+                <span class="card-title"></span>
+                <div resize id="wordCloud" ng-style="canvasStyle"></div>
             </div>
-          </div>
         </div>
-
-        <div class="col s12 m6">
-          <div class="card">
+    </div>
+    <div class="col s12 m12 l12">
+        <div class="card">
             <div class="card-content">
-              <span class="card-title">Timeseries of snippet creation</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
+                <label for="team-snippet-count-bar-chart">
+                    Snippet Counts</label>
+                <canvas id="team-snippet-count-bar-chart" class="chart chart-horizontal-bar" chart-data="snippetCountData" chart-labels="snippetCountLabel" chart-options="{'scales': { yAxes: [{ display: false }] }}"></canvas>
             </div>
-          </div>
         </div>
-
-        <div class="col s12 m6">
-          <div class="card widthToMeasure" ng-style="cardStyle">
-            <div class="card-content">
-              <span class="card-title"></span>
-                  <div resize id="wordCloud" ng-style="canvasStyle"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col s12 m6">
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">????? this week</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-          </div>
-        </div>
-      </div>
-<donut-chart snippet-count="teamSnippetCount"></donut-chart>
+    </div>
+</div>
