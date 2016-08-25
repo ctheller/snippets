@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('LoginCtrl', function($scope, $mdToast, $state, AuthService, Auth, $rootScope) {
+app.controller('LoginCtrl', function($scope, $mdToast, $state, AuthService, Auth) {
 
     $scope.googleLogin = AuthService.login;
 
@@ -18,7 +18,6 @@ app.controller('LoginCtrl', function($scope, $mdToast, $state, AuthService, Auth
     $scope.sendLogin = function(loginInfo) {
         $scope.firebaseUser = null;
         $scope.error = null;
-        $rootScope.$emit('logingIn')
         Auth.$signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
             .then(function(authData) {
                 Materialize.toast('Login Successful', 1250, 'toastSubmitted');
