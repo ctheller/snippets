@@ -22,8 +22,6 @@ app.controller('signUpCtrl',
             else {
                 Auth.$createUserWithEmailAndPassword(signupInfo.email, signupInfo.password)
                     .then(function(userData) {
-                        console.log("User " + userData.uid + " created successfully!");
-
                         return Auth.$signInWithEmailAndPassword(
                             signupInfo.email, signupInfo.password
                         );

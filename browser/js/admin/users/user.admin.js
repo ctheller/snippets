@@ -1,6 +1,5 @@
 app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $state, $stateParams, Users) {
 
- 
     var user;
     var manager;
     $scope.userCopy = {};
@@ -82,10 +81,5 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
         });
     };
 
-    $scope.userStatus = function() {
-        if ($scope.userCopy) {
-            console.log('hello');
-        }
-    }
 
 });

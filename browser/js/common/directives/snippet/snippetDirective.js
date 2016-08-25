@@ -11,8 +11,6 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
         },
         link: function(scope, element, attributes) {
 
-            // do a get request for snippet info from database
-            // use scope.id
             scope.card = false;
 
             scope.snippet = {collaborators: {}};
@@ -52,8 +50,6 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
                 }
                 scope.collaborators = collabsToAdd;
             }, true);
-
-            scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';
 
             scope.collapse = function() {
                 $mdExpansionPanel(scope.id + scope.type).collapse();

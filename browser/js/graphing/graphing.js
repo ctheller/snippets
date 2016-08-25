@@ -44,16 +44,9 @@ app.directive('resize', function ($window) {
                 scope.$digest();
             }, 100);
 
-            // console.log(newValue);
             scope.windowHeight = newValue.h;
             scope.windowWidth = newValue.w;
 
-            // scope.resizeWithOffset = function (offsetH) {
-            //     scope.$eval(attr.notifier);
-            //     return {
-            //         'height': (newValue.h - offsetH) + 'px'
-            //     };
-            // };
 
         }, true);
 

@@ -96,7 +96,6 @@ app.factory("Snippet", function($firebaseObject, AuthService, Users, $rootScope)
     Snippet.delete = function(snippetId) {
         var snippet = $firebaseObject(ref.child("snippets").child(snippetId));
         return snippet.$loaded().then(function() {
-            console.log(snippet);
             var updates = {};
             var collaborators = _.keys(snippet.collaborators);
             collaborators.forEach(function(collab) {

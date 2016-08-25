@@ -7,7 +7,6 @@ app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $md
     $scope.upload = function(dataUrl) {
 
         if (!$rootScope.user) {
-            console.log("no user logged in");
             return;
         }
 
