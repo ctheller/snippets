@@ -35,6 +35,7 @@ app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $md
                 firebase.database().ref().child('users').child(name).child('photoUrl').set(downloadURL);
                 Materialize.toast('Photo uploaded successfully', 1250, 'toastAddCollab');
                 $scope.uploading = false;
+                if (userId) $state.go('adminUserProfile', { userId: userId }, { reload: true });
             });
 
 

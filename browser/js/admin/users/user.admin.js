@@ -4,7 +4,7 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
 
     var user;
     var manager;
-    $scope.userCopy = {'id': uid};
+    $scope.userCopy = {};
 
     Users.getById(uid).then(function(user){
         Users.getById(user.manager).then(function(manager){

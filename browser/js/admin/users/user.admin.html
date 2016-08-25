@@ -22,7 +22,7 @@
                         <img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
                         </img-crop>
                     </div>
-                    <md-button class="md-primary md-raised blue darken-2" ng-show="picFile && !result" ng-click="upload(croppedDataUrl, userCopy.id)">Submit</md-button>
+                    <md-button class="md-primary md-raised blue darken-2" ng-show="picFile && !result" ng-click="upload(croppedDataUrl, userCopy.$id)">Submit</md-button>
                     <md-button ng-show="!userCopy.deletedUser" class="profile-button md-primary md-raised red darken-2 " ng-click="deleteUserWithWarning($event)"><i class="material-icons delete-user-icon">loop</i>Deactivate User</md-button>
                     <md-button ng-show="userCopy.deletedUser" class="activate-user-button-fix profile-button md-primary md-raised green darken-2" ng-click="activateUser()"><i class="material-icons delete-user-icon">loop</i>Reactivate User</md-button>
                 </form>
