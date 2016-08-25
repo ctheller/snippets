@@ -1,10 +1,12 @@
 app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $state, $stateParams, Users) {
 
+    var uid = $stateParams.userId;
+
     var user;
     var manager;
     $scope.userCopy = {'id': uid};
 
-    Users.getById($stateParams.userId).then(function(user){
+    Users.getById(uid).then(function(user){
         Users.getById(user.manager).then(function(manager){
             user.manager_name = manager.first_name + " " + manager.last_name;
             $scope.userCopy = user;

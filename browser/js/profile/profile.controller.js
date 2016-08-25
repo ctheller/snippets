@@ -2,11 +2,13 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $mdDial
 
     // fetches the user's unique id from the $stateParams to look up the user profile
 
+    var uid = $stateParams.userId;
+
     var user;
     var manager;
     $scope.userCopy = {};
 
-    Users.getById($stateParams.userId).then(function(user){
+    Users.getById(uid).then(function(user){
         Users.getById(user.manager).then(function(manager){
             user.manager_name = manager.first_name + " " + manager.last_name;
             $scope.userCopy = user;
