@@ -1,4 +1,4 @@
-app.factory("Organizations", function($firebaseObject, $firebaseArray, $rootScope) {
+app.factory("Organizations", function($firebaseObject, $rootScope) {
 
     var Organizations = {};
 
