@@ -67,12 +67,12 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, AuthService, $rootSco
         }
     }
 
-    $scope.showSnippetForm = function(ev) {
+    $scope.showSnippetForm = function() {
         $mdDialog.show({
             controller: MdHelpers.dialogCtrl,
             templateUrl: 'js/dashboard/new-snippet-form.html',
             parent: angular.element(document.body),
-            targetEvent: ev,
+            // targetEvent: ev,
             clickOutsideToClose: true
         });
     };
