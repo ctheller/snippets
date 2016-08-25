@@ -10,7 +10,6 @@ app.controller('ProfileCtrl', function($scope, $rootScope, $stateParams, $mdDial
         Users.getById(user.manager).then(function(manager){
             user.manager_name = manager.first_name + " " + manager.last_name;
             $scope.userCopy = user;
-            $scope.$apply();
         })
     })
 

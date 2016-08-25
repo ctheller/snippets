@@ -43,14 +43,14 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
 
             //ng-repeat through object directly instead!!
             scope.$watch('snippet.collaborators', function() {
-                
-                scope.collaborators = [];
                 if (!scope.snippet.collaborators) return;
+                var collabsToAdd = [];
                 for (var key in scope.snippet.collaborators) {
                     Users.getById(key).then(function(user){
-                        scope.collaborators.push(user);
+                        collabsToAdd.push(user);
                     })
                 }
+                scope.collaborators = collabsToAdd;
             }, true);
 
             scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';

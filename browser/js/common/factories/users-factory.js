@@ -25,6 +25,7 @@ app.factory("Users", function($rootScope) {
        return ref.child(userId).once('value').then(function(snapshot){
             var user = snapshot.val();
             user.$id = userId;
+            $rootScope.$evalAsync();
             return user;
         })
     }

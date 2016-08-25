@@ -9,7 +9,6 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
         Users.getById(user.manager).then(function(manager){
             user.manager_name = manager.first_name + " " + manager.last_name;
             $scope.userCopy = user;
-            $scope.$apply();
         })
     })
 
