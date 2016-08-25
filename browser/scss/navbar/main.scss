@@ -116,14 +116,11 @@ md-list-item {
 }
 
 md-list-item {
-    &.home i {
+    &.dashboard i {
         color: $blue;
     }
-    &.profile i {
+    &.home i {
         color: $orange;
-    }
-    &.dashboard i {
-        color: $green;
     }
     &.graphing i {
         color: $amber;

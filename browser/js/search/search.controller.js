@@ -1,14 +1,14 @@
 app.controller('SearchCtrl', function($scope, $stateParams, $location) {
-    $scope.results = ($stateParams.result) ? $stateParams.result.data.hits : null;
+    $scope.results = ($stateParams.result) ? _.cloneDeep($stateParams.result.data.hits) : null;
     $scope.searchOption = $stateParams.type;
     $scope.snippets = [];
     $scope.users = [];
-    $scope.goBack = function () {
-        // location path is relative
-        // hardcoded to parse everything after localhost:1337
-        // need to fix this for deployment
-        $location.path($stateParams.goBackTo.substr(22));
-    }
+    // $scope.goBack = function () {
+    //     // location path is relative
+    //     // hardcoded to parse everything after localhost:1337
+    //     // need to fix this for deployment
+    //     $location.path($stateParams.goBackTo.substr(22));
+    // }
     if ($stateParams.type === 'snippet') {
         $scope.snippets = (!$scope.results) ? null : $scope.results.map(function(res) {
             return {

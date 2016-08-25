@@ -1,15 +1,20 @@
 app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AUTH_EVENTS, $mdMedia, MdHelpers, $state, $mdSidenav) {
 
     $scope.items = [
-        { label: 'Organization', state: 'home', icon: 'home' },
-        { label: 'Profile', state: "profile({'userId':'" + $scope.user.$id + "'})", icon: 'person' },
         { label: 'Dashboard', state: 'dashboard.week({week:0})', icon: 'inbox' },
-        { label: 'Analytics', state: 'graphing', icon: 'show_chart' }
+        { label: 'Organization', state: 'home', icon: 'home' },
+        { label: 'Analytics', state: 'graphing', icon: 'show_chart' },
+        { label: 'Profile', state: "profile({'userId':'" + $scope.user.$id + "'})", icon: 'person' }
     ];
+
+    $scope.containDashboard = function(key) {
+        if (key.indexOf('dashboard') > -1) return true;
+        else return false;
+    }
 
     $scope.logout = AuthService.logout;
 
-    $scope.go = function(state){
+    $scope.go = function(state) {
         $state.go(state);
     }
 
@@ -21,7 +26,7 @@ app.controller('SidebarCtrl', function($scope, $rootScope, AuthService, Auth, AU
 
     $scope.sidebarOpen = false;
 
-    $rootScope.$on('toggle', function () {
+    $rootScope.$on('toggle', function() {
         $scope.sidebarOpen = !$scope.sidebarOpen;
     });
 
