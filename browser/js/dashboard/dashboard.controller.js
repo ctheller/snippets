@@ -41,10 +41,6 @@ app.controller('DashboardCtrl', function($rootScope, $scope, $mdDialog, MdHelper
 
     $scope.newSnippet = {};
 
-    $scope.draggables = [
-        { icon: 'people' }, { icon: 'person' }
-    ];
-
     $scope.createNewSnippet = function(e, ui) {
         var snippetCopyId = ui.draggable.scope().key;
         Snippet.duplicateAsTemplate(snippetCopyId).then(function() {
