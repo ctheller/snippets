@@ -4,14 +4,14 @@ app.controller('ImgUploadCtrl', function($scope, $state, Upload, $rootScope, $md
         $scope.result = null;
     }
 
-    $scope.upload = function(dataUrl) {
+    $scope.upload = function(dataUrl, userId) {
 
         if (!$rootScope.user) {
             console.log("no user logged in");
             return;
         }
 
-        var name = $rootScope.user.$id;
+        var name = userId || $rootScope.user.$id;
 
         var file = Upload.dataUrltoBlob(dataUrl, name);
 
