@@ -30,7 +30,8 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $
 
 
 // This app.run is for controlling access to specific states.
-app.run(function($rootScope, AuthService, $state) {
+app.run(function($rootScope, AuthService, $state, Auth) {
+
 
     // The given state requires an authenticated user.
     var destinationStateRequiresAuth = function(state) {
