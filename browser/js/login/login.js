@@ -21,7 +21,7 @@ app.controller('LoginCtrl', function($scope, $mdToast, $state, AuthService, Auth
         Auth.$signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
             .then(function(authData) {
                 Materialize.toast('Login Successful', 1250, 'toastSubmitted');
-                $state.go('dashboard.week');
+                $state.go('dashboard.week', {week:0});
             }).catch(function(err) {
                 Materialize.toast('Incorrect Email/Password', 1250, 'toastDeleted');
             });

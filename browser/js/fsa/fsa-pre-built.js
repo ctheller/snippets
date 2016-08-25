@@ -56,7 +56,7 @@
 
         this.login = function(){
             Auth.$signInWithRedirect('google');
-            $state.go('dashboard.week',{week:0});
+            $state.go('dashboard.week', {week: 0});
         };
 
         var unbindUser;
@@ -101,7 +101,7 @@
                     })
                 })
             } else {
-                $rootScope.siteLoaded = true;
+                $rootScope.siteLoaded = true;                
             }
         };
 
@@ -119,10 +119,13 @@
             $state.go('splash', { reload: true });
         }
 
-        this.setUser = setUser;
-
-        Auth.$onAuthStateChanged(function(){
-            setUser();            
+        var first = true;
+        Auth.$onAuthStateChanged(function(result){
+            setUser();
+            if (result && !first) {
+                $state.go('dashboard.week', {week: 0});
+            } 
+            first = false;    
         });
 
     });

@@ -1,6 +1,6 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('splash', {
-        url: '/splash',
+        url: '/',
         templateUrl: 'js/splashpage/splash.html'
     });
 });
