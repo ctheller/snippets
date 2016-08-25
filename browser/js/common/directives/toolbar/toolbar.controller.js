@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', function($scope, $mdSidenav, AuthService, $rootScope, $state, Search, $mdDialog, MdHelpers) {
+app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScope', '$state', 'Search', '$mdDialog', 'MdHelpers', function($scope, $mdSidenav, AuthService, $rootScope, $state, Search, $mdDialog, MdHelpers) {
 
     $rootScope.$state = $state;
 
@@ -67,14 +67,14 @@ app.controller('ToolbarCtrl', function($scope, $mdSidenav, AuthService, $rootSco
         }
     }
 
-    $scope.showSnippetForm = function() {
+    $scope.showSnippetForm = function(ev) {
         $mdDialog.show({
             controller: MdHelpers.dialogCtrl,
             templateUrl: 'js/dashboard/new-snippet-form.html',
             parent: angular.element(document.body),
-            // targetEvent: ev,
+            targetEvent: ev,
             clickOutsideToClose: true
         });
     };
 
-});
+}]);
