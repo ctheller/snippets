@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-<div layout="row tab-container" ng-show="!user.reports || (expandedView === 'team')" flex="100">
+<div ng-if="user" layout="row tab-container" ng-show="!user.reports || (expandedView === 'team')" flex="100">
     <snippet-tabs layout="row" active-panel="activePanel" flex="grow">
     </snippet-tabs>
     <ui layout="column" flex="5" ng-if="!user.reports">
