@@ -91,7 +91,8 @@
                 <md-content layout-padding="" ng-controller="SidebarCtrl">
                     <md-list ng-cloak>
                         <div ui-sref="{{item.state}}" ng-repeat="item in items" ui-sref-active="active">
-                            <md-list-item class="sidebar-item state {{item.state}}">
+                            <md-list-item class="sidebar-item state {{item.state}}"
+                            ng-class="{dashboard: containDashboard(item.state) }">
                                 <md-icon class="lnr"><i class="material-icons">{{item.icon}}</i></md-icon>
                                 <p>{{ item.label }}</p>
                             </md-list-item>
