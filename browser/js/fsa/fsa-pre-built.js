@@ -52,10 +52,11 @@
 
         var user = null;
 
+        $rootScope.siteLoaded = false;
 
         this.login = function(){
             Auth.$signInWithRedirect('google');
-            $state.go('splash');
+            $state.go('dashboard.week',{week:0});
         };
 
         var unbindUser;
@@ -121,7 +122,7 @@
         this.setUser = setUser;
 
         Auth.$onAuthStateChanged(function(){
-            setUser();
+            setUser();            
         });
 
     });

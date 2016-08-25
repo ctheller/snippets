@@ -11,8 +11,6 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
         },
         link: function(scope, element, attributes) {
 
-            // do a get request for snippet info from database
-            // use scope.id
             scope.card = false;
 
             scope.snippet = {collaborators: {}};
@@ -43,17 +41,15 @@ app.directive('snippet', function($rootScope, $state, Snippet, $mdExpansionPanel
 
             //ng-repeat through object directly instead!!
             scope.$watch('snippet.collaborators', function() {
-                
-                scope.collaborators = [];
                 if (!scope.snippet.collaborators) return;
+                var collabsToAdd = [];
                 for (var key in scope.snippet.collaborators) {
                     Users.getById(key).then(function(user){
-                        scope.collaborators.push(user);
+                        collabsToAdd.push(user);
                     })
                 }
+                scope.collaborators = collabsToAdd;
             }, true);
-
-            scope.plusButton = 'http://joshiscorner.com/files/images/plusButton.png';
 
             scope.collapse = function() {
                 $mdExpansionPanel(scope.id + scope.type).collapse();

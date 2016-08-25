@@ -11,7 +11,6 @@ app.controller('RecoveryCtrl', function($scope, $mdToast, Auth) {
     $scope.sendRecovery = function(userData) {
         if ($scope.recoveryForm.$error.email) $scope.error = 'Please enter a valid email';
         else {
-            console.log(userData);
             Auth.$sendPasswordResetEmail(userData.email).
             then(function() {
                 Materialize.toast('Password reset e-mail sent', 1250, 'toastAddCollab');

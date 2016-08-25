@@ -1,31 +1,15 @@
-app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $state, $stateParams) {
-
-    //set userID equal to the stateParams $id being passed in
-    let uid = $stateParams.userId;
+app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $state, $stateParams, Users) {
 
     var user;
     var manager;
     $scope.userCopy = {'id': uid};
 
-    function getUserPromise(id) {
-        return firebase.database().ref("users/" + id).once('value').then(function(snapshot) {
-            return snapshot.val();
-        });
-    };
-
-    // we get the user info using our promise function
-    var getUser = getUserPromise(uid);
-
-    // after we get the user info, we fetch the profile information for his/her manager
-    var getManager = getUser.then(function(user) {
-        return getUserPromise(user.manager)
-    });
-
-    // run all the requests, then combine the results and put them on the scope
-    Promise.all([getUser, getManager]).then(function(results) {
-        angular.extend($scope.userCopy, results[0]);
-        $scope.userCopy.manager_name = results[1].first_name + ' ' + results[1].last_name;
-    });
+    Users.getById($stateParams.userId).then(function(user){
+        Users.getById(user.manager).then(function(manager){
+            user.manager_name = manager.first_name + " " + manager.last_name;
+            $scope.userCopy = user;
+        })
+    })
 
     // updates the profile upon clicking submit
     $scope.saveProfile = function(userData) {
@@ -39,10 +23,10 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
                 // manager: userData.manager 
                 // MANAGER TO BE COMPLETED USING AUTOCOMPLETE
         }).then(function() {
-            console.log('Synchronization success');
+            Materialize.toast('Profile updated', 1250, 'toastAddCollab');
             $state.go('adminUserProfile', { userId: uid }, { reload: true });
         }).catch(function(err) {
-            console.log('Synchronization failed, error code:', err);
+            Materialize.toast('Updates failed', 1250, 'toastDeleted');
         })
     };
 
@@ -51,8 +35,8 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
         var profile = firebase.database().ref("users/" + uid);
 
         Auth.$sendPasswordResetEmail(profile.email)
-            .then(function() { console.log('Password reset email sent') })
-            .catch(function(err) { console.log('Password reset email failed to send. Error code:', err) });
+            .then(function() { Materialize.toast('Password reset email sent', 1250, 'toastAddCollab') })
+            .catch(function(err) { Materialize.toast('Password reset failed', 1250, 'toastDeleted') });
     };
 
     function deleteUser() {
@@ -97,10 +81,5 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
         });
     };
 
-    $scope.userStatus = function() {
-        if ($scope.userCopy) {
-            console.log('hello');
-        }
-    }
 
 });

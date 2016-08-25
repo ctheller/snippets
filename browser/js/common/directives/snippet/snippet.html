@@ -1,27 +1,3 @@
-<!-- <md-card ng-show="{{card}}" md-theme="{{ 'default' }}" md-theme-watch>
-    <md-card-title>
-        <md-card-title-text>
-            <p ng-if="!snippet.submitted" placeholder="Subject" id="snippetTitle" contenteditable ng-model-options="{debounce: 1}" ng-model="snippet.subject" class="md-headline"></p>
-            <p ng-if="snippet.submitted" id="snippetTitle" ng-model-options="{debounce: 1}" ng-model="snippet.subject" class="md-headline">{{snippet.subject}}</p>
-            <p ng-if="!snippet.submitted" id="contenttext" contenteditable ng-model-options="{debounce: 1}" ng-model="snippet.contents" class="md-subhead"></p>
-            <p ng-if="snippet.submitted" id="contenttext" ng-model-options="{debounce: 1}" ng-model="snippet.contents" class="md-subhead">{{snippet.contents}}</p>
-        </md-card-title-text>
-        <submit-snippet ng-class="{'submitted-snippet': snippet.submitted}" ng-click="toggleSubmit()" submitted="snippet.submitted"></submit-snippet>
-        <a ng-click="delete(snippet.$id)" ng-show="type!=='report'" class="deleteit btn-floating btn-xs red lighten-2"><i class="material-icons">delete</i></a>
-    </md-card-title>
-    <md-card-actions id="snippetImages" layout="row" layout-align="end center">
-        <a ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
-        <div class="snippetImg btn-floating btn-md img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index">
-            <span ng-click="removeCollaborator(collaborator.$id)" class="close"><i class="material-icons"> clear</i></span>
-
-            <md-tooltip>{{collaborator.first_name}} {{collaborator.last_name}}</md-tooltip>
-            <img ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}" ng-cloak>
-            </div>
-        </div>
-        
-
-    </md-card-actions>
-</md-card> -->
 <md-expansion-panel ng-hide="{{card}}" md-component-id="{{id}}{{type}}">
     <md-expansion-panel-collapsed>
         <div id="snippetTitle" class="md-summary collapsed-title" ng-model="snippet.subject">
@@ -42,7 +18,7 @@
             </div>
             <div id="snippetImages" layout="row" layout-align="end center">
                 <a ng-show="type!=='report'" ng-controller="PopupCtrl as ctrl" ng-click="ctrl.openDialog($event)" style="margin: 10px" class="btn-floating btn-md waves-effect waves-light blue lighten-1"><i class="material-icons">add</i></a>
-                <div class="snippetImages img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index">
+                <div class="snippetImages img-wrap" ng-repeat="(index,collaborator) in collaborators track by $index" ng-cloak>
                     <span ng-show="type!=='report'" ng-click="removeCollaborator(collaborator.$id)" class="close expansion"><i class="material-icons"> clear</i></span>
                     <md-tooltip>{{collaborator.first_name}} {{collaborator.last_name}}</md-tooltip>
                     <img class="collaborator-avatar" ng-src="{{ collaborator.photoUrl || '/files/default-profile.png' }}" ng-cloak>
