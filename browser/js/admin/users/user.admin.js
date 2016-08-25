@@ -5,7 +5,7 @@ app.controller('AdminProfileCtrl', function($scope, $rootScope, $mdDialog, $stat
 
     var user;
     var manager;
-    $scope.userCopy = {};
+    $scope.userCopy = {'id': uid};
 
     function getUserPromise(id) {
         return firebase.database().ref("users/" + id).once('value').then(function(snapshot) {
