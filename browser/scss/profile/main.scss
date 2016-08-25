@@ -9,6 +9,12 @@
 
 }
 
+#no-animation{
+  transform: none;
+  transition: none;
+  transition-webkit: none;
+}
+
 #admin-switch{
   position: relative;
   left: 0px;

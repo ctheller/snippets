@@ -41,8 +41,8 @@
                         <label>Company</label>
                         <input ng-disabled="true" ng-model="userCopy.organization">
                     </md-input-container>
-                    <md-input-container class="md-block" flex-gt-xs>
-                        <label>Manager</label>
+                    <md-input-container ng-controller="ManagerCtrl as ctrl" ng-click="ctrl.openDialog($event)" class="md-block" flex-gt-xs>
+                        <label id="no-animation">Manager</label>
                         <input ng-disabled="userCopy.deletedUser" ng-model="userCopy.manager_name">
                     </md-input-container>
                     <!--      <md-datepicker ng-model="userCopy.submissionDate" md-placeholder="Enter date">

@@ -10,6 +10,10 @@ app.factory("Users", function($rootScope) {
         return teammates.map(teammate => teammate.$id);
     };
 
+    Users.addAsManager = function(userId, managerId){
+        firebase.database().ref('users/' + userId).child("manager").set(managerId);
+    }
+
     Users.getUsers = function(userIdArray){
         var gettingUsers =  userIdArray.map(function(id){
             if (!id) return;
@@ -39,7 +43,7 @@ app.factory("Users", function($rootScope) {
         firebase.database().ref('users/'+ userId +"/snippets/asCollaborator/" + snippetId).set(snippetCreationTime);
         firebase.database().ref('snippets/'+ snippetId +"/collaborators/" + userId).set(true);
     }
-
+    
     return Users;
 
 });
