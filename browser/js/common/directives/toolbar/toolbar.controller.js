@@ -1,4 +1,4 @@
-app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScope', '$state', 'Search', '$mdDialog', 'MdHelpers', function($scope, $mdSidenav, AuthService, $rootScope, $state, Search, $mdDialog, MdHelpers) {
+app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScope', '$state', 'Search', '$mdDialog', 'MdHelpers', function($scope, $mdSidenav, AuthService, $rootScope, $state, Search, $mdDialog, MdHelpers, Snippet) {
 
     $rootScope.$state = $state;
 
@@ -43,7 +43,7 @@ app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScop
 
     $scope.availableSearchParams = $scope.snippetSearchParams;
 
-    $scope.setSearchParams = function (option) {
+    $scope.setSearchParams = function(option) {
         if (option === 'colleague') {
             $scope.availableSearchParams = $scope.userSearchParams;
             $scope.searchFor = 'user';
@@ -53,7 +53,7 @@ app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScop
         }
     }
 
-    $rootScope.$on('clearNgModel', function () {
+    $rootScope.$on('clearNgModel', function() {
         $scope.searchParams = {};
     });
 
@@ -69,7 +69,25 @@ app.controller('ToolbarCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScop
 
     $scope.showSnippetForm = function(ev) {
         $mdDialog.show({
-            controller: MdHelpers.dialogCtrl,
+            controller: function($scope, $mdDialog, Snippet) {
+                $scope.hide = function() {
+                    $mdDialog.hide();
+                };
+                $scope.cancel = function() {
+                    $mdDialog.cancel();
+                };
+                $scope.answer = function(answer) {
+                    $mdDialog.hide(answer);
+                };
+                $scope.submitSnippet = function() {
+                    Snippet.create($scope.newSnippet).then(function() {
+                        Materialize.toast('Snippet created', 1250, 'toastCreated');
+                    }).catch(function() {
+                        Materialize.toast('Error creating snippet', 2000, 'toastFail');
+                    });
+                    $mdDialog.cancel();
+                };
+            },
             templateUrl: 'js/dashboard/new-snippet-form.html',
             parent: angular.element(document.body),
             targetEvent: ev,
