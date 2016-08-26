@@ -85,9 +85,15 @@
                     ref.child(id).child('snippets').child('asCollaborator').on('child_added', function(){
                         if (!initializing) Materialize.toast('Added as Collaborator', 1250, 'toastAddCollab');
                     });
+                    ref.child(id).child('snippets').child('asManager').on('child_added', function(){
+                        if (!initializing) Materialize.toast('Received new Snippet', 1250, 'toastAddCollab');
+                    });
                     initializing = false;
                     ref.child(id).child('snippets').child('asCollaborator').on('child_removed', function(){
                         Materialize.toast('Removed as Collaborator', 1250, 'toastDeleted');
+                    });
+                    ref.child(id).child('snippets').child('asManager').on('child_removed', function(){
+                        Materialize.toast('Report Snippet Removed', 1250, 'toastDeleted');
                     });
 
 
