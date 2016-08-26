@@ -1,13 +1,13 @@
-app.controller('ManagerCtrl', PopupCtrl);
+app.controller('ManagerCtrl', ManagerCtrl);
 
-function PopupCtrl($mdDialog, $scope) {
+function ManagerCtrl($mdDialog, $scope) {
     var self = this;
 
     //snippet is on this scope
 
     self.openDialog = function($event) {
         $mdDialog.show({
-            controller: MyDialogCtrl,
+            controller: ManagerDialogCtrl,
             controllerAs: 'ctrl',
             templateUrl: 'js/admin/search-manager/search-manager.html',
             parent: angular.element(document.body),
@@ -21,7 +21,7 @@ function PopupCtrl($mdDialog, $scope) {
 
 
 
-function MyDialogCtrl($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
+function ManagerDialogCtrl($timeout, $q, $scope, $mdDialog, $rootScope, Users) {
 
     var self = this;
 
