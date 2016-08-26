@@ -72,7 +72,7 @@
 
         <md-expansion-panel-group md-component-id="report-panel" multiple>
             <div ng-if="dateInRange(value)" class="parent" ng-repeat="(key, value) in user.snippets.asManager" layout="row" data-drag="true" ng-model="user.snippets.asManager" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}}, placeholder: 'keep'}">
-                <snippet class="fromReport" id="key" type="'report'" card="false"></snippet>
+                <snippet class="fromReport" id="key" type="'report'" card="false" ></snippet>
             </div>
         </md-expansion-panel-group>
     </div>
