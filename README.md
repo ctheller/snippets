@@ -1,3 +1,5 @@
+![Snipyt Splash Page](/snipyt_splash_screenshot.png)
+
 # Snipyt
 
 Keep your projects on track and teams organized using Snipyt. Easily and efficiently track the status of your teams, and collaborate with others from anywhere in real-time using this web-based app. 
