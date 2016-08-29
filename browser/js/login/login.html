@@ -1,8 +1,14 @@
-<div layout="column" layout-align="center center">
-<h2 class="md-headline no-bottom-margin">Login to Snipyt</h2>
-<h3 class="md-subhead no-top-margin">Please enter your e-mail and password</h3>
+<div layout="column" layout-align="center">
 </div>
 <form layout-margin id="login-form" name="loginForm">
+    <div class="demoToasty white-text blue">
+        Want to demo? Try this account: </br>email: <b>Nick@nick.com</b> </br>password: <b>12345678</b>
+    </div>
+    <h2 class="md-headline no-bottom-margin blue-text">Login to Snipyt</h2>
+
+
+    </br>
+
     <alert type="danger" ng-show="error" class="red-text darken-2">
         {{ error }}
     </alert>
